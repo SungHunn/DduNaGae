@@ -41,6 +41,8 @@ public class LoginPage extends AppCompatActivity {
                 getlogin_id.setText("");
                 getlogin_pw.setText("");
 
+                System.out.println("수정확인");
+
             }
         });
     }
