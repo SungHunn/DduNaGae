@@ -29,5 +29,20 @@ public class Mainactivity extends AppCompatActivity {
 
         textView_id.setText(test_id);
         textView_pw.setText(test_pw);
+
+        String new_id;
+        String new_pw;
+        String new_animal;
+        String animal_info;
+
+        new_id = getIntent().getStringExtra("NEW_ID");
+        new_pw = getIntent().getStringExtra("NEW_PW");
+        new_animal = getIntent().getStringExtra("ANIMAL_INFO");
+        animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
+
+        System.out.println(new_id);
+        System.out.println(new_pw);
+        System.out.println(new_animal);
+        System.out.println(animal_info);
     }
 }
