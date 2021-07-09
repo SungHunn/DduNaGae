@@ -44,5 +44,7 @@ public class Mainactivity extends AppCompatActivity {
         System.out.println(new_pw);
         System.out.println(new_animal);
         System.out.println(animal_info);
+
+        System.out.println("asdfasdf");
     }
 }
