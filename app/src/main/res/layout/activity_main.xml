@@ -13,8 +13,6 @@
             android:layout_margin="10dp"
             android:orientation="vertical">
 
-
-            <!--asdfasdf -->
             <!-- 상당 서치 및 네비게이션 바 설정 위치-->
             <LinearLayout
                 android:layout_width="match_parent"
@@ -70,6 +68,7 @@
                         android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:gravity="center"
+                        android:clickable="true"
                         android:text="카페"
                         android:textSize="20dp" />
 
@@ -94,6 +93,7 @@
                         android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:gravity="center"
+                        android:clickable="true"
                         android:text="숙소"
                         android:textSize="20dp" />
 
@@ -118,6 +118,7 @@
                         android:id="@+id/category_3"
                         android:layout_width="60dp"
                         android:layout_height="30dp"
+                        android:clickable="true"
                         android:gravity="center"
                         android:text="산책"
                         android:textSize="20dp" />
@@ -140,6 +141,7 @@
                         android:layout_width="60dp"
                         android:layout_height="30dp"
                         android:gravity="center"
+                        android:clickable="true"
                         android:text="여행지"
                         android:textSize="20dp" />
 
@@ -163,6 +165,7 @@
                         android:id="@+id/category_5"
                         android:layout_width="60dp"
                         android:layout_height="30dp"
+                        android:clickable="true"
                         android:gravity="center"
                         android:text="병원"
                         android:textSize="20dp" />
@@ -187,6 +190,7 @@
                         android:id="@+id/category_6"
                         android:layout_width="60dp"
                         android:layout_height="30dp"
+                        android:clickable="true"
                         android:gravity="center"
                         android:text="기타"
                         android:textSize="20dp" />
@@ -320,12 +324,14 @@
                     android:gravity="center">
 
                     <ImageView
+                        android:id="@+id/add_menu1"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:layout_marginRight="15dp"
                         android:src="@mipmap/ic_launcher" />
 
                     <ImageView
+                        android:id="@+id/add_menu2"
                         android:layout_width="130dp"
                         android:layout_height="130dp"
                         android:layout_marginLeft="15dp"

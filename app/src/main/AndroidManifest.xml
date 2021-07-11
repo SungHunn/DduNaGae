@@ -18,6 +18,10 @@
         </activity>
         <activity android:name=".Mainactivity" />
         <activity android:name=".Sign_up" />
+        <activity android:name=".BestPlace"/>
+        <activity android:name=".BestWalk" />
+        <activity android:name=".Category" />
+        <activity android:name=".TodayPlace" />
     </application>
 
 </manifest>
