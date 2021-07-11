@@ -50,6 +50,48 @@ public class Mainactivity extends AppCompatActivity {
         animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
 
         onTextViewClick();
+        toDayPlaceClick();
+        bestPlaceClick();
+        bestWlakClick();
+        addMenuClick();
+    }
+
+    private void addMenuClick() {
+        add_menu1 = (ImageView)findViewById(R.id.add_menu1);
+        add_menu1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+                startActivity(intent);
+            }
+        });
+        add_menu2 = (ImageView)findViewById(R.id.add_menu2);
+        add_menu2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void bestWlakClick() {
+        best_walk1 = (ImageView)findViewById(R.id.best_walk1);
+        best_walk1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+                startActivity(intent);
+            }
+        });
+        best_walk2 = (ImageView)findViewById(R.id.best_walk2);
+        best_walk2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+                startActivity(intent);
+            }
+        });
     }
 
     public void onTextViewClick() {
@@ -127,4 +169,41 @@ public class Mainactivity extends AppCompatActivity {
         });
     }
 
+    public void toDayPlaceClick() {
+        today_place1 = (ImageView)findViewById(R.id.to_day_place1);
+        today_place1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TodayPlace.class);
+                startActivity(intent);
+            }
+        });
+        today_place2 = (ImageView)findViewById(R.id.to_day_place2);
+        today_place2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), TodayPlace.class);
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void bestPlaceClick() {
+        best_tour1 = (ImageView)findViewById(R.id.best_tour1);
+        best_tour1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BestPlace.class);
+                startActivity(intent);
+            }
+        });
+        best_tour2 = (ImageView)findViewById(R.id.best_tour2);
+        best_tour2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), BestPlace.class);
+                startActivity(intent);
+            }
+        });
+    }
 }
