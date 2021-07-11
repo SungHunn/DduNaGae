@@ -19,5 +19,6 @@ public class Matching extends AppCompatActivity {
         setContentView(R.layout.matching);
 
 
+        System.out.println("test");
     }
 }

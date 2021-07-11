@@ -14,18 +14,12 @@
             android:layout_margin="10dp"
             android:orientation="vertical">
 
+            <!-- 상당 서치 및 네비게이션 바 설정 위치-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:orientation="horizontal">
-
-                <androidx.appcompat.widget.Toolbar
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:layout_marginRight="15dp"
-                    android:id="@+id/navi_bar"
-                    android:background="@drawable/ic_baseline_dehaze_24"/>
 
                 <EditText
                     android:id="@+id/main_search"
