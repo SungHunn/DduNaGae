@@ -3,12 +3,17 @@ package com.example.login_example;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 
 public class Mainactivity extends AppCompatActivity {
 
@@ -32,10 +37,44 @@ public class Mainactivity extends AppCompatActivity {
     ImageView add_menu1;
     ImageView add_menu2;
 
+    //네비게이션바
+    DrawerLayout drawerLayout;
+    View drawerView;
+    //네비게이션바
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //네비게이션바
+        drawerLayout = (DrawerLayout)findViewById(R.id.drawlayout);
+        drawerView = (View)findViewById(R.id.drawer);
+
+        ImageButton nvg_open = (ImageButton)findViewById(R.id.nvg_open);
+        nvg_open.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                drawerLayout.openDrawer(drawerView);
+            }
+        });
+
+        ImageButton nvg_close = (ImageButton)findViewById(R.id.nvg_close);
+        nvg_close.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                drawerLayout.closeDrawers();
+            }
+        });
+
+        drawerLayout.setDrawerListener(listener);
+        drawerView.setOnTouchListener(new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent event){
+                return true;
+            }
+        });
+        //네비게이션바
 
         Intent intent = getIntent();
 
@@ -56,8 +95,31 @@ public class Mainactivity extends AppCompatActivity {
         bestWlakClick();
         addMenuClick();
 
-        System.out.println("asdfasdf");
     }
+
+    //네비게이션바
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
+    //네비게이션바
 
     private void addMenuClick() {
         add_menu1 = (ImageView)findViewById(R.id.add_menu1);

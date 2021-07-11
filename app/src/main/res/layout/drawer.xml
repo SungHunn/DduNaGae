@@ -5,14 +5,15 @@
     android:layout_height="match_parent"
     android:layout_gravity="start"
     android:background="#FFFEE6"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:id="@+id/drawer">
 
         <ImageButton
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:maxHeight="35dp"
             android:maxWidth="35dp"
-            android:id="@+id/imageButton1"
+            android:id="@+id/nvg_close"
             android:padding="1dp"
             android:src="@drawable/goback"
             android:adjustViewBounds="true"

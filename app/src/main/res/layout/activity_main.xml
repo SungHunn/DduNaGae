@@ -1,9 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
-
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    >
+ <androidx.drawerlayout.widget.DrawerLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:id="@+id/drawlayout"
+                    >
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -21,12 +27,23 @@
                 android:gravity="center"
                 android:orientation="horizontal">
 
+
+                    <ImageButton
+                        android:id="@+id/nvg_open"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:maxHeight="25dp"
+                        android:maxWidth="25dp"
+                        android:scaleType="fitCenter"
+                        android:src="@drawable/ic_baseline_dehaze_24" />
+
                 <EditText
                     android:id="@+id/main_search"
                     android:layout_width="200dp"
                     android:layout_height="50dp"
                     android:layout_gravity="center"
                     android:layout_marginRight="15dp"
+                    android:layout_marginLeft="45dp"
                     android:background="@drawable/rounded_edittext" />
 
                 <ImageView
@@ -342,7 +359,8 @@
             </LinearLayout>
         </LinearLayout>
     </ScrollView>
-
+     <include layout = "@layout/drawer"/>
+ </androidx.drawerlayout.widget.DrawerLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavi"
         android:layout_width="match_parent"
