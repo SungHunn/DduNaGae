@@ -336,6 +336,7 @@
                         android:layout_height="130dp"
                         android:layout_marginLeft="15dp"
                         android:src="@mipmap/ic_launcher" />
+
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
