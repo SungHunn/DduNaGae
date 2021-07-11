@@ -3,17 +3,24 @@ package com.example.login_example;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Mainactivity extends AppCompatActivity {
 
@@ -40,40 +47,104 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
     DrawerLayout drawerLayout;
     View drawerView;
+    ListView listview = null;
     //네비게이션바
+
+    BottomNavigationView bottomNavigationView;
+
+    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //네비게이션바
-        drawerLayout = (DrawerLayout)findViewById(R.id.drawlayout);
-        drawerView = (View)findViewById(R.id.drawer);
-
-        ImageButton nvg_open = (ImageButton)findViewById(R.id.nvg_open);
-        nvg_open.setOnClickListener(new View.OnClickListener(){
+        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v){
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.matching:
+                        Intent intent = new Intent(getApplicationContext(), Matching.class);
+                        startActivity(intent);
+
+                    case R.id.home:
+                        Intent intent2 = new Intent(getApplicationContext(), Matching.class);
+                        startActivity(intent2);
+
+                    case R.id.mylocation:
+                        //Intent intent3 = new Intent(getApplicationContext(), );
+                        //startActivity(intent3);
+                }
+                return false;
+            }
+        });
+
+        //네비게이션바
+        drawerLayout = findViewById(R.id.drawlayout);
+        drawerView = findViewById(R.id.drawer);
+
+        ImageButton nvg_open = findViewById(R.id.nvg_open);
+        nvg_open.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 drawerLayout.openDrawer(drawerView);
             }
         });
 
-        ImageButton nvg_close = (ImageButton)findViewById(R.id.nvg_close);
-        nvg_close.setOnClickListener(new View.OnClickListener(){
+        ImageButton nvg_close = findViewById(R.id.nvg_close);
+        nvg_close.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v){
+            public void onClick(View v) {
                 drawerLayout.closeDrawers();
             }
         });
 
         drawerLayout.setDrawerListener(listener);
-        drawerView.setOnTouchListener(new View.OnTouchListener(){
+        drawerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event){
+            public boolean onTouch(View v, MotionEvent event) {
                 return true;
             }
         });
+
+        final String[] items = {"공지사항", "이벤트", "예약내역", "매칭방 목록", "좋아요 표시한 목록", "고객센터", "설정", "로그인"};
+        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+
+        listview = findViewById(R.id.navi_list);
+        listview.setAdapter(adapter);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+
+                        break;
+
+                    case 2:
+                        break;
+
+                    case 3:
+                        break;
+
+                    case 4:
+                        break;
+
+                    case 5:
+                        break;
+
+                    case 6:
+                        break;
+
+                    case 7:
+                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                        startActivity(intent);
+                        break;
+                }
+            }
+        });
+
         //네비게이션바
 
         Intent intent = getIntent();
@@ -122,7 +193,7 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
 
     private void addMenuClick() {
-        add_menu1 = (ImageView)findViewById(R.id.add_menu1);
+        add_menu1 = (ImageView) findViewById(R.id.add_menu1);
         add_menu1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -130,7 +201,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        add_menu2 = (ImageView)findViewById(R.id.add_menu2);
+        add_menu2 = (ImageView) findViewById(R.id.add_menu2);
         add_menu2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -141,7 +212,7 @@ public class Mainactivity extends AppCompatActivity {
     }
 
     private void bestWlakClick() {
-        best_walk1 = (ImageView)findViewById(R.id.best_walk1);
+        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
         best_walk1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -149,7 +220,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        best_walk2 = (ImageView)findViewById(R.id.best_walk2);
+        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
         best_walk2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -160,7 +231,7 @@ public class Mainactivity extends AppCompatActivity {
     }
 
     public void onTextViewClick() {
-        category1 = (TextView)findViewById(R.id.category_1);
+        category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -172,7 +243,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        category2 = (TextView)findViewById(R.id.category_2);
+        category2 = (TextView) findViewById(R.id.category_2);
         category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -184,7 +255,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        category3 = (TextView)findViewById(R.id.category_3);
+        category3 = (TextView) findViewById(R.id.category_3);
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -196,7 +267,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        category4 = (TextView)findViewById(R.id.category_4);
+        category4 = (TextView) findViewById(R.id.category_4);
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -208,7 +279,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        category5 = (TextView)findViewById(R.id.category_5);
+        category5 = (TextView) findViewById(R.id.category_5);
         category5.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -220,7 +291,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        category6 = (TextView)findViewById(R.id.category_6);
+        category6 = (TextView) findViewById(R.id.category_6);
         category6.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -235,7 +306,7 @@ public class Mainactivity extends AppCompatActivity {
     }
 
     public void toDayPlaceClick() {
-        today_place1 = (ImageView)findViewById(R.id.to_day_place1);
+        today_place1 = (ImageView) findViewById(R.id.to_day_place1);
         today_place1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -243,7 +314,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        today_place2 = (ImageView)findViewById(R.id.to_day_place2);
+        today_place2 = (ImageView) findViewById(R.id.to_day_place2);
         today_place2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -254,7 +325,7 @@ public class Mainactivity extends AppCompatActivity {
     }
 
     public void bestPlaceClick() {
-        best_tour1 = (ImageView)findViewById(R.id.best_tour1);
+        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
         best_tour1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -262,7 +333,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        best_tour2 = (ImageView)findViewById(R.id.best_tour2);
+        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
         best_tour2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

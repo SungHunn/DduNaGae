@@ -9,19 +9,21 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Login_Example">
-        <activity android:name=".LoginPage">
+
+        <activity android:name=".Mainactivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Mainactivity" />
         <activity android:name=".Sign_up" />
-        <activity android:name=".BestPlace"/>
+        <activity android:name=".BestPlace" />
         <activity android:name=".BestWalk" />
         <activity android:name=".Category" />
         <activity android:name=".TodayPlace" />
+        <activity android:name=".Matching" />
+        <activity android:name=".LoginPage" />
     </application>
 
 </manifest>

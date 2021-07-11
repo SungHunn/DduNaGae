@@ -1,366 +1,368 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    >
- <androidx.drawerlayout.widget.DrawerLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:id="@+id/drawlayout"
-                    >
-    <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/drawlayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
-            <!-- 상당 서치 및 네비게이션 바 설정 위치-->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:gravity="center"
-                android:orientation="horizontal">
+                android:layout_margin="10dp"
+                android:orientation="vertical">
+
+                <!-- 상당 서치 및 네비게이션 바 설정 위치-->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
 
 
                     <ImageButton
                         android:id="@+id/nvg_open"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:maxHeight="25dp"
                         android:maxWidth="25dp"
+                        android:maxHeight="25dp"
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_baseline_dehaze_24" />
 
-                <EditText
-                    android:id="@+id/main_search"
-                    android:layout_width="200dp"
-                    android:layout_height="50dp"
-                    android:layout_gravity="center"
-                    android:layout_marginRight="15dp"
-                    android:layout_marginLeft="45dp"
-                    android:background="@drawable/rounded_edittext" />
-
-                <ImageView
-                    android:id="@+id/main_rogo"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:src="@mipmap/ic_launcher" />
-            </LinearLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="#000000"/>
-
-            <!-- 중간 부분 카테고리 이미지 클릭 위치 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="80dp"
-                android:layout_margin="3dp"
-                android:background="@drawable/rounded_edittext"
-                android:gravity="center"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:id="@+id/category_1"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:gravity="center"
-                        android:clickable="true"
-                        android:text="카페"
-                        android:textSize="20dp" />
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="2dp"
-                        android:background="#000000" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:id="@+id/category_2"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:gravity="center"
-                        android:clickable="true"
-                        android:text="숙소"
-                        android:textSize="20dp" />
-
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="2dp"
-                        android:background="#000000" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:id="@+id/category_3"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:text="산책"
-                        android:textSize="20dp" />
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:id="@+id/category_4"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:gravity="center"
-                        android:clickable="true"
-                        android:text="여행지"
-                        android:textSize="20dp" />
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="2dp"
-                        android:background="#000000" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:id="@+id/category_5"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:text="병원"
-                        android:textSize="20dp" />
-
-                    <View
-                        android:layout_width="2dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginRight="10dp"
-                        android:layout_marginBottom="2dp"
-                        android:background="#000000" />
-
-                    <ImageView
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:layout_marginTop="2dp"
-                        android:layout_marginBottom="2dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <TextView
-                        android:id="@+id/category_6"
-                        android:layout_width="60dp"
-                        android:layout_height="30dp"
-                        android:clickable="true"
-                        android:gravity="center"
-                        android:text="기타"
-                        android:textSize="20dp" />
-                </LinearLayout>
-            </LinearLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="#000000"/>
-
-            <!-- 오늘의 place -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="오늘의 PLACE"
-                    android:textSize="25dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="5dp"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/to_day_place1"
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
+                    <EditText
+                        android:id="@+id/main_search"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_gravity="center"
+                        android:layout_marginLeft="45dp"
                         android:layout_marginRight="15dp"
-                        android:src="@mipmap/ic_launcher" />
+                        android:background="@drawable/rounded_edittext" />
 
                     <ImageView
-                        android:id="@+id/to_day_place2"
-                        android:layout_width="140dp"
-                        android:layout_height="140dp"
-                        android:layout_marginLeft="15dp"
+                        android:id="@+id/main_rogo"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:src="@mipmap/ic_launcher" />
                 </LinearLayout>
 
-
-            </LinearLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="1dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginBottom="10dp"
-                android:background="#000000"/>
-
-            <!-- best 관광지, best 산책지 -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <TextView
+                <View
                     android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#000000" />
+
+                <!-- 중간 부분 카테고리 이미지 클릭 위치 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="80dp"
+                    android:layout_margin="3dp"
+                    android:background="@drawable/rounded_edittext"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/category_1"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:text="카페"
+                            android:textSize="20dp" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#000000" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/category_2"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:text="숙소"
+                            android:textSize="20dp" />
+
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#000000" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/category_3"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:text="산책"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/category_4"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:text="여행지"
+                            android:textSize="20dp" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#000000" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/category_5"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:text="병원"
+                            android:textSize="20dp" />
+
+                        <View
+                            android:layout_width="2dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="10dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginBottom="2dp"
+                            android:background="#000000" />
+
+                        <ImageView
+                            android:layout_width="30dp"
+                            android:layout_height="30dp"
+                            android:layout_marginTop="2dp"
+                            android:layout_marginBottom="2dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/category_6"
+                            android:layout_width="60dp"
+                            android:layout_height="30dp"
+                            android:clickable="true"
+                            android:gravity="center"
+                            android:text="기타"
+                            android:textSize="20dp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#000000" />
+
+                <!-- 오늘의 place -->
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="best 관광지"
-                    android:textSize="25dp" />
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="오늘의 PLACE"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="5dp"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/to_day_place1"
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"
+                            android:layout_marginRight="15dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <ImageView
+                            android:id="@+id/to_day_place2"
+                            android:layout_width="140dp"
+                            android:layout_height="140dp"
+                            android:layout_marginLeft="15dp"
+                            android:src="@mipmap/ic_launcher" />
+                    </LinearLayout>
+
+
+                </LinearLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginBottom="10dp"
+                    android:background="#000000" />
+
+                <!-- best 관광지, best 산책지 -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="best 관광지"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/best_tour1"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_marginRight="15dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <ImageView
+                            android:id="@+id/best_tour2"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_marginLeft="15dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                    </LinearLayout>
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="best 산책로"
+                        android:textSize="25dp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
+
+                        <ImageView
+                            android:id="@+id/best_walk1"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_marginRight="15dp"
+                            android:src="@mipmap/ic_launcher" />
+
+                        <ImageView
+                            android:id="@+id/best_walk2"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_marginLeft="15dp"
+                            android:src="@mipmap/ic_launcher" />
+                    </LinearLayout>
+                </LinearLayout>
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:gravity="center">
+                    android:orientation="vertical">
 
-                    <ImageView
-                        android:id="@+id/best_tour1"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@mipmap/ic_launcher" />
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="추가 메뉴"
+                        android:textSize="25dp" />
 
-                    <ImageView
-                        android:id="@+id/best_tour2"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginLeft="15dp"
-                        android:src="@mipmap/ic_launcher" />
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center">
 
-                </LinearLayout>
+                        <ImageView
+                            android:id="@+id/add_menu1"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_marginRight="15dp"
+                            android:src="@mipmap/ic_launcher" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="best 산책로"
-                    android:textSize="25dp" />
+                        <ImageView
+                            android:id="@+id/add_menu2"
+                            android:layout_width="130dp"
+                            android:layout_height="130dp"
+                            android:layout_marginLeft="15dp"
+                            android:src="@mipmap/ic_launcher" />
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/best_walk1"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/best_walk2"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginLeft="15dp"
-                        android:src="@mipmap/ic_launcher" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
+        </ScrollView>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical">
+        <include layout="@layout/drawer" />
+    </androidx.drawerlayout.widget.DrawerLayout>
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="추가 메뉴"
-                    android:textSize="25dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:gravity="center">
-
-                    <ImageView
-                        android:id="@+id/add_menu1"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginRight="15dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                    <ImageView
-                        android:id="@+id/add_menu2"
-                        android:layout_width="130dp"
-                        android:layout_height="130dp"
-                        android:layout_marginLeft="15dp"
-                        android:src="@mipmap/ic_launcher" />
-
-                </LinearLayout>
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-     <include layout = "@layout/drawer"/>
- </androidx.drawerlayout.widget.DrawerLayout>
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavi"
         android:layout_width="match_parent"
@@ -369,10 +371,9 @@
         app:itemBackground="@android:color/white"
         app:itemIconTint="#000000"
         app:itemTextColor="#000000"
-        app:menu="@menu/bottomnavigation"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        />
+        app:menu="@menu/bottomnavigation" />
 
 </RelativeLayout>
