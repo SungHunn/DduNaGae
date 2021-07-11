@@ -49,11 +49,14 @@ public class Mainactivity extends AppCompatActivity {
         new_animal = getIntent().getStringExtra("ANIMAL_INFO");
         animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
 
+
         onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
         bestWlakClick();
         addMenuClick();
+
+        System.out.println("asdfasdf");
     }
 
     private void addMenuClick() {
