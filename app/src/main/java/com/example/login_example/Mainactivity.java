@@ -17,18 +17,7 @@ public class Mainactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        textView_id = (TextView)findViewById(R.id.send_id);
-        textView_pw = (TextView)findViewById(R.id.send_pw);
-
         Intent intent = getIntent();
-
-        String test_id;
-        test_id = getIntent().getStringExtra("LOGIN_ID");
-        String test_pw;
-        test_pw = getIntent().getStringExtra("LOGIN_PW");
-
-        textView_id.setText(test_id);
-        textView_pw.setText(test_pw);
 
         String new_id;
         String new_pw;
