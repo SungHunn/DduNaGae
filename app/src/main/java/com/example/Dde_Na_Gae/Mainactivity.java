@@ -1,15 +1,12 @@
-package com.example.login_example;
+package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
-import android.media.Image;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -48,6 +45,7 @@ public class Mainactivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
     ListView listview = null;
+    TextView my_page;
     //네비게이션바
 
     BottomNavigationView bottomNavigationView;
@@ -59,6 +57,8 @@ public class Mainactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        // 바텀네비게이션바 클릭 이벤트 삽입 구간
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -69,7 +69,7 @@ public class Mainactivity extends AppCompatActivity {
                         startActivity(intent);
 
                     case R.id.home:
-                        Intent intent2 = new Intent(getApplicationContext(), Matching.class);
+                        Intent intent2 = new Intent(getApplicationContext(), Mainactivity.class);
                         startActivity(intent2);
 
                     case R.id.mylocation:
@@ -80,7 +80,7 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
-        //네비게이션바
+        //네비게이션바(햄버거) 클릭 이벤트 삽입 구간
         drawerLayout = findViewById(R.id.drawlayout);
         drawerView = findViewById(R.id.drawer);
 
@@ -142,6 +142,15 @@ public class Mainactivity extends AppCompatActivity {
                         startActivity(intent);
                         break;
                 }
+            }
+        });
+
+        my_page = findViewById(R.id.my_page);
+        my_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), My_Page.class);
+                startActivity(intent);
             }
         });
 

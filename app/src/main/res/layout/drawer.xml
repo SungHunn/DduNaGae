@@ -22,10 +22,12 @@
 
 
     <TextView
-        android:id="@+id/close"
+        android:id="@+id/my_page"
+        android:clickable="true"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_margin="5dp"
+        android:gravity="center"
         android:background="@drawable/navigationbar"
         android:text="망고"
         android:textSize="25dp" />

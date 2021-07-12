@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.login_example">
+    package="com.example.Dde_Na_Gae">
 
     <application
         android:allowBackup="true"
@@ -10,20 +10,21 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Login_Example">
 
-        <activity android:name=".Mainactivity">
+        <activity android:name="com.example.Dde_Na_Gae.Mainactivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Sign_up" />
-        <activity android:name=".BestPlace" />
-        <activity android:name=".BestWalk" />
-        <activity android:name=".Category" />
-        <activity android:name=".TodayPlace" />
-        <activity android:name=".Matching" />
-        <activity android:name=".LoginPage" />
+        <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
+        <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
+        <activity android:name="com.example.Dde_Na_Gae.BestWalk" />
+        <activity android:name="com.example.Dde_Na_Gae.Category" />
+        <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
+        <activity android:name="com.example.Dde_Na_Gae.Matching" />
+        <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
+        <activity android:name=".My_Page" />
     </application>
 
 </manifest>

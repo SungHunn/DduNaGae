@@ -1,13 +1,16 @@
-package com.example.login_example;
+package com.example.Dde_Na_Gae;
 
 import android.os.Bundle;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
-public class BestWalk extends AppCompatActivity {
+public class My_Page extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.best_walk);
+        setContentView(R.layout.my_page);
+
+
     }
 }
