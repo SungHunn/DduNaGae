@@ -56,6 +56,7 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
+            // 성별 클릭하면 선택
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -96,6 +97,8 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
+            // 클릭하면 선택
+            // 종류별로 옆에 무게 써줘야함 (소형 : 7kg이하, 중형 : 7~15kg, 대형 : 15kg초과)
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -152,6 +155,7 @@
             android:layout_marginTop="5dp"
             android:orientation="horizontal">
 
+            //차량 여부 클릭하면 선택됨
             <TextView
                 android:layout_width="50dp"
                 android:layout_height="wrap_content"
@@ -192,6 +196,7 @@
                 android:text="사는 지역"
                 android:textSize="20sp" />
 
+            // 현재 내 위치 주변 지도 표시
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -206,10 +211,14 @@
             android:layout_height="1dp"
             android:background="#000000" />
 
-
-
-
     </LinearLayout>
+
+    // 카카오 주소검색 api 사용
+    <Spinner
+        android:id="@+id/spinner_do"
+        android:layout_width="200dp"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp" />
 
 
 </LinearLayout>
