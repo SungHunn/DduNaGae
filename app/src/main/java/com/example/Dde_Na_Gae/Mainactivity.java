@@ -67,14 +67,17 @@ public class Mainactivity extends AppCompatActivity {
                     case R.id.matching:
                         Intent intent = new Intent(getApplicationContext(), Matching.class);
                         startActivity(intent);
+                        break;
 
                     case R.id.home:
                         Intent intent2 = new Intent(getApplicationContext(), Mainactivity.class);
                         startActivity(intent2);
+                        break;
 
                     case R.id.mylocation:
                         //Intent intent3 = new Intent(getApplicationContext(), );
                         //startActivity(intent3);
+                        break;
                 }
                 return false;
             }
