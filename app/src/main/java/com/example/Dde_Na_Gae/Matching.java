@@ -25,6 +25,7 @@ public class Matching extends AppCompatActivity {
         btn_group_match = (Button)findViewById(R.id.btn_group_match);
         btn_my_group = (Button)findViewById(R.id.btn_my_group);
 
+
         // 홈으로 이동
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override

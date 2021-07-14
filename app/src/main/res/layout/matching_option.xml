@@ -352,7 +352,6 @@
 
                     // 카카오 API 통해 정보 등록 예정
                     // 여행인데 동까지 세세한 지역 입력이 필요한가? 시까지만 입력해도 ㄱㅊ을듯
-                    // 내일 얘기해보자
                     <Spinner
                         android:id="@+id/sp_trip_do"
                         android:layout_width="200dp"
