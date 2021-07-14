@@ -25,6 +25,7 @@ public class Matching extends AppCompatActivity {
         btn_group_match = (Button)findViewById(R.id.btn_group_match);
         btn_my_group = (Button)findViewById(R.id.btn_my_group);
 
+        // 홈으로 이동
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -33,11 +34,29 @@ public class Matching extends AppCompatActivity {
             }
         });
 
+         // 1ㄷ1 매칭으로 이동
         btn_private_match.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                Intent intent = new Intent(getApplicationContext(), Matching_Option.class);
+                startActivity(intent);
             }
         });
+//
+//        // 그룹 매칭으로 이동
+//        btn_group_match.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), );
+//            }
+//        });
+//
+//        // 내 그룹방으로 이동 (채팅방)
+//        btn_group_match.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), );
+//            }
+//        });
     }
 }

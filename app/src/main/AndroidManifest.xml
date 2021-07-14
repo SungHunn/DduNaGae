@@ -25,6 +25,7 @@
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
         <activity android:name=".My_Page" />
+        <activity android:name=".Matching_Option"/>
     </application>
 
 </manifest>
