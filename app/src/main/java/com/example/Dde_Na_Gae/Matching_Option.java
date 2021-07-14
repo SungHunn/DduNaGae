@@ -137,7 +137,7 @@ public class Matching_Option extends AppCompatActivity {
         });
 
         // Spinner 및 지도 보기 추가해야됨
-
+        // 매칭목록방 추가 에정
 
     }
 }

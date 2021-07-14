@@ -42,7 +42,7 @@ public class Matching extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-//
+
 //        // 그룹 매칭으로 이동
 //        btn_group_match.setOnClickListener(new View.OnClickListener() {
 //            @Override
