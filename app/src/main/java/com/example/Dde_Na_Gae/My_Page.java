@@ -30,6 +30,8 @@ public class My_Page extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_page);
 
+
+
         myinfo_page();
         reservation_page();
         my_review_page();
