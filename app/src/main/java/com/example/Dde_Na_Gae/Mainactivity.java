@@ -175,7 +175,7 @@ public class Mainactivity extends AppCompatActivity {
         onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
-        bestWlakClick();
+        bestWalkClick();
         addMenuClick();
 
     }
@@ -223,7 +223,7 @@ public class Mainactivity extends AppCompatActivity {
         });
     }
 
-    private void bestWlakClick() {
+    private void bestWalkClick() {
         best_walk1 = (ImageView) findViewById(R.id.best_walk1);
         best_walk1.setOnClickListener(new View.OnClickListener() {
             @Override
