@@ -26,8 +26,7 @@
         <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
         <activity android:name=".My_Page" />
         <activity android:name=".Matching_Option"/>
-        // 몰랐는데 intent하려면 넘기려는 액티비티 추가해줘야 함.. 이거로 30분 날렸당
-
+        <activity android:name=".Category_Hotel"/>
     </application>
 
 </manifest>

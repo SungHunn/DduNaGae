@@ -259,11 +259,7 @@ public class Mainactivity extends AppCompatActivity {
         category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category2.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
-
+                Intent intent = new Intent(getApplicationContext(), Category_Hotel.class);
                 startActivity(intent);
             }
         });
