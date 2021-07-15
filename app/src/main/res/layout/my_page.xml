@@ -17,7 +17,7 @@
             android:layout_height="50dp"
             android:layout_marginEnd="70dp"
             android:layout_marginRight="70dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/goback" />
 
         <TextView
 
@@ -31,7 +31,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:background="@drawable/rectangle_back"
+        android:background="@drawable/rectangle_back2"
         android:orientation="vertical">
 
         <LinearLayout
@@ -40,7 +40,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/my_animal"
+                android:id="@+id/my_picture"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
@@ -51,8 +51,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginLeft="10dp"
+                android:layout_marginLeft="8dp"
                 android:clickable="true"
+                android:focusable="true"
                 android:orientation="vertical">
 
                 <TextView
@@ -70,49 +71,52 @@
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/reservation"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/rectangle_back"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
-            android:orientation="vertical">
+            android:orientation="horizontal">
 
             <TextView
-                android:id="@+id/reservation"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
                 android:text="예약 내역"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/my_review"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/rectangle_back"
+            android:clickable="true"
+            android:focusable="true"
             android:gravity="center"
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/my_review"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
                 android:text="내 리뷰"
                 android:textSize="20sp" />
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/question"
             android:layout_width="match_parent"
             android:layout_height="70dp"
             android:background="@drawable/rectangle_back"
             android:gravity="center"
-            android:orientation="vertical">
+            android:clickable="true"
+            android:orientation="vertical"
+            android:focusable="true">
 
             <TextView
-                android:id="@+id/question"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:clickable="true"
                 android:text="고객 센터"
                 android:textSize="20sp" />
         </LinearLayout>
@@ -125,37 +129,38 @@
             android:orientation="horizontal">
 
             <LinearLayout
+                android:id="@+id/kakao_question"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:clickable="true"
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_back"
-                android:gravity="center">
+                android:gravity="center"
+                android:focusable="true">
 
                 <TextView
-                    android:id="@+id/kakao_question"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:text="카카오톡 1:1 문의"
                     android:textSize="20sp" />
             </LinearLayout>
 
             <LinearLayout
+                android:id="@+id/affiliate"
+                android:clickable="true"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/rectangle_back"
-                android:gravity="center">
+                android:gravity="center"
+                android:focusable="true">
 
                 <TextView
-                    android:id="@+id/affiliate"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:clickable="true"
                     android:text="제휴 연결"
                     android:textSize="20sp" />
             </LinearLayout>
-
         </LinearLayout>
     </LinearLayout>
 
