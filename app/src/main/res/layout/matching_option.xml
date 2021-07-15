@@ -5,6 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical">
 
+    // test
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawlayout"
         android:layout_width="match_parent"
