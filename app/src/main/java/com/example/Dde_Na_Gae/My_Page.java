@@ -38,8 +38,6 @@ public class My_Page extends AppCompatActivity {
         affiliate_page();
         bottomNavigationBar();
         my_picture_change();
-
-        System.out.println("asdfasdf");
     }
 
     private void my_picture_change() {

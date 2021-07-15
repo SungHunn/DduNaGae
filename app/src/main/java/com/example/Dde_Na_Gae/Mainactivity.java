@@ -21,8 +21,6 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 public class Mainactivity extends AppCompatActivity {
-
-
     TextView category1;
     TextView category2;
     TextView category3;
@@ -123,7 +121,9 @@ public class Mainactivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        break;
 
+                    case 1:
                         break;
 
                     case 2:
