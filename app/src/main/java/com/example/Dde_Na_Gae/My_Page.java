@@ -37,6 +37,7 @@ public class My_Page extends AppCompatActivity {
         kakao_question_page();
         affiliate_page();
         bottomNavigationBar();
+        my_picture_change();
     }
 
     private void my_picture_change() {
