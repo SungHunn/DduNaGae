@@ -63,9 +63,9 @@ public class Matching_Option extends AppCompatActivity {
             public void onClick(View v) {
                 num++;
                 if(num % 2 == 0)
-                    gender_male.setBackgroundColor(Color.parseColor("#FF7F00"));
+                    gender_female.setBackgroundColor(Color.parseColor("#FF7F00"));
                 else
-                    gender_male.setBackgroundColor(Color.WHITE);
+                    gender_female.setBackgroundColor(Color.WHITE);
             }
         });
 
