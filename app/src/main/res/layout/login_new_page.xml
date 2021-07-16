@@ -21,4 +21,35 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent" />
 
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_marginStart="105dp"
+        android:layout_marginLeft="105dp"
+        android:layout_marginTop="98dp"
+        android:layout_marginEnd="105dp"
+        android:layout_marginRight="105dp"
+        android:layout_marginBottom="116dp"
+        android:src="@drawable/logo"
+        app:layout_constraintBottom_toTopOf="@+id/google_login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="39dp"
+        android:text="로그인"
+        app:layout_constraintBottom_toTopOf="@+id/google_login_button"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:textSize="35dp"
+        />
+
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>
