@@ -28,6 +28,10 @@
         <activity android:name=".Matching_Option"/>
         <activity android:name=".Setting" />
         <activity android:name=".Search" />
+        <activity android:name=".Personal_information" />
+        <activity android:name=".Terms_of_service" />
+        <activity android:name=".Notice" />
+
         // 몰랐는데 intent하려면 넘기려는 액티비티 추가해줘야 함.. 이거로 30분 날렸당
 
     </application>
