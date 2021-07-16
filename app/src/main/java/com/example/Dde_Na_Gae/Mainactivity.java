@@ -141,7 +141,7 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 7:
-                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
+                        Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
                         startActivity(intent);
                         break;
                 }
