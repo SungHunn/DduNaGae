@@ -43,7 +43,6 @@ public class Setting extends AppCompatActivity {
                         Intent intent_notice =
                                 new Intent(getApplicationContext(), Notice.class);
                         startActivity(intent_notice);
-
                         break;
 
                     case 1:

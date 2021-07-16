@@ -122,7 +122,12 @@ public class Mainactivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        Intent intent_notice =
+                                new Intent(getApplicationContext(), Notice.class);
+                        startActivity(intent_notice);
+                        break;
 
+                    case 1:
                         break;
 
                     case 2:
@@ -138,6 +143,8 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 6:
+                        Intent intent_setting = new Intent(getApplicationContext(), Setting.class);
+                        startActivity(intent_setting);
                         break;
 
                     case 7:
