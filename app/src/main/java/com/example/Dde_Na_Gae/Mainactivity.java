@@ -7,7 +7,6 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
@@ -123,12 +122,6 @@ public class Mainactivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-                        Intent intent_notice =
-                                new Intent(getApplicationContext(), Notice.class);
-                        startActivity(intent_notice);
-                        break;
-
-                    case 1:
 
                         break;
 
@@ -142,11 +135,12 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 5:
-                        Intent intent_setting = new Intent(getApplicationContext(), Setting.class);
-                        startActivity(intent_setting);
                         break;
 
                     case 6:
+                        break;
+
+                    case 7:
                         Intent intent = new Intent(getApplicationContext(), LoginPage.class);
                         startActivity(intent);
                         break;
@@ -183,7 +177,6 @@ public class Mainactivity extends AppCompatActivity {
         bestPlaceClick();
         bestWlakClick();
         addMenuClick();
-        main_search();
 
     }
 
@@ -210,18 +203,6 @@ public class Mainactivity extends AppCompatActivity {
         }
     };
     //네비게이션바
-
-// serach box
-    private void main_search(){
-        EditText main_search = (EditText)findViewById(R.id.main_search);
-        main_search.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Search.class);
-                startActivity(intent);
-            }
-        });
-    }
 
     private void addMenuClick() {
         add_menu1 = (ImageView) findViewById(R.id.add_menu1);

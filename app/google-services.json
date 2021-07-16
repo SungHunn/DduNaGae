@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "245319854039",
+    "project_id": "ddunagae-prj",
+    "storage_bucket": "ddunagae-prj.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:245319854039:android:8a7cf340c04831109e0d92",
+        "android_client_info": {
+          "package_name": "com.example.Dde_Na_Gae"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "245319854039-1lqbtaodj414su6a21ikbdtjdl1vjja6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Dde_Na_Gae",
+            "certificate_hash": "66fced6f83f915d96eb523fe4005c58661cb2db6"
+          }
+        },
+        {
+          "client_id": "245319854039-kmj45pld41akpg22cb49u7vdoi5eb9nj.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.Dde_Na_Gae",
+            "certificate_hash": "313baaed1601e58e0724bafa8d41233753804ed6"
+          }
+        },
+        {
+          "client_id": "245319854039-6ijumo16pha6bckgi5hfef970q8m6tgf.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACh1LKaL-QlPWFsiUYUoTJtZQLwsbSqBM",
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "245319854039-6ijumo16pha6bckgi5hfef970q8m6tgf.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

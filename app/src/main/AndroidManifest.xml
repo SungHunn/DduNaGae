@@ -24,6 +24,7 @@
         <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
+        <activity android:name="com.example.Dde_Na_Gae.Login_New_Page"/>
         <activity android:name=".My_Page" />
         <activity android:name=".Matching_Option"/>
         <activity android:name=".Setting" />
