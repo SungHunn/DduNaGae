@@ -162,7 +162,7 @@ public class Mainactivity extends AppCompatActivity {
 
         //네비게이션바
 
-        Intent intent = getIntent();
+        Intent inten1t = getIntent();
 
         String new_id;
         String new_pw;
