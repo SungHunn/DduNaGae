@@ -17,13 +17,23 @@
         <activity android:name="com.example.Dde_Na_Gae.Mainactivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
 
-                <data android:host="oauth"
-                    android:scheme="kakaob214210d275c3c68a2ab5a59099d8b41" />
             </intent-filter>
         </activity>
+
+            <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
+                <intent-filter>
+                    <action android:name="android.intent.action.VIEW" />
+                    <category android:name="android.intent.category.DEFAULT" />
+                    <category android:name="android.intent.category.BROWSABLE" />
+
+                    <!-- Redirect URI: "kakao{NATIVE_APP_KEY}://oauth" -->
+                    <data android:host="oauth"
+                        android:scheme="kakaob214210d275c3c68a2ab5a59099d8b41" />
+                </intent-filter>
+            </activity>
+
         <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
         <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
         <activity android:name="com.example.Dde_Na_Gae.BestWalk" />
@@ -32,6 +42,7 @@
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
         <activity android:name="com.example.Dde_Na_Gae.Login_New_Page"/>
+
         <activity android:name=".My_Page" />
     </application>
 
