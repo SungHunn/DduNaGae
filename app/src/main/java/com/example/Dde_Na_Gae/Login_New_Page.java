@@ -25,7 +25,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GoogleAuthProvider;
 import com.kakao.sdk.auth.model.OAuthToken;
-import com.kakao.sdk.common.KakaoSdk;
 import com.kakao.sdk.user.UserApiClient;
 import com.kakao.sdk.user.model.User;
 
@@ -52,7 +51,7 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
             public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
                 if(oAuthToken != null){
                     //로그인 했을 때 처리해야 할 일
-                    /*loginSuccess();*/
+                    loginSuccess();
                 }
                 if(throwable != null){
                     //로그인하다 오류가 났을때 오류값을 가지고 처리해야 할 일
@@ -99,13 +98,13 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
         });
 
         updateKakaoLoginUi();
-        /*loginSuccess();*/
+
     }
 
-   /* private void loginSuccess(){
+    private void loginSuccess(){
         Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
         startActivity(intent);
-    }*/
+    }
 
     private void updateKakaoLoginUi() {
         UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
@@ -113,7 +112,7 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
             public Unit invoke(User user, Throwable throwable) {
                 if(user != null){
                 //로그인 되있을때
-                    /*loginSuccess();*/
+                    loginSuccess();
                 }
                 else{
                 //로그인 안되있을때
