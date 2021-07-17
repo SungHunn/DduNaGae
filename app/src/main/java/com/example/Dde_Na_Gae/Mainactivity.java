@@ -122,9 +122,9 @@ public class Mainactivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-
                         break;
-
+                    case 1:
+                        break;
                     case 2:
                         break;
 
@@ -143,8 +143,6 @@ public class Mainactivity extends AppCompatActivity {
                     case 7:
                         Intent LoginIntent = new Intent(getApplicationContext(), Login_New_Page.class);
                         startActivity(LoginIntent);
-
-
                         break;
                 }
             }
