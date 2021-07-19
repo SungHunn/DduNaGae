@@ -46,12 +46,19 @@ public class Setting extends AppCompatActivity {
                         break;
 
                     case 1:
+                        Intent intent_alarm =
+                                new Intent(getApplicationContext(), Alarm.class);
+                        startActivity(intent_alarm);
                         break;
 
                     case 2:
                         break;
 
                     case 3:
+                        Intent intent_event =
+                            new Intent(getApplicationContext(), Notice.class);
+                        startActivity(intent_event);
+
                         break;
 
                     case 4:
@@ -69,6 +76,7 @@ public class Setting extends AppCompatActivity {
                     case 6:
 
                         break;
+
                 }
             }
         });
