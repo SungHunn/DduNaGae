@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/love_it"
+        android:icon="@drawable/ic_launcher_foreground"
+        android:title="좋아요" />
+    <item
+        android:id="@+id/home"
+        android:icon="@android:drawable/ic_menu_camera"
+        android:title="홈" />
+    <item
+        android:id="@+id/seleced_reservation"
+        android:title="예약하기" />
+</menu>

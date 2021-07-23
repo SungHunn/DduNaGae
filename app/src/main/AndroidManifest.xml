@@ -19,6 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Search_Selected" />
         <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
         <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
         <activity android:name="com.example.Dde_Na_Gae.BestWalk" />

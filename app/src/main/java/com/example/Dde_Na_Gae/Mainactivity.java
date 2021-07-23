@@ -26,9 +26,6 @@ import org.w3c.dom.Text;
 import java.util.List;
 
 public class Mainactivity extends AppCompatActivity {
-
-
-
     TextView category1;
     TextView category2;
     TextView category3;
@@ -61,9 +58,6 @@ public class Mainactivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-
-
 
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);

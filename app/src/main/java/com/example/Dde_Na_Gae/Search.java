@@ -1,17 +1,14 @@
 package com.example.Dde_Na_Gae;
 
-import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,7 +16,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.gson.Gson;
 
 import java.util.ArrayList;
-import java.util.List;
 
 import android.content.SharedPreferences.Editor;
 import android.widget.TextView;
@@ -31,8 +27,7 @@ import java.lang.reflect.Type;
 
 public class Search extends AppCompatActivity {
 
-    private ArrayList<Search_Item> search_items = new ArrayList<>();
-    ArrayAdapter adapter;
+    public ArrayList<Search_Item> search_items = new ArrayList<>();
 
     private ListView search_found;
 
@@ -41,32 +36,30 @@ public class Search extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search);
 
-        SaveSearch_item((ArrayList<Search_Item>) search_items);
-        ReadSearch_Item();
-
-        //adapter = new ArrayAdapter(this, R.layout.search_item, search_items);
-
         search_found = findViewById(R.id.search_result);
-        search_items = new ArrayList<Search_Item>() {{
-            search_items.add(new
 
-                    Search_Item("이름", "이미지", "설명"));
-            search_items.add(new
+        searchItemsAdapter().add(new Search_Item("name", "description"));
+        searchItemsAdapter().add(new Search_Item("name2", "description2"));
+        searchItemsAdapter().add(new Search_Item("name3", "description3"));
+        searchItemsAdapter().add(new Search_Item("name4", "description4"));
 
-                    Search_Item("이름2", "이미지", "설명"));
-            search_items.add(new
-
-                    Search_Item("이름3", "이미지", "설명"));
-        }};
-        searchItemsAdapter();
-
+        search_found.setAdapter(searchItemsAdapter());
+        search_found.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                Intent intent = new Intent(getApplication(), Search_Selected.class);
+                intent.putExtra("NAME", search_items.get(position).item_name);
+                intent.putExtra("DES", search_items.get(position).item_description);
+                startActivity(intent);
+            }
+        });
     }
 
-    private void searchItemsAdapter() {
+    private ArrayAdapter<Search_Item> searchItemsAdapter() {
         ArrayAdapter<Search_Item> adapter = new ArrayAdapter<Search_Item>(getApplicationContext(), R.layout.search_item, search_items) {
             @Override
             public View getView(int position, View convertView, ViewGroup parent) {
-                // 배열에서 position에 위치한 데이터(아이템) 가져오기
+                // 배열에서 position 에 위치한 데이터(아이템) 가져오기
                 Search_Item search_item = getItem(position);
                 // 아이템의 내용을 그림 convertView의 재사용을 위해서 확인
                 // null 이면 새로 만들고, null 이 아니면 재사용한다.
@@ -83,25 +76,6 @@ public class Search extends AppCompatActivity {
                 return convertView;
             }
         };
-        search_found.setAdapter(adapter);
-    }
-
-    private void SaveSearch_item(ArrayList<Search_Item> search_items) {
-        SharedPreferences preferences = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Editor editor = preferences.edit();
-        Gson gson = new Gson();
-        String json = gson.toJson(search_items);
-        editor.putString("Items", json);
-        editor.commit();
-    }
-
-    private ArrayList<Search_Item> ReadSearch_Item() {
-        SharedPreferences sharedPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        Gson gson = new Gson();
-        String json = sharedPrefs.getString("Items", "EMPTY");
-        Type type = new TypeToken<ArrayList<Search_Item>>() {
-        }.getType();
-        ArrayList<Search_Item> arrayList = gson.fromJson(json, type);
-        return arrayList;
+        return adapter;
     }
 }
