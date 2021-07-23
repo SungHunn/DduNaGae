@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -20,7 +21,14 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.w3c.dom.Text;
+
+import java.util.List;
+
 public class Mainactivity extends AppCompatActivity {
+
+
+
     TextView category1;
     TextView category2;
     TextView category3;
@@ -49,12 +57,12 @@ public class Mainactivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    Toast toast;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+
 
 
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
@@ -160,6 +168,7 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
+
         //네비게이션바
 
         Intent intent = getIntent();
@@ -210,7 +219,7 @@ public class Mainactivity extends AppCompatActivity {
 
 // serach box
     private void main_search(){
-        EditText main_search = (EditText)findViewById(R.id.main_search);
+        TextView main_search = findViewById(R.id.main_search);
         main_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -370,4 +379,6 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
     }
+
+
 }

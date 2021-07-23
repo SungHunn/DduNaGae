@@ -7,18 +7,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
         android:gravity="center"
-        android:orientation="horizontal"
-        android:layout_marginTop="10dp">
+        android:orientation="horizontal">
 
         <EditText
             android:id="@+id/search_box"
             android:layout_width="275dp"
             android:layout_height="50dp"
-            android:layout_marginRight="15dp"
             android:background="@drawable/rounded_edittext"
             android:hint="검색어를 입력하세요"
-            android:paddingRight="20dp"/>
+            android:paddingLeft="10dp" />
 
         <ImageView
             android:id="@+id/search_icon"
@@ -36,17 +35,16 @@
             android:src="@drawable/ic_baseline_dehaze_24" />
 
 
-
     </LinearLayout>
     <!-- 해쉬태그 만들기 구현하는게 있는듯-->
     <TextView
         android:id="@+id/search_hashTag"
         android:layout_width="70dp"
         android:layout_height="20dp"
-        android:text="# 해시태그"
         android:layout_marginLeft="16dp"
         android:layout_marginTop="7dp"
-        android:textSize="12sp"/>
+        android:text="# 해시태그"
+        android:textSize="12sp" />
 
     <View
         android:layout_width="370dp"
@@ -58,24 +56,13 @@
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_margin="15dp"
         android:orientation="horizontal">
 
-        <ImageView
-            android:layout_width="150dp"
-            android:layout_height="100dp"
-            android:src="@mipmap/ic_launcher"
-            android:layout_marginTop="35dp"/>
-
-        <TextView
-            android:id="@+id/search_result_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="안양 애견 파크"
-            android:layout_gravity="center"
-            android:textSize="20sp"
-            android:textColor="#000000"
-            android:clickable="true" />
-
+        <ListView
+            android:id="@+id/search_result"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 
