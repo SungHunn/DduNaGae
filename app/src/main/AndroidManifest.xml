@@ -46,6 +46,7 @@
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
         <activity android:name="com.example.Dde_Na_Gae.Login_New_Page"/>
+        <activity android:name=".My_Information"/>
         <activity android:name=".My_Page"/>
     </application>
 

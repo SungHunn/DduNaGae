@@ -30,6 +30,7 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
 
 import java.util.HashMap;
@@ -44,52 +45,83 @@ import android.widget.Button;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
+import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
+import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.gms.auth.api.Auth;
+import com.google.android.gms.auth.api.signin.GoogleSignIn;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.SignInButton;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GoogleAuthProvider;
+import com.kakao.sdk.auth.model.OAuthToken;
+import com.kakao.sdk.user.UserApiClient;
+import com.kakao.sdk.user.model.User;
+
+import kotlin.Unit;
+import kotlin.jvm.functions.Function2;
 
 
-public class Login_New_Page extends AppCompatActivity {
+public class Login_New_Page extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
     private static final String TAG = Login_New_Page.class.getName();
 
-    LinearLayout loggedInView;
     LoginButton loginButton;
-    Button logoutButton;
-    ImageView imageView;
+    private static final int RC_SIGN_IN = 10;
+    private GoogleApiClient mGoogleApiClient;
+    private FirebaseAuth mAuth;
+    SignInButton button;
+
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_new_page);
+        //구글
+        mAuth = FirebaseAuth.getInstance();
+        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build();
 
+        mGoogleApiClient = new GoogleApiClient.Builder(this)
+                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
+                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
+                .build();
 
-
-
-        loggedInView = (LinearLayout) findViewById(R.id.logged_in_view);
-        loginButton = (LoginButton) findViewById(R.id.kakaologin_button);
-        logoutButton = (Button) findViewById(R.id.logout_button);
-        imageView = (ImageView) findViewById(R.id.profile_image_view);
-
-        logoutButton.setOnClickListener(new View.OnClickListener() {
+        button = (SignInButton)findViewById(R.id.google_login_button);
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
-                    @Override
-                    public void onCompleteLogout() {
-                        FirebaseAuth.getInstance().signOut();
 
-                        Handler handler = new Handler(Looper.getMainLooper());
-                        handler.post(new Runnable() {
-                            @Override
-                            public void run() {
-                                updateUI();
-                            }
-                        });
-                    }
-                });
+                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
+                startActivityForResult(signInIntent, RC_SIGN_IN);
+
             }
         });
 
+
+        //카카오
+        loginButton = (LoginButton) findViewById(R.id.kakaologin_button);
         Session.getCurrentSession().addCallback(new KakaoSessionCallback());
+
+
     }
 
 
@@ -97,41 +129,62 @@ public class Login_New_Page extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        updateUI();
+
     }
 
     /**
      * Update UI based on Firebase's current user. Show Login Button if not logged in.
      */
-    private void updateUI() {
-        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
-        if (currentUser != null) {
+    private void updateUI(FirebaseUser user) {
+    }
 
 
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
 
-            if (currentUser.getPhotoUrl() != null) {
-                Glide.with(this)
-                        .load(currentUser.getPhotoUrl())
-                        .into(imageView);
+        Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data);
+        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
+        if (requestCode == RC_SIGN_IN) {
+            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
+            try {
+                // Google Sign In was successful, authenticate with Firebase
+                GoogleSignInAccount account = task.getResult(ApiException.class);
+                firebaseAuthWithGoogle(account.getIdToken());
+            } catch (ApiException e) {
+                // Google Sign In failed, update UI appropriately
+
             }
-            loginButton.setVisibility(View.INVISIBLE);
-            loggedInView.setVisibility(View.VISIBLE);
-            logoutButton.setVisibility(View.VISIBLE);
-        } else {
-            loginButton.setVisibility(View.VISIBLE);
-            loggedInView.setVisibility(View.INVISIBLE);
-            logoutButton.setVisibility(View.INVISIBLE);
         }
     }
+
+    private void firebaseAuthWithGoogle(String idToken) {
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            updateUI(user);
+                            Intent intent_information = new Intent(getApplicationContext(), My_Information.class);
+                            startActivity(intent_information);
+                            finish();
+                        } else {
+                            // If sign in fails, display a message to the user.
+
+                            updateUI(null);
+                        }
+                    }
+                });
+    }
+
 
     /**
      * OnActivityResult() should be overridden for Kakao Login because Kakao Login uses startActivityForResult().
      */
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data);
-    }
+
 
     /**
      *
@@ -176,6 +229,11 @@ public class Login_New_Page extends AppCompatActivity {
         return source.getTask();
     }
 
+    @Override
+    public void onConnectionFailed(@NonNull @NotNull ConnectionResult connectionResult) {
+
+    }
+
     /**
      * Session callback class for Kakao Login. OnSessionOpened() is called after successful login.
      */
@@ -195,7 +253,9 @@ public class Login_New_Page extends AppCompatActivity {
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        updateUI();
+                        Intent intent_information = new Intent(getApplicationContext(), My_Information.class);
+                        startActivity(intent_information);
+                        finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Failed to create a Firebase user.", Toast.LENGTH_LONG).show();
                         if (task.getException() != null) {
