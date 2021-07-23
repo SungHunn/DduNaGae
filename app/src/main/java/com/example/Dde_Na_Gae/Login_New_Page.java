@@ -45,38 +45,12 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_new_page);
-        //카카오 로그인
-        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-            @Override
-            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                if(oAuthToken != null){
-                    //로그인 했을 때 처리해야 할 일
-                    loginSuccess();
-                }
-                if(throwable != null){
-                    //로그인하다 오류가 났을때 오류값을 가지고 처리해야 할 일
-                }
-                updateKakaoLoginUi();
-                return null;
-            }
-        };
-        kakaoLoginButton = findViewById(R.id.login_kakao);
-       kakaoLoginButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-              if( UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login_New_Page.this)){
-                    UserApiClient.getInstance().loginWithKakaoTalk(Login_New_Page.this, callback);
-              }
-              else{
-                    UserApiClient.getInstance().loginWithKakaoAccount(Login_New_Page.this, callback);
-                    };
-              }
-           });
+
 
         //구글 로그인
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.web_client_id))
+                .requestIdToken(getString(R.string.default_web_client_id))
                 .requestEmail()
                 .build();
 
@@ -97,30 +71,10 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
             }
         });
 
-        updateKakaoLoginUi();
+
 
     }
 
-    private void loginSuccess(){
-        Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
-        startActivity(intent);
-    }
-
-    private void updateKakaoLoginUi() {
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-            @Override
-            public Unit invoke(User user, Throwable throwable) {
-                if(user != null){
-                //로그인 되있을때
-                    loginSuccess();
-                }
-                else{
-                //로그인 안되있을때
-                }
-                return null;
-            }
-        });
-    }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -148,9 +102,11 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(Login_New_Page.this,"로그인 완료!",Toast.LENGTH_SHORT);
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
+                            Intent intent_information = new Intent(getApplicationContext(), My_Information.class);
+                            startActivity(intent_information);
+                            finish();
                         } else {
                             // If sign in fails, display a message to the user.
 

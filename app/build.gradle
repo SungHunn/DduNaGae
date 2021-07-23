@@ -1,6 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'com.google.gms.google-services'
+
 }
 
 
@@ -43,6 +44,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.google.firebase:firebase-database'
 
     implementation "com.kakao.sdk:v2-user:2.5.2" // 카카오 로그인
     implementation "com.kakao.sdk:v2-talk:2.5.2" // 친구, 메시지(카카오톡)
@@ -51,6 +53,8 @@ dependencies {
     implementation "com.kakao.sdk:v2-navi:2.5.2" // 카카오내비
 
 }
+
+
 
 
 
