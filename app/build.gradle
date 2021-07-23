@@ -28,6 +28,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+
 }
 
 dependencies {
@@ -43,6 +44,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-auth'
     implementation 'com.google.android.gms:play-services-auth:19.0.0'
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation group: project.KAKAO_SDK_GROUP, name: 'usermgmt', version: project.KAKAO_SDK_VERSION
+    implementation 'com.github.bumptech.glide:glide:3.7.0'
 
     implementation "com.kakao.sdk:v2-user:2.5.2" // 카카오 로그인
     implementation "com.kakao.sdk:v2-talk:2.5.2" // 친구, 메시지(카카오톡)
@@ -51,7 +55,7 @@ dependencies {
     implementation "com.kakao.sdk:v2-navi:2.5.2" // 카카오내비
 
 }
-
+apply plugin: 'com.google.gms.google-services'
 
 
 

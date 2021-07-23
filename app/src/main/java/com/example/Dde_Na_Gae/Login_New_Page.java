@@ -1,171 +1,216 @@
 package com.example.Dde_Na_Gae;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.android.gms.tasks.TaskCompletionSource;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
+import com.kakao.auth.ISessionCallback;
+import com.kakao.auth.Session;
+import com.kakao.usermgmt.LoginButton;
+import com.kakao.usermgmt.UserManagement;
+import com.kakao.usermgmt.callback.LogoutResponseCallback;
+import com.kakao.util.exception.KakaoException;
+
+import android.os.Handler;
+import android.os.Looper;
+
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Toast;
+
+import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
+
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.android.gms.auth.api.Auth;
-import com.google.android.gms.auth.api.signin.GoogleSignIn;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
-import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.SignInButton;
-import com.google.android.gms.common.api.ApiException;
-import com.google.android.gms.common.api.GoogleApiClient;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.auth.AuthCredential;
-import com.google.firebase.auth.AuthResult;
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GoogleAuthProvider;
-import com.kakao.sdk.auth.model.OAuthToken;
-import com.kakao.sdk.user.UserApiClient;
-import com.kakao.sdk.user.model.User;
-
-import kotlin.Unit;
-import kotlin.jvm.functions.Function2;
 
 
-public class Login_New_Page extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
+public class Login_New_Page extends AppCompatActivity {
 
+    private static final String TAG = Login_New_Page.class.getName();
 
-    private View kakaoLoginButton;
-    private static final int RC_SIGN_IN = 10;
-    private GoogleApiClient mGoogleApiClient;
-    private FirebaseAuth mAuth;
-    SignInButton button;
+    LinearLayout loggedInView;
+    LoginButton loginButton;
+    Button logoutButton;
+    ImageView imageView;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState){
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_new_page);
-        //카카오 로그인
-        Function2<OAuthToken, Throwable, Unit> callback = new Function2<OAuthToken, Throwable, Unit>() {
-            @Override
-            public Unit invoke(OAuthToken oAuthToken, Throwable throwable) {
-                if(oAuthToken != null){
-                    //로그인 했을 때 처리해야 할 일
-                    loginSuccess();
-                }
-                if(throwable != null){
-                    //로그인하다 오류가 났을때 오류값을 가지고 처리해야 할 일
-                }
-                updateKakaoLoginUi();
-                return null;
-            }
-        };
-        kakaoLoginButton = findViewById(R.id.login_kakao);
-       kakaoLoginButton.setOnClickListener(new View.OnClickListener() {
-           @Override
-           public void onClick(View view) {
-              if( UserApiClient.getInstance().isKakaoTalkLoginAvailable(Login_New_Page.this)){
-                    UserApiClient.getInstance().loginWithKakaoTalk(Login_New_Page.this, callback);
-              }
-              else{
-                    UserApiClient.getInstance().loginWithKakaoAccount(Login_New_Page.this, callback);
-                    };
-              }
-           });
-
-        //구글 로그인
-        mAuth = FirebaseAuth.getInstance();
-        GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-                .requestIdToken(getString(R.string.web_client_id))
-                .requestEmail()
-                .build();
 
 
-        mGoogleApiClient = new GoogleApiClient.Builder(this)
-                .enableAutoManage(this /* FragmentActivity */, this /* OnConnectionFailedListener */)
-                .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-                .build();
 
-        button = (SignInButton)findViewById(R.id.google_login_button);
-        button.setOnClickListener(new View.OnClickListener() {
+
+        loggedInView = (LinearLayout) findViewById(R.id.logged_in_view);
+        loginButton = (LoginButton) findViewById(R.id.kakaologin_button);
+        logoutButton = (Button) findViewById(R.id.logout_button);
+        imageView = (ImageView) findViewById(R.id.profile_image_view);
+
+        logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                UserManagement.getInstance().requestLogout(new LogoutResponseCallback() {
+                    @Override
+                    public void onCompleteLogout() {
+                        FirebaseAuth.getInstance().signOut();
 
-                Intent signInIntent = Auth.GoogleSignInApi.getSignInIntent(mGoogleApiClient);
-                startActivityForResult(signInIntent, RC_SIGN_IN);
-
+                        Handler handler = new Handler(Looper.getMainLooper());
+                        handler.post(new Runnable() {
+                            @Override
+                            public void run() {
+                                updateUI();
+                            }
+                        });
+                    }
+                });
             }
         });
 
-        updateKakaoLoginUi();
-
+        Session.getCurrentSession().addCallback(new KakaoSessionCallback());
     }
 
-    private void loginSuccess(){
-        Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
-        startActivity(intent);
-    }
 
-    private void updateKakaoLoginUi() {
-        UserApiClient.getInstance().me(new Function2<User, Throwable, Unit>() {
-            @Override
-            public Unit invoke(User user, Throwable throwable) {
-                if(user != null){
-                //로그인 되있을때
-                    loginSuccess();
-                }
-                else{
-                //로그인 안되있을때
-                }
-                return null;
-            }
-        });
-    }
 
     @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
+    protected void onStart() {
+        super.onStart();
+        updateUI();
+    }
 
-        // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
-        if (requestCode == RC_SIGN_IN) {
-            Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
-            try {
-                // Google Sign In was successful, authenticate with Firebase
-                GoogleSignInAccount account = task.getResult(ApiException.class);
-                firebaseAuthWithGoogle(account.getIdToken());
-            } catch (ApiException e) {
-                // Google Sign In failed, update UI appropriately
+    /**
+     * Update UI based on Firebase's current user. Show Login Button if not logged in.
+     */
+    private void updateUI() {
+        FirebaseUser currentUser = FirebaseAuth.getInstance().getCurrentUser();
+        if (currentUser != null) {
 
+
+
+            if (currentUser.getPhotoUrl() != null) {
+                Glide.with(this)
+                        .load(currentUser.getPhotoUrl())
+                        .into(imageView);
             }
+            loginButton.setVisibility(View.INVISIBLE);
+            loggedInView.setVisibility(View.VISIBLE);
+            logoutButton.setVisibility(View.VISIBLE);
+        } else {
+            loginButton.setVisibility(View.VISIBLE);
+            loggedInView.setVisibility(View.INVISIBLE);
+            logoutButton.setVisibility(View.INVISIBLE);
         }
     }
 
-    private void firebaseAuthWithGoogle(String idToken) {
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if (task.isSuccessful()) {
-                            // Sign in success, update UI with the signed-in user's information
-                            Toast.makeText(Login_New_Page.this,"로그인 완료!",Toast.LENGTH_SHORT);
-                            FirebaseUser user = mAuth.getCurrentUser();
-                            updateUI(user);
-                        } else {
-                            // If sign in fails, display a message to the user.
+    /**
+     * OnActivityResult() should be overridden for Kakao Login because Kakao Login uses startActivityForResult().
+     */
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data);
+    }
 
-                            updateUI(null);
+    /**
+     *
+     * @param kakaoAccessToken Access token retrieved after successful Kakao Login
+     * @return Task object that will call validation server and retrieve firebase token
+     */
+    private Task<String> getFirebaseJwt(final String kakaoAccessToken) {
+        final TaskCompletionSource<String> source = new TaskCompletionSource<>();
+
+        RequestQueue queue = Volley.newRequestQueue(this);
+        String url = getResources().getString(R.string.validation_server_domain) + "/verifyToken";
+        HashMap<String, String> validationObject = new HashMap<>();
+        validationObject.put("token", kakaoAccessToken);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, new JSONObject(validationObject), new Response.Listener<JSONObject>() {
+            @Override
+            public void onResponse(JSONObject response) {
+                try {
+                    String firebaseToken = response.getString("firebase_token");
+                    source.setResult(firebaseToken);
+                } catch (Exception e) {
+                    source.setException(e);
+                }
+
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Log.e(TAG, error.toString());
+                source.setException(error);
+            }
+        }) {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                params.put("token", kakaoAccessToken);
+                return params;
+            }
+        };
+
+        queue.add(request);
+        return source.getTask();
+    }
+
+    /**
+     * Session callback class for Kakao Login. OnSessionOpened() is called after successful login.
+     */
+    private class KakaoSessionCallback implements ISessionCallback {
+        @Override
+        public void onSessionOpened() {
+            Toast.makeText(getApplicationContext(), "Successfully logged in to Kakao. Now creating or updating a Firebase User.", Toast.LENGTH_LONG).show();
+            String accessToken = Session.getCurrentSession().getAccessToken();
+            getFirebaseJwt(accessToken).continueWithTask(new Continuation<String, Task<AuthResult>>() {
+                @Override
+                public Task<AuthResult> then(@NonNull Task<String> task) throws Exception {
+                    String firebaseToken = task.getResult();
+                    FirebaseAuth auth = FirebaseAuth.getInstance();
+                    return auth.signInWithCustomToken(firebaseToken);
+                }
+            }).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                @Override
+                public void onComplete(@NonNull Task<AuthResult> task) {
+                    if (task.isSuccessful()) {
+                        updateUI();
+                    } else {
+                        Toast.makeText(getApplicationContext(), "Failed to create a Firebase user.", Toast.LENGTH_LONG).show();
+                        if (task.getException() != null) {
+                            Log.e(TAG, task.getException().toString());
                         }
                     }
-                });
-    }
+                }
+            });
+        }
 
-    private void updateUI(FirebaseUser user) {
-    }
-
-
-    @Override
-    public void onConnectionFailed(@NonNull @org.jetbrains.annotations.NotNull ConnectionResult connectionResult) {
-
+        @Override
+        public void onSessionOpenFailed(KakaoException exception) {
+            if (exception != null) {
+                Log.e(TAG, exception.toString());
+            }
+        }
     }
 }

@@ -1,4 +1,10 @@
 <resources>
     <string name="app_name">Dde_Na_Gae</string>
-    <string name="web_client_id">245319854039-kmj45pld41akpg22cb49u7vdoi5eb9nj.apps.googleusercontent.com</string>
+
+
+    <string name="logout">Logout</string>
+    <string name="profile_picture">Profile Picture:</string>
+    <string name="display_name">Display Name:</string>
+    <string name="login_failed">Login failed.</string>
+    <string name="email_text">Email:</string>
 </resources>
