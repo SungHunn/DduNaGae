@@ -79,9 +79,12 @@ public class My_Information extends AppCompatActivity {
         button = (Button)findViewById(R.id.okay);
         button.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View v ) {
                 member_database(firstname1.getText().toString(),lastname1.getText().toString(),phone_num1.getText().toString(),myage1.getText().toString(),text_pet_type,petage1.getText().toString(),petweight1.getText().toString(),petname1.getText().toString(),text_pet_sex,text_car_spinner,unique1.getText().toString());
 
+                Intent intent_main = new Intent(getApplicationContext(),Mainactivity.class);
+                startActivity(intent_main);
+                finish();
 
             }
         });

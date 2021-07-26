@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:ems="6"
             android:inputType="textPersonName"
-            android:text="성" />
+            android:hint="성" />
 
         <EditText
             android:id="@+id/last_name"
@@ -47,7 +47,7 @@
             android:ems="7"
             android:inputType="textPersonName"
             android:layout_marginLeft="35dp"
-            android:text="이름" />
+            android:hint="이름" />
 
     </LinearLayout>
 
@@ -58,7 +58,7 @@
             android:layout_weight="1"
             android:ems="15"
             android:inputType="textPersonName"
-            android:text="전화번호" />
+            android:hint="전화번호" />
 
         <EditText
             android:id="@+id/my_age"
@@ -67,7 +67,7 @@
             android:layout_weight="1"
             android:ems="6"
             android:inputType="textPersonName"
-            android:text="나이" />
+            android:hint="나이" />
 
 
     </LinearLayout>
@@ -116,7 +116,7 @@
             android:layout_weight="1"
             android:ems="6"
             android:inputType="textPersonName"
-            android:text="(ex) 견종)" />
+            android:hint="(ex) 견종)" />
 
 
         <LinearLayout
@@ -131,7 +131,7 @@
                 android:layout_weight="1"
                 android:ems="6"
                 android:inputType="textPersonName"
-                android:text="동물 나이" />
+                android:hint="동물 나이" />
 
 
             <EditText
@@ -141,7 +141,7 @@
                 android:layout_weight="1"
                 android:ems="6"
                 android:inputType="textPersonName"
-                android:text="무게"
+                android:hint="무게"
                 android:layout_marginLeft="25dp"/>
 
         </LinearLayout>
@@ -158,7 +158,7 @@
                 android:layout_weight="1"
                 android:ems="6"
                 android:inputType="textPersonName"
-                android:text="동물 이름" />
+                android:hint="동물 이름" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -207,7 +207,7 @@
             android:layout_weight="1"
             android:ems="6"
             android:inputType="textPersonName"
-            android:text="ex)동물 등록번호\n 사회성 \n 동물 성격"
+            android:hint="ex)\n동물 등록번호\n 사회성 \n 동물 성격"
             android:background="@drawable/type_edittext"
             android:layout_gravity="center"/>
 
