@@ -9,6 +9,7 @@
         android:icon="@android:drawable/ic_menu_camera"
         android:title="홈" />
     <item
-        android:id="@+id/seleced_reservation"
-        android:title="예약하기" />
+        android:id="@+id/more_room_activity"
+        android:icon="@android:drawable/ic_menu_agenda"
+        android:title="객실 보기" />
 </menu>

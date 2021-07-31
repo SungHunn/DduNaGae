@@ -3,7 +3,10 @@ package com.example.Dde_Na_Gae;
 import android.content.Intent;
 import android.media.Image;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -63,14 +66,16 @@ public class Search_Selected extends AppCompatActivity {
                         startActivity(intent2);
                         break;
 
-                    case R.id.reservation:
-                        //Intent intent3 = new Intent(getApplicationContext(), );
-                        //startActivity(intent3);
+                    case R.id.more_room_activity:
+                        Intent intent = new Intent(getApplicationContext(), Search_Selected_More.class);
+                        intent.putExtra("More_info", getIntent().getStringExtra("NAME"));
+                        startActivity(intent);
                         break;
                 }
                 return false;
             }
         });
+
     }
 
     protected ArrayList setItem() {
