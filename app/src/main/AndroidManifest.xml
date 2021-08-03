@@ -18,7 +18,13 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="b214210d275c3c68a2ab5a59099d8b41"/>
 
-        <activity android:name="com.example.Dde_Na_Gae.Mainactivity"/>
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.LAUNCHER" />
+
+            </intent-filter>
+        </activity>
 
             <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
                 <intent-filter>
@@ -31,7 +37,7 @@
                         android:scheme="kakaob214210d275c3c68a2ab5a59099d8b41" />
                 </intent-filter>
             </activity>
-
+        <activity android:name=".Mainactivity" />
         <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
         <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
         <activity android:name="com.example.Dde_Na_Gae.BestWalk" />
@@ -39,12 +45,7 @@
         <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
-        <activity android:name="com.example.Dde_Na_Gae.Login_New_Page">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-    </activity>
+        <activity android:name="com.example.Dde_Na_Gae.Login_New_Page"/>
         <activity android:name=".My_Information"/>
         <activity android:name=".My_Page"/>
     </application>
