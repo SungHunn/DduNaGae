@@ -37,7 +37,7 @@ public class My_Information extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
-    private DatabaseReference databaseReference;
+
 
 
     private Button overlapbutton;
@@ -92,17 +92,17 @@ public class My_Information extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v ) {
-               /* if(overlapbutton.isEnabled()==false) {
-
+               if(overlapbutton.isEnabled()==false && firstname1!=null && lastname1!=null&& phone_num1!=null&& myage1!=null && petage1!=null && petweight1!=null && petname1 != null) {
+                   member_database(nick_name.getText().toString(), firstname1.getText().toString(), lastname1.getText().toString(), phone_num1.getText().toString(), myage1.getText().toString(), text_pet_type, petage1.getText().toString(), petweight1.getText().toString(), petname1.getText().toString(), text_pet_sex, text_car_spinner, unique1.getText().toString());
+                   Intent intent_main = new Intent(getApplicationContext(), Mainactivity.class);
+                   startActivity(intent_main);
+                   finish();
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"닉네임 중복 확인 필수!!",Toast.LENGTH_SHORT).show();//토스메세지 출력
                 }
-*/
-                member_database(nick_name.getText().toString(), firstname1.getText().toString(), lastname1.getText().toString(), phone_num1.getText().toString(), myage1.getText().toString(), text_pet_type, petage1.getText().toString(), petweight1.getText().toString(), petname1.getText().toString(), text_pet_sex, text_car_spinner, unique1.getText().toString());
-                Intent intent_main = new Intent(getApplicationContext(), Mainactivity.class);
-                startActivity(intent_main);
-                finish();
+
+
             }
         });
         //닉네임칸 함수
@@ -133,18 +133,16 @@ public class My_Information extends AppCompatActivity {
 
     }
     public void overlap_nickname(){
-        databaseReference.child("ddunagae-prj-default-rtdb").child("users").child(nick_name.getText().toString()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+        mDatabase.child("users").child(nick_name.getText().toString()).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String value = snapshot.getValue(String.class);
-
-                if(value!=null){
+                if (snapshot.exists()){
                     Toast.makeText(getApplicationContext(),"중복된 닉네임입니다.",Toast.LENGTH_SHORT).show();//토스메세지 출력
                 }
                 else{
                     Toast.makeText(getApplicationContext(),"사용가능한 닉네임입니다.",Toast.LENGTH_SHORT).show();//토스메세지 출력
                     //버튼 비활성화
-                    nick_name.setEnabled(false);
+                    overlapbutton.setEnabled(false);
                 }
             }
 
@@ -174,7 +172,7 @@ public class My_Information extends AppCompatActivity {
 
 
 
-        mDatabase.child("users").child(lastname).setValue(member_database)
+        mDatabase.child("users").child(nick_name).setValue(member_database)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
