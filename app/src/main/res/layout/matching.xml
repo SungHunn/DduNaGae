@@ -22,33 +22,32 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="매 칭"
-        android:textSize="30sp"/>
+        android:textSize="30sp"
+        android:layout_marginTop="30dp"/>
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="180dp"
-        android:src="@mipmap/ic_launcher_round" />
+        android:src="@drawable/logo"
+        android:layout_marginBottom="50dp"
+        android:layout_marginTop="15dp"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_margin="10dp"
-        android:text="매칭 방식을 선택해주세요."
-        android:textSize="20sp"/>
+
 
     <Button
-        android:id="@+id/btn_private_match"
+        android:id="@+id/btn_match"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="1 대 1 매칭칭"/>
+        android:text="매칭방 찾기"
+        />
 
     <Button
-        android:id="@+id/btn_group_match"
+        android:id="@+id/btn_matchmake"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="그룹매칭"/>
+        android:text="매칭방 만들기"/>
 
     <Button
         android:id="@+id/btn_my_group"
