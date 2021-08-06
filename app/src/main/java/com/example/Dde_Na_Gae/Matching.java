@@ -22,7 +22,7 @@ public class Matching extends AppCompatActivity {
 
         img_back = (ImageView)findViewById(R.id.img_back);
         btn_private_match = (Button)findViewById(R.id.btn_match);
-        btn_make_match = (Button)findViewById(R.id.btn_make_match);
+        btn_make_match = (Button)findViewById(R.id.btn_matchmake);
         btn_my_group = (Button)findViewById(R.id.btn_my_group);
 
         img_back.setOnClickListener(new View.OnClickListener() {
