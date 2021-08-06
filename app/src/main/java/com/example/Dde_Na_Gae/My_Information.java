@@ -16,6 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -37,7 +38,7 @@ public class My_Information extends AppCompatActivity {
 
     private DatabaseReference mDatabase;
 
-
+    private String uid = FirebaseAuth.getInstance().getUid();
 
 
     private Button overlapbutton;
@@ -48,7 +49,7 @@ public class My_Information extends AppCompatActivity {
         setContentView(R.layout.information);
 
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+            mDatabase = FirebaseDatabase.getInstance().getReference();
         firstname1 = (EditText)findViewById(R.id.first_name);
         lastname1 = (EditText)findViewById(R.id.last_name);
         phone_num1 = (EditText)findViewById(R.id.phone_number);
@@ -93,7 +94,7 @@ public class My_Information extends AppCompatActivity {
             @Override
             public void onClick(View v ) {
                if(overlapbutton.isEnabled()==false && firstname1!=null && lastname1!=null&& phone_num1!=null&& myage1!=null && petage1!=null && petweight1!=null && petname1 != null) {
-                   member_database(nick_name.getText().toString(), firstname1.getText().toString(), lastname1.getText().toString(), phone_num1.getText().toString(), myage1.getText().toString(), text_pet_type, petage1.getText().toString(), petweight1.getText().toString(), petname1.getText().toString(), text_pet_sex, text_car_spinner, unique1.getText().toString());
+                   member_database(uid, nick_name.getText().toString(), firstname1.getText().toString(), lastname1.getText().toString(), phone_num1.getText().toString(), myage1.getText().toString(), text_pet_type, petage1.getText().toString(), petweight1.getText().toString(), petname1.getText().toString(), text_pet_sex, text_car_spinner, unique1.getText().toString());
                    Intent intent_main = new Intent(getApplicationContext(), Mainactivity.class);
                    startActivity(intent_main);
                    finish();
@@ -156,8 +157,9 @@ public class My_Information extends AppCompatActivity {
 
 
 
-    public void member_database(String nick_name, String firstname, String lastname, String phone_num, String myage, String pettype, String petage, String petweight, String petname, String petsex, String havecar, String unique){
+    public void member_database(String uid, String nick_name, String firstname, String lastname, String phone_num, String myage, String pettype, String petage, String petweight, String petname, String petsex, String havecar, String unique){
         Member_Database member_database = new Member_Database();
+        member_database.uid = uid;
         member_database.nickname = nick_name;
         member_database.firstname = firstname;
         member_database.lastname = lastname;
@@ -172,7 +174,7 @@ public class My_Information extends AppCompatActivity {
 
 
 
-        mDatabase.child("users").child(nick_name).setValue(member_database)
+        mDatabase.child("users").child(uid).setValue(member_database)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

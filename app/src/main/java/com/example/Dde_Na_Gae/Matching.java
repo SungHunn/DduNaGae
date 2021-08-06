@@ -12,7 +12,7 @@ public class Matching extends AppCompatActivity {
 
     ImageView img_back;
     Button btn_private_match;
-    Button btn_group_match;
+    Button btn_make_match;
     Button btn_my_group;
 
     @Override
@@ -21,8 +21,8 @@ public class Matching extends AppCompatActivity {
         setContentView(R.layout.matching);
 
         img_back = (ImageView)findViewById(R.id.img_back);
-        btn_private_match = (Button)findViewById(R.id.btn_private_match);
-        btn_group_match = (Button)findViewById(R.id.btn_group_match);
+        btn_private_match = (Button)findViewById(R.id.btn_match);
+        btn_make_match = (Button)findViewById(R.id.btn_make_match);
         btn_my_group = (Button)findViewById(R.id.btn_my_group);
 
         img_back.setOnClickListener(new View.OnClickListener() {
@@ -37,6 +37,13 @@ public class Matching extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+            }
+        });
+        btn_make_match.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Matching_Option.class);
+                startActivity(intent);
             }
         });
     }

@@ -16,6 +16,11 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.kakao.auth.ISessionCallback;
 import com.kakao.auth.Session;
 import com.kakao.usermgmt.LoginButton;
@@ -87,12 +92,15 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
     private FirebaseAuth mAuth;
     SignInButton button;
 
+    private DatabaseReference mDatabase;
+    private String uid = FirebaseAuth.getInstance().getUid();
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login_new_page);
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         //구글
         mAuth = FirebaseAuth.getInstance();
         GoogleSignInOptions gso = new GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
@@ -168,8 +176,8 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
                             // Sign in success, update UI with the signed-in user's information
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
-                            Intent intent_information = new Intent(getApplicationContext(), My_Information.class);
-                            startActivity(intent_information);
+                            //uid 검사
+                           overlap_uid();
                             finish();
                         } else {
                             // If sign in fails, display a message to the user.
@@ -253,8 +261,8 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
                 @Override
                 public void onComplete(@NonNull Task<AuthResult> task) {
                     if (task.isSuccessful()) {
-                        Intent intent_information = new Intent(getApplicationContext(), My_Information.class);
-                        startActivity(intent_information);
+                        //uid 검사
+                        overlap_uid();
                         finish();
                     } else {
                         Toast.makeText(getApplicationContext(), "Failed to create a Firebase user.", Toast.LENGTH_LONG).show();
@@ -272,5 +280,30 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
                 Log.e(TAG, exception.toString());
             }
         }
+    }
+
+
+    public void overlap_uid(){
+        mDatabase.child("users").child(uid).child("uid").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                if (snapshot.exists()){
+                    //uid있을시
+                    Intent mainactivity = new Intent(getApplicationContext(), Mainactivity.class);
+                    startActivity(mainactivity);
+                }
+                else{
+                    //uid없을시
+                    Intent intent_information = new Intent(getApplicationContext(), My_Information.class);
+                    startActivity(intent_information);
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {
+                // 디비를 가져오던중 에러 발생 시
+                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+            }
+        });
     }
 }
