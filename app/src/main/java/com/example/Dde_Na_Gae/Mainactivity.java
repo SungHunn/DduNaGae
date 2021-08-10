@@ -19,6 +19,10 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
 public class Mainactivity extends AppCompatActivity {
 
 
@@ -239,6 +243,10 @@ public class Mainactivity extends AppCompatActivity {
         best_walk1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                TextView txt_result = findViewById(R.id.txt_result);
+                txt_result.setText(readTxt());
+
                 Intent intent = new Intent(getApplicationContext(), BestWalk.class);
                 startActivity(intent);
             }
@@ -364,5 +372,25 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+    }
+
+    private String readTxt(){
+        String data = null;
+        InputStream inputStream = getResources().openRawResource(R.raw.tour_rank);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+
+        int i ;
+        try{
+            i = inputStream.read();
+            while(i != -1){
+                byteArrayOutputStream.write(i);
+                i = inputStream.read();
+            }
+            data = new String(byteArrayOutputStream.toByteArray(),"MS949");
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
+            return data;
     }
 }

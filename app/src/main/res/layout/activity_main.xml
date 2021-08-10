@@ -322,6 +322,12 @@
                             android:layout_height="130dp"
                             android:layout_marginLeft="15dp"
                             android:src="@mipmap/ic_launcher" />
+
+                        <TextView
+                            android:id="@+id/txt_result"
+                            android:layout_width="100dp"
+                            android:layout_height="100dp" />
+
                     </LinearLayout>
                 </LinearLayout>
 
