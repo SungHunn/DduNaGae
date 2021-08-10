@@ -374,6 +374,8 @@ public class Mainactivity extends AppCompatActivity {
         });
     }
 
+    // txt읽어오는 함수
+
     private String readTxt(){
         String data = null;
         InputStream inputStream = getResources().openRawResource(R.raw.tour_rank);
