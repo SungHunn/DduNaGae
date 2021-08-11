@@ -35,7 +35,7 @@ public class LoginPage extends AppCompatActivity {
         btn_sign_up.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Sign_up.class);
+                Intent intent = new Intent(getApplicationContext(), EmailSignupActivity.class);
                 startActivity(intent);
             }
         });

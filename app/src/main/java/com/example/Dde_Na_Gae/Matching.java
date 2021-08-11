@@ -20,10 +20,6 @@ public class Matching extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.matching);
 
-        img_back = (ImageView)findViewById(R.id.img_back);
-        btn_private_match = (Button)findViewById(R.id.btn_private_match);
-        btn_group_match = (Button)findViewById(R.id.btn_group_match);
-        btn_my_group = (Button)findViewById(R.id.btn_my_group);
 
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
