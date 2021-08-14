@@ -51,6 +51,10 @@
         <activity android:name=".Login_New_Page" />
         <activity android:name=".My_Information" />
         <activity android:name=".My_Page" />
+        <activity android:name=".Matching_Option"/>
+        <activity android:name=".chat.New_MessageActivity"/>
+        <activity android:name=".New_ChatMainActivity"/>
+        <activity android:name=".Maching_Room_detail"/>
     </application>
 
 </manifest>

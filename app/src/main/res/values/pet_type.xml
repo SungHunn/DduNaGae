@@ -2,11 +2,9 @@
 <resources>
 
     <string-array name="pet_type">
-        <item>개</item>
-        <item>고양이</item>
-        <item>새</item>
-        <item>토끼</item>
-        <item>기타</item>
+        <item>대형견</item>
+        <item>중형견</item>
+        <item>소형견</item>
 
     </string-array>
 

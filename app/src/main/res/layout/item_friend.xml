@@ -1,37 +1,78 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="71dp"
-    android:orientation="vertical">
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:layout_marginBottom="10dp">
 
     <LinearLayout
-
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:padding="20dp"
+        android:orientation="horizontal"
 
+        >
+
+        <!--프로필 사진-->
         <ImageView
-            android:layout_margin="10dp"
-            android:id="@+id/frienditem_imageview"
-            android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:id="@+id/profile_photo"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginRight="5dp"
+            />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:layout_gravity="left">
+            <!--이름-->
+            <TextView
+                android:id="@+id/chatting_nickname"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="닉네임"
+                android:textSize="25dp"
+                android:textColor="#000000"/>
 
-        <TextView
-            android:id="@+id/frienditem_textview"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
-            android:layout_marginLeft="10dp"
-            android:text="아이디" />
+            <!--상태 메시지-->
+            <TextView
+                android:id="@+id/chatting_dog_inf"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="10dp"
+                android:text="개 정보"
+                android:textSize="12dp"
+                android:textColor="#000000"
+                />
+            <!--상태 메시지-->
+            <TextView
+                android:id="@+id/chatting_live_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="사는 곳"
+                android:textSize="12dp"
+                android:textColor="#000000"
+                />
+            <TextView
+                android:id="@+id/chatting_hope_area"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="희망 여행지"
+                android:textSize="12dp"
+                android:textColor="#000000"
+                />
+        </LinearLayout>
     </LinearLayout>
 
-    <LinearLayout
-        android:background="@android:color/darker_gray"
+    <!--구분선-->
+    <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
-        ></LinearLayout>
-
-
-
+        android:layout_marginHorizontal="10dp"
+        android:background="#000000"/>
 
 </LinearLayout>

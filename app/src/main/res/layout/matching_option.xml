@@ -4,6 +4,22 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/matching_option_back"
+            android:layout_width="30dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/goback" />
+
+
+    </LinearLayout>
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -12,20 +28,6 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical">
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/img_back"
-                    android:layout_width="30dp"
-                    android:layout_height="50dp"
-                    android:layout_marginLeft="10dp"
-                    android:src="@drawable/goback" />
-
-
-            </LinearLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -116,24 +118,12 @@
                         android:text="매칭자 나이" />
 
                     <Spinner
-                        android:id="@+id/h_matching_age1"
+                        android:id="@+id/h_matching_age"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
 
-                       />
+                        />
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=" ~ "
-                       />
-
-                    <Spinner
-                        android:id="@+id/h_matching_age2"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-
-                       />
 
                 </LinearLayout>
             </LinearLayout>
@@ -145,6 +135,11 @@
                 android:layout_margin="15dp"
                 android:layout_marginHorizontal="10dp"
                 android:orientation="vertical">
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -180,7 +175,7 @@
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_margin="5dp"
+                        android:layout_marginTop="5dp"
                         android:text="반려 동물 종류" />
 
                     <Spinner
@@ -190,9 +185,7 @@
                         android:layout_gravity="bottom"
                         android:layout_weight="1" />
 
-
                 </LinearLayout>
-
             </LinearLayout>
 
             <LinearLayout
@@ -208,11 +201,6 @@
                     android:layout_margin="5dp"
                     android:text="채팅방 종류"
                     android:textSize="20sp" />
-
-                <View
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="#000000" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -343,7 +331,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="사는 지역"
+                        android:text="여행 지역"
                         android:textSize="20sp" />
 
                     <ImageView

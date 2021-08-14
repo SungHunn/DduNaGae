@@ -35,7 +35,7 @@
 
 
     <Button
-        android:id="@+id/btn_match"
+        android:id="@+id/btn_match_find"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
