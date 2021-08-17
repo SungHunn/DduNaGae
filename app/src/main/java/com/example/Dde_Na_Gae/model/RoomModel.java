@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class RoomModel {
-    public String userName;
+    public String Nickname;
     public String profileImageUrl;
     public String roomName;
     public String uid;

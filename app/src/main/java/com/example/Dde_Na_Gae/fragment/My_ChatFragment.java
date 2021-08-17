@@ -93,9 +93,7 @@ public class My_ChatFragment extends Fragment {
                     destinationUid = user;
                 }
             }
-            if(destinationUid != null) {
-                //유저가 있을떄
-                //유저 이름,사진 받아오기
+
                 FirebaseDatabase.getInstance().getReference().child("users").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
@@ -114,30 +112,6 @@ public class My_ChatFragment extends Fragment {
                     }
                 });
 
-
-
-            }
-            else{
-                //아무도 없이 나혼자 있을 때
-                FirebaseDatabase.getInstance().getReference().child("users").child(uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(DataSnapshot dataSnapshot) {
-                        UserModel userModel = dataSnapshot.getValue(UserModel.class);
-                        ChatModel chatModel = dataSnapshot.getValue(ChatModel.class);
-                        Glide.with(customViewHolder.itemView.getContext())
-                                .load(userModel.profileImageUrl)
-                                .apply(new RequestOptions().circleCrop())
-                                .into(customViewHolder.chatitem_imageview);
-
-                       ///customViewHolder.textView_room.setText(chatModel.roomName);
-                    }
-
-                    @Override
-                    public void onCancelled(DatabaseError databaseError) {
-
-                    }
-                });
-            }
             //메시지를 내림 차순으로 정렬 후 마지막 메세지의 키값을 가져옴
             Map<String,ChatModel.Comment> commentMap = new TreeMap<>(Collections.reverseOrder());
             commentMap.putAll(chatModels.get(position).comments);

@@ -1,0 +1,19 @@
+package com.example.Dde_Na_Gae;
+
+public class Room_Name_Detail_Database {
+
+
+    public String Room_name;
+    public String master_uid;
+    public Room_Name_Detail_Database() {
+        // Default constructor required for calls to DataSnapshot.getValue(User.class)
+    }
+
+    public Room_Name_Detail_Database(String room_name, String master_uid) {
+
+        this.Room_name = room_name;
+        this.master_uid = master_uid;
+
+    }
+
+}

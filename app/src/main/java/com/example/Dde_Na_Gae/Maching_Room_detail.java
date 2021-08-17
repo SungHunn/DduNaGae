@@ -1,17 +1,21 @@
 package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
+
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
+
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.Dde_Na_Gae.chat.New_MessageActivity;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -19,7 +23,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import java.util.ArrayList;
+import org.jetbrains.annotations.NotNull;
+
 public class Maching_Room_detail extends AppCompatActivity {
 
     DatabaseReference mDatabase;
@@ -36,10 +41,10 @@ public class Maching_Room_detail extends AppCompatActivity {
     public TextView hope_pet_option;
     public TextView hope_have_car;
     public String[] masterchild = {"nickname","myage","my_sex","petage","petweight","havecar"};
-   // public String[] hopechild = {"matching_age","matching_sex","matching_pet_age","matching_pet_option","matching_car_option"};
     public ImageView petprofile;
     public Button room_detail_chatting_list;
     public String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+    public String imageuri;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +86,21 @@ public class Maching_Room_detail extends AppCompatActivity {
         String name6 = getintent.getExtras().getString("Room_Name");
         Room_Name.setText(name6);
 
+        FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                String imageuri = dataSnapshot.getValue(String.class);
+                Glide.with(Maching_Room_detail.this)
+                        .load(imageuri)
+                        .apply(new RequestOptions().circleCrop())
+                        .into(petprofile);
+                }
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
         room_detail_chatting_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -104,6 +124,6 @@ public class Maching_Room_detail extends AppCompatActivity {
             });
         }
     }
-
-
 }
+
+

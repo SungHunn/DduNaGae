@@ -106,12 +106,10 @@ public class Matching_Option extends AppCompatActivity {
                String chatting_room_option_selector = text_h_matching_sex+text_h_matching_age+text_h_matching_pet_age+text_h_matching_pet_option+text_matching_room_option+text_h_car_option;
 
                String text_room_name = Room_Name.getText().toString();
-                ChatModel chatModel = new ChatModel();
-                chatModel.users.put(uid,true);
-
+                Room_Name_Detail_Database room_name_detail_database = new Room_Name_Detail_Database(text_room_name,uid);
                 room_database(text_h_matching_sex,text_h_matching_age,text_h_matching_pet_age,text_h_matching_pet_option,text_matching_room_option,text_h_car_option,chatting_room_option_selector);
                 room_name_database(text_room_name,chatting_room_option_selector);
-                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child(Room_Name.getText().toString()).push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").setValue(room_name_detail_database).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void unused) {
                             Intent intent_option = new Intent(getApplicationContext(), Maching_Room_detail.class);

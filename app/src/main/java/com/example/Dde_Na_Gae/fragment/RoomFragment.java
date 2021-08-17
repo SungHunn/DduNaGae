@@ -6,51 +6,45 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import android.widget.ListView;
-import android.widget.TextView;
 
-import androidx.annotation.NonNull;
+
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LifecycleObserver;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.request.RequestOptions;
+
 import com.example.Dde_Na_Gae.R;
-import com.example.Dde_Na_Gae.chat.MessageActivity;
 import com.example.Dde_Na_Gae.chat.New_MessageActivity;
-import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.RoomModel;
-import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+
 
 public class RoomFragment extends Fragment {
+
+    public  String chatting_room_option_selector;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_room, container, false);
-        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.roomFragment_recyclerview);
+        View view = inflater.inflate(R.layout.fragment_room_list, container, false);
+        RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.search_room_fragment_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         recyclerView.setAdapter(new RoomFragmentRecyclerViewAdapter());
-
-
+            Bundle bundle= getArguments();
+            chatting_room_option_selector = bundle.getString("chatting_room_option_selector");
+            System.out.println(chatting_room_option_selector);
         return view;
     }
-
     class RoomFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
         List<RoomModel> roomModels;
