@@ -18,11 +18,11 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.R;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.UserModel;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.auth.FirebaseAuth;
 
 import org.jetbrains.annotations.NotNull;
 
