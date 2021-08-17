@@ -40,8 +40,7 @@ public class RoomFragment extends Fragment {
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.search_room_fragment_recyclerview);
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
         recyclerView.setAdapter(new RoomFragmentRecyclerViewAdapter());
-            Bundle bundle= getArguments();
-            chatting_room_option_selector = bundle.getString("chatting_room_option_selector");
+            chatting_room_option_selector = getArguments().getString("chatting_room_option_selector");
             System.out.println(chatting_room_option_selector);
         return view;
     }
