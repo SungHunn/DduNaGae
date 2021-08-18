@@ -100,7 +100,7 @@ public class RoomFragment extends Fragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
 
            final CustomViewHolder customViewHolder = (CustomViewHolder)holder;
-
+//
            String abc = chatrrommodels1.get(position).master_uid;
             FirebaseDatabase.getInstance().getReference().child("users").child(abc).addListenerForSingleValueEvent(new ValueEventListener(){
                 @Override
