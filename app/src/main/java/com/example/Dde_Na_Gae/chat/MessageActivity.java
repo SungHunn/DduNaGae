@@ -195,7 +195,7 @@ public class MessageActivity extends AppCompatActivity {
 
             }else{
                 Glide.with(holder.itemView.getContext())
-                        .load(userModel.profileImageUrl)
+                        .load(userModel.imageUri)
                         .apply(new RequestOptions().circleCrop())
                         .into(messageViewHolder.imageView_profile);
                 messageViewHolder.textView_name.setText(userModel.userName);

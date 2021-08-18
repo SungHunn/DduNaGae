@@ -76,7 +76,7 @@ public class PeopleFragment extends Fragment {
 
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_friend, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_roomlist, parent, false);
 
 
             return new CustomViewHolder(view);
@@ -86,7 +86,7 @@ public class PeopleFragment extends Fragment {
         public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
             Glide.with
                     (holder.itemView.getContext())
-                    .load(userModels.get(position).profileImageUrl)
+                    .load(userModels.get(position).imageUri)
                     .apply(new RequestOptions().circleCrop())
                     .into(((CustomViewHolder) holder).chatitem_imageview);
             ((CustomViewHolder) holder).textView_room.setText(userModels.get(position).userName);

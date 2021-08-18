@@ -16,7 +16,7 @@
 
         <!--프로필 사진-->
         <ImageView
-            android:id="@+id/profile_photo"
+            android:id="@+id/chatting_room_list_profile_photo"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginRight="5dp"
@@ -26,9 +26,17 @@
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="left">
+            <TextView
+                android:id="@+id/chatting_room_list_room_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="방이름"
+                android:textSize="25dp"
+                android:textColor="#000000"/>
             <!--이름-->
             <TextView
-                android:id="@+id/chatting_nickname"
+                android:id="@+id/chatting_room_list_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -36,16 +44,6 @@
                 android:textSize="25dp"
                 android:textColor="#000000"/>
 
-            <!--상태 메시지-->
-            <TextView
-                android:id="@+id/chatting_dog_inf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="개 정보"
-                android:textSize="12dp"
-                android:textColor="#000000"
-                />
             <!--상태 메시지-->
             <TextView
                 android:id="@+id/chatting_live_area"

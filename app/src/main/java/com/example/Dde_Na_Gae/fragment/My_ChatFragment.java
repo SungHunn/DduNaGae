@@ -99,7 +99,7 @@ public class My_ChatFragment extends Fragment {
                     public void onDataChange(DataSnapshot dataSnapshot) {
                         UserModel userModel =  dataSnapshot.getValue(UserModel.class);
                         Glide.with(customViewHolder.itemView.getContext())
-                                .load(userModel.profileImageUrl)
+                                .load(userModel.imageUri)
                                 .apply(new RequestOptions().circleCrop())
                                 .into(customViewHolder.chatitem_imageview);
 
