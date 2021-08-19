@@ -1,6 +1,5 @@
 package com.example.Dde_Na_Gae.fragment;
 
-        import android.app.ActivityOptions;
         import android.content.Intent;
         import android.os.Bundle;
         import android.view.LayoutInflater;
@@ -18,11 +17,10 @@ package com.example.Dde_Na_Gae.fragment;
 
         import com.bumptech.glide.Glide;
         import com.bumptech.glide.request.RequestOptions;
-        import com.example.Dde_Na_Gae.Member_Database;
+        import com.example.Dde_Na_Gae.Matching_Room_detail;
+        import com.example.Dde_Na_Gae.My_Matching_Room_detail;
         import com.example.Dde_Na_Gae.R;
         import com.example.Dde_Na_Gae.Room_Name_Detail_Database;
-        import com.example.Dde_Na_Gae.chat.MessageActivity;
-        import com.example.Dde_Na_Gae.chat.New_MessageActivity;
         import com.example.Dde_Na_Gae.model.UserModel;
         import com.google.firebase.auth.FirebaseAuth;
         import com.google.firebase.database.DataSnapshot;
@@ -32,16 +30,14 @@ package com.example.Dde_Na_Gae.fragment;
         import com.google.firebase.database.ValueEventListener;
 
 
-        import java.lang.reflect.Array;
         import java.util.ArrayList;
         import java.util.List;
 
 
 public class RoomFragment extends Fragment {
 
+    final String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     public  String chatting_room_option_selector;
-    public  String text_room_name;
-    private DatabaseReference mdatabase;
 
     @Nullable
     @Override
@@ -67,8 +63,7 @@ public class RoomFragment extends Fragment {
         List<Room_Name_Detail_Database> chatrrommodels1;
         public RoomFragmentRecyclerViewAdapter() {
             chatrrommodels1 = new ArrayList<>();
-            int i=0;
-            final String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
             FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(DataSnapshot dataSnapshot) {
@@ -132,15 +127,21 @@ public class RoomFragment extends Fragment {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    //if절 사용하여 디테일로 들어가기
-                    Intent intent = new Intent(view.getContext(), MessageActivity.class);
 
-                    ActivityOptions activityOptions = null;
-                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-                        activityOptions = ActivityOptions.makeCustomAnimation(view.getContext(), R.anim.fromright, R.anim.toleft);
-                        startActivity(intent, activityOptions.toBundle());
+                    if(chatrrommodels1.get(position).master_uid != myUid) {
+                        Intent intent1 = new Intent(view.getContext(), Matching_Room_detail.class);
+                        intent1.putExtra("masteruid", chatrrommodels1.get(position).master_uid);
+                        intent1.putExtra("roomname", chatrrommodels1.get(position).Room_name);
+                        intent1.putExtra("option_selector", chatrrommodels1.get(position).chatting_room_option_selector);
+                        startActivity(intent1);
                     }
-
+                    else{
+                        Intent intent = new Intent(view.getContext(), My_Matching_Room_detail.class);
+                        intent.putExtra("masteruid", chatrrommodels1.get(position).master_uid);
+                        intent.putExtra("roomname", chatrrommodels1.get(position).Room_name);
+                        intent.putExtra("option_selector", chatrrommodels1.get(position).chatting_room_option_selector);
+                        startActivity(intent);
+                    }
                 }
             });
         }

@@ -3,7 +3,6 @@
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
@@ -12,24 +11,15 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.Dde_Na_Gae.chat.New_MessageActivity;
-import com.example.Dde_Na_Gae.model.ChatModel;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
-
-import org.jetbrains.annotations.NotNull;
-
-import java.lang.reflect.Array;
 
     public class Matching_Option extends AppCompatActivity {
 
@@ -126,7 +116,7 @@ import java.lang.reflect.Array;
 
                         }
                     });
-                    Intent intent_option = new Intent(getApplicationContext(), Maching_Room_detail.class);
+                    Intent intent_option = new Intent(getApplicationContext(), My_Matching_Room_detail.class);
                     intent_option.putExtra("text_h_matching_sex",text_h_matching_sex);
                     intent_option.putExtra("text_h_matching_age",text_h_matching_age);
                     intent_option.putExtra("text_h_matching_pet_age",text_h_matching_pet_age);

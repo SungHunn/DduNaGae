@@ -54,7 +54,8 @@
         <activity android:name=".Matching_Option"/>
         <activity android:name=".chat.New_MessageActivity"/>
         <activity android:name=".New_ChatMainActivity"/>
-        <activity android:name=".Maching_Room_detail"/>
+        <activity android:name=".My_Matching_Room_detail"/>
+        <activity android:name=".Matching_Room_detail"/>
         <activity android:name=".Matching_filter_Option"/>
         <activity android:name=".Chatting_List"/>
 

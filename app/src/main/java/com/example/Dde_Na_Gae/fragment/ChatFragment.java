@@ -42,7 +42,6 @@ public class ChatFragment extends Fragment {
         RecyclerView recyclerView  = (RecyclerView) view.findViewById(R.id.chatFragment_recyclerview);
         recyclerView.setAdapter(new ChatRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(inflater.getContext()));
-
         return view;
     }
 

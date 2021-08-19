@@ -85,6 +85,9 @@ public class Matching_filter_Option extends AppCompatActivity {
 
                 String chatting_room_option_selector = text_h_matching_sex+text_h_matching_age+text_h_matching_pet_age+text_h_matching_pet_option+text_matching_room_option+text_h_car_option;
 
+                Intent intent_matching_room_detail = new Intent(getApplicationContext(),Matching_Room_detail.class);
+                intent_matching_room_detail.putExtra("chatting_room_option_selector",chatting_room_option_selector);
+
                 Intent intent_chattinglist = new Intent(getApplicationContext(), Chatting_List.class);
                 intent_chattinglist.putExtra("chatting_room_option_selector",chatting_room_option_selector);
                 startActivity(intent_chattinglist);

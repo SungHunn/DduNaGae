@@ -298,8 +298,8 @@
             android:layout_marginTop="15dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="내 채팅 목록 보기"
-            android:id="@+id/room_detail_go_my_chatting_list"/>
+            android:text="채팅하기"
+            android:id="@+id/room_detail_go_chatting"/>
     </LinearLayout>
 
     </ScrollView>
