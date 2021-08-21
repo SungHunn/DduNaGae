@@ -40,12 +40,13 @@ import java.util.List;
 
 public class New_MessageActivity extends AppCompatActivity {
 
-    private String destinatonUid;
+
     private Button button;
     private EditText editText;
 
     private String uid;
     private String chatRoomUid;
+
 
     private RecyclerView recyclerView;
 
@@ -54,44 +55,75 @@ public class New_MessageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message2);
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();  //채팅을 요구 하는 아아디 즉 단말기에 로그인된 UID
-
         button = (Button) findViewById(R.id.messageActivity_button);
         editText = (EditText) findViewById(R.id.messageActivity_editText);
         recyclerView = (RecyclerView)findViewById(R.id.messageActivity_recyclerview);
 
-        Intent intentget = getIntent();
+
+        Intent intent = getIntent();
+        String destinatonUid = intent.getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
+        String roomname = intent.getStringExtra("room-name");
+        String chatting_room_option_selector = intent.getStringExtra("option_selector");
+
+        System.out.println(destinatonUid);
+        System.out.println(chatting_room_option_selector);
+        System.out.println(roomname);
+
 
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 ChatModel chatModel = new ChatModel();
-
                 chatModel.users.put(uid,true);
+                chatModel.users.put(destinatonUid,true);
+
+                if(chatRoomUid == null){
+                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void unused) {
+                            checkChatRoom();
+                        }
+                    });
+                }else {
+
                     ChatModel.Comment comment = new ChatModel.Comment();
                     comment.uid = uid;
                     comment.message = editText.getText().toString();
-                    FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
                         @Override
                         public void onComplete(@NonNull @NotNull Task<Void> task) {
                             editText.setText("");
                         }
                     });
 
-
+                }
 
             }
         });
-        checkChatRoom();
+        checkChatRoom(); 
 
 
     }
 
     void  checkChatRoom(){
+       String useruid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        FirebaseDatabase.getInstance().getReference().child("chatrooms").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+        Intent intent = getIntent();
+        String destinatonUid = intent.getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
+        String roomname = intent.getStringExtra("room-name");
+        String chatting_room_option_selector = intent.getStringExtra("option_selector");
+
+
+
+        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
+
+                Intent intent = getIntent();
+                String destinatonUid = intent.getStringExtra("masteruid");
+
+
                 for(DataSnapshot item : dataSnapshot.getChildren()){
                     ChatModel  chatModel = item.getValue(ChatModel.class);
                     if(chatModel.users.containsKey(destinatonUid)){
@@ -116,6 +148,9 @@ public class New_MessageActivity extends AppCompatActivity {
         UserModel userModel;
         public  RecyclerViewAdapter() {
 
+            Intent intent = getIntent();
+            String destinatonUid = intent.getStringExtra("masteruid");
+
             comments = new ArrayList<>();
 
 
@@ -139,7 +174,13 @@ public class New_MessageActivity extends AppCompatActivity {
 
 
         void getMessageList(){
-            FirebaseDatabase.getInstance().getReference().child("chatrooms").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
+
+            Intent intent = getIntent();
+            String destinatonUid = intent.getStringExtra("masteruid"); // 채팅을 당하는 아이디
+            String roomname = intent.getStringExtra("roomname");
+            String chatting_room_option_selector = intent.getStringExtra("option_selector");
+
+            FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 

@@ -56,6 +56,9 @@ public class RoomFragment extends Fragment {
 
 
 
+
+
+
     }
     class RoomFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
@@ -128,15 +131,18 @@ public class RoomFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
+                    System.out.println(myUid);
+                    System.out.println(chatrrommodels1.get(position).master_uid);
+
                     if(chatrrommodels1.get(position).master_uid != myUid) {
-                        Intent intent1 = new Intent(view.getContext(), Matching_Room_detail.class);
+                        Intent intent1 = new Intent(getActivity(), Matching_Room_detail.class);
                         intent1.putExtra("masteruid", chatrrommodels1.get(position).master_uid);
                         intent1.putExtra("roomname", chatrrommodels1.get(position).Room_name);
                         intent1.putExtra("option_selector", chatrrommodels1.get(position).chatting_room_option_selector);
                         startActivity(intent1);
                     }
                     else{
-                        Intent intent = new Intent(view.getContext(), My_Matching_Room_detail.class);
+                        Intent intent = new Intent(getActivity(), My_Matching_Room_detail.class);
                         intent.putExtra("masteruid", chatrrommodels1.get(position).master_uid);
                         intent.putExtra("roomname", chatrrommodels1.get(position).Room_name);
                         intent.putExtra("option_selector", chatrrommodels1.get(position).chatting_room_option_selector);

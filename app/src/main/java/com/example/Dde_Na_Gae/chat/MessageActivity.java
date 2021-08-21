@@ -65,8 +65,6 @@ public class MessageActivity extends AppCompatActivity {
                 chatModel.users.put(destinatonUid,true);
 
 
-
-
                 if(chatRoomUid == null){
                     FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override

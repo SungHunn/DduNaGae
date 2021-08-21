@@ -1,5 +1,6 @@
 package com.example.Dde_Na_Gae;
 
+import android.app.ActivityOptions;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
@@ -50,7 +51,7 @@ public class Matching_Room_detail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.my_matching_room_detail);
+        setContentView(R.layout.matching_room_detail);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -74,9 +75,15 @@ public class Matching_Room_detail extends AppCompatActivity {
         Intent intent = getIntent();
         String master_uid = intent.getStringExtra("masteruid");
         String room_name =  intent.getStringExtra("roomname");
+        String chatting_room_option_selector = intent.getStringExtra("option_selector");
 
         gettextview(masterchild,masterdata);
         gettextview1(hopechild,hopedata);
+        Room_Name.setText(room_name);
+
+        System.out.println(master_uid);
+        System.out.println(chatting_room_option_selector);
+        System.out.println(room_name);
 
 
 
@@ -96,7 +103,23 @@ public class Matching_Room_detail extends AppCompatActivity {
         });
 
 
+        room_detail_go_chatting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), New_MessageActivity.class);
+                intent.putExtra("chat-destinationUid", master_uid);
+                intent.putExtra("room-name",room_name);
+                intent.putExtra("option_selector",chatting_room_option_selector);
+                ActivityOptions activityOptions = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
 
+
+                    activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fromright, R.anim.toleft);
+                    startActivity(intent, activityOptions.toBundle());
+                }
+                startActivity(intent);
+            }
+        });
 
     }
 
@@ -138,4 +161,3 @@ public class Matching_Room_detail extends AppCompatActivity {
         }
     }
 }
-
