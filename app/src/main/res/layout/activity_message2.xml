@@ -6,7 +6,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/messageActivity_recyclerview"
         android:layout_width="match_parent"
-        android:layout_height="682dp" />
+        android:layout_height="match_parent" />
 
     <EditText
         android:layout_toLeftOf="@+id/messageActivity_button"

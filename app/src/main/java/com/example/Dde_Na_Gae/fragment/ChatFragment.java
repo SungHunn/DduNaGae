@@ -50,6 +50,7 @@ public class ChatFragment extends Fragment {
 
         private List<ChatModel> chatModels = new ArrayList<>();
         private String uid;
+        private ArrayList<String> destinationUser = new ArrayList<>();
         public ChatRecyclerViewAdapter() {
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
@@ -93,6 +94,7 @@ public class ChatFragment extends Fragment {
             for(String user: chatModels.get(position).users.keySet()){
                 if(!user.equals(uid)){
                     destinationUid = user;
+                    destinationUser.add(destinationUid);
                 }
             }
             FirebaseDatabase.getInstance().getReference().child("users").child(destinationUid).addListenerForSingleValueEvent(new ValueEventListener() {

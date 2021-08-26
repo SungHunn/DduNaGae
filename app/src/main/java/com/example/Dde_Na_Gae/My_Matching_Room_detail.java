@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 
@@ -40,6 +41,8 @@ public class My_Matching_Room_detail extends AppCompatActivity {
     public TextView hope_pet_age;
     public TextView hope_pet_option;
     public TextView hope_have_car;
+    public TextView member_num;
+    public LinearLayout member_num_layout;
     public String[] masterchild = {"nickname","myage","my_sex","petage","petweight","havecar"};
     public ImageView petprofile;
     public Button room_detail_chatting_list;
@@ -52,7 +55,8 @@ public class My_Matching_Room_detail extends AppCompatActivity {
         setContentView(R.layout.my_matching_room_detail);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        member_num = (TextView)findViewById(R.id.my_room_detail_member_number);
+        member_num_layout = (LinearLayout)findViewById(R.id.my_room_detail_member_num_layout);
         master_nickname = (TextView)findViewById(R.id.my_room_detail_master);
         Room_Name = (TextView)findViewById(R.id.my_room_detail_room_name);
         master_age = (TextView)findViewById(R.id.my_room_detail_age);
@@ -73,6 +77,13 @@ public class My_Matching_Room_detail extends AppCompatActivity {
     gettextview(masterchild,masterdata);
 
     Intent getintent = getIntent();
+
+        String matching_option = getintent.getExtras().getString("text_matching_room_option");
+        if(matching_option.equals("그룹 매칭방")){
+            member_num_layout.setVisibility(View.VISIBLE);
+        String group_member_number = getintent.getExtras().getString("text_group_member_number");
+            member_num.setText(group_member_number);
+        }
         String name1 = getintent.getExtras().getString("text_h_matching_sex");
         hope_sex.setText(name1);
         String name2 = getintent.getExtras().getString("text_h_matching_age");

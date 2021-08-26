@@ -44,6 +44,34 @@
     android:src="@mipmap/ic_launcher"
     />
     </LinearLayout>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000" />
+        <LinearLayout
+            android:id="@+id/room_detail_member_num_layout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="25dp"
+                android:text="최대인원 수 : "
+                android:layout_marginVertical="15dp"
+                />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/room_detail_member_number"
+                android:textSize="25dp"
+                android:text="명 수"
+                android:layout_marginVertical="15dp"
+                />
+        </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -299,7 +327,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="채팅하기"
-            android:id="@+id/room_detail_go_chatting"/>
+            android:id="@+id/room_detail_go_chatting" />
+        
+
     </LinearLayout>
 
     </ScrollView>

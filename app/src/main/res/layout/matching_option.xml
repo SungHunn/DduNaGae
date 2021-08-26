@@ -201,7 +201,10 @@
                     android:layout_margin="5dp"
                     android:text="채팅방 종류"
                     android:textSize="20sp" />
-
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#000000" />
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -215,6 +218,24 @@
                         android:layout_gravity="bottom"
                         android:layout_weight="1" />
 
+                </LinearLayout>
+
+                <LinearLayout
+                    android:visibility="invisible"
+                    android:layout_marginTop="10dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:id="@+id/h_group_member_number_text">
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="그룹 채팅방 인원수"/>
+                    <Spinner
+                        android:id="@+id/h_group_member_number"
+                        android:layout_width="70dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="bottom" />
                 </LinearLayout>
 
             </LinearLayout>
@@ -378,11 +399,21 @@
             </LinearLayout>
 
             <Button
-                android:id="@+id/matching_okay"
+                android:id="@+id/personal_matching_okay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="완료" />
+                android:text="완료"
+                android:visibility="gone"
+                />
+            <Button
+                android:id="@+id/group_matching_okay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="완료"
+                android:visibility="gone"
+                />
         </LinearLayout>
     </ScrollView>
 </LinearLayout>

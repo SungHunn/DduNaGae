@@ -9,6 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -57,6 +58,7 @@ public class MessageActivity extends AppCompatActivity {
         recyclerView = (RecyclerView)findViewById(R.id.messageActivity_recyclerview);
 
 
+
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -68,7 +70,7 @@ public class MessageActivity extends AppCompatActivity {
                 if(chatRoomUid == null){
                     FirebaseDatabase.getInstance().getReference().child("chatrooms").push().setValue(chatModel).addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
-                        public void onSuccess(Void unused) {
+                        public void onSuccess(Void aVoid) {
                             checkChatRoom();
                         }
                     });
@@ -115,6 +117,8 @@ public class MessageActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 

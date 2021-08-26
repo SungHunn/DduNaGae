@@ -3,9 +3,11 @@
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -24,16 +26,22 @@ import com.google.firebase.database.ValueEventListener;
     public class Matching_Option extends AppCompatActivity {
 
         private DatabaseReference mDatabase;
-        private Button button;
+        private Button personal_button;
+        private Button group_button;
         private EditText Room_Name;
         private String uid;
-
+        private LinearLayout group_member_number;
         @Override
         protected void onCreate(Bundle savedInstanceState) {
             super.onCreate(savedInstanceState);
             setContentView(R.layout.matching_option);
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+            String number = "3명";
+
+            group_member_number = (LinearLayout)findViewById(R.id.h_group_member_number_text);
+            personal_button = (Button)findViewById(R.id.personal_matching_okay);
+            group_button = (Button)findViewById(R.id.group_matching_okay);
             mDatabase = FirebaseDatabase.getInstance().getReference();
             Room_Name = (EditText)findViewById(R.id.chatting_name);
 
@@ -78,11 +86,41 @@ import com.google.firebase.database.ValueEventListener;
             matching_room_option_Adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
             matching_room_option_spinner.setAdapter(matching_room_option_Adapter);
 
+            Spinner group_member_number_spinner = (Spinner)findViewById(R.id.h_group_member_number);
+            ArrayAdapter  group_member_number_Adapter = ArrayAdapter.createFromResource(this,
+                    R.array.group_member_number, android.R.layout.simple_spinner_item);
+            group_member_number_Adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+            group_member_number_spinner.setAdapter(group_member_number_Adapter);
+
+            matching_room_option_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+                @Override
+                public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                    if (matching_room_option_spinner.getSelectedItem().toString().equals("그룹 매칭방")){
+                        group_member_number.setVisibility(View.VISIBLE);
+                        group_button.setVisibility(View.VISIBLE);
+                        personal_button.setVisibility(View.GONE);
+                    }
+                    else if(matching_room_option_spinner.getSelectedItem().toString().equals("1대1 매칭방")) {
+                        group_member_number.setVisibility(View.GONE);
+                        group_button.setVisibility(View.GONE);
+                        personal_button.setVisibility(View.VISIBLE);
+                    }
+                    else{
+                        group_member_number.setVisibility(View.GONE);
+                        group_button.setVisibility(View.GONE);
+                        personal_button.setVisibility(View.GONE);
+                    }
+                }
+
+                @Override
+                public void onNothingSelected(AdapterView<?> parent) {
+
+                }
+            });
 
 
-
-            button = (Button)findViewById(R.id.matching_okay);
-            button.setOnClickListener(new View.OnClickListener() {
+            //개인 채팅 클릭
+            personal_button.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -92,8 +130,8 @@ import com.google.firebase.database.ValueEventListener;
                     String text_h_matching_pet_age = h_matching_pet_age_spinner.getSelectedItem().toString();
                     String text_h_matching_pet_option = h_matching_pet_option_spinner.getSelectedItem().toString();
                     String text_matching_room_option = matching_room_option_spinner.getSelectedItem().toString();
-                    String chatting_room_option_selector = text_h_matching_sex+text_h_matching_age+text_h_matching_pet_age+text_h_matching_pet_option+text_matching_room_option+text_h_car_option;
 
+                    String chatting_room_option_selector = text_h_matching_sex+text_h_matching_age+text_h_matching_pet_age+text_h_matching_pet_option+text_matching_room_option+text_h_car_option;
                     String text_room_name = Room_Name.getText().toString();
 
 
@@ -103,12 +141,12 @@ import com.google.firebase.database.ValueEventListener;
                         public void onDataChange(@NonNull DataSnapshot snapshot) {
                             if (snapshot.exists()){
                                 room_name_detail_database(text_room_name,uid,chatting_room_option_selector);
-                                room_name_database(text_room_name,chatting_room_option_selector);
+
                             }
                             else{
                                 room_database(text_h_matching_sex,text_h_matching_age,text_h_matching_pet_age,text_h_matching_pet_option,text_matching_room_option,text_h_car_option,chatting_room_option_selector);
                                 room_name_detail_database(text_room_name,uid,chatting_room_option_selector);
-                                room_name_database(text_room_name,chatting_room_option_selector);
+
                             }
                         }
                         @Override
@@ -122,11 +160,59 @@ import com.google.firebase.database.ValueEventListener;
                     intent_option.putExtra("text_h_matching_pet_age",text_h_matching_pet_age);
                     intent_option.putExtra("text_h_matching_pet_option",text_h_matching_pet_option);
                     intent_option.putExtra("text_h_car_option",text_h_car_option);
+                    intent_option.putExtra("text_matching_room_option",text_matching_room_option);
+
                     intent_option.putExtra("Room_Name",Room_Name.getText().toString());
                     startActivity(intent_option);
                 }
             });
+            //그룹 채팅 클릭
+            group_button.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                    String text_h_matching_sex =  h_matching_sex_spinner.getSelectedItem().toString();
+                    String text_h_car_option = h_car_option_spinner.getSelectedItem().toString();
+                    String text_h_matching_age =h_matching_age_spinner.getSelectedItem().toString();
+                    String text_h_matching_pet_age = h_matching_pet_age_spinner.getSelectedItem().toString();
+                    String text_h_matching_pet_option = h_matching_pet_option_spinner.getSelectedItem().toString();
+                    String text_matching_room_option = matching_room_option_spinner.getSelectedItem().toString();
+                    String text_group_member_number = group_member_number_spinner.getSelectedItem().toString();
+                    String chatting_room_option_selector = text_h_matching_sex+text_h_matching_age+text_h_matching_pet_age+text_h_matching_pet_option+text_matching_room_option+text_h_car_option;
+                    String text_room_name = Room_Name.getText().toString();
 
+
+
+                    mDatabase.child("chatting_room").child(chatting_room_option_selector).child("chatting_room_option_selector").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            if (snapshot.exists()){
+                                room_name_detail_database(text_room_name,uid,chatting_room_option_selector);
+
+                            }
+                            else{
+                                group_room_database(text_h_matching_sex,text_h_matching_age,text_h_matching_pet_age,text_h_matching_pet_option,text_matching_room_option,text_h_car_option,chatting_room_option_selector,text_group_member_number);
+                                room_name_detail_database(text_room_name,uid,chatting_room_option_selector);
+
+                            }
+                        }
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                        }
+                    });
+                    Intent intent_option = new Intent(getApplicationContext(), My_Matching_Room_detail.class);
+                    intent_option.putExtra("text_h_matching_sex",text_h_matching_sex);
+                    intent_option.putExtra("text_h_matching_age",text_h_matching_age);
+                    intent_option.putExtra("text_h_matching_pet_age",text_h_matching_pet_age);
+                    intent_option.putExtra("text_h_matching_pet_option",text_h_matching_pet_option);
+                    intent_option.putExtra("text_h_car_option",text_h_car_option);
+                    intent_option.putExtra("text_matching_room_option",text_matching_room_option);
+                    intent_option.putExtra("text_group_member_number",text_group_member_number);
+                    intent_option.putExtra("Room_Name",Room_Name.getText().toString());
+                    startActivity(intent_option);
+                }
+            });
 
 
         }
@@ -139,13 +225,7 @@ import com.google.firebase.database.ValueEventListener;
 
         }
 
-        public void room_name_database(String room_name, String Room_selector_option) {
-            Room_Name_Database room_name_database = new Room_Name_Database();
-            room_name_database.Room_name = room_name;
-            room_name_database.Room_selector_option = Room_selector_option;
-            mDatabase.child("users").child(uid).child("my_chatting_list").child(Room_selector_option).child(room_name).setValue(room_name_database);
 
-        }
         public void room_database( String matching_sex,String matching_age,String matching_pet_age,String matching_pet_option,String matching_room_option, String matching_car_option,String chatting_room_option_selector){
             Room_Database room_database = new Room_Database();
             room_database.chatting_room_option_selector = chatting_room_option_selector;
@@ -156,8 +236,32 @@ import com.google.firebase.database.ValueEventListener;
             room_database.matching_sex = matching_sex;
             room_database.matching_car_option = matching_car_option;
 
-
             mDatabase.child("chatting_room").child(chatting_room_option_selector).setValue(room_database)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            Toast.makeText(getApplicationContext(),"생성 완료!",Toast.LENGTH_SHORT).show();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+
+                        }
+                    });
+        }
+
+        public void group_room_database( String matching_sex,String matching_age,String matching_pet_age,String matching_pet_option,String matching_room_option, String matching_car_option,String chatting_room_option_selector, String text_group_member_number){
+            Group_Room_Database group_room_database = new Group_Room_Database();
+            group_room_database.chatting_room_option_selector = chatting_room_option_selector;
+            group_room_database.matching_age = matching_age;
+            group_room_database.matching_pet_age = matching_pet_age;
+            group_room_database.matching_pet_option = matching_pet_option;
+            group_room_database.matching_room_option = matching_room_option;
+            group_room_database.matching_sex = matching_sex;
+            group_room_database.matching_car_option = matching_car_option;
+            group_room_database.group_member_number = text_group_member_number;
+            mDatabase.child("chatting_room").child(chatting_room_option_selector).setValue(group_room_database)
                     .addOnSuccessListener(new OnSuccessListener<Void>() {
                         @Override
                         public void onSuccess(Void aVoid) {

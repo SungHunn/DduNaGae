@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -41,8 +42,10 @@ public class Matching_Room_detail extends AppCompatActivity {
     public TextView hope_pet_age;
     public TextView hope_pet_option;
     public TextView hope_have_car;
+    public LinearLayout room_detail_member_num_layout;
+    public TextView room_detail_member_number;
     public String[] masterchild = {"nickname","myage","my_sex","petage","petweight","havecar"};
-    public String[] hopechild = {"matching_age","matching_car_option","matching_pet_age","matching_pet_option","matching_sex"};
+    public String[] hopechild = {"matching_age","matching_sex","matching_pet_age","matching_pet_option","matching_car_option"};
     public ImageView petprofile;
     public Button room_detail_go_chatting;
     public String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
@@ -54,7 +57,8 @@ public class Matching_Room_detail extends AppCompatActivity {
         setContentView(R.layout.matching_room_detail);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
-
+        room_detail_member_number =(TextView)findViewById(R.id.room_detail_member_number);
+        room_detail_member_num_layout = (LinearLayout)findViewById(R.id.room_detail_member_num_layout);
         master_nickname = (TextView)findViewById(R.id.room_detail_master);
         Room_Name = (TextView)findViewById(R.id.room_detail_room_name);
         master_age = (TextView)findViewById(R.id.room_detail_age);
@@ -81,12 +85,12 @@ public class Matching_Room_detail extends AppCompatActivity {
         gettextview1(hopechild,hopedata);
         Room_Name.setText(room_name);
 
-        System.out.println(master_uid);
-        System.out.println(chatting_room_option_selector);
-        System.out.println(room_name);
-
-
-
+        String matching_option = FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("matching_room_option").toString();
+        if(matching_option.equals("그룹 매칭방")){
+            room_detail_member_num_layout.setVisibility(View.VISIBLE);
+            String group_member_number = FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("group_member_number").toString();
+            room_detail_member_number.setText(group_member_number);
+        }
         FirebaseDatabase.getInstance().getReference().child("users").child(master_uid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

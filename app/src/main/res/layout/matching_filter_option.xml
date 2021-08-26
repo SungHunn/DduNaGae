@@ -118,7 +118,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -131,17 +131,19 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
-                        android:layout_weight="1" />
+                        android:layout_weight="1"
+                        android:layout_marginBottom="10dp"/>
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="반려 동물 종류" />
+                        android:text="반려 동물 종류"
+                        android:layout_marginTop="20dp"/>
 
                     <Spinner
                         android:id="@+id/h_matching_pet_option_filter"
-                        android:layout_width="wrap_content"
+                        android:layout_width="150dp"
                         android:layout_height="wrap_content"
                         android:layout_gravity="bottom"
                         android:layout_weight="1" />
@@ -359,4 +361,3 @@
         </LinearLayout>
     </ScrollView>
 </LinearLayout>
-

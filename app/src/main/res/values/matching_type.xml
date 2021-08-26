@@ -44,5 +44,13 @@
         <item>아니오</item>
     </string-array>
 
+    <string-array name="group_member_number">
+        <item>3명</item>
+        <item>4명</item>
+        <item>5명</item>
+        <item>6명</item>
+        <item>7명</item>
+        <item>8명</item>
+    </string-array>
 
 </resources>

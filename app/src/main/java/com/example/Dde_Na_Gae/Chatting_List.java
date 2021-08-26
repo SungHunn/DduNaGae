@@ -25,7 +25,6 @@ public class Chatting_List extends AppCompatActivity {
 
        roomFragment.setArguments(bundle);
         fragmentTransaction.replace(R.id.chatting_list_framelayout,roomFragment).commit();
-       // -------------------------------------------------------------------------------------------
 
 
     }
