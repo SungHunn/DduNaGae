@@ -28,6 +28,11 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.jetbrains.annotations.NotNull;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class Mainactivity extends AppCompatActivity {
 
     DatabaseReference mDatabase ;
@@ -51,12 +56,12 @@ public class Mainactivity extends AppCompatActivity {
     ImageView add_menu1;
     ImageView add_menu2;
 
-
+    TextView my_nickname;
 
     //네비게이션바
     DrawerLayout drawerLayout;
     View drawerView;
-    ListView listview = null;
+    ListView listview;
     TextView my_page;
     //네비게이션바
 
@@ -69,7 +74,9 @@ public class Mainactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        listview = findViewById(R.id.navi_list);
 
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -122,16 +129,32 @@ public class Mainactivity extends AppCompatActivity {
                 return true;
             }
         });
+
+        my_nickname = (TextView)findViewById(R.id.my_page);
+        String myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(myuid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                my_nickname.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
         FirebaseAuth aAuth = FirebaseAuth.getInstance();
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
+
         String uid = user != null ? user.getUid() : null; // 로그인한 유저의 고유 uid 가져오기
 
 
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
-        DatabaseReference firstname = mDatabase.child(uid).child("firstname");    // 이메일
+       // DatabaseReference firstname = mDatabase.child(uid).child("firstname");    // 이메일
 
 
-        firstname.addValueEventListener(new ValueEventListener() {
+       /* firstname.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 String name = snapshot.getValue(String.class);
@@ -139,13 +162,20 @@ public class Mainactivity extends AppCompatActivity {
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) { }
-        });
+        }); */
 
+        List<String> list = new ArrayList<>();
+        list.add("공지사항");
+        list.add("이벤트");
+        list.add("예약내역");
+        list.add("매칭방 목록");
+        list.add("좋아요 표시한 목록");
+        list.add("고객센터");
+        list.add("설정");
+        list.add("로그인");
 
-        final String[] items = {"공지사항", "이벤트", "예약내역", "매칭방 목록", "좋아요 표시한 목록", "고객센터", "설정", "로그인"};
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,list);
 
-        listview = findViewById(R.id.navi_list);
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -175,8 +205,30 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 7:
-                        Intent intent_login = new Intent(getApplicationContext(), Login_New_Page.class);
-                        startActivity(intent_login);
+                        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+                        mDatabase.child("users");
+                        mDatabase.child(uid);
+                        mDatabase.child("uid");
+                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                if (snapshot.exists()) {
+                                    //uid있을시
+
+                                  list.set(7, "로그아웃");
+                                } else {
+                                    //uid없을시
+
+                                }
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull DatabaseError databaseError) {
+                                // 디비를 가져오던중 에러 발생 시
+                                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
+                            }
+                        });
+
                         break;
                 }
             }

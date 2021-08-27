@@ -85,12 +85,39 @@ public class Matching_Room_detail extends AppCompatActivity {
         gettextview1(hopechild,hopedata);
         Room_Name.setText(room_name);
 
-        String matching_option = FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("matching_room_option").toString();
-        if(matching_option.equals("그룹 매칭방")){
-            room_detail_member_num_layout.setVisibility(View.VISIBLE);
-            String group_member_number = FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("group_member_number").toString();
-            room_detail_member_number.setText(group_member_number);
-        }
+
+        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("matching_room_option").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                if(snapshot.getValue().toString().equals("그룹 매칭방")){
+                    room_detail_member_num_layout.setVisibility(View.VISIBLE);
+                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("group_member_number").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            room_detail_member_number.setText(snapshot.getValue().toString());
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
+
+
+
+
         FirebaseDatabase.getInstance().getReference().child("users").child(master_uid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {

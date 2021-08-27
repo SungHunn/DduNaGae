@@ -9,22 +9,17 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:gravity="center">
 
         <ImageView
             android:id="@+id/back_btn"
             android:layout_width="50dp"
             android:layout_height="50dp"
-            android:layout_marginEnd="70dp"
-            android:layout_marginRight="70dp"
-            android:src="@mipmap/ic_launcher" />
+            android:src="@drawable/logo"
+            />
 
-        <TextView
 
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="My 떠나개"
-            android:textSize="40sp" />
     </LinearLayout>
 
     <LinearLayout
@@ -40,7 +35,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/my_animal"
+                android:id="@+id/my_profile"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
                 android:layout_margin="5dp"
@@ -56,16 +51,13 @@
                 android:orientation="vertical">
 
                 <TextView
+                    android:id="@+id/myname"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:text="내 이름"
                     android:textSize="20sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="my 회원정보"
-                    android:textSize="10sp" />
+
             </LinearLayout>
         </LinearLayout>
 
