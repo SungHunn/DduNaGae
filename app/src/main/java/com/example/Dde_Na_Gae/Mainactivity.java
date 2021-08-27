@@ -66,7 +66,7 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
 
     BottomNavigationView bottomNavigationView;
-
+    FirebaseUser user;
     Toast toast;
 
     @Override
@@ -130,19 +130,7 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
-        my_nickname = (TextView)findViewById(R.id.my_page);
-        String myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference().child("users").child(myuid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                my_nickname.setText(snapshot.getValue().toString());
-            }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
 
 
         FirebaseAuth aAuth = FirebaseAuth.getInstance();
@@ -173,6 +161,27 @@ public class Mainactivity extends AppCompatActivity {
         list.add("고객센터");
         list.add("설정");
         list.add("로그인");
+
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            list.set(7, "로그아웃");
+        } else {
+
+        }
+
+        my_nickname = (TextView)findViewById(R.id.my_page);
+        String myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+        FirebaseDatabase.getInstance().getReference().child("users").child(myuid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                my_nickname.setText(snapshot.getValue().toString());
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,list);
 
@@ -205,29 +214,6 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 7:
-                        final String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-                        mDatabase.child("users");
-                        mDatabase.child(uid);
-                        mDatabase.child("uid");
-                        mDatabase.addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                                if (snapshot.exists()) {
-                                    //uid있을시
-
-                                  list.set(7, "로그아웃");
-                                } else {
-                                    //uid없을시
-
-                                }
-                            }
-
-                            @Override
-                            public void onCancelled(@NonNull DatabaseError databaseError) {
-                                // 디비를 가져오던중 에러 발생 시
-                                //Log.e("MainActivity", String.valueOf(databaseError.toException())); // 에러문 출력
-                            }
-                        });
 
                         break;
                 }
