@@ -9,10 +9,14 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -56,26 +60,29 @@ public class Mainactivity extends AppCompatActivity {
     ImageView add_menu1;
     ImageView add_menu2;
 
+    ImageView profile_photo;
     TextView my_nickname;
+    TextView unlogin;
+    LinearLayout layout_account;
 
     //네비게이션바
     DrawerLayout drawerLayout;
     View drawerView;
     ListView listview;
-    TextView my_page;
     //네비게이션바
 
     BottomNavigationView bottomNavigationView;
-    FirebaseUser user;
-    Toast toast;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        profile_photo = (ImageView)findViewById(R.id.profile_photo);
         listview = findViewById(R.id.navi_list);
-
+        layout_account = (LinearLayout)findViewById(R.id.my_account);
+        unlogin = (TextView)findViewById(R.id.my_page_unlogin);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
@@ -138,6 +145,7 @@ public class Mainactivity extends AppCompatActivity {
         String uid = user != null ? user.getUid() : null; // 로그인한 유저의 고유 uid 가져오기
 
 
+
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
        // DatabaseReference firstname = mDatabase.child(uid).child("firstname");    // 이메일
 
@@ -165,23 +173,46 @@ public class Mainactivity extends AppCompatActivity {
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
             list.set(7, "로그아웃");
-        } else {
 
+            layout_account.setVisibility(View.VISIBLE);
+            my_nickname = (TextView)findViewById(R.id.my_page_login);
+            String myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            FirebaseDatabase.getInstance().getReference().child("users").child(myuid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    UserModel userModel =  snapshot.getValue(UserModel.class);
+                    Glide.with(Mainactivity.this)
+                            .load(userModel.imageUri)
+                            .apply(new RequestOptions().circleCrop())
+                            .into(profile_photo);
+                    my_nickname.setText(userModel.nickname);
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+            my_nickname.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), My_Page.class);
+                    startActivity(intent);
+                }
+            });
+
+        } else {
+            unlogin.setVisibility(View.VISIBLE);
+            unlogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
+                    startActivity(intent);
+                }
+            });
         }
 
-        my_nickname = (TextView)findViewById(R.id.my_page);
-        String myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        FirebaseDatabase.getInstance().getReference().child("users").child(myuid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                my_nickname.setText(snapshot.getValue().toString());
-            }
 
-            @Override
-            public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-            }
-        });
 
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,list);
 
@@ -214,20 +245,19 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 7:
-
+                    if(list.get(7).equals("로그아웃")){
+                        //로그아웃 이벤트
+                    }
+                    else{
+                        Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
+                        startActivity(intent);
+                    }
                         break;
                 }
             }
         });
 
-        my_page = findViewById(R.id.my_page);
-        my_page.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), My_Page.class);
-                startActivity(intent);
-            }
-        });
+
 
         //네비게이션바
 

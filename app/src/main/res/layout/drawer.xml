@@ -19,9 +19,34 @@
         android:scaleType="fitCenter"
         android:src="@drawable/goback" />
 
+<LinearLayout
+    android:id="@+id/my_account"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:orientation="horizontal"
+    android:visibility="gone"
+    >
+    <ImageView
+        android:layout_marginLeft="5dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:id="@+id/profile_photo"
+        />
+    <TextView
+        android:id="@+id/my_page_login"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_margin="5dp"
+        android:background="@drawable/navigationbar"
+        android:clickable="true"
+        android:gravity="center"
+        android:text="로그인"
+        android:textSize="25dp" />
+</LinearLayout>
 
     <TextView
-        android:id="@+id/my_page"
+
+        android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:layout_margin="5dp"
@@ -29,8 +54,9 @@
         android:clickable="true"
         android:gravity="center"
         android:text="로그인"
-        android:textSize="25dp" />
-
+        android:textSize="25dp"
+        android:id="@+id/my_page_unlogin"
+        />
     <ListView
         android:id="@+id/navi_list"
         android:layout_width="match_parent"

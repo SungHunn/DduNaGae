@@ -77,15 +77,6 @@ public class New_MessageActivity extends AppCompatActivity {
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        System.out.println(destinatonUid);
-        System.out.println(chatting_room_option_selector);
-        System.out.println(roomname);
-
-
-
-
-
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -156,7 +147,7 @@ public class New_MessageActivity extends AppCompatActivity {
                     ChatModel  chatModel = item.getValue(ChatModel.class);
                     if(chatModel.users.containsKey(destinatonUid)){
                         chatRoomUid = item.getKey();
-                        System.out.println(chatRoomUid);
+
 
                         button.setEnabled(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));

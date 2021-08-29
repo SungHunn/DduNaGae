@@ -72,12 +72,29 @@ public class My_ChatFragment extends Fragment {
 
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Room_Name_Database chatroommodel1 = snapshot.getValue(Room_Name_Database.class);
-
-
                         RoomModels.add(chatroommodel1);
                     }
                     notifyDataSetChanged();
-                    System.out.println(RoomModels.size());
+
+                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(DataSnapshot snapshot) {
+
+                            for(DataSnapshot snapshot1 : snapshot.getChildren()){
+                                Room_Name_Database chatroommodel2 = snapshot1.getValue(Room_Name_Database.class);
+                                RoomModels.add(chatroommodel2);
+                            }
+                            notifyDataSetChanged();
+                        }
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
+
+
+
                     chatModels.clear();
                     for (int a = 0; a < RoomModels.size(); a++) {
                         FirebaseDatabase.getInstance().getReference().child("chatting_room").child(RoomModels.get(a).Room_selector_option).child("Room_Name").child(RoomModels.get(a).Room_name).child("talk").orderByChild("users/" + uid).addListenerForSingleValueEvent(new ValueEventListener() {
@@ -132,7 +149,6 @@ public class My_ChatFragment extends Fragment {
                         @Override
                         public void onDataChange(DataSnapshot dataSnapshot) {
                             UserModel userModel =  dataSnapshot.getValue(UserModel.class);
-                            Room_Name_Database roomNameDatabase = dataSnapshot.getValue(Room_Name_Database.class);
                             Glide.with(customViewHolder.itemView.getContext())
                                     .load(userModel.imageUri)
                                     .apply(new RequestOptions().circleCrop())
