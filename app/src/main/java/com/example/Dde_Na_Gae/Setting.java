@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Setting extends AppCompatActivity {
+public class Setting extends AppCompatActivity{
 
     TextView setting_member_id;
 

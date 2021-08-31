@@ -8,7 +8,7 @@ import android.widget.ImageView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Matching extends AppCompatActivity {
+public class Matching extends AppCompatActivity{
 
     ImageView img_back;
     Button btn_private_match;

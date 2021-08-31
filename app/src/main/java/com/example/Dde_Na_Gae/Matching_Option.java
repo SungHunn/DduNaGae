@@ -3,7 +3,6 @@ package com.example.Dde_Na_Gae;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -11,7 +10,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Matching_Option extends AppCompatActivity {
+public class Matching_Option extends AppCompatActivity{
 
     ImageView img_back;
     TextView gender_male;

@@ -1,15 +1,22 @@
 package com.example.Dde_Na_Gae;
 
+import android.app.AppComponentFactory;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,14 +24,29 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xml.sax.SAXException;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
 
 public class Mainactivity extends AppCompatActivity {
-
 
     TextView category1;
     TextView category2;
@@ -54,16 +76,54 @@ public class Mainactivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    Toast toast;
+    ArrayList<String> FirstImage = new ArrayList<>();
+    ArrayList<String> Title = new ArrayList<>();
+
+    TextView best_walk1_txt;
+    TextView best_walk2_txt;
+    TextView best_tour1_txt;
+    TextView best_tour2_txt;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
+        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
+        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
+        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
+
+        best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
+        best_walk2_txt = (TextView)findViewById(R.id.best_walk2_txt);
+        best_tour1_txt = (TextView)findViewById(R.id.best_tour1_txt);
+        best_tour2_txt = (TextView)findViewById(R.id.best_tour2_txt);
+
+        FirstImage = getIntent().getStringArrayListExtra("Image");
+        Title = getIntent().getStringArrayListExtra("Title");
+
+        Glide.with(this).load(FirstImage.get(0)).into(best_walk1);
+        best_walk1_txt.setText(Title.get(0));
+
+        Glide.with(this).load(FirstImage.get(1)).into(best_walk2);
+        best_walk2_txt.setText(Title.get(1));
+
+        Glide.with(this).load(FirstImage.get(2)).into(best_tour1);
+        best_tour1_txt.setText(Title.get(2));
+
+        Glide.with(this).load(FirstImage.get(3)).into(best_tour2);
+        best_tour2_txt.setText(Title.get(3));
+
+
+
+        System.out.println(FirstImage);
+        System.out.println(Title);
+
 
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -190,10 +250,11 @@ public class Mainactivity extends AppCompatActivity {
         onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
-        bestWlakClick();
+        bestWalkClick();
         addMenuClick();
 
     }
+
 
     //네비게이션바
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -237,27 +298,31 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
     }
+    /// ------------------------------------------------------------ url
 
-    private void bestWlakClick() {
-        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
+    private void bestWalkClick() {
+
         best_walk1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                TextView txt_result = findViewById(R.id.txt_result);
-                txt_result.setText(readTxt());
+//                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
 
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+                Intent intent = new Intent(getApplicationContext(), Pay.class); // 결제 실험
                 startActivity(intent);
             }
         });
-        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
+
+        // ----------------------------------------------------------- 여기서 실험
+
+        TextView result_txt = (TextView) findViewById(R.id.best_walk2_txt);
         best_walk2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-                startActivity(intent);
-            }
+
+                    Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+                    startActivity(intent);
+                }
         });
     }
 
@@ -356,7 +421,6 @@ public class Mainactivity extends AppCompatActivity {
     }
 
     public void bestPlaceClick() {
-        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
         best_tour1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -364,7 +428,6 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
         best_tour2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -374,23 +437,4 @@ public class Mainactivity extends AppCompatActivity {
         });
     }
 
-    private String readTxt(){
-        String data = null;
-        InputStream inputStream = getResources().openRawResource(R.raw.tour_rank);
-        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-
-        int i ;
-        try{
-            i = inputStream.read();
-            while(i != -1){
-                byteArrayOutputStream.write(i);
-                i = inputStream.read();
-            }
-            data = new String(byteArrayOutputStream.toByteArray(),"MS949");
-        }
-        catch (IOException e){
-            e.printStackTrace();
-        }
-            return data;
-    }
 }
