@@ -126,7 +126,6 @@ public class New_MessageActivity extends AppCompatActivity {
         room_name_database.Room_name = room_name;
         room_name_database.Room_selector_option = Room_selector_option;
         mDatabase.child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").child(room_name).setValue(room_name_database);
-
     }
 
     public void room_name_database_2(String room_name, String Room_selector_option, String master_uid) {

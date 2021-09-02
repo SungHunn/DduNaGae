@@ -189,12 +189,14 @@ public class Matching_Option extends AppCompatActivity {
                 ChatModel chatModel = new ChatModel();
                 chatModel.users.put(uid, true);
 
+
                 mDatabase.child("chatting_room").child(chatting_room_option_selector).child("chatting_room_option_selector").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot snapshot) {
                         if (snapshot.exists()) {
                             room_name_detail_database(text_room_name, uid, chatting_room_option_selector);
                             add_group_database(chatting_room_option_selector, text_room_name, chatModel);
+
                         } else {
                             group_room_database(text_h_matching_sex, text_h_matching_age, text_h_matching_pet_age, text_h_matching_pet_option, text_matching_room_option, text_h_car_option, chatting_room_option_selector, text_group_member_number);
                             room_name_detail_database(text_room_name, uid, chatting_room_option_selector);
@@ -304,7 +306,21 @@ public class Matching_Option extends AppCompatActivity {
             public void onDataChange(DataSnapshot dataSnapshot) {
                 for (DataSnapshot item : dataSnapshot.getChildren()) {
                     ChatRoomUid = item.getKey();
+
                     group_room_name_database(text_room_name, chatting_room_option_selector, ChatRoomUid);
+
+                    ChatModel.Comment comment = new ChatModel.Comment();
+                    comment.uid = uid;
+                    comment.message = "그룹 채팅이 시작 되었습니다!";
+                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(text_room_name).child("talk").child(ChatRoomUid).child("comments").push().setValue(comment).addOnCompleteListener(new OnCompleteListener<Void>() {
+                        @Override
+                        public void onComplete(@NonNull @NotNull Task<Void> task) {
+
+
+                        }
+                    });
+
+
 
                 }
             }
@@ -315,9 +331,6 @@ public class Matching_Option extends AppCompatActivity {
             }
         });
 
-        ChatModel.Comment comment = new ChatModel.Comment();
-        comment.uid = uid;
-        comment.message = "그룹채팅 시작!!";
-        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(text_room_name).child("talk").child(ChatRoomUid).child("comments").push().setValue(comment);
+
     }
 }

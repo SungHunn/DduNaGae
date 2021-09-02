@@ -54,12 +54,15 @@
         <activity android:name=".My_Information" />
         <activity android:name=".My_Page" />
         <activity android:name=".Matching_Option"/>
-        <activity android:name=".chat.New_MessageActivity" />
+        <activity android:name=".chat.New_MessageActivity"
+            android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".New_ChatMainActivity"/>
         <activity android:name=".My_Matching_Room_detail"/>
         <activity android:name=".Matching_Room_detail"/>
         <activity android:name=".Matching_filter_Option"/>
         <activity android:name=".Chatting_List"/>
+        <activity android:name=".chat.Group_MessageActivity"
+            android:windowSoftInputMode="adjustResize"/>
 
     </application>
 

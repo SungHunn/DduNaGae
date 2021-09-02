@@ -14,7 +14,9 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.chat.Group_MessageActivity;
 import com.example.Dde_Na_Gae.chat.New_MessageActivity;
+import com.example.Dde_Na_Gae.model.ChatModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,7 +27,11 @@ import com.google.firebase.database.ValueEventListener;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import static com.kakao.usermgmt.StringSet.user_id;
 
 public class Matching_Room_detail extends AppCompatActivity {
 
@@ -47,7 +53,8 @@ public class Matching_Room_detail extends AppCompatActivity {
     public String[] masterchild = {"nickname","myage","my_sex","petage","petweight","havecar"};
     public String[] hopechild = {"matching_age","matching_sex","matching_pet_age","matching_pet_option","matching_car_option"};
     public ImageView petprofile;
-    public Button room_detail_go_chatting;
+    public Button single_room_detail_go_chatting;
+    public Button group_room_detail_go_chatting;
     public String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     public String imageuri;
 
@@ -72,7 +79,8 @@ public class Matching_Room_detail extends AppCompatActivity {
         hope_pet_option = (TextView)findViewById(R.id.h_room_detail_pet_option);
         hope_have_car = (TextView)findViewById(R.id.h_room_detail_have_car);
         petprofile = (ImageView)findViewById(R.id.room_detail_room_image);
-        room_detail_go_chatting = (Button)findViewById(R.id.room_detail_go_chatting);
+        single_room_detail_go_chatting = (Button)findViewById(R.id.single_room_detail_go_chatting);
+        group_room_detail_go_chatting = (Button)findViewById(R.id.group_room_detail_go_chatting);
 
         TextView[] masterdata = {master_nickname,master_age,master_sex,master_pet_age,master_pet_option, master_have_car};
         TextView[] hopedata = {hope_age,hope_sex,hope_pet_age,hope_pet_option, hope_have_car};
@@ -91,11 +99,13 @@ public class Matching_Room_detail extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                 if(snapshot.getValue().toString().equals("그룹 매칭방")){
                     room_detail_member_num_layout.setVisibility(View.VISIBLE);
+                    group_room_detail_go_chatting.setVisibility(View.VISIBLE);
                     FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("group_member_number").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                             room_detail_member_number.setText(snapshot.getValue().toString());
                         }
+
 
                         @Override
                         public void onCancelled(@NonNull @NotNull DatabaseError error) {
@@ -103,6 +113,9 @@ public class Matching_Room_detail extends AppCompatActivity {
                         }
                     });
 
+                }
+                else{
+                    single_room_detail_go_chatting.setVisibility(View.VISIBLE);
                 }
             }
 
@@ -134,7 +147,7 @@ public class Matching_Room_detail extends AppCompatActivity {
         });
 
 
-        room_detail_go_chatting.setOnClickListener(new View.OnClickListener() {
+        single_room_detail_go_chatting.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), New_MessageActivity.class);
@@ -147,10 +160,71 @@ public class Matching_Room_detail extends AppCompatActivity {
 
                     activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fromright, R.anim.toleft);
                     startActivity(intent, activityOptions.toBundle());
+
+
+
+
+
+
                 }
                 startActivity(intent);
             }
         });
+
+        group_room_detail_go_chatting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Group_MessageActivity.class);
+                intent.putExtra("chat_masterUid", master_uid);
+                intent.putExtra("room_name",room_name);
+                intent.putExtra("option_selector",chatting_room_option_selector);
+                ActivityOptions activityOptions = null;
+                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+
+
+                    activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fromright, R.anim.toleft);
+                    startActivity(intent, activityOptions.toBundle());
+
+
+                    mDatabase.child("users").child(master_uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                            String abc= snapshot.getValue(String.class);
+
+
+                            ChatModel chatModel = new ChatModel();
+                            chatModel.users.put(uid, true);
+
+
+                            Map<String, Object> user = new HashMap<>();
+                            user.put(uid, true);
+
+
+
+
+                            mDatabase.child("chatting_room")
+                                    .child(chatting_room_option_selector)
+                                    .child("Room_Name").child(room_name).child("talk")
+                                    .child(abc).child("users")
+                                    .updateChildren(user, chatModel);
+
+                            group_room_name_database(room_name,chatting_room_option_selector);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
+
+                }
+                startActivity(intent);
+            }
+        });
+
 
     }
 
@@ -190,5 +264,11 @@ public class Matching_Room_detail extends AppCompatActivity {
                 }
             });
         }
+    }
+    public void group_room_name_database(String room_name, String Room_selector_option) {
+        Room_Name_Database room_name_database = new Room_Name_Database();
+        room_name_database.Room_name = room_name;
+        room_name_database.Room_selector_option = Room_selector_option;
+        mDatabase.child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(room_name_database);
     }
 }

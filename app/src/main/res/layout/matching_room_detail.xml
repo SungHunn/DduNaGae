@@ -327,7 +327,16 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="채팅하기"
-                android:id="@+id/room_detail_go_chatting" />
+                android:id="@+id/single_room_detail_go_chatting"
+                android:visibility="gone"/>
+
+            <Button
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="채팅하기"
+                android:id="@+id/group_room_detail_go_chatting"
+                android:visibility="gone"/>
 
 
         </LinearLayout>
