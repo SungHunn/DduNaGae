@@ -55,7 +55,7 @@ public class MessageActivity extends AppCompatActivity {
         destinatonUid = getIntent().getStringExtra("destinationUid"); // 채팅을 당하는 아이디
         button = (Button) findViewById(R.id.messageActivity_button);
         editText = (EditText) findViewById(R.id.messageActivity_editText);
-        recyclerView = (RecyclerView)findViewById(R.id.messageActivity_recyclerview);
+        recyclerView = (RecyclerView)findViewById(R.id.single_messageActivity_recyclerview);
 
 
 

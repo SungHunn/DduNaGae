@@ -77,26 +77,27 @@ public class My_ChatFragment extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Room_Name_Database chatroommodel1 = snapshot.getValue(Room_Name_Database.class);
                         RoomModels.add(chatroommodel1);
-                        chatModels.clear();
-                        for (int a = 0; a < RoomModels.size(); a++) {
-                            FirebaseDatabase.getInstance().getReference().child("chatting_room").child(RoomModels.get(a).Room_selector_option).child("Room_Name").child(RoomModels.get(a).Room_name).child("talk").orderByChild("users/" + uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                                @Override
-                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                                    for (DataSnapshot item : snapshot.getChildren()) {
-                                        chatModels.add(item.getValue(ChatModel.class));
-                                    }
-                                    notifyDataSetChanged();
+                    }
+                    chatModels.clear();
+                    for (int a = 0; a < RoomModels.size(); a++) {
+                        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(RoomModels.get(a).Room_selector_option).child("Room_Name").child(RoomModels.get(a).Room_name).child("talk").orderByChild("users/" + uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                                for (DataSnapshot item : snapshot.getChildren()) {
+                                    chatModels.add(item.getValue(ChatModel.class));
                                 }
+                                notifyDataSetChanged();
+                            }
 
-                                @Override
-                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                                }
-                            });
+                            }
+                        });
 
 
-                        }
                     }
                     notifyDataSetChanged();
                 }

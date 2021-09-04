@@ -5,24 +5,32 @@ import android.os.Bundle;
 
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.ListView;
 import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.ChatMainActivity;
+import com.example.Dde_Na_Gae.New_ChatMainActivity;
 import com.example.Dde_Na_Gae.R;
+import com.example.Dde_Na_Gae.fragment.ChatFragment;
+import com.example.Dde_Na_Gae.fragment.My_ChatFragment;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -55,6 +63,16 @@ public class Group_MessageActivity extends AppCompatActivity {
     String chat_masterUid;
     String room_name;
     String option_selector;
+    Button chattingroom_exit;
+
+    ImageView group_chat_back;
+    ImageButton group_chat_hbg;
+
+    TextView chatoption;
+    TextView groupchatnum;
+
+    DrawerLayout drawerLayout;
+    View drawerView;
 
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
@@ -67,6 +85,29 @@ public class Group_MessageActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.group_message_activity);
+
+        //햄버거
+
+        drawerLayout = findViewById(R.id.chat_drawlayout);
+        drawerView = findViewById(R.id.chatting_drawer);
+
+        group_chat_hbg = (ImageButton) findViewById(R.id.talkmenu_open);
+
+        group_chat_hbg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawerView);
+            }
+        });
+
+        drawerLayout.setDrawerListener(listener);
+        drawerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         editText = (EditText) findViewById(R.id.group_messageActivity_editText);
 
@@ -110,9 +151,67 @@ public class Group_MessageActivity extends AppCompatActivity {
             }
         });
 
+        chattingroom_exit = (Button)findViewById(R.id.group_room_exit);
+
+        chattingroom_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
+                FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        chatroomuid = snapshot.getValue().toString();
+
+                        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").child(uid).setValue(null);
 
 
+                            }
+
+
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+              onBackPressed();
+
+            }
+        });
+
+     /*   group_chat_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), My_ChatFragment.class);
+                startActivity(intent);
+            }
+        });
+*/
     }
+
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
 
     void init() {
         Button button = (Button) findViewById(R.id.group_messageActivity_button);
@@ -263,4 +362,18 @@ public class Group_MessageActivity extends AppCompatActivity {
             }
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        stopPlay(); //이 액티비티에서 종료되어야 하는 활동 종료시켜주는 함수
+        Intent intent = new Intent(Group_MessageActivity.this, New_ChatMainActivity.class); //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
+        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);    //인텐트 플래그 설정
+        startActivity(intent);  //인텐트 이동
+        finish();   //현재 액티비티 종료
+    }
+
+    private void stopPlay() {
+    }
+
 }

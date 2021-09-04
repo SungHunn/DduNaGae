@@ -4,23 +4,27 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.Group_Room_Name_Database;
 import com.example.Dde_Na_Gae.New_ChatMainActivity;
 import com.example.Dde_Na_Gae.R;
 import com.example.Dde_Na_Gae.Room_Name_Database;
@@ -46,6 +50,8 @@ public class New_MessageActivity extends AppCompatActivity {
 
     private Button button;
     private EditText editText;
+    ImageButton single_chat_hbg;
+    Button chattingroom_exit;
 
     private String uid;
     private String chatRoomUid;
@@ -56,26 +62,48 @@ public class New_MessageActivity extends AppCompatActivity {
     RecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
 
+    DrawerLayout drawerLayout;
+    View drawerView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_message2);
 
+
+        //햄버거
+        drawerLayout = findViewById(R.id.single_chat_drawlayout);
+        drawerView = findViewById(R.id.single_chatting_drawer);
+
+        single_chat_hbg = (ImageButton) findViewById(R.id.single_talkmenu_open);
+
+        single_chat_hbg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawerView);
+            }
+        });
+
+        drawerLayout.setDrawerListener(listener);
+        drawerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();  //채팅을 요구 하는 아아디 즉 단말기에 로그인된 UID
         button = (Button) findViewById(R.id.messageActivity_button);
         editText = (EditText) findViewById(R.id.messageActivity_editText);
         destinatonUid = getIntent().getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
         roomname = getIntent().getStringExtra("room-name");
         chatting_room_option_selector = getIntent().getStringExtra("option_selector");
-        recyclerView = (RecyclerView)findViewById(R.id.messageActivity_recyclerview);
+        recyclerView = (RecyclerView)findViewById(R.id.single_messageActivity_recyclerview);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
-
-
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -92,8 +120,7 @@ public class New_MessageActivity extends AppCompatActivity {
                         public void onSuccess(Void aVoid) {
 
                             checkChatRoom();
-                            room_name_database(roomname, chatting_room_option_selector);
-                            room_name_database_2(roomname, chatting_room_option_selector, destinatonUid);
+
 
                         }
                     });
@@ -117,21 +144,74 @@ public class New_MessageActivity extends AppCompatActivity {
         checkChatRoom();
 
 
+        chattingroom_exit = (Button)findViewById(R.id.single_room_exit);
+
+        chattingroom_exit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").child(roomname).setValue(null);
+                FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).child("my_chatting_list").child("1대1 채팅방").child(roomname).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        chatRoomUid = snapshot.getValue().toString();
+
+                        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("users").child(uid).setValue(null);
+
+
+                    }
+
+
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+                onBackPressed();
+
+            }
+        });
+
     }
 
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+        @Override
+        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
+
+        }
+
+        @Override
+        public void onDrawerOpened(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerClosed(@NonNull View drawerView) {
+
+        }
+
+        @Override
+        public void onDrawerStateChanged(int newState) {
+
+        }
+    };
 
 
-    public void room_name_database(String room_name, String Room_selector_option) {
-        Room_Name_Database room_name_database = new Room_Name_Database();
+    public void room_name_database(String room_name, String Room_selector_option, String chatRoomUid) {
+        Group_Room_Name_Database room_name_database = new Group_Room_Name_Database();
         room_name_database.Room_name = room_name;
         room_name_database.Room_selector_option = Room_selector_option;
+        room_name_database.chatroomuid = chatRoomUid;
         mDatabase.child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").child(room_name).setValue(room_name_database);
     }
 
-    public void room_name_database_2(String room_name, String Room_selector_option, String master_uid) {
-        Room_Name_Database room_name_database = new Room_Name_Database();
+    public void room_name_database_2(String room_name, String Room_selector_option, String master_uid, String chatRoomUid) {
+        Group_Room_Name_Database room_name_database = new Group_Room_Name_Database();
         room_name_database.Room_name = room_name;
         room_name_database.Room_selector_option = Room_selector_option;
+        room_name_database.chatroomuid = chatRoomUid;
         mDatabase.child("users").child(master_uid).child("my_chatting_list").child("1대1 채팅방").child(room_name).setValue(room_name_database);
 
     }
@@ -147,6 +227,8 @@ public class New_MessageActivity extends AppCompatActivity {
                     if(chatModel.users.containsKey(destinatonUid)){
                         chatRoomUid = item.getKey();
 
+                        room_name_database(roomname, chatting_room_option_selector, chatRoomUid);
+                        room_name_database_2(roomname, chatting_room_option_selector, destinatonUid, chatRoomUid);
 
                         button.setEnabled(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));
