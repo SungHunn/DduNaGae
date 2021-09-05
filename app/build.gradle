@@ -29,9 +29,12 @@ android {
 }
 
 dependencies {
+    implementation files('libs/libDaumMapAndroid.jar')
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'com.github.bumptech.glide:glide:4.11.0'
+    implementation files('C:\\Users\\USER\\AndroidStudioProjects\\Dde_Na_Gae_project\\app\\libs/json-simple-1.1.1')
+    implementation files('libs\\json-simple-1.1.1.jar')
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //이 위로 내가 추가한 것
 

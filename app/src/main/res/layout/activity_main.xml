@@ -37,7 +37,7 @@
                         android:scaleType="fitCenter"
                         android:src="@drawable/ic_baseline_dehaze_24" />
 
-                    <TextView
+                    <EditText
                         android:id="@+id/main_search"
                         android:layout_width="200dp"
                         android:layout_height="50dp"

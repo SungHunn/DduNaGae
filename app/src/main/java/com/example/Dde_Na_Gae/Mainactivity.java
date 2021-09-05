@@ -5,7 +5,6 @@ import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
@@ -13,17 +12,12 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
-
-import org.w3c.dom.Text;
-
-import java.util.List;
 
 public class Mainactivity extends AppCompatActivity {
     TextView category1;
@@ -164,20 +158,6 @@ public class Mainactivity extends AppCompatActivity {
 
 
         //네비게이션바
-
-        Intent intent = getIntent();
-
-        String new_id;
-        String new_pw;
-        String new_animal;
-        String animal_info;
-
-        new_id = getIntent().getStringExtra("NEW_ID");
-        new_pw = getIntent().getStringExtra("NEW_PW");
-        new_animal = getIntent().getStringExtra("ANIMAL_INFO");
-        animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
-
-
         onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
@@ -213,11 +193,15 @@ public class Mainactivity extends AppCompatActivity {
 
 // serach box
     private void main_search(){
-        TextView main_search = findViewById(R.id.main_search);
+        EditText main_search = findViewById(R.id.main_search);
+        final String str;
+        str = main_search.toString();
+
         main_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(),Search.class);
+                intent.putExtra("SEARCH", str);
                 startActivity(intent);
             }
         });
