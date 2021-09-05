@@ -6,7 +6,7 @@ import android.widget.CheckBox;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Alarm extends AppCompatActivity {
+public class Alarm extends AppCompatActivity{
 
     @Override
     public void onCreate(Bundle savedInstanceState) {

@@ -8,7 +8,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Sign_up extends AppCompatActivity {
+public class Sign_up extends AppCompatActivity{
 
     /*데이터 타입 정의하는 클래스를 만들까 고민중*/
     EditText getNew_id;

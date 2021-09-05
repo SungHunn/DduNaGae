@@ -1,19 +1,16 @@
 package com.example.Dde_Na_Gae;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class Notice extends AppCompatActivity {
+public class Notice extends AppCompatActivity{
 
     TextView notice_button;
     TextView event_button;

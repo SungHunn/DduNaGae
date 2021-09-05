@@ -4,7 +4,7 @@ import android.os.Bundle;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Terms_of_service extends AppCompatActivity {
+public class Terms_of_service extends AppCompatActivity{
 
     @Override
     protected  void onCreate(Bundle savedInstanceState) {

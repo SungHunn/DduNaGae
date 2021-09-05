@@ -7,7 +7,7 @@ import android.widget.EditText;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Search extends AppCompatActivity {
+public class Search extends AppCompatActivity{
 
     EditText search_box;
 

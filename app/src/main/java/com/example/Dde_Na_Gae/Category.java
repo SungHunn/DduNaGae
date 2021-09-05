@@ -6,7 +6,7 @@ import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-public class Category extends AppCompatActivity {
+public class Category extends AppCompatActivity{
 
     TextView getcategory;
 
