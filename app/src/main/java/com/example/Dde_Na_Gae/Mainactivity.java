@@ -325,9 +325,7 @@ public class Mainactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-//                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-
-                Intent intent = new Intent(getApplicationContext(), Pay.class); // 결제 실험
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
                 startActivity(intent);
             }
         });

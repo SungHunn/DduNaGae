@@ -136,4 +136,5 @@
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/reservation_bar_menu" />
     </LinearLayout>
+
 </LinearLayout>

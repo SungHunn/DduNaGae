@@ -22,25 +22,29 @@
 <!--                <category android:name="android.intent.category.BROWSABLE"/>-->
             </intent-filter>
         </activity>
-        <activity android:name="com.example.Dde_Na_Gae.Mainactivity"/>
-        <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
+        <activity android:name=".Alarm" />
         <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
         <activity android:name="com.example.Dde_Na_Gae.BestWalk" />
         <activity android:name="com.example.Dde_Na_Gae.Category" />
-        <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
-        <activity android:name="com.example.Dde_Na_Gae.Matching" />
-        <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
         <activity android:name="com.example.Dde_Na_Gae.Login_New_Page"/>
-        <activity android:name=".My_Page" />
+        <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
+        <activity android:name="com.example.Dde_Na_Gae.Mainactivity"/>
+        <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name=".Matching_Option"/>
-        <activity android:name=".Setting" />
-        <activity android:name=".Search" />
-        <activity android:name=".Personal_information" />
-        <activity android:name=".Terms_of_service" />
+        <activity android:name=".My_Page" />
         <activity android:name=".Notice" />
-        <activity android:name=".Alarm" />
         <activity android:name=".OpenApi"/>
         <activity android:name=".Pay"/>
+        <activity android:name=".Personal_information" />
+        <activity android:name=".Search" />
+        <activity android:name=".Search_Selected" />
+        <activity android:name=".Search_Selected_More" />
+        <activity android:name=".Setting" />
+        <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
+        <activity android:name=".Terms_of_service" />
+        <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
+
+
         // 몰랐는데 intent하려면 넘기려는 액티비티 추가해줘야 함.. 이거로 30분 날렸당
 
     </application>
