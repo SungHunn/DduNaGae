@@ -3,16 +3,17 @@ package com.example.Dde_Na_Gae;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-public class My_Page extends AppCompatActivity{
+public class My_Page extends AppCompatActivity {
     LinearLayout my_info;
     LinearLayout reservation;
     LinearLayout my_review;
