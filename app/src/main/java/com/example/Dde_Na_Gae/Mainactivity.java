@@ -200,7 +200,7 @@ public class Mainactivity extends AppCompatActivity {
         main_search.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Search.class);
+                Intent intent = new Intent(getApplicationContext(),Category.class);
                 intent.putExtra("SEARCH", str);
                 startActivity(intent);
             }
@@ -253,7 +253,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category1.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -265,7 +265,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category2.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -277,7 +277,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category3.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -289,7 +289,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category4.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -301,7 +301,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category5.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -313,7 +313,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category6.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }

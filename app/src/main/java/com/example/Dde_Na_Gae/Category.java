@@ -50,7 +50,7 @@ public class Category extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView(){
-        category = getIntent().getStringExtra("CATEGORY");
+        category = getIntent().getStringExtra("SEARCH");
         url = "https://www.google.com/maps/search/" + category;
 
         webView.getSettings().setSupportZoom(true);
