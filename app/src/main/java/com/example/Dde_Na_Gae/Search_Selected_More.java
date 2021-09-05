@@ -49,6 +49,7 @@ public class Search_Selected_More extends AppCompatActivity {
                     convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_item, parent, false);
                 }
                 // ConvertView에서 Card의 내용을 적용할 뷰 찾기
+
                 TextView name = (TextView) convertView.findViewById(R.id.search_name);
                 TextView description = (TextView) convertView.findViewById(R.id.search_description);
                 // 뷰에 값 지정하기.
