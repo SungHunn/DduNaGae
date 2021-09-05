@@ -2,11 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.Dde_Na_Gae">
 
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="BIND_GET_INSTALL_REFERRER_SERVICE" />
-
-
+    <uses-permission android:name="android.permission.INTERNET"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -16,19 +12,17 @@
         android:theme="@style/Theme.Login_Example"
         android:usesCleartextTraffic="true">
 
-        <meta-data android:name="com.kakao.sdk.AppKey" android:value="7d2651ab82b4eddd3028acfeb7c8124d"/>
-
-        <activity android:name="com.example.Dde_Na_Gae.Mainactivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+<!--                <category android:name="android.intent.category.BROWSABLE"/>-->
             </intent-filter>
         </activity>
-
-        <activity android:name=".Api_date" />
-        <activity android:name=".Search_Selected" />
-        <activity android:name=".Search_Selected_More" />
+        <activity android:name="com.example.Dde_Na_Gae.Mainactivity"/>
         <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
         <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
         <activity android:name="com.example.Dde_Na_Gae.BestWalk" />
@@ -36,10 +30,18 @@
         <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
+        <activity android:name="com.example.Dde_Na_Gae.Login_New_Page"/>
         <activity android:name=".My_Page" />
-        <activity android:name=".Matching_Option" />
+        <activity android:name=".Matching_Option"/>
         <activity android:name=".Setting" />
         <activity android:name=".Search" />
+        <activity android:name=".Personal_information" />
+        <activity android:name=".Terms_of_service" />
+        <activity android:name=".Notice" />
+        <activity android:name=".Alarm" />
+        <activity android:name=".OpenApi"/>
+        <activity android:name=".Pay"/>
+        // 몰랐는데 intent하려면 넘기려는 액티비티 추가해줘야 함.. 이거로 30분 날렸당
 
     </application>
 

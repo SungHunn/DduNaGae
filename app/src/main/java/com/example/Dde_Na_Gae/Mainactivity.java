@@ -1,25 +1,54 @@
 package com.example.Dde_Na_Gae;
 
+import android.app.AppComponentFactory;
+import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.EditText;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+import org.xml.sax.SAXException;
+
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.ArrayList;
+
+import javax.xml.parsers.ParserConfigurationException;
+
 public class Mainactivity extends AppCompatActivity {
+
+
     TextView category1;
     TextView category2;
     TextView category3;
@@ -48,13 +77,54 @@ public class Mainactivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
+    ArrayList<String> FirstImage = new ArrayList<>();
+    ArrayList<String> Title = new ArrayList<>();
+
+    TextView best_walk1_txt;
+    TextView best_walk2_txt;
+    TextView best_tour1_txt;
+    TextView best_tour2_txt;
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
+        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
+        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
+        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
+
+        best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
+        best_walk2_txt = (TextView)findViewById(R.id.best_walk2_txt);
+        best_tour1_txt = (TextView)findViewById(R.id.best_tour1_txt);
+        best_tour2_txt = (TextView)findViewById(R.id.best_tour2_txt);
+
+        FirstImage = getIntent().getStringArrayListExtra("Image");
+        Title = getIntent().getStringArrayListExtra("Title");
+
+        Glide.with(this).load(FirstImage.get(0)).into(best_walk1);
+        best_walk1_txt.setText(Title.get(0));
+
+        Glide.with(this).load(FirstImage.get(1)).into(best_walk2);
+        best_walk2_txt.setText(Title.get(1));
+
+        Glide.with(this).load(FirstImage.get(2)).into(best_tour1);
+        best_tour1_txt.setText(Title.get(2));
+
+        Glide.with(this).load(FirstImage.get(3)).into(best_tour2);
+        best_tour2_txt.setText(Title.get(3));
+
+
+
+        System.out.println(FirstImage);
+        System.out.println(Title);
+
+
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -117,9 +187,16 @@ public class Mainactivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
+                        Intent intent_notice =
+                                new Intent(getApplicationContext(), Notice.class);
+                        startActivity(intent_notice);
                         break;
 
                     case 1:
+                        // 공지사항이랑 이벤트는 같은 페이지임 나중에 이벤트 클릭된 상태로 넘어가게 하면됨
+                        Intent intent_event =
+                                new Intent(getApplicationContext(), Notice.class);
+                        startActivity(intent_event);
                         break;
 
                     case 2:
@@ -158,14 +235,29 @@ public class Mainactivity extends AppCompatActivity {
 
 
         //네비게이션바
+
+        Intent intent = getIntent();
+
+        String new_id;
+        String new_pw;
+        String new_animal;
+        String animal_info;
+
+        new_id = getIntent().getStringExtra("NEW_ID");
+        new_pw = getIntent().getStringExtra("NEW_PW");
+        new_animal = getIntent().getStringExtra("ANIMAL_INFO");
+        animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
+
+
         onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
-        bestWlakClick();
+        bestWalkClick();
         addMenuClick();
         main_search();
 
     }
+
 
     //네비게이션바
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -226,22 +318,29 @@ public class Mainactivity extends AppCompatActivity {
         });
     }
 
-    private void bestWlakClick() {
-        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
+    private void bestWalkClick() {
+
         best_walk1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+
+//                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+
+                Intent intent = new Intent(getApplicationContext(), Pay.class); // 결제 실험
                 startActivity(intent);
             }
         });
-        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
+
+        // ----------------------------------------------------------- 여기서 실험
+
+        TextView result_txt = (TextView) findViewById(R.id.best_walk2_txt);
         best_walk2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-                startActivity(intent);
-            }
+
+                    Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+                    startActivity(intent);
+                }
         });
     }
 
@@ -357,6 +456,5 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
     }
-
-
 }
+

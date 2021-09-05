@@ -8,7 +8,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-public class LoginPage extends AppCompatActivity {
+public class LoginPage extends AppCompatActivity{
 
     Button btn_login;
     EditText getlogin_id;
