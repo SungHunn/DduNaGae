@@ -1,11 +1,6 @@
 package com.example.Dde_Na_Gae;
 
-import android.app.AppComponentFactory;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.net.Uri;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -17,7 +12,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -28,24 +22,8 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.xml.sax.SAXException;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.util.ArrayList;
-
-import javax.xml.parsers.ParserConfigurationException;
+import java.util.Calendar;
 
 public class Mainactivity extends AppCompatActivity {
 
@@ -77,14 +55,29 @@ public class Mainactivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    ArrayList<String> FirstImage = new ArrayList<>();
-    ArrayList<String> Title = new ArrayList<>();
+    ArrayList<String> Today_FirstImage = new ArrayList<>();
+    ArrayList<String> Today_Title = new ArrayList<>();
+
+    ArrayList<String> Main_FirstImage = new ArrayList<>();
+    ArrayList<String> Main_Title = new ArrayList<>();
+
+    ArrayList<String> Sub_FirstImage = new ArrayList<>();
+    ArrayList<String> Sub_Title = new ArrayList<>();
+
+
+    ImageView to_day_place1;
+    TextView to_day_place1_txt;
+    ImageView to_day_place2;
+    TextView to_day_place2_txt;
 
     TextView best_walk1_txt;
     TextView best_walk2_txt;
+
     TextView best_tour1_txt;
     TextView best_tour2_txt;
 
+    TextView region_walk;
+    TextView region_travle;
 
 
     @Override
@@ -92,35 +85,56 @@ public class Mainactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
-        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
-        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
-        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
+        // 오늘의 place 사진 및 텍스트 설정
+        to_day_place1 = (ImageView)findViewById(R.id.to_day_place1);
+        to_day_place1_txt = (TextView)findViewById(R.id.to_day_place1_txt);
+        to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
+        to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
 
-        best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
-        best_walk2_txt = (TextView)findViewById(R.id.best_walk2_txt);
+        Today_FirstImage = getIntent().getStringArrayListExtra("Today_FirstImage");
+        Today_Title = getIntent().getStringArrayListExtra("Today_Title");
+
+        Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
+        to_day_place1_txt.setText(Today_Title.get(0));
+        Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
+        to_day_place2_txt.setText(Today_Title.get(1));
+
+        ///////////////////////////
+
+        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
         best_tour1_txt = (TextView)findViewById(R.id.best_tour1_txt);
+        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
         best_tour2_txt = (TextView)findViewById(R.id.best_tour2_txt);
 
-        FirstImage = getIntent().getStringArrayListExtra("Image");
-        Title = getIntent().getStringArrayListExtra("Title");
+        Main_FirstImage = getIntent().getStringArrayListExtra("Main_Image");
+        Main_Title = getIntent().getStringArrayListExtra("Main_Title");
 
-        Glide.with(this).load(FirstImage.get(0)).into(best_walk1);
-        best_walk1_txt.setText(Title.get(0));
-
-        Glide.with(this).load(FirstImage.get(1)).into(best_walk2);
-        best_walk2_txt.setText(Title.get(1));
-
-        Glide.with(this).load(FirstImage.get(2)).into(best_tour1);
-        best_tour1_txt.setText(Title.get(2));
-
-        Glide.with(this).load(FirstImage.get(3)).into(best_tour2);
-        best_tour2_txt.setText(Title.get(3));
+        Glide.with(this).load(Main_FirstImage.get(0)).into(best_tour1);
+        best_tour1_txt.setText(Main_Title.get(0));
+        Glide.with(this).load(Main_FirstImage.get(1)).into(best_tour2);
+        best_tour2_txt.setText(Main_Title.get(1));
 
 
+        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
+        best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
+        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
+        best_walk2_txt = (TextView)findViewById(R.id.best_walk2_txt);
 
-        System.out.println(FirstImage);
-        System.out.println(Title);
+        ////////////////////////////////////////////////////////////////
+
+        Sub_FirstImage = getIntent().getStringArrayListExtra("Sub_Image");
+        Sub_Title = getIntent().getStringArrayListExtra("Sub_Title");
+
+        Glide.with(this).load(Sub_FirstImage.get(0)).into(best_walk1);
+        best_walk1_txt.setText(Sub_Title.get(0));
+        Glide.with(this).load(Sub_FirstImage.get(1)).into(best_walk2);
+        best_walk2_txt.setText(Sub_Title.get(1));
+
+//        region_travle = (TextView)findViewById(R.id.region_travel);
+//        region_travle.setText(getRegionCode((today % 8) + 1) + " 추천 여행지");
+//
+//        region_walk = (TextView)findViewById(R.id.region_walk);
+//        region_walk.setText(getRegionCode((today % 9) + 31) + " 추천 여행지");
 
 
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
@@ -248,7 +262,7 @@ public class Mainactivity extends AppCompatActivity {
         animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
 
 
-        onTextViewClick();
+//        onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
         bestWalkClick();
@@ -317,121 +331,27 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
     }
-    /// ------------------------------------------------------------ url
 
-    private void bestWalkClick() {
-
-        best_walk1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                startActivity(intent);
-            }
-        });
-
-        // ----------------------------------------------------------- 여기서 실험
-
-        TextView result_txt = (TextView) findViewById(R.id.best_walk2_txt);
-        best_walk2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                    Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-                    startActivity(intent);
-                }
-        });
-    }
-
-    public void onTextViewClick() {
-        category1 = (TextView) findViewById(R.id.category_1);
-        category1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category1.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-        category2 = (TextView) findViewById(R.id.category_2);
-        category2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category2.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-        category3 = (TextView) findViewById(R.id.category_3);
-        category3.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category3.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-        category4 = (TextView) findViewById(R.id.category_4);
-        category4.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category4.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-        category5 = (TextView) findViewById(R.id.category_5);
-        category5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category5.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-        category6 = (TextView) findViewById(R.id.category_6);
-        category6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category6.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-    }
-
+    // 오늘의 place 클릭 이벤트
     public void toDayPlaceClick() {
         today_place1 = (ImageView) findViewById(R.id.to_day_place1);
         today_place1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TodayPlace.class);
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Today_FirstImage.get(0));
+                intent.putExtra("Title", Today_Title.get(0));
                 startActivity(intent);
             }
         });
+
         today_place2 = (ImageView) findViewById(R.id.to_day_place2);
         today_place2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TodayPlace.class);
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Today_FirstImage.get(1));
+                intent.putExtra("Title", Today_Title.get(1));
                 startActivity(intent);
             }
         });
@@ -442,18 +362,163 @@ public class Mainactivity extends AppCompatActivity {
         best_tour1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestPlace.class);
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Main_FirstImage.get(0));
+                intent.putExtra("Title", Main_Title.get(0));
                 startActivity(intent);
             }
         });
+
         best_tour2 = (ImageView) findViewById(R.id.best_tour2);
         best_tour2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestPlace.class);
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Main_FirstImage.get(1));
+                intent.putExtra("Title", Main_Title.get(1));
                 startActivity(intent);
             }
         });
     }
+
+    private void bestWalkClick() {
+
+        best_walk1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Sub_FirstImage.get(0));
+                intent.putExtra("Title", Sub_Title.get(0));
+                startActivity(intent);
+            }
+        });
+
+        best_walk2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Sub_FirstImage.get(1));
+                intent.putExtra("Title", Sub_Title.get(1));
+                startActivity(intent);
+            }
+        });
+    }
+//
+//    public String getRegionCode(int code){
+//        String region="";
+//
+//        if (code == 1)
+//            region = "서울";
+//        else if (code == 2)
+//            region = "인천";
+//        else if (code == 3)
+//            region = "대전";
+//        else if (code == 4)
+//            region = "대구";
+//        else if (code == 5)
+//            region = "광주";
+//        else if (code == 6)
+//            region = "부산";
+//        else if (code == 7)
+//            region = "울산";
+//        else if (code == 8)
+//            region = "세종특별자치시";
+//        else if (code == 31)
+//            region = "경기도";
+//        else if (code == 32)
+//            region = "강원도";
+//        else if (code == 33 || code == 34)
+//            region = "충청도";
+//        else if (code == 35 || code == 36)
+//            region = "경상도";
+//        else if (code == 37 || code == 38)
+//            region = "전라도";
+//        else if (code == 39)
+//            region = "제주도";
+//
+//        return region;
+//    }
+
+//    public String getRegionCode(){
+//
+//
+//        if (code)
+//    }
+
+//    public void onTextViewClick() {
+//        category1 = (TextView) findViewById(R.id.category_1);
+//        category1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String getcategory1;
+//                getcategory1 = category1.getText().toString();
+//                Intent intent = new Intent(getApplicationContext(), Category.class);
+//                intent.putExtra("SEARCH", getcategory1);
+//
+//                startActivity(intent);
+//            }
+//        });
+//        category2 = (TextView) findViewById(R.id.category_2);
+//        category2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String getcategory1;
+//                getcategory1 = category2.getText().toString();
+//                Intent intent = new Intent(getApplicationContext(), Category.class);
+//                intent.putExtra("SEARCH", getcategory1);
+//
+//                startActivity(intent);
+//            }
+//        });
+//        category3 = (TextView) findViewById(R.id.category_3);
+//        category3.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String getcategory1;
+//                getcategory1 = category3.getText().toString();
+//                Intent intent = new Intent(getApplicationContext(), Category.class);
+//                intent.putExtra("SEARCH", getcategory1);
+//
+//                startActivity(intent);
+//            }
+//        });
+//        category4 = (TextView) findViewById(R.id.category_4);
+//        category4.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String getcategory1;
+//                getcategory1 = category4.getText().toString();
+//                Intent intent = new Intent(getApplicationContext(), Category.class);
+//                intent.putExtra("SEARCH", getcategory1);
+//
+//                startActivity(intent);
+//            }
+//        });
+//        category5 = (TextView) findViewById(R.id.category_5);
+//        category5.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String getcategory1;
+//                getcategory1 = category5.getText().toString();
+//                Intent intent = new Intent(getApplicationContext(), Category.class);
+//                intent.putExtra("SEARCH", getcategory1);
+//
+//                startActivity(intent);
+//            }
+//        });
+//        category6 = (TextView) findViewById(R.id.category_6);
+//        category6.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                String getcategory1;
+//                getcategory1 = category6.getText().toString();
+//                Intent intent = new Intent(getApplicationContext(), Category.class);
+//                intent.putExtra("SEARCH", getcategory1);
+//
+//                startActivity(intent);
+//            }
+//        });
+//    }
+
 
 }

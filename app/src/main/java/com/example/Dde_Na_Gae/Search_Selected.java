@@ -14,6 +14,7 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 
+import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.w3c.dom.Text;
@@ -22,35 +23,49 @@ import java.util.ArrayList;
 
 public class Search_Selected extends AppCompatActivity {
 
-    TextView selected_item_name;
-    TextView selected_item_name_main;
-    TextView selected_item_desciption;
+    ImageView img_back;
 
+    TextView selected_item_desciption;
     ImageView selected_map;
 
-    ViewPager2 viewPager2;
-
     BottomNavigationView bottomNavigationView;
+
+    String img;
+    String title;
+
+    TextView selected_name;
+    TextView selected_name_main;
+
+    ImageView selected_img;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_selected);
 
-        selected_item_name = findViewById(R.id.selected_name);
-        selected_item_name.setText(getIntent().getStringExtra("NAME"));
-        selected_item_name_main = findViewById(R.id.selected_name_main);
-        selected_item_name_main.setText(getIntent().getStringExtra("NAME"));
+        selected_name = findViewById(R.id.selected_name);
+//        selected_item_name.setText(getIntent().getStringExtra("NAME"));
+        selected_name_main = findViewById(R.id.selected_name_main);
+//        selected_item_name_main.setText(getIntent().getStringExtra("NAME"));
 
-        viewPager2 = findViewById(R.id.selected_img);
-        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());
-        viewPager2.setAdapter(adapter);
+        img = getIntent().getStringExtra("Image");
+        selected_img = (ImageView)findViewById(R.id.selected_img);
+        Glide.with(this).load(img).into(selected_img);
+
+        title = getIntent().getStringExtra("Title");
+        selected_name.setText(title);
+        selected_name_main.setText(title);
+
+//        viewPager2 = findViewById(R.id.selected_img);
+//        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());
+//        viewPager2.setAdapter(adapter);
 
         selected_map = findViewById(R.id.selected_map);
 
         selected_item_desciption = findViewById(R.id.selected_item_desciption);
         selected_item_desciption.setText(getIntent().getStringExtra("DES"));
 
+        // 바텀 네비
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -76,13 +91,21 @@ public class Search_Selected extends AppCompatActivity {
             }
         });
 
+        img_back = (ImageView)findViewById(R.id.img_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
+                startActivity(intent);
+            }
+        });
+
     }
 
     protected ArrayList setItem() {
         ArrayList<String> itemList = new ArrayList<>();
-        itemList.add("page 1");
-        itemList.add("page 2");
-        itemList.add("page 3");
+//        itemList.add();
+//        itemList.add();
 
         return itemList;
     }
