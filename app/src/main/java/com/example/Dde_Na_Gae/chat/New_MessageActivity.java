@@ -59,7 +59,6 @@ public class New_MessageActivity extends AppCompatActivity {
     private String roomname;
     private String chatting_room_option_selector;
     DatabaseReference mDatabase;
-    RecyclerViewAdapter adapter;
     private RecyclerView recyclerView;
 
     DrawerLayout drawerLayout;
@@ -99,11 +98,17 @@ public class New_MessageActivity extends AppCompatActivity {
         destinatonUid = getIntent().getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
         roomname = getIntent().getStringExtra("room-name");
         chatting_room_option_selector = getIntent().getStringExtra("option_selector");
+
         recyclerView = (RecyclerView)findViewById(R.id.single_messageActivity_recyclerview);
+
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
 
 
+
+        /* System.out.println(destinatonUid);
+        System.out.println(roomname);
+        System.out.println(chatting_room_option_selector); */
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -141,7 +146,7 @@ public class New_MessageActivity extends AppCompatActivity {
 
             }
         });
-        checkChatRoom();
+        checkChatRoom1();
 
 
         chattingroom_exit = (Button)findViewById(R.id.single_room_exit);
@@ -201,18 +206,21 @@ public class New_MessageActivity extends AppCompatActivity {
 
     public void room_name_database(String room_name, String Room_selector_option, String chatRoomUid) {
         Group_Room_Name_Database room_name_database = new Group_Room_Name_Database();
-        room_name_database.Room_name = room_name;
         room_name_database.Room_selector_option = Room_selector_option;
         room_name_database.chatroomuid = chatRoomUid;
-        mDatabase.child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").child(room_name).setValue(room_name_database);
+        String room_name_uid = room_name+"@"+uid;
+        room_name_database.Room_name = room_name_uid;
+
+        mDatabase.child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").child(room_name_uid).setValue(room_name_database);
     }
 
     public void room_name_database_2(String room_name, String Room_selector_option, String master_uid, String chatRoomUid) {
         Group_Room_Name_Database room_name_database = new Group_Room_Name_Database();
-        room_name_database.Room_name = room_name;
         room_name_database.Room_selector_option = Room_selector_option;
         room_name_database.chatroomuid = chatRoomUid;
-        mDatabase.child("users").child(master_uid).child("my_chatting_list").child("1대1 채팅방").child(room_name).setValue(room_name_database);
+        String room_name_uid = room_name+"@"+uid;
+        room_name_database.Room_name = room_name_uid;
+        mDatabase.child("users").child(master_uid).child("my_chatting_list").child("1대1 채팅방").child(room_name_uid).setValue(room_name_database);
 
     }
 
@@ -227,9 +235,32 @@ public class New_MessageActivity extends AppCompatActivity {
                     if(chatModel.users.containsKey(destinatonUid)){
                         chatRoomUid = item.getKey();
 
+
                         room_name_database(roomname, chatting_room_option_selector, chatRoomUid);
                         room_name_database_2(roomname, chatting_room_option_selector, destinatonUid, chatRoomUid);
 
+                        button.setEnabled(true);
+                        recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));
+                        recyclerView.setAdapter(new RecyclerViewAdapter());
+                    }
+                }
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+
+            }
+        });
+    }
+    void  checkChatRoom1(){
+
+        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                for(DataSnapshot item : dataSnapshot.getChildren()){
+                    ChatModel  chatModel = item.getValue(ChatModel.class);
+                    if(chatModel.users.containsKey(destinatonUid)){
+                        chatRoomUid = item.getKey();
                         button.setEnabled(true);
                         recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));
                         recyclerView.setAdapter(new RecyclerViewAdapter());
@@ -249,19 +280,18 @@ public class New_MessageActivity extends AppCompatActivity {
         List<ChatModel.Comment> comments;
         UserModel userModel;
         public  RecyclerViewAdapter() {
-
-
-
             comments = new ArrayList<>();
-
-
             FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
                     userModel = snapshot.getValue(UserModel.class);
                     getMessageList();
 
+
+
                 }
+
 
                 @Override
                 public void onCancelled(@NonNull @NotNull DatabaseError error) {
@@ -276,29 +306,59 @@ public class New_MessageActivity extends AppCompatActivity {
 
 
         void getMessageList(){
+            Intent intent = getIntent();
+            String key = intent.getStringExtra("key");
+            if(key.equals(1)) {
+                String chatroom_uid = intent.getStringExtra("chatroom_uid");
 
-            FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatroom_uid).child("comments").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                    comments.clear();
+                        comments.clear();
 
-                    for(DataSnapshot item : snapshot.getChildren()){
-                        comments.add(item.getValue(ChatModel.Comment.class));
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            comments.add(item.getValue(ChatModel.Comment.class));
+                        }
+                        //메세지 새로고침
+                        notifyDataSetChanged();
+
+                        recyclerView.scrollToPosition(comments.size() - 1);
+
+
                     }
-                    //메세지 새로고침
-                    notifyDataSetChanged();
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+            }
+            else
+            {
+                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                        comments.clear();
+
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            comments.add(item.getValue(ChatModel.Comment.class));
+                        }
+                        //메세지 새로고침
+                        notifyDataSetChanged();
+
+                        recyclerView.scrollToPosition(comments.size() - 1);
 
 
+                    }
 
-                }
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-
+                    }
+                });
+            }
         }
 
 
@@ -324,13 +384,17 @@ public class New_MessageActivity extends AppCompatActivity {
                 messageViewHolder.linearLayout_main.setGravity(Gravity.RIGHT);
 
 
-            }else{
+            }
+            if(comments.get(position).uid.equals(destinatonUid)){
+
                 Glide.with(holder.itemView.getContext())
                         .load(userModel.imageUri)
                         .apply(new RequestOptions().circleCrop())
                         .into(messageViewHolder.imageView_profile);
-                messageViewHolder.textView_name.setText(userModel.userName);
-                messageViewHolder.linearLayout_destination.setVisibility(View.INVISIBLE);
+
+                messageViewHolder.textView_name.setText(userModel.nickname);
+
+                messageViewHolder.linearLayout_destination.setVisibility(View.VISIBLE);
                 messageViewHolder.textView_message.setBackgroundResource(R.drawable.leftbubble);
                 messageViewHolder.textView_message.setText(comments.get(position).message);
                 messageViewHolder.textView_message.setTextSize(25);
@@ -355,11 +419,12 @@ public class New_MessageActivity extends AppCompatActivity {
 
             public MessageViewHolder(View view) {
                 super(view);
-                textView_message = (TextView)view.findViewById(R.id.messageItem_textView_message);
-                textView_name = (TextView)view.findViewById(R.id.messageItem_textview_name);
-                imageView_profile = (ImageView)view.findViewById(R.id.messageItem_imageview_profile);
-                linearLayout_destination = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_destination);
-                linearLayout_main = (LinearLayout)view.findViewById(R.id.messageItem_linearlayout_main);
+                textView_message = (TextView)view.findViewById(R.id.single_messageItem_textView_message);
+                textView_name = (TextView)view.findViewById(R.id.single_messageItem_textview_name);
+                imageView_profile = (ImageView)view.findViewById(R.id.single_messageItem_imageview_profile);
+
+                linearLayout_destination = (LinearLayout)view.findViewById(R.id.single_messageItem_linearlayout_destination);
+                linearLayout_main = (LinearLayout)view.findViewById(R.id.single_messageItem_linearlayout_main);
 
             }
         }

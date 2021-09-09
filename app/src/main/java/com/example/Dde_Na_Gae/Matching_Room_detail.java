@@ -154,6 +154,7 @@ public class Matching_Room_detail extends AppCompatActivity {
                 intent.putExtra("chat-destinationUid", master_uid);
                 intent.putExtra("room-name",room_name);
                 intent.putExtra("option_selector",chatting_room_option_selector);
+                intent.putExtra("key","0");
                 ActivityOptions activityOptions = null;
                 if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
 

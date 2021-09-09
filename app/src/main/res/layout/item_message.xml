@@ -4,10 +4,10 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginBottom="20dp"
-    android:id="@+id/messageItem_linearlayout_main">
+    android:id="@+id/single_messageItem_linearlayout_main">
 
     <LinearLayout
-        android:id="@+id/messageItem_linearlayout_destination"
+        android:id="@+id/single_messageItem_linearlayout_destination"
         android:orientation="vertical"
         android:gravity="center"
         android:layout_width="wrap_content"
@@ -15,20 +15,22 @@
         android:layout_marginBottom="15dp">
 
         <ImageView
-            android:id="@+id/messageItem_imageview_profile"
+            android:id="@+id/single_messageItem_imageview_profile"
             android:layout_width="50dp"
             android:layout_height="50dp" />
+
         <TextView
-            android:id="@+id/messageItem_textview_name"
-            android:text="이름"
+            android:id="@+id/single_messageItem_textview_name"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:text="이름" />
+
 
     </LinearLayout>
 
 
     <TextView
-        android:id="@+id/messageItem_textView_message"
+        android:id="@+id/single_messageItem_textView_message"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="20dp"

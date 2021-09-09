@@ -6,6 +6,7 @@ public class Room_Name_Detail_Database {
     public String Room_name;
     public String master_uid;
     public String chatting_room_option_selector;
+
     public Room_Name_Detail_Database() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }

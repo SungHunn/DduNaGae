@@ -156,17 +156,42 @@ public class Group_MessageActivity extends AppCompatActivity {
         chattingroom_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
                 FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                         chatroomuid = snapshot.getValue().toString();
-
                         FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").child(uid).setValue(null);
 
+                        if(uid.equals(chat_masterUid))
+                        {
+                            FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                                String[] user = new String[8];
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                            }
+                                    for (DataSnapshot item : snapshot.getChildren()) {
+                                        int i=0;
+                                        user[i] = item.getKey();
+                                        i++;
+                                    }
+
+                                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("master_uid").setValue(user[0]);
+                                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
+                                }
+
+
+
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+                        else{
+                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
+                        }
+
+                    }
 
 
 
@@ -176,7 +201,7 @@ public class Group_MessageActivity extends AppCompatActivity {
                     }
                 });
 
-              onBackPressed();
+                onBackPressed();
 
             }
         });
@@ -315,18 +340,30 @@ public class Group_MessageActivity extends AppCompatActivity {
                 //상대방이 보낸 메세지
 
             } else {
+                FirebaseDatabase.getInstance().getReference().child("users").child(comments.get(position).uid).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        UserModel userModel =  snapshot.getValue(UserModel.class);
+                        Glide.with(holder.itemView.getContext())
+                                .load(userModel.imageUri)
+                                .apply(new RequestOptions().circleCrop())
+                                .into(messageViewHolder.imageView_profile);
+                        messageViewHolder.textview_name.setText(userModel.nickname);
+                    }
 
-                Glide.with(holder.itemView.getContext())
-                        .load(users.get(comments.get(position).uid).imageUri)
-                        .apply(new RequestOptions().circleCrop())
-                        .into(messageViewHolder.imageView_profile);
-                messageViewHolder.textview_name.setText(users.get(comments.get(position).uid).userName);
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
                 messageViewHolder.linearLayout_destination.setVisibility(View.VISIBLE);
                 messageViewHolder.textView_message.setBackgroundResource(R.drawable.leftbubble);
                 messageViewHolder.textView_message.setText(comments.get(position).message);
                 messageViewHolder.textView_message.setTextSize(25);
                 messageViewHolder.linearLayout_main.setGravity(Gravity.LEFT);
                 //setReadCounter(position, messageViewHolder.textView_readCounter_right);
+
 
 
             }

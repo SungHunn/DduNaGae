@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="20dp"
+    android:id="@+id/chatting_drawer_useritem"
+    >
+
+
+        <ImageView
+            android:layout_marginLeft="10dp"
+            android:id="@+id/chatting_drawer_profile"
+            android:layout_width="60dp"
+            android:layout_height="60dp" />
+
+
+    <TextView
+        android:id="@+id/chatting_drawer_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_gravity="center_vertical"
+        android:textSize="15dp"
+        android:text="유저 닉네임"/>
+
+</LinearLayout>
