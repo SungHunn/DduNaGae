@@ -79,19 +79,20 @@ public class Mainactivity extends AppCompatActivity {
     TextView region_walk;
     TextView region_travle;
 
+    Travel travel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 오늘의 place 사진 및 텍스트 설정
+        // 오늘의 place 사진 및 텍스트 설정z
         to_day_place1 = (ImageView)findViewById(R.id.to_day_place1);
         to_day_place1_txt = (TextView)findViewById(R.id.to_day_place1_txt);
         to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
         to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
 
-        Today_FirstImage = getIntent().getStringArrayListExtra("Today_FirstImage");
+        Today_FirstImage = getIntent().getStringArrayListExtra("Today_Image");
         Today_Title = getIntent().getStringArrayListExtra("Today_Title");
 
         Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
@@ -99,7 +100,7 @@ public class Mainactivity extends AppCompatActivity {
         Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
         to_day_place2_txt.setText(Today_Title.get(1));
 
-        ///////////////////////////
+        /////////////////////////
 
         best_tour1 = (ImageView) findViewById(R.id.best_tour1);
         best_tour1_txt = (TextView)findViewById(R.id.best_tour1_txt);
@@ -114,7 +115,6 @@ public class Mainactivity extends AppCompatActivity {
         Glide.with(this).load(Main_FirstImage.get(1)).into(best_tour2);
         best_tour2_txt.setText(Main_Title.get(1));
 
-
         best_walk1 = (ImageView) findViewById(R.id.best_walk1);
         best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
         best_walk2 = (ImageView) findViewById(R.id.best_walk2);
@@ -124,6 +124,14 @@ public class Mainactivity extends AppCompatActivity {
 
         Sub_FirstImage = getIntent().getStringArrayListExtra("Sub_Image");
         Sub_Title = getIntent().getStringArrayListExtra("Sub_Title");
+
+        System.out.println(Today_Title);
+        System.out.println(Today_FirstImage);
+        System.out.println(Main_Title);
+        System.out.println(Main_FirstImage);
+        System.out.println(Sub_Title);
+        System.out.println(Sub_FirstImage);
+
 
         Glide.with(this).load(Sub_FirstImage.get(0)).into(best_walk1);
         best_walk1_txt.setText(Sub_Title.get(0));
@@ -403,6 +411,8 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
     }
+
+
 //
 //    public String getRegionCode(int code){
 //        String region="";

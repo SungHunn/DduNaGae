@@ -2,6 +2,7 @@ package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -40,20 +41,24 @@ public class OpenApi extends AppCompatActivity {
     Calendar cal = Calendar.getInstance();
     int today = cal.get(Calendar.DAY_OF_MONTH);
     int[] today_region = {1, 2, 31, 32};
+    int today_index = (today % 4);
+    int main_index = (today % 8) + 1;
+    int sub_index = (today % 9) + 31;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
-        // 오늘의 place
+        int n = 1;
+
+        if (n == 1) {
+            // 오늘의 place
             new Thread() {
                 @Override
                 public void run() {
-                    today_images.clear();
-                    today_titles.clear();
-                    today_contentids.clear();
-                    int today_index = (today % 4);
+//                    today_images.clear();
+//                    today_titles.clear();
+//                    today_contentids.clear();
                     String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList" +
                             "?ServiceKey=" + key +
                             "&MobileOS=AND" +
@@ -101,6 +106,7 @@ public class OpenApi extends AppCompatActivity {
                             today_images.add(firstimage);
                             today_titles.add(title);
                             today_contentids.add(contentid);
+
                         } // for 종료
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -109,19 +115,21 @@ public class OpenApi extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    // 메인으로 인텐트
+//                     메인으로 인텐트
 //                    Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
-                    intent.putStringArrayListExtra("Today_Image", today_images);
-                    intent.putStringArrayListExtra("Today_Title", today_titles);
-                    startActivity(intent);
+//                    intent.putStringArrayListExtra("Today_Image", today_images);
+//                    intent.putStringArrayListExtra("Today_Title", today_titles);
+//                    startActivity(intent);
                 }
             }.start();
             // 오늘의 place 끝
 
             // 1 ~ 8 번 (서울, 인천, 부산 등등)
-            new Thread(){
+            new Thread() {
                 public void run() {
-                    int main_index = (today % 8) + 1;
+//                    main_images.clear();
+//                    main_titles.clear();
+//                    main_contentids.clear();
                     String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList" +
                             "?ServiceKey=" + key +
                             "&MobileOS=AND" +
@@ -169,6 +177,7 @@ public class OpenApi extends AppCompatActivity {
                             main_images.add(firstimage);
                             main_titles.add(title);
                             main_contentids.add(contentid);
+
                         } // for 종료
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -178,10 +187,7 @@ public class OpenApi extends AppCompatActivity {
                         e.printStackTrace();
                     }
 //                    Intent main_intent = new Intent(getApplicationContext(), Mainactivity.class);
-                    intent.putExtra("Main_Image", main_images);
-                    intent.putExtra("Main_Title", main_titles);
-                    intent.putExtra("Main_ContentId", main_contentids);
-                    startActivity(intent);
+
                 }
             }.start();
 
@@ -190,7 +196,9 @@ public class OpenApi extends AppCompatActivity {
             new Thread() {
                 @Override
                 public void run() {
-                    int sub_index = (today % 9) + 31;
+//                    sub_images.clear();
+//                    sub_titles.clear();
+//                    sub_contentids.clear();
                     String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList" +
                             "?ServiceKey=" + key +
                             "&MobileOS=AND" +
@@ -238,6 +246,7 @@ public class OpenApi extends AppCompatActivity {
                             sub_images.add(firstimage);
                             sub_titles.add(title);
                             sub_contentids.add(contentid);
+
                         } // for 종료
                     } catch (IOException e) {
                         e.printStackTrace();
@@ -246,11 +255,19 @@ public class OpenApi extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    intent.putExtra("Sub_Image", sub_images);
-                    intent.putExtra("Sub_Title", sub_titles);
-                    intent.putExtra("Sub_ContentId", sub_contentids);
+                    Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
+                    intent.putStringArrayListExtra("Today_Image", today_images);
+                    intent.putStringArrayListExtra("Today_Title", today_titles);
+                    intent.putStringArrayListExtra("Main_Image", main_images);
+                    intent.putStringArrayListExtra("Main_Title", main_titles);
+                    intent.putStringArrayListExtra("Main_ContentId", main_contentids);
+                    intent.putStringArrayListExtra("Sub_Image", sub_images);
+                    intent.putStringArrayListExtra("Sub_Title", sub_titles);
+                    intent.putStringArrayListExtra("Sub_ContentId", sub_contentids);
                     startActivity(intent);
                 }
             }.start();
+        }
+        n++;
     }
 }
