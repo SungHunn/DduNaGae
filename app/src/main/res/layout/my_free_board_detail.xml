@@ -82,7 +82,6 @@
            android:visibility="gone"
            android:layout_width="wrap_content"
            android:layout_height="wrap_content"
-           android:src=""
            android:layout_weight="1"
            android:id="@+id/unfilled_heart"/>
         //꽉찬하트 이미지
@@ -90,7 +89,7 @@
             android:visibility="gone"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src=""
+            android:src="@drawable/logo"
             android:layout_weight="1"
             android:id="@+id/filled_heart"/>
 

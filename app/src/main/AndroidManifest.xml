@@ -63,6 +63,8 @@
         <activity android:name=".Chatting_List"/>
         <activity android:name=".chat.Group_MessageActivity"
             android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".fragment.Freeboard_Fragment"/>
+        <activity android:name=".Free_Board_Writing"/>
 
     </application>
 
