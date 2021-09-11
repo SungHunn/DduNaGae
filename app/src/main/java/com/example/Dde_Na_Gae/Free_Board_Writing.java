@@ -31,6 +31,11 @@ import com.google.firebase.storage.UploadTask;
 
 import org.jetbrains.annotations.NotNull;
 
+
+import java.sql.Timestamp;
+import java.text.SimpleDateFormat;
+import java.util.TimeZone;
+
 public class Free_Board_Writing extends AppCompatActivity {
 
     private EditText title;
@@ -66,6 +71,8 @@ public class Free_Board_Writing extends AppCompatActivity {
             }
         });
 
+
+
         okay = (Button)findViewById(R.id.writing_button);
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,7 +92,12 @@ public class Free_Board_Writing extends AppCompatActivity {
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 String nickname = snapshot.getValue(String.class);
 
-                                Article_Database(uid, nickname,title.getText().toString(), content.getText().toString() , imageUrl.getResult().toString());
+                                Timestamp timestamp = new Timestamp(System.currentTimeMillis() );
+
+                                SimpleDateFormat sdf = new SimpleDateFormat ("yyyy년 MM월 dd일  a hh:mm:ss");
+                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+
+                                Article_Database(uid, nickname,title.getText().toString(), content.getText().toString() , imageUrl.getResult().toString(), sdf.format(timestamp));
 
 
                             }
@@ -110,7 +122,7 @@ public class Free_Board_Writing extends AppCompatActivity {
 
     }
 
-    public void Article_Database(String uid,String nickname, String title, String content, String imageUri){
+    public void Article_Database(String uid,String nickname, String title, String content, String imageUri, String writing_time){
 
         Article_Database article_database = new Article_Database();
         article_database.uid = uid;
@@ -118,6 +130,7 @@ public class Free_Board_Writing extends AppCompatActivity {
         article_database.title = title;
         article_database.content = content;
         article_database.imageUri = imageUri;
+        article_database.writing_time = writing_time;
 
 
 
