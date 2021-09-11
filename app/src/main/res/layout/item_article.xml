@@ -32,6 +32,13 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="abcd   " />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/freeboard_time"
+                android:text="올린 시간"
+                android:layout_marginLeft="180dp"
+                />
     </LinearLayout>
 
         <LinearLayout

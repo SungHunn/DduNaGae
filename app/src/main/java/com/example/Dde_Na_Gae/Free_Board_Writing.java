@@ -136,7 +136,7 @@ public class Free_Board_Writing extends AppCompatActivity {
 
 
 
-        mDatabase.child("Free_Board").child(nickname +" + " + title).setValue(article_database)
+        mDatabase.child("Free_Board").push().setValue(article_database)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {
