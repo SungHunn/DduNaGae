@@ -17,21 +17,35 @@ import androidx.viewpager2.widget.ViewPager2;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.w3c.dom.Text;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
-public class Search_Selected extends AppCompatActivity {
+public class  Search_Selected extends AppCompatActivity {
+
+    String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
 
     ImageView img_back;
 
-    TextView selected_item_desciption;
     ImageView selected_map;
 
     BottomNavigationView bottomNavigationView;
 
     String img;
     String title;
+    String conId;
+
+    TextView selected_item_desciption;
+    String overview;
 
     TextView selected_name;
     TextView selected_name_main;
@@ -42,6 +56,52 @@ public class Search_Selected extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_selected);
+
+        new Thread() {
+            @Override
+            public void run() {
+                conId = getIntent().getStringExtra("ConId");
+                String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon" +
+                        "?ServiceKey=" + key +
+                        "&MobileOS=AND" +
+                        "&MobileApp=TestApp" +
+                        "&numOfRows=1" +
+                        "&contentid" + conId +
+                        "&contentTypeId=12" +
+                        "&addrinfoYN=Y" +
+                        "&overviewYN=Y" +
+                        "&_type=json";
+
+                try {
+                    URL url = new URL(urlAdress);
+
+                    InputStream is = url.openStream();
+                    InputStreamReader isr = new InputStreamReader(is);
+                    BufferedReader br = new BufferedReader(isr);
+
+                    StringBuffer buffer = new StringBuffer();
+                    String line = br.readLine();
+
+                    while (line != null) {
+                        buffer.append(line + "\n");
+                        line = br.readLine();
+                    }
+
+                    String jsonData = buffer.toString();
+
+                    System.out.println(conId);
+                    System.out.println(jsonData);
+
+                    JSONObject obj = new JSONObject(jsonData);
+                    JSONObject
+                } catch (IOException e) {
+                    e.printStackTrace();
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+            }
+        }.start();
+
 
         selected_name = findViewById(R.id.selected_name);
 //        selected_item_name.setText(getIntent().getStringExtra("NAME"));
@@ -56,14 +116,18 @@ public class Search_Selected extends AppCompatActivity {
         selected_name.setText(title);
         selected_name_main.setText(title);
 
+        selected_item_desciption = findViewById(R.id.selected_item_desciption);
+        selected_item_desciption.setText(overview);
+
 //        viewPager2 = findViewById(R.id.selected_img);
 //        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());
 //        viewPager2.setAdapter(adapter);
 
         selected_map = findViewById(R.id.selected_map);
 
-        selected_item_desciption = findViewById(R.id.selected_item_desciption);
-        selected_item_desciption.setText(getIntent().getStringExtra("DES"));
+
+        // 상세 정보
+
 
         // 바텀 네비
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
@@ -95,18 +159,11 @@ public class Search_Selected extends AppCompatActivity {
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
+                Intent intent = new Intent(getApplicationContext(), OpenApi.class);
                 startActivity(intent);
             }
         });
 
     }
 
-    protected ArrayList setItem() {
-        ArrayList<String> itemList = new ArrayList<>();
-//        itemList.add();
-//        itemList.add();
-
-        return itemList;
-    }
 }

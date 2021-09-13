@@ -42,23 +42,18 @@ public class OpenApi extends AppCompatActivity {
     int today = cal.get(Calendar.DAY_OF_MONTH);
     int[] today_region = {1, 2, 31, 32};
     int today_index = (today % 4);
-    int main_index = (today % 8) + 1;
-    int sub_index = (today % 9) + 31;
+    int main_index = (today % 6) + 3;
+    int sub_index = (today % 7) + 33;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        int n = 1;
 
-        if (n == 1) {
             // 오늘의 place
             new Thread() {
                 @Override
                 public void run() {
-//                    today_images.clear();
-//                    today_titles.clear();
-//                    today_contentids.clear();
                     String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList" +
                             "?ServiceKey=" + key +
                             "&MobileOS=AND" +
@@ -88,8 +83,6 @@ public class OpenApi extends AppCompatActivity {
 
                         String jsonData = buffer.toString();
 
-//                    System.out.println(jsonData);
-
                         JSONObject obj = new JSONObject(jsonData);
                         JSONObject response = (JSONObject) obj.get("response");
                         JSONObject test = (JSONObject) response.get("body");
@@ -115,11 +108,6 @@ public class OpenApi extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-//                     메인으로 인텐트
-//                    Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
-//                    intent.putStringArrayListExtra("Today_Image", today_images);
-//                    intent.putStringArrayListExtra("Today_Title", today_titles);
-//                    startActivity(intent);
                 }
             }.start();
             // 오늘의 place 끝
@@ -127,9 +115,6 @@ public class OpenApi extends AppCompatActivity {
             // 1 ~ 8 번 (서울, 인천, 부산 등등)
             new Thread() {
                 public void run() {
-//                    main_images.clear();
-//                    main_titles.clear();
-//                    main_contentids.clear();
                     String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList" +
                             "?ServiceKey=" + key +
                             "&MobileOS=AND" +
@@ -158,8 +143,6 @@ public class OpenApi extends AppCompatActivity {
                         }
 
                         String jsonData = buffer.toString();
-
-//                    System.out.println(jsonData);
 
                         JSONObject obj = new JSONObject(jsonData);
                         JSONObject response = (JSONObject) obj.get("response");
@@ -196,9 +179,6 @@ public class OpenApi extends AppCompatActivity {
             new Thread() {
                 @Override
                 public void run() {
-//                    sub_images.clear();
-//                    sub_titles.clear();
-//                    sub_contentids.clear();
                     String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/areaBasedList" +
                             "?ServiceKey=" + key +
                             "&MobileOS=AND" +
@@ -228,8 +208,6 @@ public class OpenApi extends AppCompatActivity {
 
                         String jsonData = buffer.toString();
 
-//                    System.out.println(jsonData);
-
                         JSONObject obj = new JSONObject(jsonData);
                         JSONObject response = (JSONObject) obj.get("response");
                         JSONObject test = (JSONObject) response.get("body");
@@ -255,9 +233,10 @@ public class OpenApi extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
+                    Intent intent = new Intent(OpenApi.this, Mainactivity.class);
                     intent.putStringArrayListExtra("Today_Image", today_images);
                     intent.putStringArrayListExtra("Today_Title", today_titles);
+                    intent.putStringArrayListExtra("Today_ContentId", today_contentids);
                     intent.putStringArrayListExtra("Main_Image", main_images);
                     intent.putStringArrayListExtra("Main_Title", main_titles);
                     intent.putStringArrayListExtra("Main_ContentId", main_contentids);
@@ -268,6 +247,5 @@ public class OpenApi extends AppCompatActivity {
                 }
             }.start();
         }
-        n++;
-    }
+
 }

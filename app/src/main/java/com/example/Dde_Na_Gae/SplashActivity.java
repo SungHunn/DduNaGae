@@ -28,8 +28,7 @@ public class SplashActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.splash);
 
-        Intent intent = new Intent(getApplicationContext(), OpenApi.class);
-//        Intent intent_main = new Intent(getApplicationContext(),Mainactivity.class);
+        Intent intent = new Intent(SplashActivity.this, OpenApi.class);
         startActivity(intent);
 
         linearLayout = (LinearLayout)findViewById(R.id.splashactivity_Linearlayout);
