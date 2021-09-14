@@ -90,7 +90,7 @@ public class OpenApi extends AppCompatActivity {
 
                         for (int i = 0; i < 2; i++) {
                             JSONObject temp = galUrl.getJSONObject(i);
-
+                            System.out.println(temp);
                             String firstimage = temp.getString("firstimage");
                             String title = temp.getString("title");
                             String contentid = temp.getString("contentid");
@@ -151,7 +151,7 @@ public class OpenApi extends AppCompatActivity {
 
                         for (int i = 0; i < 2; i++) {
                             JSONObject temp = galUrl.getJSONObject(i);
-
+                            System.out.println(temp);
                             String firstimage = temp.getString("firstimage");
                             String title = temp.getString("title");
                             String contentid = temp.getString("contentid");
@@ -174,7 +174,7 @@ public class OpenApi extends AppCompatActivity {
             }.start();
 
 
-            ////  지역 31 ~ 39
+            //  지역 31 ~ 39
             new Thread() {
                 @Override
                 public void run() {
@@ -215,7 +215,7 @@ public class OpenApi extends AppCompatActivity {
 
                         for (int i = 0; i < 2; i++) {
                             JSONObject temp = galUrl.getJSONObject(i);
-
+                            System.out.println(temp);
                             String firstimage = temp.getString("firstimage");
                             String title = temp.getString("title");
                             String contentid = temp.getString("contentid");
@@ -235,22 +235,18 @@ public class OpenApi extends AppCompatActivity {
                     System.out.println(today_titles);
                     System.out.println(main_titles);
                     System.out.println(sub_titles);
-                    if (today_titles.isEmpty() || main_titles.isEmpty() || sub_titles.isEmpty()){
-                        Intent intent = new Intent();
-                    }
-                    else {
-                        Intent intent = new Intent(OpenApi.this, Mainactivity.class);
-                        intent.putStringArrayListExtra("Today_Image", today_images);
-                        intent.putStringArrayListExtra("Today_Title", today_titles);
-                        intent.putStringArrayListExtra("Today_ContentId", today_contentids);
-                        intent.putStringArrayListExtra("Main_Image", main_images);
-                        intent.putStringArrayListExtra("Main_Title", main_titles);
-                        intent.putStringArrayListExtra("Main_ContentId", main_contentids);
-                        intent.putStringArrayListExtra("Sub_Image", sub_images);
-                        intent.putStringArrayListExtra("Sub_Title", sub_titles);
-                        intent.putStringArrayListExtra("Sub_ContentId", sub_contentids);
-                        startActivity(intent);
-                    }
+                    Intent intent = new Intent(OpenApi.this, Mainactivity.class);
+                    intent.putStringArrayListExtra("Today_Image", today_images);
+                    intent.putStringArrayListExtra("Today_Title", today_titles);
+                    intent.putStringArrayListExtra("Today_ContentId", today_contentids);
+                    intent.putStringArrayListExtra("Main_Image", main_images);
+                    intent.putStringArrayListExtra("Main_Title", main_titles);
+                    intent.putStringArrayListExtra("Main_ContentId", main_contentids);
+                    intent.putStringArrayListExtra("Sub_Image", sub_images);
+                    intent.putStringArrayListExtra("Sub_Title", sub_titles);
+                    intent.putStringArrayListExtra("Sub_ContentId", sub_contentids);
+                    startActivity(intent);
+
                 }
             }.start();
         }

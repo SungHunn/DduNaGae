@@ -99,18 +99,24 @@ public class  Search_Selected extends AppCompatActivity {
 
                     String jsonData = buffer.toString();
 
-                    System.out.println(conId);
-                    System.out.println(jsonData);
-
                     JSONObject obj = new JSONObject(jsonData);
                     JSONObject response = (JSONObject) obj.get("response");
-                    JSONObject test = (JSONObject) response.get("body");
-                    JSONObject galUrlResult = (JSONObject) test.get("items");
+                    JSONObject body = (JSONObject) response.get("body");
+                    JSONObject items = (JSONObject) body.get("items");
+                    JSONObject temp = items.getJSONObject("item");
 
-                    JSONObject temp = galUrlResult.getJSONObject("item");
+                    System.out.println(temp);
+
+                    addr1 = temp.getString("addr1");  // 주소 받아오기
                     homepage = temp.getString("homepage"); // 홈페이지 받아오기
                     overview = temp.getString("overview"); // 개요(설명) 받아오기
-                    addr1 = temp.getString("addr1");  // 주소 받아오기
+
+                    selected_item_hompage = findViewById(R.id.selected_item_hompage);
+                    selected_item_hompage.setText(homepage);
+                    selected_item_desciption = findViewById(R.id.selected_item_desciption);
+                    selected_item_desciption.setText(overview);
+                    selected_item_addr = findViewById(R.id.selected_item_addr);
+                    selected_item_addr.setText(addr1);
 
                 } catch (IOException e) {
                     e.printStackTrace();
@@ -134,12 +140,8 @@ public class  Search_Selected extends AppCompatActivity {
         selected_img = (ImageView)findViewById(R.id.selected_img);
         Glide.with(this).load(img).into(selected_img);
 
-        selected_item_hompage = findViewById(R.id.selected_item_hompage);
-        selected_item_hompage.setText(homepage);
-        selected_item_desciption = findViewById(R.id.selected_item_desciption);
-        selected_item_desciption.setText(overview);
-        selected_item_addr = findViewById(R.id.selected_item_addr);
-        selected_item_addr.setText(addr1);
+
+        System.out.println(overview);
 
 //        viewPager2 = findViewById(R.id.selected_img);
 //        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());
