@@ -44,8 +44,13 @@ public class  Search_Selected extends AppCompatActivity {
     String title;
     String conId;
 
-    TextView selected_item_desciption;
+    String homepage;
     String overview;
+    String addr1;
+
+    TextView selected_item_desciption;
+    TextView selected_item_hompage;
+    TextView selected_item_addr;
 
     TextView selected_name;
     TextView selected_name_main;
@@ -62,13 +67,18 @@ public class  Search_Selected extends AppCompatActivity {
             public void run() {
                 conId = getIntent().getStringExtra("ConId");
                 String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon" +
-                        "?ServiceKey=" + key +
+                        "?serviceKey=" + key +
+                        "&numOfRows=10" +
+                        "&pageNo=1" +
                         "&MobileOS=AND" +
-                        "&MobileApp=TestApp" +
-                        "&numOfRows=1" +
-                        "&contentid" + conId +
-                        "&contentTypeId=12" +
+                        "&MobileApp=AppTest" +
+                        "&contentId=" + conId +
+                        "&defaultYN=Y" +
+                        "&firstImageYN=Y" +
+                        "&areacodeYN=Y" +
+                        "&catcodeYN=Y" +
                         "&addrinfoYN=Y" +
+                        "&mapinfoYN=Y" +
                         "&overviewYN=Y" +
                         "&_type=json";
 
@@ -93,7 +103,15 @@ public class  Search_Selected extends AppCompatActivity {
                     System.out.println(jsonData);
 
                     JSONObject obj = new JSONObject(jsonData);
-                    JSONObject
+                    JSONObject response = (JSONObject) obj.get("response");
+                    JSONObject test = (JSONObject) response.get("body");
+                    JSONObject galUrlResult = (JSONObject) test.get("items");
+
+                    JSONObject temp = galUrlResult.getJSONObject("item");
+                    homepage = temp.getString("homepage"); // 홈페이지 받아오기
+                    overview = temp.getString("overview"); // 개요(설명) 받아오기
+                    addr1 = temp.getString("addr1");  // 주소 받아오기
+
                 } catch (IOException e) {
                     e.printStackTrace();
                 } catch (JSONException e) {
@@ -101,23 +119,27 @@ public class  Search_Selected extends AppCompatActivity {
                 }
             }
         }.start();
-
+        // 스레드 종료
 
         selected_name = findViewById(R.id.selected_name);
-//        selected_item_name.setText(getIntent().getStringExtra("NAME"));
+//        selected_name.setText(getIntent().getStringExtra("NAME"));
         selected_name_main = findViewById(R.id.selected_name_main);
-//        selected_item_name_main.setText(getIntent().getStringExtra("NAME"));
-
-        img = getIntent().getStringExtra("Image");
-        selected_img = (ImageView)findViewById(R.id.selected_img);
-        Glide.with(this).load(img).into(selected_img);
+//        selected_name_main.setText(getIntent().getStringExtra("NAME"));
 
         title = getIntent().getStringExtra("Title");
         selected_name.setText(title);
         selected_name_main.setText(title);
 
+        img = getIntent().getStringExtra("Image");
+        selected_img = (ImageView)findViewById(R.id.selected_img);
+        Glide.with(this).load(img).into(selected_img);
+
+        selected_item_hompage = findViewById(R.id.selected_item_hompage);
+        selected_item_hompage.setText(homepage);
         selected_item_desciption = findViewById(R.id.selected_item_desciption);
         selected_item_desciption.setText(overview);
+        selected_item_addr = findViewById(R.id.selected_item_addr);
+        selected_item_addr.setText(addr1);
 
 //        viewPager2 = findViewById(R.id.selected_img);
 //        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());

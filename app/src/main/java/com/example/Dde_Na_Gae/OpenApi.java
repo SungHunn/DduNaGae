@@ -49,7 +49,6 @@ public class OpenApi extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-
             // 오늘의 place
             new Thread() {
                 @Override
@@ -89,7 +88,7 @@ public class OpenApi extends AppCompatActivity {
                         JSONObject galUrlResult = (JSONObject) test.get("items");
                         JSONArray galUrl = (JSONArray) galUrlResult.get("item");
 
-                        for (int i = 0; i < galUrl.length(); i++) {
+                        for (int i = 0; i < 2; i++) {
                             JSONObject temp = galUrl.getJSONObject(i);
 
                             String firstimage = temp.getString("firstimage");
@@ -150,7 +149,7 @@ public class OpenApi extends AppCompatActivity {
                         JSONObject galUrlResult = (JSONObject) test.get("items");
                         JSONArray galUrl = (JSONArray) galUrlResult.get("item");
 
-                        for (int i = 0; i < galUrl.length(); i++) {
+                        for (int i = 0; i < 2; i++) {
                             JSONObject temp = galUrl.getJSONObject(i);
 
                             String firstimage = temp.getString("firstimage");
@@ -214,7 +213,7 @@ public class OpenApi extends AppCompatActivity {
                         JSONObject galUrlResult = (JSONObject) test.get("items");
                         JSONArray galUrl = (JSONArray) galUrlResult.get("item");
 
-                        for (int i = 0; i < galUrl.length(); i++) {
+                        for (int i = 0; i < 2; i++) {
                             JSONObject temp = galUrl.getJSONObject(i);
 
                             String firstimage = temp.getString("firstimage");
@@ -233,17 +232,25 @@ public class OpenApi extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Intent intent = new Intent(OpenApi.this, Mainactivity.class);
-                    intent.putStringArrayListExtra("Today_Image", today_images);
-                    intent.putStringArrayListExtra("Today_Title", today_titles);
-                    intent.putStringArrayListExtra("Today_ContentId", today_contentids);
-                    intent.putStringArrayListExtra("Main_Image", main_images);
-                    intent.putStringArrayListExtra("Main_Title", main_titles);
-                    intent.putStringArrayListExtra("Main_ContentId", main_contentids);
-                    intent.putStringArrayListExtra("Sub_Image", sub_images);
-                    intent.putStringArrayListExtra("Sub_Title", sub_titles);
-                    intent.putStringArrayListExtra("Sub_ContentId", sub_contentids);
-                    startActivity(intent);
+                    System.out.println(today_titles);
+                    System.out.println(main_titles);
+                    System.out.println(sub_titles);
+                    if (today_titles.isEmpty() || main_titles.isEmpty() || sub_titles.isEmpty()){
+                        Intent intent = new Intent();
+                    }
+                    else {
+                        Intent intent = new Intent(OpenApi.this, Mainactivity.class);
+                        intent.putStringArrayListExtra("Today_Image", today_images);
+                        intent.putStringArrayListExtra("Today_Title", today_titles);
+                        intent.putStringArrayListExtra("Today_ContentId", today_contentids);
+                        intent.putStringArrayListExtra("Main_Image", main_images);
+                        intent.putStringArrayListExtra("Main_Title", main_titles);
+                        intent.putStringArrayListExtra("Main_ContentId", main_contentids);
+                        intent.putStringArrayListExtra("Sub_Image", sub_images);
+                        intent.putStringArrayListExtra("Sub_Title", sub_titles);
+                        intent.putStringArrayListExtra("Sub_ContentId", sub_contentids);
+                        startActivity(intent);
+                    }
                 }
             }.start();
         }

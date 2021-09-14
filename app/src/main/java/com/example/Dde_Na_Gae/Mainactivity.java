@@ -137,10 +137,6 @@ public class Mainactivity extends AppCompatActivity {
 //        Glide.with(this).load(Sub_FirstImage.get(1)).into(best_walk2);
 //        best_walk2_txt.setText(Sub_Title.get(1));
 
-        System.out.println(Today_Title);
-        System.out.println(Main_Title);
-        System.out.println(Sub_Title);
-
         region_travle = (TextView)findViewById(R.id.region_travel);
 //        region_travle.setText(getRegionCode((today % 8) + 1) + " 추천 여행지");
 
