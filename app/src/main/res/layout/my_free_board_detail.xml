@@ -34,10 +34,16 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/free_board_detail_profile_image"
+        android:id="@+id/my_free_board_detail_profile_image"
         android:layout_marginLeft="5dp"/>
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+
             <TextView
+
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -45,27 +51,58 @@
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"
                 />
+
+                <TextView
+                    android:id="@+id/my_writer_nickname"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:text="AABBCCDD"
+                    android:layout_gravity="center_vertical"
+                    android:textSize="15dp"
+                    />
+
+
             <ImageView
                 android:layout_width="35dp"
                 android:layout_height="35dp"
                 android:src="@drawable/ic_baseline_more_horiz_24"
                 android:layout_gravity="center_vertical"
-                android:layout_marginLeft="270dp"
+                android:layout_marginLeft="200dp"
 
                 />
+            </LinearLayout>
         </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="20dp">
+
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/free_board_detail_title"
-        android:text="제목"
+        android:text="제목 : "
         android:textSize="25dp"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/my_free_board_detail_title"
+            android:text="````` "
+            android:textSize="25dp"/>
+
+
+    </LinearLayout>
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/free_board_detail_content"
+        android:id="@+id/my_free_board_detail_content"
         android:text="내용"
-        android:textSize="15dp"/>
+        android:textSize="15dp"
+        android:layout_marginTop="20dp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -75,7 +112,8 @@
         android:layout_width="match_parent"
         android:layout_height="40dp"
         android:orientation="horizontal"
-        android:weightSum="6">
+        android:weightSum="6"
+        android:layout_marginTop="20dp">
 
         //빈하트 이미지
        <ImageView
@@ -115,27 +153,54 @@
         android:background="#000000"
         />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/my_free_board_detail_comment"
+        android:id="@+id/my_free_board_detail_comment_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/free_board"
-        />
+        android:layout_marginTop="20dp"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:layout_marginTop="20dp">
         <EditText
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="7"
-            android:id="@+id/free_board_detail_comment"/>
+            android:id="@+id/my_free_board_detail_comment"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="3"
             android:text="댓글달기"
-            android:id="@+id/free_board_detail_post_comment"/>
+            android:id="@+id/my_free_board_detail_post_comment"/>
 
     </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="30dp">
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="45dp"
+            android:text="수정"
+            android:id="@+id/my_free_board_detail_change"
+           />
+
+        <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="150dp"
+            android:text="삭제"
+            android:id="@+id/my_free_board_detail_delete"/>
+
+
+    </LinearLayout>
+
+
 </LinearLayout>

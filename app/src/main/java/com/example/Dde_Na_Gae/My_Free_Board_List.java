@@ -50,9 +50,11 @@ public class My_Free_Board_List extends AppCompatActivity {
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         List<Article_Model> articles;
+        List<String> articleid;
 
         public  BoardRecyclerViewAdapter() {
 
+            articleid = new ArrayList<>();
             articles = new ArrayList<>();
             FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -63,6 +65,7 @@ public class My_Free_Board_List extends AppCompatActivity {
                         Article_Model article = item.getValue(Article_Model.class);
                         if(article.uid.equals(uid)) {
                             articles.add(article);
+                            articleid.add(item.getKey());
                         }
                     }
                     notifyDataSetChanged();
@@ -102,11 +105,12 @@ public class My_Free_Board_List extends AppCompatActivity {
             boardviewholder.time.setText(Time);
             boardviewholder.title.setText(articles.get(position).title);
 
-            Intent intent = new Intent(getApplicationContext(),my_free_board_detail.class);
+
+            Intent intent = new Intent(getApplicationContext(),My_free_board_detail.class);
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-
+                    intent.putExtra("articleid",articleid.get(position));
                     startActivity(intent);
                 }
             });

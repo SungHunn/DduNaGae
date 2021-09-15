@@ -65,8 +65,9 @@
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".Free_Board_Writing"/>
         <activity android:name=".Freeboard_Activity"/>
-        <activity android:name=".my_free_board_detail"/>
+        <activity android:name=".My_free_board_detail"/>
         <activity android:name=".My_Free_Board_List"/>
+        <activity android:name=".Free_Board_Detail"/>
     </application>
 
 </manifest>

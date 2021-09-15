@@ -106,9 +106,7 @@ public class New_MessageActivity extends AppCompatActivity {
 
 
 
-        /* System.out.println(destinatonUid);
-        System.out.println(roomname);
-        System.out.println(chatting_room_option_selector); */
+
 
 
         button.setOnClickListener(new View.OnClickListener() {
@@ -372,7 +370,7 @@ public class New_MessageActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder,final int position) {
 
             MessageViewHolder messageViewHolder = ((MessageViewHolder)holder);
 

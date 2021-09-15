@@ -16,7 +16,6 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.Dde_Na_Gae.fragment.PeopleFragment;
 import com.example.Dde_Na_Gae.model.Article_Model;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -117,10 +116,17 @@ public class Freeboard_Activity extends AppCompatActivity {
             BoardActivityviewholder.time.setText(Time);
             BoardActivityviewholder.title.setText(articles.get(position).title);
 
-            Intent intent = new Intent(getApplicationContext(),my_free_board_detail.class);
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(), Free_Board_Detail.class);
+                    intent.putExtra("profile", articles.get(position).imageUri);
+                    intent.putExtra("nickname", articles.get(position).nickname);
+                    intent.putExtra("content", articles.get(position).content);
+                    intent.putExtra("writing_time", articles.get(position).writing_time);
+                    intent.putExtra("title", articles.get(position).title);
+
                     startActivity(intent);
                 }
             });
