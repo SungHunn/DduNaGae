@@ -78,7 +78,7 @@ public class Freeboard_Activity extends AppCompatActivity {
 
                     for(DataSnapshot item:snapshot.getChildren()){
                         Article_Model article = item.getValue(Article_Model.class);
-                            articles.add(article);
+                        articles.add(article);
                     }
                     notifyDataSetChanged();
                 }

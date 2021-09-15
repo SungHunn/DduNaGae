@@ -11,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.Dde_Na_Gae.model.Article_Model;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,10 +30,8 @@ public class My_free_board_detail extends AppCompatActivity {
     private Button change;
     private Button delete;
 
-    private String intent_title;
-    private String intent_content;
-    private String intent_nickname;
-    private String intente_comment;
+    private String articleid;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,30 +47,35 @@ public class My_free_board_detail extends AppCompatActivity {
         change = (Button)findViewById(R.id.my_free_board_detail_change);
         delete = (Button)findViewById(R.id.my_free_board_detail_delete);
 
-        delete.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        articleid =  intent.getStringExtra("articleid");
+
+        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onClick(View v) {
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                Article_Model article ;
+               article = snapshot.getValue(Article_Model.class);
+                    title.setText(article.title);
+                    content.setText(article.content);
+                    nickname.setText(article.nickname);
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });
 
 
-
-
-        Intent intent = getIntent();
-        intent_title =  intent.getStringExtra("title");
-        title.setText(intent_title);
-
-        intent_content = intent.getStringExtra("content");
-        content.setText(intent_content);
-
-        intent_nickname = intent.getStringExtra("nickname");
-        nickname.setText(intent_nickname);
-
-        intente_comment = intent.getStringExtra("comment");
-        comment.setText(intente_comment);
-
-
+        delete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(getApplicationContext(),My_Free_Board_List.class);
+                FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).setValue(null);
+                startActivity(intent1);
+            }
+        });
 
     }
 
