@@ -115,7 +115,7 @@
         android:background="#000000"
         />
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/free_board_list"
+        android:id="@+id/my_free_board_detail_comment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@+id/free_board"

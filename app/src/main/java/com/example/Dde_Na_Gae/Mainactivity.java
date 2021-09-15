@@ -12,11 +12,9 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.Dde_Na_Gae.fragment.Freeboard_Fragment;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
@@ -102,7 +100,7 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case R.id.freeboard:
-                        Intent intent3 = new Intent(getApplicationContext(), Freeboard_Fragment.class);
+                        Intent intent3 = new Intent(getApplicationContext(), Freeboard_Activity.class);
                         startActivity(intent3);
                         break;
                 }

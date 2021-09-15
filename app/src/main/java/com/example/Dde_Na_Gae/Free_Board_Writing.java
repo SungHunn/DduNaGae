@@ -14,8 +14,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 
-import com.example.Dde_Na_Gae.fragment.Freeboard_Fragment;
-import com.example.Dde_Na_Gae.model.RoomModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -143,7 +141,7 @@ public class Free_Board_Writing extends AppCompatActivity {
                         // Write was successful!
                         // ...
 
-                        Intent intent = new Intent(getApplicationContext(), Freeboard_Fragment.class);
+                        Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
                         startActivity(intent);
                     }
                 })

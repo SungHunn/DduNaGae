@@ -39,7 +39,7 @@
                 />
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/free_board_list"
+            android:id="@+id/my_free_board_list"
             android:layout_width="match_parent"
             android:layout_height="569dp"
             android:layout_below="@+id/free_board"
