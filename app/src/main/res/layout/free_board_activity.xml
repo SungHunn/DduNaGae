@@ -2,7 +2,10 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/free_board_activity_drawlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -30,7 +33,18 @@
             android:layout_marginLeft="15dp"
             android:textSize="20dp"
             />
+        <View
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_weight="1" />
 
+        <ImageButton
+            android:id="@+id/free_board_category_open"
+            android:layout_width="49dp"
+            android:layout_height="match_parent"
+            android:maxWidth="25dp"
+            android:maxHeight="20dp"
+            android:src="@drawable/ic_baseline_dehaze_24" />
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -63,4 +77,5 @@
         android:layout_alignParentBottom="true"
         />
     </RelativeLayout>
+    </androidx.drawerlayout.widget.DrawerLayout>
 </LinearLayout>
