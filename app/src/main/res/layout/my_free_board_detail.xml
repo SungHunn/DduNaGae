@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    >
+
+   <LinearLayout
+       android:layout_width="match_parent"
+       android:layout_height="match_parent"
+       android:orientation="vertical">
 
 
 
@@ -34,7 +39,7 @@
     <ImageView
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:id="@+id/my_free_board_detail_profile_image"
+        android:id="@+id/my_profile_image"
         android:layout_marginLeft="5dp"/>
 
             <LinearLayout
@@ -95,14 +100,26 @@
             android:textSize="25dp"/>
 
 
+
     </LinearLayout>
+
+       <ImageView
+           android:layout_width="150dp"
+           android:layout_height="150dp"
+           android:id="@+id/my_free_board_detail_profile_image"
+           android:layout_gravity="center"
+           android:layout_marginTop="30dp"/>
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="250dp"
+        android:layout_gravity="center"
+        android:layout_weight="1"
+        android:inputType="textPersonName"
         android:id="@+id/my_free_board_detail_content"
         android:text="내용"
         android:textSize="15dp"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"/>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -203,4 +220,5 @@
     </LinearLayout>
 
 
-</LinearLayout>
+   </LinearLayout>
+</ScrollView>

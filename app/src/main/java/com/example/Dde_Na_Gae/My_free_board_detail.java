@@ -5,12 +5,15 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.model.Article_Model;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -26,6 +29,9 @@ public class My_free_board_detail extends AppCompatActivity {
     private TextView nickname;
     private EditText comment;
     private Button send;
+    private ImageView photo;
+    private ImageView profile;
+
 
     private Button change;
     private Button delete;
@@ -43,12 +49,18 @@ public class My_free_board_detail extends AppCompatActivity {
         nickname = (TextView)findViewById(R.id.my_writer_nickname);
         comment = (EditText)findViewById(R.id.my_free_board_detail_comment);
         send = (Button)findViewById(R.id.my_free_board_detail_post_comment);
+        photo = (ImageView)findViewById(R.id.my_free_board_detail_profile_image);
+        profile = (ImageView)findViewById(R.id.my_profile_image);
+
+
 
         change = (Button)findViewById(R.id.my_free_board_detail_change);
         delete = (Button)findViewById(R.id.my_free_board_detail_delete);
 
         Intent intent = getIntent();
         articleid =  intent.getStringExtra("articleid");
+
+        System.out.println(articleid);
 
         FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -59,7 +71,34 @@ public class My_free_board_detail extends AppCompatActivity {
                     content.setText(article.content);
                     nickname.setText(article.nickname);
 
+                Glide.with(My_free_board_detail.this)
+                        .load(article.imageUri)
+                        .apply(new RequestOptions().circleCrop())
+                        .into(photo);
+
+                FirebaseDatabase.getInstance().getReference().child("users").child(article.uid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                        String uri = snapshot.getValue(String.class);
+
+                        Glide.with(My_free_board_detail.this)
+                                .load(uri)
+                                .apply(new RequestOptions().circleCrop())
+                                .into(profile);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+
+
             }
+
 
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
@@ -74,6 +113,17 @@ public class My_free_board_detail extends AppCompatActivity {
                 Intent intent1 = new Intent(getApplicationContext(),My_Free_Board_List.class);
                 FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).setValue(null);
                 startActivity(intent1);
+            }
+        });
+
+        change.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),My_Free_Board_detail_Change.class);
+                intent.putExtra("my_articleid",articleid);
+
+
+                startActivity(intent);
             }
         });
 

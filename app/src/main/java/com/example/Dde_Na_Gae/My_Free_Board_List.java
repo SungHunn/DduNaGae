@@ -106,10 +106,11 @@ public class My_Free_Board_List extends AppCompatActivity {
             boardviewholder.title.setText(articles.get(position).title);
 
 
-            Intent intent = new Intent(getApplicationContext(),My_free_board_detail.class);
+
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+                    Intent intent = new Intent(getApplicationContext(),My_free_board_detail.class);
                     intent.putExtra("articleid",articleid.get(position));
                     startActivity(intent);
                 }

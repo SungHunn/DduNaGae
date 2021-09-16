@@ -126,6 +126,7 @@ public class Freeboard_Activity extends AppCompatActivity {
                     intent.putExtra("content", articles.get(position).content);
                     intent.putExtra("writing_time", articles.get(position).writing_time);
                     intent.putExtra("title", articles.get(position).title);
+                    intent.putExtra("uid",articles.get(position).uid);
 
                     startActivity(intent);
                 }
