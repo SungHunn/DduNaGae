@@ -7,6 +7,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -67,7 +68,8 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
     DrawerLayout drawerLayout;
     View drawerView;
-    ListView listview;
+    ListView listview = null;
+    TextView my_page;
     //네비게이션바
 
     BottomNavigationView bottomNavigationView;
@@ -241,6 +243,8 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 6:
+                        Intent intent_setting = new Intent(getApplicationContext(), Setting.class);
+                        startActivity(intent_setting);
                         break;
 
                     case 7:
@@ -256,28 +260,23 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
+        my_page = findViewById(R.id.my_page);
+        my_page.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), My_Page.class);
+                startActivity(intent);
+            }
+        });
 
 
         //네비게이션바
-
-        Intent inten1t = getIntent();
-
-        String new_id;
-        String new_pw;
-        String new_animal;
-        String animal_info;
-
-        new_id = getIntent().getStringExtra("NEW_ID");
-        new_pw = getIntent().getStringExtra("NEW_PW");
-        new_animal = getIntent().getStringExtra("ANIMAL_INFO");
-        animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
-
-
         onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
         bestWlakClick();
         addMenuClick();
+        main_search();
 
     }
 
@@ -304,6 +303,22 @@ public class Mainactivity extends AppCompatActivity {
         }
     };
     //네비게이션바
+
+// serach box
+    private void main_search(){
+        EditText main_search = findViewById(R.id.main_search);
+        final String str;
+        str = main_search.toString();
+
+        main_search.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(),Category.class);
+                intent.putExtra("SEARCH", str);
+                startActivity(intent);
+            }
+        });
+    }
 
     private void addMenuClick() {
         add_menu1 = (ImageView) findViewById(R.id.add_menu1);
@@ -351,7 +366,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category1.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -363,7 +378,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category2.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -375,7 +390,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category3.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -387,7 +402,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category4.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -399,7 +414,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category5.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -411,7 +426,7 @@ public class Mainactivity extends AppCompatActivity {
                 String getcategory1;
                 getcategory1 = category6.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("CATEGORY", getcategory1);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }

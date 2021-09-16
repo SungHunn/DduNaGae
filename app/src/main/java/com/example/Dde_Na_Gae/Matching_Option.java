@@ -39,6 +39,28 @@ public class Matching_Option extends AppCompatActivity {
     private String uid;
     private String ChatRoomUid;
     private LinearLayout group_member_number;
+import android.graphics.Color;
+import android.os.Bundle;
+import android.view.MotionEvent;
+import android.view.View;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+
+public class Matching_Option extends AppCompatActivity {
+
+    ImageView img_back;
+    TextView gender_male;
+    TextView gender_female;
+
+    LinearLayout small_size;
+    LinearLayout medium_size;
+    LinearLayout large_size;
+
+    TextView poss_car;
+    TextView no_poss_car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
