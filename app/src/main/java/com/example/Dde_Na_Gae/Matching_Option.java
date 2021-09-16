@@ -7,8 +7,10 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -29,16 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
-
-public class Matching_Option extends AppCompatActivity {
-
-    private DatabaseReference mDatabase;
-    private Button personal_button;
-    private Button group_button;
-    private EditText Room_Name;
-    private String uid;
-    private String ChatRoomUid;
-    private LinearLayout group_member_number;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -51,16 +43,15 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class Matching_Option extends AppCompatActivity {
 
-    ImageView img_back;
-    TextView gender_male;
-    TextView gender_female;
+    private DatabaseReference mDatabase;
+    private Button personal_button;
+    private Button group_button;
+    private EditText Room_Name;
+    private String uid;
+    private String ChatRoomUid;
+    private LinearLayout group_member_number;
 
-    LinearLayout small_size;
-    LinearLayout medium_size;
-    LinearLayout large_size;
 
-    TextView poss_car;
-    TextView no_poss_car;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -260,14 +260,14 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
-        my_page = findViewById(R.id.my_page);
+       /* my_page = findViewById(R.id.my_page);
         my_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), My_Page.class);
                 startActivity(intent);
             }
-        });
+        });*/
 
 
         //네비게이션바
