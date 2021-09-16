@@ -50,7 +50,30 @@ public class Category extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView(){
-        category = getIntent().getStringExtra("SEARCH");
+        Intent intent = getIntent();
+        category = intent.getStringExtra("SEARCH");
+
+        switch (category) {
+            case "카페":
+                category = "애견 카페";
+                break;
+
+            case "숙소":
+                category = "동물 반입 가능 숙소";
+                break;
+
+            case "산책" :
+                category = "동물 반입 가능 공원";
+                break;
+
+            case "여행지" :
+                category = "동물 반입 가능 여행지";
+                break;
+
+            case "병원" :
+                category = "동물 병원";
+                break;
+        }
         url = "https://www.google.com/maps/search/" + category;
 
         webView.getSettings().setSupportZoom(true);

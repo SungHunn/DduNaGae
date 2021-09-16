@@ -2,6 +2,7 @@ package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -18,6 +19,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
 
 public class Mainactivity extends AppCompatActivity {
     TextView category1;
@@ -192,17 +195,25 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
 
 // serach box
-    private void main_search(){
-        EditText main_search = findViewById(R.id.main_search);
-        final String str;
-        str = main_search.toString();
+    public String str;
 
-        main_search.setOnClickListener(new View.OnClickListener() {
+    private void main_search(){
+        final EditText main_search = findViewById(R.id.main_search);
+        str = main_search.getText().toString();
+
+        main_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Category.class);
-                intent.putExtra("SEARCH", str);
-                startActivity(intent);
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                str = main_search.getText().toString();
+                switch (actionId)
+                {
+                    case IME_ACTION_SEARCH :
+                        Intent intent = new Intent(getApplicationContext(), Category.class);
+                        intent.putExtra("SEARCH", str);
+
+                        startActivity(intent);
+                }
+                return true;
             }
         });
     }
