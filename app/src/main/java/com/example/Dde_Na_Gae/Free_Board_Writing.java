@@ -67,13 +67,6 @@ public class Free_Board_Writing extends AppCompatActivity {
         mDatabase = FirebaseDatabase.getInstance().getReference();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        System.out.println(uid);
-        System.out.println(uid);
-        System.out.println(uid);
-        System.out.println(uid);
-        System.out.println(uid);
-
-
         title = (EditText) findViewById(R.id.article_title);
         content = (EditText) findViewById(R.id.article_content);
 

@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -39,7 +40,7 @@ public class My_Free_Board_List extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_free_board_list);
 
-        recyclerView = (RecyclerView)findViewById(R.id.my_free_board_list);
+        recyclerView = (RecyclerView) findViewById(R.id.my_free_board_list);
         recyclerView.setAdapter(new My_Free_Board_List.BoardRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -47,71 +48,98 @@ public class My_Free_Board_List extends AppCompatActivity {
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
 
-    class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
+    class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         List<Article_Model> articles;
         List<String> articleid;
 
-        public  BoardRecyclerViewAdapter() {
-
+        public BoardRecyclerViewAdapter() {
             articleid = new ArrayList<>();
             articles = new ArrayList<>();
-            FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    articles.clear();
+            articles.clear();
 
-                    for(DataSnapshot item:snapshot.getChildren()){
-                        Article_Model article = item.getValue(Article_Model.class);
-                        if(article.uid.equals(uid)) {
-                            articles.add(article);
-                            articleid.add(item.getKey());
-                        }
+            String[] category = {"자유게시판", "리뷰", "꿀 정보", "동호회 모집", "기타"};
+            String[] category_review = {"숙소", "병원", "여행지", "미용실", "공원", "기타"};
+            for (int i = 0; i < 5; i++) {
+                if (i == 1) {
+                    for(int j = 0; j < 6; j++) {
+                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).child(category_review[j]).orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                for (DataSnapshot item : snapshot.getChildren()) {
+                                    Article_Model article = item.getValue(Article_Model.class);
+                                    if (article.uid.equals(uid)) {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                }
+                                notifyDataSetChanged();
+                            }
+
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                            }
+                        });
                     }
-                    notifyDataSetChanged();
+                }
+                else {
+                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+
+                            for (DataSnapshot item : snapshot.getChildren()) {
+                                Article_Model article = item.getValue(Article_Model.class);
+                                if (article.uid.equals(uid)) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                            }
+                            notifyDataSetChanged();
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
                 }
 
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+            }
 
-                }
-            });
+            System.out.println(articles.size());
         }
-
-
 
 
         @NonNull
         @NotNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
 
             return new BoardViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-
-            BoardViewHolder boardviewholder = ((My_Free_Board_List.BoardRecyclerViewAdapter.BoardViewHolder)holder);
+            BoardViewHolder boardviewholder = ((My_Free_Board_List.BoardRecyclerViewAdapter.BoardViewHolder) holder);
 
             Glide.with(holder.itemView.getContext())
                     .load(articles.get(position).imageUri)
                     .apply(new RequestOptions().circleCrop())
                     .into(boardviewholder.imageView);
 
-            String Time = articles.get(position).writing_time.substring(2,4)+"."+articles.get(position).writing_time.substring(6,8)+"."+articles.get(position).writing_time.substring(10,12)+"."+articles.get(position).writing_time.substring(18,20)+":"+articles.get(position).writing_time.substring(21,23);
+            String Time = articles.get(position).writing_time.substring(2, 4) + "." + articles.get(position).writing_time.substring(6, 8) + "." + articles.get(position).writing_time.substring(10, 12) + "." + articles.get(position).writing_time.substring(18, 20) + ":" + articles.get(position).writing_time.substring(21, 23);
             boardviewholder.nickname.setText(articles.get(position).nickname);
             boardviewholder.time.setText(Time);
             boardviewholder.title.setText(articles.get(position).title);
 
 
-
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(),My_free_board_detail.class);
-                    intent.putExtra("articleid",articleid.get(position));
+                    Intent intent = new Intent(getApplicationContext(), My_free_board_detail.class);
+                    intent.putExtra("articleid", articleid.get(position));
                     startActivity(intent);
                 }
             });
@@ -132,10 +160,10 @@ public class My_Free_Board_List extends AppCompatActivity {
 
             public BoardViewHolder(View view) {
                 super(view);
-                imageView = (ImageView)view.findViewById(R.id.freeboard_imageview);
-                nickname = (TextView)view.findViewById(R.id.freeboard_nickname);
-                time = (TextView)view.findViewById(R.id.freeboard_time);
-                title = (TextView)view.findViewById(R.id.freeboard_title);
+                imageView = (ImageView) view.findViewById(R.id.freeboard_imageview);
+                nickname = (TextView) view.findViewById(R.id.freeboard_nickname);
+                time = (TextView) view.findViewById(R.id.freeboard_time);
+                title = (TextView) view.findViewById(R.id.freeboard_title);
 
             }
 

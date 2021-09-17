@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
     <string-array name="free_board_category">
         <item>자유게시판</item>
         <item>리뷰</item>
