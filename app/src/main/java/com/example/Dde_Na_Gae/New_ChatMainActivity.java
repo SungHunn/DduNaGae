@@ -6,10 +6,7 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.Dde_Na_Gae.fragment.ChatFragment;
 import com.example.Dde_Na_Gae.fragment.My_ChatFragment;
-import com.example.Dde_Na_Gae.fragment.PeopleFragment;
-import com.example.Dde_Na_Gae.fragment.RoomFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;

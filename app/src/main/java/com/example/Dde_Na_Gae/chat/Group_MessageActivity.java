@@ -14,7 +14,6 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 
 
@@ -26,11 +25,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.Dde_Na_Gae.ChatMainActivity;
 import com.example.Dde_Na_Gae.New_ChatMainActivity;
 import com.example.Dde_Na_Gae.R;
-import com.example.Dde_Na_Gae.fragment.ChatFragment;
-import com.example.Dde_Na_Gae.fragment.My_ChatFragment;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -40,18 +36,14 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ServerValue;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.TimeZone;
 
 public class Group_MessageActivity extends AppCompatActivity {
     Map<String, UserModel> users = new HashMap<>();
