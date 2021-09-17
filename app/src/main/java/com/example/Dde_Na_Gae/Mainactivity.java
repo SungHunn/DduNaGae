@@ -40,7 +40,7 @@ import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
 
 public class Mainactivity extends AppCompatActivity {
 
-    DatabaseReference mDatabase ;
+    DatabaseReference mDatabase;
 
     TextView category1;
     TextView category2;
@@ -81,13 +81,13 @@ public class Mainactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        profile_photo = (ImageView)findViewById(R.id.profile_photo);
+        profile_photo = (ImageView) findViewById(R.id.profile_photo);
         listview = findViewById(R.id.navi_list);
-        layout_account = (LinearLayout)findViewById(R.id.my_account);
-        unlogin = (TextView)findViewById(R.id.my_page_unlogin);
+        layout_account = (LinearLayout) findViewById(R.id.my_account);
+        unlogin = (TextView) findViewById(R.id.my_page_unlogin);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
-        bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -140,16 +140,13 @@ public class Mainactivity extends AppCompatActivity {
         });
 
 
-
-
         FirebaseAuth aAuth = FirebaseAuth.getInstance();
 
         String uid = user != null ? user.getUid() : null; // 로그인한 유저의 고유 uid 가져오기
 
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
-       // DatabaseReference firstname = mDatabase.child(uid).child("firstname");    // 이메일
+        // DatabaseReference firstname = mDatabase.child(uid).child("firstname");    // 이메일
 
 
        /* firstname.addValueEventListener(new ValueEventListener() {
@@ -177,12 +174,12 @@ public class Mainactivity extends AppCompatActivity {
             list.set(7, "로그아웃");
 
             layout_account.setVisibility(View.VISIBLE);
-            my_nickname = (TextView)findViewById(R.id.my_page_login);
+            my_nickname = (TextView) findViewById(R.id.my_page_login);
             String myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
             FirebaseDatabase.getInstance().getReference().child("users").child(myuid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    UserModel userModel =  snapshot.getValue(UserModel.class);
+                    UserModel userModel = snapshot.getValue(UserModel.class);
                     Glide.with(Mainactivity.this)
                             .load(userModel.imageUri)
                             .apply(new RequestOptions().circleCrop())
@@ -215,8 +212,7 @@ public class Mainactivity extends AppCompatActivity {
         }
 
 
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,list);
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
 
         listview.setAdapter(adapter);
 
@@ -249,13 +245,12 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 7:
-                    if(list.get(7).equals("로그아웃")){
-                        //로그아웃 이벤트
-                    }
-                    else{
-                        Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
-                        startActivity(intent);
-                    }
+                        if (list.get(7).equals("로그아웃")) {
+                            //로그아웃 이벤트
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
+                            startActivity(intent);
+                        }
                         break;
                 }
             }
@@ -302,20 +297,20 @@ public class Mainactivity extends AppCompatActivity {
     };
     //네비게이션바
 
-// serach box
-public String str;
+    // serach box
+    public String str;
 
-    private void main_search(){
+    private void main_search() {
         final EditText main_search = findViewById(R.id.main_search);
         str = main_search.getText().toString();
+        main_search.getText().clear();
 
         main_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
                 str = main_search.getText().toString();
-                switch (actionId)
-                {
-                    case IME_ACTION_SEARCH :
+                switch (actionId) {
+                    case IME_ACTION_SEARCH:
                         Intent intent = new Intent(getApplicationContext(), Category.class);
                         intent.putExtra("SEARCH", str);
 
@@ -325,9 +320,6 @@ public String str;
             }
         });
     }
-
-
-
 
 
     public void onTextViewClick() {
@@ -423,8 +415,6 @@ public String str;
             }
         });
     }
-
-
 
 
 }

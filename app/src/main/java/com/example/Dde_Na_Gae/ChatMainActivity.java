@@ -10,7 +10,6 @@ import com.example.Dde_Na_Gae.fragment.ChatFragment;
 import com.example.Dde_Na_Gae.fragment.PeopleFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
-import org.jetbrains.annotations.NotNull;
 
 public class ChatMainActivity extends AppCompatActivity {
 
@@ -23,7 +22,7 @@ public class ChatMainActivity extends AppCompatActivity {
 
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.action_people:
                         getSupportFragmentManager().beginTransaction().replace(R.id.mainactivity_framelayout,new PeopleFragment()).commit();

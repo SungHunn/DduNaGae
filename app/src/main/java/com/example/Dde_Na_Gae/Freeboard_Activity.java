@@ -79,7 +79,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         list.add("꿀 정보");
         list.add("동호회 모집");
 
-        drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
+       /* drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
         drawerView = findViewById(R.id.free_board_drawer);
 
         imageButton = findViewById(R.id.free_board_category_open);
@@ -122,11 +122,11 @@ public class Freeboard_Activity extends AppCompatActivity {
 
                 }
             }
-        });
+        });*/
 
     }
 
-    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+   /* DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
         @Override
         public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
@@ -147,7 +147,7 @@ public class Freeboard_Activity extends AppCompatActivity {
 
         }
     };
-
+*/
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
         List<Article_Model> articles;
@@ -155,7 +155,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         public  BoardRecyclerViewAdapter() {
 
             articles = new ArrayList<>();
-            FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("Free_Board").child("자유게시판").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     articles.clear();

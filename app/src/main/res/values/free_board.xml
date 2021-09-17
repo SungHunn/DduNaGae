@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string-array name="free_board_category">
+        <item>자유게시판</item>
+        <item>리뷰</item>
+        <item>꿀 정보</item>
+        <item>동호회 모집</item>
+        <item>기타</item>
+    </string-array>
+
+    <string-array name="review_category_list">
+        <item>숙소</item>
+        <item>병원</item>
+        <item>여행지</item>
+        <item>미용실</item>
+        <item>공원</item>
+        <item>기타</item>
+    </string-array>
+</resources>

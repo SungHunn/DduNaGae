@@ -5,9 +5,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
@@ -47,17 +51,31 @@ public class Free_Board_Writing extends AppCompatActivity {
     private DatabaseReference mDatabase;
 
 
+    private String category;
+    private String category_review;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_writing_page);
 
+
+        category_review = null;
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
-        title = (EditText)findViewById(R.id.article_title);
-        content = (EditText)findViewById(R.id.article_content);
+        System.out.println(uid);
+        System.out.println(uid);
+        System.out.println(uid);
+        System.out.println(uid);
+        System.out.println(uid);
+
+
+        title = (EditText) findViewById(R.id.article_title);
+        content = (EditText) findViewById(R.id.article_content);
 
         photo = (ImageView) findViewById(R.id.article_image);
         photo.setOnClickListener(new View.OnClickListener() {
@@ -69,20 +87,50 @@ public class Free_Board_Writing extends AppCompatActivity {
             }
         });
 
+        Spinner free_board_category_spinner = (Spinner) findViewById(R.id.free_board_category);
+        ArrayAdapter free_board_category = ArrayAdapter.createFromResource(this,
+                R.array.free_board_category, android.R.layout.simple_spinner_item);
+        free_board_category.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        free_board_category_spinner.setAdapter(free_board_category);
+
+        Spinner review_category_spinner = (Spinner) findViewById(R.id.review_category);
+        ArrayAdapter review_category = ArrayAdapter.createFromResource(this,
+                R.array.review_category_list, android.R.layout.simple_spinner_item);
+        review_category.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        review_category_spinner.setAdapter(review_category);
+
+        free_board_category_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (position == 1)
+                    review_category_spinner.setVisibility(View.VISIBLE);
+                else
+                    review_category_spinner.setVisibility(View.GONE);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
 
 
-        okay = (Button)findViewById(R.id.writing_button);
+        okay = (Button) findViewById(R.id.writing_button);
         okay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
+                category = free_board_category_spinner.getSelectedItem().toString();
+                if (category.equals("리뷰")) {
+                    category_review = review_category_spinner.getSelectedItem().toString();
+                }
 
                 FirebaseStorage.getInstance().getReference().child("Freeboard_Images").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
                     @Override
                     public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
                         @SuppressWarnings("VisibleForTests")
                         Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-                        while(!imageUrl.isComplete());
+                        while (!imageUrl.isComplete()) ;
 
 
                         FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -90,14 +138,12 @@ public class Free_Board_Writing extends AppCompatActivity {
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 String nickname = snapshot.getValue(String.class);
 
-                                Timestamp timestamp = new Timestamp(System.currentTimeMillis() );
+                                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-                                SimpleDateFormat sdf = new SimpleDateFormat ("yyyy년 MM월 dd일  a hh:mm:ss");
+                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
                                 sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 
-                                Article_Database(uid, nickname,title.getText().toString(), content.getText().toString() , imageUrl.getResult().toString(), sdf.format(timestamp));
-
-
+                                Article_Database(uid, nickname, title.getText().toString(), content.getText().toString(), imageUrl.getResult().toString(), sdf.format(timestamp), category, category_review);
                             }
 
                             @Override
@@ -115,12 +161,9 @@ public class Free_Board_Writing extends AppCompatActivity {
         });
 
 
-
-
-
     }
 
-    public void Article_Database(String uid,String nickname, String title, String content, String imageUri, String writing_time){
+    public void Article_Database(String uid, String nickname, String title, String content, String imageUri, String writing_time, String category, String category_review) {
 
         Article_Database article_database = new Article_Database();
         article_database.uid = uid;
@@ -129,30 +172,54 @@ public class Free_Board_Writing extends AppCompatActivity {
         article_database.content = content;
         article_database.imageUri = imageUri;
         article_database.writing_time = writing_time;
+        article_database.category = category;
+        article_database.category_review = category_review;
 
 
+        if(category.equals("리뷰")) {
+            //FreeBoard -> category -> if -> category_review
+            mDatabase.child("FreeBoard").child(category).child(category_review).push().setValue(article_database)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Write was successful!
+                            // ...
 
+                            Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Write failed
+                            // ...
+                            Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        } else {
+            //FreeBoard -> category -> if -> category_review
+            mDatabase.child("FreeBoard").child(category).push().setValue(article_database)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Write was successful!
+                            // ...
 
+                            Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Write failed
+                            // ...
+                            Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                        }
+                    });
+        }
 
-        mDatabase.child("Free_Board").push().setValue(article_database)
-                .addOnSuccessListener(new OnSuccessListener<Void>() {
-                    @Override
-                    public void onSuccess(Void aVoid) {
-                        // Write was successful!
-                        // ...
-
-                        Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                        startActivity(intent);
-                    }
-                })
-                .addOnFailureListener(new OnFailureListener() {
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        // Write failed
-                        // ...
-                        Toast.makeText(getApplicationContext(),"오류 발생",Toast.LENGTH_SHORT).show();
-                    }
-                });
     }
 
 
