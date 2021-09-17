@@ -2,6 +2,7 @@ package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -14,9 +15,14 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.drawerlayout.widget.DrawerLayout;
+
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.model.UserModel;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -25,17 +31,12 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
-
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.drawerlayout.widget.DrawerLayout;
-
-import com.google.android.material.bottomnavigation.BottomNavigationView;
-
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
 
 public class Mainactivity extends AppCompatActivity {
 
@@ -305,17 +306,25 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
 
 // serach box
-    private void main_search(){
-        EditText main_search = findViewById(R.id.main_search);
-        final String str;
-        str = main_search.toString();
+public String str;
 
-        main_search.setOnClickListener(new View.OnClickListener() {
+    private void main_search(){
+        final EditText main_search = findViewById(R.id.main_search);
+        str = main_search.getText().toString();
+
+        main_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Category.class);
-                intent.putExtra("SEARCH", str);
-                startActivity(intent);
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                str = main_search.getText().toString();
+                switch (actionId)
+                {
+                    case IME_ACTION_SEARCH :
+                        Intent intent = new Intent(getApplicationContext(), Category.class);
+                        intent.putExtra("SEARCH", str);
+
+                        startActivity(intent);
+                }
+                return true;
             }
         });
     }

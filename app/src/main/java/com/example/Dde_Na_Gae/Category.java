@@ -50,7 +50,30 @@ public class Category extends AppCompatActivity {
 
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebView(){
-        category = getIntent().getStringExtra("SEARCH");
+        Intent intent = getIntent();
+        category = intent.getStringExtra("SEARCH");
+
+        switch (category) {
+            case "카페":
+                category = "애견 카페";
+                break;
+
+            case "숙소":
+                category = "동물 반입 가능 숙소";
+                break;
+
+            case "산책" :
+                category = "동물 반입 가능 공원";
+                break;
+
+            case "여행지" :
+                category = "동물 반입 가능 여행지";
+                break;
+
+            case "병원" :
+                category = "동물 병원";
+                break;
+        }
         url = "https://www.google.com/maps/search/" + category;
 
         webView.getSettings().setSupportZoom(true);
@@ -58,8 +81,9 @@ public class Category extends AppCompatActivity {
         webView.getSettings().setDisplayZoomControls(true);
         WebSettings.ZoomDensity zoomDensity = WebSettings.ZoomDensity.CLOSE;
         webView.getSettings().setDefaultZoom(zoomDensity);
-        webView.getSettings().setJavaScriptEnabled(true); // 자바스크립트 사용을 허용한다.
-        webView.setWebViewClient(new WebViewClient());  // 새로운 창을 띄우지 않고 내부에서 웹뷰를 실행시킨다.
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
