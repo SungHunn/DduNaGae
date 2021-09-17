@@ -36,7 +36,6 @@
         <activity android:name="com.example.Dde_Na_Gae.Category" />
         <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
-        <activity android:name="com.example.Dde_Na_Gae.LoginPage" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -50,9 +49,6 @@
                     android:scheme="kakaob214210d275c3c68a2ab5a59099d8b41" />
             </intent-filter>
         </activity>
-        <activity android:name=".EmailSignupActivity"/>
-        <activity android:name=".ChatMainActivity"/>
-        <activity android:name=".chat.MessageActivity"/>
         <activity android:name=".Mainactivity" />
         <activity android:name=".Login_New_Page" />
         <activity android:name=".My_Information" />

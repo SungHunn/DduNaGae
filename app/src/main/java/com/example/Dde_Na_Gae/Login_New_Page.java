@@ -147,80 +147,17 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
 
 
 
-        //임시 email
-        firebaseAuth = FirebaseAuth.getInstance();
-        firebaseAuth.signOut();
-
-        id = (EditText) findViewById(R.id.loginActivity_edittext_id);
-        password = (EditText) findViewById(R.id.loginActivity_edittext_password);
-
-        login = (Button) findViewById(R.id.loginActivity_button_login);
-        signup = (Button) findViewById(R.id.loginActivity_button_signup);
-
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                loginEvent();
-            }
-        });
-        signup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                startActivity(new Intent(Login_New_Page.this, EmailSignupActivity.class));
-            }
-        });
 
         //로그인 인터페이스 리스너
 
-        authStateListener = new FirebaseAuth.AuthStateListener() {
-            @Override
-            public void onAuthStateChanged(@NonNull FirebaseAuth firebaseAuth) {
-                FirebaseUser user = firebaseAuth.getCurrentUser();
-                if(user != null){
-                    //로그인
-                    Intent intent = new Intent(Login_New_Page.this,ChatMainActivity.class);
-                    startActivity(intent);
-                    finish();
-                }else{
-                    //로그아웃
-                }
 
-            }
-        };
 
 
 
     }
 
-    //임시 email
-    void loginEvent() {
-        firebaseAuth.signInWithEmailAndPassword(id.getText().toString(), password.getText().toString())
-                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-
-                        if (!task.isSuccessful()) {
-                            //로그인 실패한부분
-                            Toast.makeText(Login_New_Page.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                        }
 
 
-                    }
-                });
-
-    }
-
-    @Override
-    protected void onStart() {
-        super.onStart();
-        firebaseAuth.addAuthStateListener(authStateListener);
-    }
-
-    @Override
-    protected void onStop() {
-        super.onStop();
-        firebaseAuth.removeAuthStateListener(authStateListener);
-    }
 
 
 
