@@ -59,5 +59,6 @@ dependencies {
     implementation 'com.github.iamport:iamport-rest-client-java-hc:0.0.2'
     implementation 'com.android.support:multidex:1.0.3'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.10.0'
+    implementation 'kr.co.prnd:readmore-textview:1.0.0'
 }
 

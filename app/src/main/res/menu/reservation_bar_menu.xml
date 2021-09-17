@@ -11,5 +11,5 @@
     <item
         android:id="@+id/more_room_activity"
         android:icon="@android:drawable/ic_menu_agenda"
-        android:title="객실 보기" />
+        android:title="길찾기" />
 </menu>

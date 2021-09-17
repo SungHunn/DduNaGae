@@ -23,6 +23,16 @@ import androidx.drawerlayout.widget.DrawerLayout;
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
+import org.apache.log4j.chainsaw.Main;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -97,14 +107,32 @@ public class Mainactivity extends AppCompatActivity {
         to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
         to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
 
-        Today_FirstImage = getIntent().getStringArrayListExtra("Today_Image");
-        Today_Title = getIntent().getStringArrayListExtra("Today_Title");
-        Today_ConId = getIntent().getStringArrayListExtra("Today_ContentId");
+//        Today_FirstImage = getIntent().getStringArrayListExtra("Today_Image");
+        Today_api today_api = new Today_api();
+        Thread today_thread = new Thread(today_api);
+        Main_api main_api = new Main_api();
+        Thread main_thread = new Thread(main_api);
+        Sub_api sub_api = new Sub_api();
+        Thread sub_thread = new Thread(sub_api);
+        try {
+            today_thread.start();
+            today_thread.join();
 
-//        Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
-//        to_day_place1_txt.setText(Today_Title.get(0));
-//        Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
-//        to_day_place2_txt.setText(Today_Title.get(1));
+            main_thread.start();
+            main_thread.join();
+
+            sub_thread.start();
+            sub_thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Today_FirstImage = today_api.getToday_images();
+        Today_Title = today_api.getToday_titles();
+        Today_ConId = today_api.getToday_contentids();
+        Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
+        to_day_place1_txt.setText(Today_Title.get(0));
+        Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
+        to_day_place2_txt.setText(Today_Title.get(1));
         /////////////////////////
 
         best_tour1 = (ImageView) findViewById(R.id.best_tour1);
@@ -112,14 +140,14 @@ public class Mainactivity extends AppCompatActivity {
         best_tour2 = (ImageView) findViewById(R.id.best_tour2);
         best_tour2_txt = (TextView)findViewById(R.id.best_tour2_txt);
 
-        Main_FirstImage = getIntent().getStringArrayListExtra("Main_Image");
-        Main_Title = getIntent().getStringArrayListExtra("Main_Title");
-        Main_ConId = getIntent().getStringArrayListExtra("Main_ContentId");
+        Main_FirstImage = main_api.getMain_images();
+        Main_Title = main_api.getMain_titles();
+        Main_ConId = main_api.getMain_contentids();
 
-//        Glide.with(this).load(Main_FirstImage.get(0)).into(best_tour1);
-//        best_tour1_txt.setText(Main_Title.get(0));
-//        Glide.with(this).load(Main_FirstImage.get(1)).into(best_tour2);
-//        best_tour2_txt.setText(Main_Title.get(1));
+        Glide.with(this).load(Main_FirstImage.get(0)).into(best_tour1);
+        best_tour1_txt.setText(Main_Title.get(0));
+        Glide.with(this).load(Main_FirstImage.get(1)).into(best_tour2);
+        best_tour2_txt.setText(Main_Title.get(1));
 
         best_walk1 = (ImageView) findViewById(R.id.best_walk1);
         best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
@@ -128,14 +156,14 @@ public class Mainactivity extends AppCompatActivity {
 
         ////////////////////////////////////////////////////////////////
 
-        Sub_FirstImage = getIntent().getStringArrayListExtra("Sub_Image");
-        Sub_Title = getIntent().getStringArrayListExtra("Sub_Title");
-        Sub_ConId = getIntent().getStringArrayListExtra("Sub_ContentId");
+        Sub_FirstImage = sub_api.getSub_images();
+        Sub_Title = sub_api.getSub_titles();
+        Sub_ConId = sub_api.getSub_contentids();
 
-//        Glide.with(this).load(Sub_FirstImage.get(0)).into(best_walk1);
-//        best_walk1_txt.setText(Sub_Title.get(0));
-//        Glide.with(this).load(Sub_FirstImage.get(1)).into(best_walk2);
-//        best_walk2_txt.setText(Sub_Title.get(1));
+        Glide.with(this).load(Sub_FirstImage.get(0)).into(best_walk1);
+        best_walk1_txt.setText(Sub_Title.get(0));
+        Glide.with(this).load(Sub_FirstImage.get(1)).into(best_walk2);
+        best_walk2_txt.setText(Sub_Title.get(1));
 
         region_travle = (TextView)findViewById(R.id.region_travel);
 //        region_travle.setText(getRegionCode((today % 8) + 1) + " 추천 여행지");

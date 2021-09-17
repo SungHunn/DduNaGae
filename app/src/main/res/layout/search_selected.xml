@@ -105,6 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="홈페이지 주소"
+                    android:clickable="true"
                     android:textSize="15sp" />
 
                 <TextView
@@ -124,6 +125,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="10dp"
                     android:text="아이템 설명"
+                    android:ellipsize="end"
+                    android:maxLines="2"
                     android:textSize="15sp" />
 
                 <TextView

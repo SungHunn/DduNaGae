@@ -33,7 +33,6 @@
         <activity android:name=".Matching_Option"/>
         <activity android:name=".My_Page" />
         <activity android:name=".Notice" />
-        <activity android:name=".OpenApi"/>
         <activity android:name=".Pay"/>
         <activity android:name=".Personal_information" />
         <activity android:name=".Search" />

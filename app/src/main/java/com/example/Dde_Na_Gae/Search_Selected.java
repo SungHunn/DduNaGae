@@ -1,9 +1,13 @@
-package com.example.Dde_Na_Gae;
+ package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
 import android.media.Image;
+import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.text.Html;
+import android.text.SpannableString;
+import android.text.style.ClickableSpan;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
@@ -31,8 +35,8 @@ import java.net.URL;
 import java.util.ArrayList;
 
 public class  Search_Selected extends AppCompatActivity {
-
     String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
+
 
     ImageView img_back;
 
@@ -62,70 +66,28 @@ public class  Search_Selected extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_selected);
 
-        new Thread() {
-            @Override
-            public void run() {
-                conId = getIntent().getStringExtra("ConId");
-                String urlAdress = "http://api.visitkorea.or.kr/openapi/service/rest/KorService/detailCommon" +
-                        "?serviceKey=" + key +
-                        "&numOfRows=10" +
-                        "&pageNo=1" +
-                        "&MobileOS=AND" +
-                        "&MobileApp=AppTest" +
-                        "&contentId=" + conId +
-                        "&defaultYN=Y" +
-                        "&firstImageYN=Y" +
-                        "&areacodeYN=Y" +
-                        "&catcodeYN=Y" +
-                        "&addrinfoYN=Y" +
-                        "&mapinfoYN=Y" +
-                        "&overviewYN=Y" +
-                        "&_type=json";
+        conId = getIntent().getStringExtra("ConId");
+        Detail_api detail_api = new Detail_api(conId);
+        Thread detail_thread = new Thread(detail_api);
 
-                try {
-                    URL url = new URL(urlAdress);
+        try {
+            detail_thread.start();
+            detail_thread.join();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
-                    InputStream is = url.openStream();
-                    InputStreamReader isr = new InputStreamReader(is);
-                    BufferedReader br = new BufferedReader(isr);
+        homepage = stripHtml(detail_api.getHomepage());
+        overview = stripHtml(detail_api.getOverview());
+        addr1 = stripHtml(detail_api.getAddr1());
 
-                    StringBuffer buffer = new StringBuffer();
-                    String line = br.readLine();
+        selected_item_hompage = findViewById(R.id.selected_item_hompage);
+        selected_item_desciption = findViewById(R.id.selected_item_desciption);
+        selected_item_addr = findViewById(R.id.selected_item_addr);
 
-                    while (line != null) {
-                        buffer.append(line + "\n");
-                        line = br.readLine();
-                    }
-
-                    String jsonData = buffer.toString();
-
-                    JSONObject obj = new JSONObject(jsonData);
-                    JSONObject response = (JSONObject) obj.get("response");
-                    JSONObject body = (JSONObject) response.get("body");
-                    JSONObject items = (JSONObject) body.get("items");
-                    JSONObject temp = items.getJSONObject("item");
-
-                    System.out.println(temp);
-
-                    addr1 = temp.getString("addr1");  // 주소 받아오기
-                    homepage = temp.getString("homepage"); // 홈페이지 받아오기
-                    overview = temp.getString("overview"); // 개요(설명) 받아오기
-
-                    selected_item_hompage = findViewById(R.id.selected_item_hompage);
-                    selected_item_hompage.setText(homepage);
-                    selected_item_desciption = findViewById(R.id.selected_item_desciption);
-                    selected_item_desciption.setText(overview);
-                    selected_item_addr = findViewById(R.id.selected_item_addr);
-                    selected_item_addr.setText(addr1);
-
-                } catch (IOException e) {
-                    e.printStackTrace();
-                } catch (JSONException e) {
-                    e.printStackTrace();
-                }
-            }
-        }.start();
-        // 스레드 종료
+        selected_item_hompage.setText(homepage);
+        selected_item_desciption.setText(overview);
+        selected_item_addr.setText(addr1);
 
         selected_name = findViewById(R.id.selected_name);
 //        selected_name.setText(getIntent().getStringExtra("NAME"));
@@ -141,8 +103,6 @@ public class  Search_Selected extends AppCompatActivity {
         Glide.with(this).load(img).into(selected_img);
 
 
-        System.out.println(overview);
-
 //        viewPager2 = findViewById(R.id.selected_img);
 //        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());
 //        viewPager2.setAdapter(adapter);
@@ -150,8 +110,16 @@ public class  Search_Selected extends AppCompatActivity {
         selected_map = findViewById(R.id.selected_map);
 
 
-        // 상세 정보
-
+        // 클릭 이벤트
+        selected_item_hompage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_VIEW);
+                intent.setData(Uri.parse(homepage));
+                startActivity(intent);
+                System.out.println(conId);
+            }
+        });
 
         // 바텀 네비
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
@@ -183,11 +151,37 @@ public class  Search_Selected extends AppCompatActivity {
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), OpenApi.class);
+                Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
                 startActivity(intent);
+            }
+        });
+
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.matching:
+                        Intent intent = new Intent(getApplicationContext(), Matching.class);
+                        startActivity(intent);
+                        break;
+
+                    case R.id.home:
+                        Intent intent2 = new Intent(getApplicationContext(), Mainactivity.class);
+                        startActivity(intent2);
+                        break;
+
+                    case R.id.mylocation:
+                        //Intent intent3 = new Intent(getApplicationContext(), );
+                        //startActivity(intent3);
+                        break;
+                }
+                return false;
             }
         });
 
     }
 
+    public String stripHtml(String html)
+    { return Html.fromHtml(html).toString(); }
 }
