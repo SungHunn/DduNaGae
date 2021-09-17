@@ -81,8 +81,9 @@ public class Category extends AppCompatActivity {
         webView.getSettings().setDisplayZoomControls(true);
         WebSettings.ZoomDensity zoomDensity = WebSettings.ZoomDensity.CLOSE;
         webView.getSettings().setDefaultZoom(zoomDensity);
-        webView.getSettings().setJavaScriptEnabled(true); // 자바스크립트 사용을 허용한다.
-        webView.setWebViewClient(new WebViewClient());  // 새로운 창을 띄우지 않고 내부에서 웹뷰를 실행시킨다.
+        webView.getSettings().setJavaScriptEnabled(true);
+
+        webView.setWebViewClient(new WebViewClient());
         webView.setWebChromeClient(new WebChromeClient(){
             @Override
             public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
