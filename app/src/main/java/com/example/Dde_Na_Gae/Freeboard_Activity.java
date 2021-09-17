@@ -6,6 +6,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -80,27 +82,45 @@ public class Freeboard_Activity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
         drawerView = findViewById(R.id.free_board_drawer);
 
-        ImageButton free_board_activity_drawer_open = findViewById(R.id.free_board_category_open);
-        free_board_activity_drawer_open.setOnClickListener(new View.OnClickListener() {
+        imageButton = findViewById(R.id.free_board_category_open);
+        imageButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(drawerView);
             }
         });
 
-        ImageButton nvg_close = findViewById(R.id.nvg_close);
-        nvg_close.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.closeDrawers();
-            }
-        });
-
         drawerLayout.setDrawerListener(listener);
+
         drawerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 return true;
+            }
+        });
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,list);
+
+        listview.setAdapter(adapter);
+
+        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                switch (position) {
+                    case 0:
+                        break;
+
+                    case 1:
+                        break;
+
+                    case 2:
+                        break;
+
+                    case 3:
+                        break;
+
+
+                }
             }
         });
 
