@@ -6,8 +6,6 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
@@ -39,11 +37,11 @@ public class Freeboard_Activity extends AppCompatActivity {
     private Button my_list;
     private RecyclerView recyclerView;
 
-    ImageButton free_board_drawer_open;
-
     DrawerLayout drawerLayout;
     View drawerView;
-    ListView listview;
+    ListView listview = null;
+
+    ImageButton imageButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,27 +54,6 @@ public class Freeboard_Activity extends AppCompatActivity {
 
         writing = (Button) findViewById(R.id.go_writing);
         my_list = (Button) findViewById(R.id.my_text_list);
-
-//        drawerLayout = (DrawerLayout) findViewById(R.id.free_board_activity_drawlayout);
-//        drawerView = (View)findViewById(R.id.free_board_drawer);
-//        listview = (ListView)findViewById(R.id.Free_board_drawer_list);
-
-        /*free_board_drawer_open = (ImageButton) findViewById(R.id.free_board_category_open);
-
-        free_board_drawer_open.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(drawerView);
-            }
-        });
-
-        drawerLayout.setDrawerListener(listener);
-        drawerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });*/
 
         writing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -94,35 +71,42 @@ public class Freeboard_Activity extends AppCompatActivity {
             }
         });
 
-        /*List<String> list = new ArrayList<>();
-        list.add("자유 게시판");
+        List<String> list = new ArrayList<>();
+        list.add("자유게시판");
         list.add("리뷰");
         list.add("꿀 정보");
         list.add("동호회 모집");
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1,list);
+        drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
+        drawerView = findViewById(R.id.free_board_drawer);
 
-        listview.setAdapter(adapter);
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        ImageButton free_board_activity_drawer_open = findViewById(R.id.free_board_category_open);
+        free_board_activity_drawer_open.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        break;
-                    case 1:
-                        break;
-                    case 2:
-                        break;
-                    case 3:
-                        break;
-                }
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawerView);
             }
-        });*/
+        });
+
+        ImageButton nvg_close = findViewById(R.id.nvg_close);
+        nvg_close.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.closeDrawers();
+            }
+        });
+
+        drawerLayout.setDrawerListener(listener);
+        drawerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
 
     }
 
-   /* DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
+    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
         @Override
         public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
 
@@ -142,7 +126,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         public void onDrawerStateChanged(int newState) {
 
         }
-    };*/
+    };
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 

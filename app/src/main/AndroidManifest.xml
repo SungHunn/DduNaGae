@@ -33,9 +33,6 @@
         <activity android:name=".Api_date" />
         <activity android:name=".Search_Selected" />
         <activity android:name=".Search_Selected_More" />
-        <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
-        <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
-        <activity android:name="com.example.Dde_Na_Gae.BestWalk" />
         <activity android:name="com.example.Dde_Na_Gae.Category" />
         <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
@@ -57,20 +54,12 @@
         <activity android:name=".ChatMainActivity"/>
         <activity android:name=".chat.MessageActivity"/>
         <activity android:name=".Mainactivity" />
-        <activity android:name=".BestPlace" />
-        <activity android:name=".BestWalk" />
-        <activity android:name=".Category" />
-        <activity android:name=".TodayPlace" />
-        <activity android:name=".Matching" />
-        <activity android:name=".LoginPage" />
         <activity android:name=".Login_New_Page" />
         <activity android:name=".My_Information" />
         <activity android:name=".My_Page" />
         <activity android:name=".Matching_Option" />
         <activity android:name=".Setting" />
         <activity android:name=".Search" />
-
-        <activity android:name=".Matching_Option"/>
         <activity android:name=".chat.New_MessageActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".New_ChatMainActivity"/>

@@ -274,9 +274,6 @@ public class Mainactivity extends AppCompatActivity {
         //네비게이션바
         onTextViewClick();
         toDayPlaceClick();
-        bestPlaceClick();
-        bestWlakClick();
-        addMenuClick();
         main_search();
 
     }
@@ -329,43 +326,9 @@ public String str;
         });
     }
 
-    private void addMenuClick() {
-        add_menu1 = (ImageView) findViewById(R.id.add_menu1);
-        add_menu1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-                startActivity(intent);
-            }
-        });
-        add_menu2 = (ImageView) findViewById(R.id.add_menu2);
-        add_menu2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-                startActivity(intent);
-            }
-        });
-    }
 
-    private void bestWlakClick() {
-        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
-        best_walk1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-                startActivity(intent);
-            }
-        });
-        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
-        best_walk2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-                startActivity(intent);
-            }
-        });
-    }
+
+
 
     public void onTextViewClick() {
         category1 = (TextView) findViewById(R.id.category_1);
@@ -461,24 +424,7 @@ public String str;
         });
     }
 
-    public void bestPlaceClick() {
-        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
-        best_tour1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestPlace.class);
-                startActivity(intent);
-            }
-        });
-        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
-        best_tour2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), BestPlace.class);
-                startActivity(intent);
-            }
-        });
-    }
+
 
 
 }
