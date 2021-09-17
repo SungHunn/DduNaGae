@@ -20,7 +20,7 @@
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/goback" />
+            android:src="@drawable/go_back" />
 
         <TextView
             android:layout_width="wrap_content"

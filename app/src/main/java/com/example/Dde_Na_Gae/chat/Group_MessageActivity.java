@@ -55,7 +55,6 @@ import java.util.TimeZone;
 
 public class Group_MessageActivity extends AppCompatActivity {
     Map<String, UserModel> users = new HashMap<>();
-    String destinationRoom;
     String uid;
     EditText editText;
 
@@ -65,18 +64,16 @@ public class Group_MessageActivity extends AppCompatActivity {
     String option_selector;
     Button chattingroom_exit;
 
-    ImageView group_chat_back;
     ImageButton group_chat_hbg;
 
-    TextView chatoption;
-    TextView groupchatnum;
+
 
     DrawerLayout drawerLayout;
     View drawerView;
 
     private DatabaseReference databaseReference;
     private ValueEventListener valueEventListener;
-    private SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy.MM.dd HH:mm");
+
     private RecyclerView recyclerView;
 
     List<ChatModel.Comment> comments = new ArrayList<>();
@@ -117,7 +114,8 @@ public class Group_MessageActivity extends AppCompatActivity {
         option_selector = intent.getStringExtra("option_selector");
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_RESIZE);
 
-        UserModel userModel = new UserModel();
+
+
 
         FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -126,10 +124,9 @@ public class Group_MessageActivity extends AppCompatActivity {
                 FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(DataSnapshot dataSnapshot) {
+                        UserModel  userModel = new UserModel();
                         for (DataSnapshot item : dataSnapshot.getChildren()) {
-
-                            users.put(item.getKey(), userModel);
-
+                            users.put(item.getKey(),userModel);
                         }
 
                         init();
@@ -323,9 +320,9 @@ public class Group_MessageActivity extends AppCompatActivity {
         }
 
         @Override
-        public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
+        public void onBindViewHolder(final RecyclerView.ViewHolder holder, int position) {
 
-            GroupMessageViewHodler messageViewHolder = ((GroupMessageViewHodler) holder);
+            final GroupMessageViewHodler messageViewHolder = ((GroupMessageViewHodler) holder);
 
 
             //내가보낸 메세지

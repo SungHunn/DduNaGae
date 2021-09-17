@@ -38,7 +38,7 @@
                     android:maxHeight="35dp"
                     android:padding="1dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/goback" />
+                    android:src="@drawable/go_back" />
 
 
                 //채팅방 상대 닉네임
