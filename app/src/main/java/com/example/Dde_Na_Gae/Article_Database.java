@@ -16,7 +16,6 @@ public class Article_Database {
 
     }
 
-
     public Article_Database(String uid,String nickname, String title, String content, String imageUri,
                             String writing_time, String writing_category, String writing_category_review){
 
