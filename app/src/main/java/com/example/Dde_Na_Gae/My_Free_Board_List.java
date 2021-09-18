@@ -28,6 +28,8 @@ import org.jetbrains.annotations.NotNull;
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.google.firebase.database.FirebaseDatabase.*;
+
 public class My_Free_Board_List extends AppCompatActivity {
 
 
@@ -56,17 +58,12 @@ public class My_Free_Board_List extends AppCompatActivity {
             articleid = new ArrayList<>();
             articles = new ArrayList<>();
             articles.clear();
-
-            String[] category = {"자유게시판", "리뷰", "꿀 정보", "동호회 모집", "기타"};
-            String[] category_review = {"숙소", "병원", "여행지", "미용실", "공원", "기타"};
-            for (int i = 0; i < 5; i++) {
-                if (i == 1) {
-                    for(int j = 0; j < 6; j++) {
-                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).child(category_review[j]).orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+                        FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 for (DataSnapshot item : snapshot.getChildren()) {
                                     Article_Model article = item.getValue(Article_Model.class);
+                                    System.out.println(article.uid);
                                     if (article.uid.equals(uid)) {
                                         articles.add(article);
                                         articleid.add(item.getKey());
@@ -80,34 +77,9 @@ public class My_Free_Board_List extends AppCompatActivity {
 
                             }
                         });
-                    }
-                }
-                else {
-                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
 
-                            for (DataSnapshot item : snapshot.getChildren()) {
-                                Article_Model article = item.getValue(Article_Model.class);
-                                if (article.uid.equals(uid)) {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                            }
-                            notifyDataSetChanged();
-                        }
 
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                        }
-                    });
-                }
-
-            }
-
-            System.out.println(articles.size());
         }
 
 

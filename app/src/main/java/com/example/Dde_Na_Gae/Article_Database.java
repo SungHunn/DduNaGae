@@ -9,7 +9,6 @@ public class Article_Database {
     public String imageUri;
     public String writing_time;
     public String category;
-    public String category_review;
 
 
     public Article_Database(){
@@ -17,7 +16,7 @@ public class Article_Database {
     }
 
     public Article_Database(String uid,String nickname, String title, String content, String imageUri,
-                            String writing_time, String writing_category, String writing_category_review){
+                            String writing_time, String writing_category){
 
         this.uid = uid;
         this.nickname = nickname;
@@ -26,7 +25,6 @@ public class Article_Database {
         this.imageUri = imageUri;
         this.writing_time = writing_time;
         this.category = writing_category;
-        this.category_review = writing_category_review;
 
     }
 }

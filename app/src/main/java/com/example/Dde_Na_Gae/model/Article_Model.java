@@ -8,5 +8,5 @@ public class Article_Model {
     public String content;
     public String writing_time;
     public String imageUri;
-
+    public String category;
 }
