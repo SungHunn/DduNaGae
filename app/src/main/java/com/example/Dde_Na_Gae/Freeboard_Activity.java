@@ -50,7 +50,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_activity);
 
-        recyclerView = (RecyclerView) findViewById(R.id.free_board_list);
+        recyclerView = (RecyclerView)findViewById(R.id.free_board_list);
         recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -75,6 +75,7 @@ public class Freeboard_Activity extends AppCompatActivity {
             }
         });
 
+        drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
         drawerView = findViewById(R.id.free_board_drawer);
         drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
 
@@ -173,7 +174,7 @@ public class Freeboard_Activity extends AppCompatActivity {
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     articles.clear();
 
-                    for (DataSnapshot item : snapshot.getChildren()) {
+                    for(DataSnapshot item:snapshot.getChildren()){
                         Article_Model article = item.getValue(Article_Model.class);
                         articles.add(article);
                     }
@@ -188,11 +189,13 @@ public class Freeboard_Activity extends AppCompatActivity {
         }
 
 
+
+
         @NonNull
         @NotNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article,parent,false);
 
             return new Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder(view);
         }
@@ -200,13 +203,13 @@ public class Freeboard_Activity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
 
-            Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder BoardActivityviewholder = ((Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder) holder);
+            Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder BoardActivityviewholder = ((Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder)holder);
 
             Glide.with(holder.itemView.getContext())
                     .load(articles.get(position).imageUri)
                     .apply(new RequestOptions().circleCrop())
                     .into(BoardActivityviewholder.imageView);
-            String Time = articles.get(position).writing_time.substring(2, 4) + "." + articles.get(position).writing_time.substring(6, 8) + "." + articles.get(position).writing_time.substring(10, 12) + "." + articles.get(position).writing_time.substring(18, 20) + ":" + articles.get(position).writing_time.substring(21, 23);
+            String Time = articles.get(position).writing_time.substring(2,4)+"."+articles.get(position).writing_time.substring(6,8)+"."+articles.get(position).writing_time.substring(10,12)+"."+articles.get(position).writing_time.substring(18,20)+":"+articles.get(position).writing_time.substring(21,23);
             BoardActivityviewholder.nickname.setText(articles.get(position).nickname);
             BoardActivityviewholder.time.setText(Time);
             BoardActivityviewholder.title.setText(articles.get(position).title);
@@ -221,7 +224,7 @@ public class Freeboard_Activity extends AppCompatActivity {
                     intent.putExtra("content", articles.get(position).content);
                     intent.putExtra("writing_time", articles.get(position).writing_time);
                     intent.putExtra("title", articles.get(position).title);
-                    intent.putExtra("uid", articles.get(position).uid);
+                    intent.putExtra("uid",articles.get(position).uid);
 
                     startActivity(intent);
                 }
@@ -243,10 +246,10 @@ public class Freeboard_Activity extends AppCompatActivity {
 
             public BoardActivityViewHolder(View view) {
                 super(view);
-                imageView = (ImageView) view.findViewById(R.id.freeboard_imageview);
-                nickname = (TextView) view.findViewById(R.id.freeboard_nickname);
-                time = (TextView) view.findViewById(R.id.freeboard_time);
-                title = (TextView) view.findViewById(R.id.freeboard_title);
+                imageView = (ImageView)view.findViewById(R.id.freeboard_imageview);
+                nickname = (TextView)view.findViewById(R.id.freeboard_nickname);
+                time = (TextView)view.findViewById(R.id.freeboard_time);
+                title = (TextView)view.findViewById(R.id.freeboard_title);
 
             }
 

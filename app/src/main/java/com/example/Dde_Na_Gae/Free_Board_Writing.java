@@ -165,54 +165,30 @@ public class Free_Board_Writing extends AppCompatActivity {
         article_database.content = content;
         article_database.imageUri = imageUri;
         article_database.writing_time = writing_time;
-        article_database.category = category;
-        article_database.category_review = category_review;
-
-
-        if(category.equals("리뷰")) {
-            //FreeBoard -> category -> if -> category_review
-            mDatabase.child("FreeBoard").child(category).child(category_review).push().setValue(article_database)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful!
-                            // ...
-
-                            Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            // ...
-                            Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
-                        }
-                    });
-        } else {
-            //FreeBoard -> category -> if -> category_review
-            mDatabase.child("FreeBoard").child(category).push().setValue(article_database)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful!
-                            // ...
-
-                            Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            // ...
-                            Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+        if(category_review == null){
+            article_database.category = category;
         }
+        article_database.category = category+"-"+category_review;
 
+            mDatabase.child("FreeBoard").push().setValue(article_database)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            // Write was successful!
+                            // ...
+
+                            Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                            startActivity(intent);
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            // Write failed
+                            // ...
+                            Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                        }
+                    });
     }
 
 
