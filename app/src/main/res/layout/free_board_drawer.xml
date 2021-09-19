@@ -6,23 +6,46 @@
     android:layout_gravity="right"
     android:background="#FFFEE6"
     android:orientation="vertical">
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
-        <TextView
-            android:layout_width="wrap_content"
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="카테고리"
-            android:layout_marginTop="10dp"
-            android:layout_marginLeft="10dp"
-            android:textSize="30dp"
-            />
+            android:orientation="horizontal"
+            android:weightSum="4">
+
+            <TextView
+                android:layout_weight="3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="10dp"
+                android:text="카테고리"
+                android:textSize="30dp" />
+
+            <ImageButton
+                android:layout_weight="@integer/material_motion_duration_long_1"
+                android:id="@+id/drawer_close"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:adjustViewBounds="true"
+                android:maxWidth="35dp"
+                android:maxHeight="35dp"
+                android:padding="1dp"
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_baseline_arrow_forward_24" />
+
+        </LinearLayout>
+
         <ListView
+            android:id="@+id/Free_board_drawer_list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:id="@+id/Free_board_drawer_list"/>
+            android:layout_height="wrap_content" />
 
     </LinearLayout>
 

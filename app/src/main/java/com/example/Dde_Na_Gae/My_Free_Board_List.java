@@ -62,7 +62,8 @@ public class My_Free_Board_List extends AppCompatActivity {
             for (int i = 0; i < 5; i++) {
                 if (i == 1) {
                     for(int j = 0; j < 6; j++) {
-                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).child(category_review[j]).orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).child(category_review[j]).
+                                orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
                             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                                 for (DataSnapshot item : snapshot.getChildren()) {
