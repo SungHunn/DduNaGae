@@ -126,8 +126,5 @@ public class My_free_board_detail extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
     }
-
-
 }

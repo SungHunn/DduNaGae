@@ -31,6 +31,7 @@ import java.util.List;
 public class My_Free_Board_List extends AppCompatActivity {
 
 
+
     private RecyclerView recyclerView;
     private String uid;
 
@@ -39,6 +40,7 @@ public class My_Free_Board_List extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_free_board_list);
+
 
         recyclerView = (RecyclerView) findViewById(R.id.my_free_board_list);
         recyclerView.setAdapter(new My_Free_Board_List.BoardRecyclerViewAdapter());

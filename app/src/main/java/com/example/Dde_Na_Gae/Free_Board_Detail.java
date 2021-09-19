@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.model.Article_Model;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -31,13 +32,7 @@ public class Free_Board_Detail  extends AppCompatActivity {
     private ImageView photo;
     private ImageView profile;
 
-
-    private String intent_title;
-    private String intent_content;
-    private String intent_nickname;
-    private String intente_comment;
-    private String intent_imageuri;
-    private String intent_uid;
+    private String articleid;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,51 +50,54 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
 
 
-
-
         Intent intent = getIntent();
-        intent_title =  intent.getStringExtra("title");
+        articleid =  intent.getStringExtra("articleid");
 
-        //System.out.println(intent_title);
+        System.out.println(articleid);
 
-        title.setText(intent_title);
-
-        intent_content = intent.getStringExtra("content");
-        content.setText(intent_content);
-
-        intent_nickname = intent.getStringExtra("nickname");
-        nickname.setText(intent_nickname);
-
-        intente_comment = intent.getStringExtra("comment");
-        comment.setText(intente_comment);
-
-        intent_imageuri = intent.getStringExtra("profile");
-        intent_uid = intent.getStringExtra("uid");
-
-
-        Glide.with(Free_Board_Detail.this)
-                .load(intent_imageuri)
-                .apply(new RequestOptions().circleCrop())
-                .into(photo);
-
-        FirebaseDatabase.getInstance().getReference().child("users").child(intent_uid).child("imageUri").addValueEventListener(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                String abc = snapshot.getValue(String.class);
+                Article_Model article ;
+                article = snapshot.getValue(Article_Model.class);
+                title.setText(article.title);
+                content.setText(article.content);
+                nickname.setText(article.nickname);
 
                 Glide.with(Free_Board_Detail.this)
-                        .load(abc)
+                        .load(article.imageUri)
                         .apply(new RequestOptions().circleCrop())
-                        .into(profile);
+                        .into(photo);
+
+                FirebaseDatabase.getInstance().getReference().child("users").child(article.uid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                        String uri = snapshot.getValue(String.class);
+
+                        Glide.with(Free_Board_Detail.this)
+                                .load(uri)
+                                .apply(new RequestOptions().circleCrop())
+                                .into(profile);
+
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                    }
+                });
+
+
 
             }
+
 
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
             }
         });
-
 
     }
 }

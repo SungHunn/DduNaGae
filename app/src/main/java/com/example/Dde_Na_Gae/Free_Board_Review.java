@@ -141,48 +141,48 @@ public class Free_Board_Review extends AppCompatActivity {
                         Article_Model article = item.getValue(Article_Model.class);
 
                         switch (str){
-                            case 0:
-                                if(article.category.substring(0,2).equals("리뷰"))
-                            {
-                                articles.add(article);
-                                articleid.add(item.getKey());
-                            }
-                            break;
-                            case 1:
-                                if(article.category.equals("리뷰-호텔"))
-                            {
-                                articles.add(article);
-                                articleid.add(item.getKey());
-                            }
-                            break;
-                            case 2:
-                                if(article.category.equals("리뷰-병원"))
-                                {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
-                            case 3:
-                                if(article.category.equals("리뷰-여행"))
-                                {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
-                            case 4:
-                                if(article.category.equals("리뷰-미용"))
-                                {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
-                            case 5:
-                                if(article.category.equals("리뷰-공원"))
-                                {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
+                                case 0:
+                                    if(article.category.substring(0,2).equals("리뷰"))
+                                    {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+                                case 1:
+                                    if(article.category.equals("리뷰-숙소"))
+                                    {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+                                case 2:
+                                    if(article.category.equals("리뷰-병원"))
+                                    {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+                                case 3:
+                                    if(article.category.equals("리뷰-여행지"))
+                                    {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+                                case 4:
+                                    if(article.category.equals("리뷰-미용실"))
+                                    {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+                                case 5:
+                                    if(article.category.equals("리뷰-공원"))
+                                    {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
                             case 6:
                                 if(article.category.equals("리뷰-기타"))
                                 {
@@ -236,7 +236,6 @@ public class Free_Board_Review extends AppCompatActivity {
                     startActivity(intent);
                 }
             });
-
         }
 
         @Override

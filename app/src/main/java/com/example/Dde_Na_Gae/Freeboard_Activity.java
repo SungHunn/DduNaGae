@@ -41,9 +41,13 @@ public class Freeboard_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private String uid;
 
+    int str = 0;
+
     DrawerLayout drawerLayout;
     View drawerView;
     ListView listview = null;
+
+    TextView freeboard_Title;
 
     ImageButton imageButton_open;
     ImageButton imageButton_close;
@@ -51,6 +55,8 @@ public class Freeboard_Activity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_activity);
+
+        freeboard_Title = findViewById(R.id.free_board_Text);
 
         recyclerView = (RecyclerView)findViewById(R.id.free_board_list);
         recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
@@ -118,28 +124,45 @@ public class Freeboard_Activity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-
+                        freeboard_Title.setText("자유게시판");
+                        str = 0;
+                        recyclerView.removeAllViewsInLayout();
+                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
                         break;
 
                     case 1:
+
                         Intent intent = new Intent(getApplicationContext(), Free_Board_Review.class);
                         startActivity(intent);
                         break;
 
                     case 2:
+                        str = 2;
+                        freeboard_Title.setText("꿀 정보");
 
+                        recyclerView.removeAllViewsInLayout();
+                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
                         break;
 
                     case 3:
+                        str = 3;
+                        freeboard_Title.setText("동호회 모집");
 
+                        recyclerView.removeAllViewsInLayout();
+                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
                         break;
 
                     case 4:
+                        str = 4;
+                        freeboard_Title.setText("기타");
 
+                        recyclerView.removeAllViewsInLayout();
+                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
                         break;
                 }
             }
@@ -173,9 +196,12 @@ public class Freeboard_Activity extends AppCompatActivity {
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         List<Article_Model> articles;
+        List<String> articleid;
 
         public BoardRecyclerViewAdapter() {
             articles = new ArrayList<>();
+            articleid = new ArrayList<>();
+
             FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -183,8 +209,37 @@ public class Freeboard_Activity extends AppCompatActivity {
 
                     for(DataSnapshot item:snapshot.getChildren()){
                         Article_Model article = item.getValue(Article_Model.class);
-                        if(!(article.uid.equals(uid))){
-                        articles.add(article);
+
+                        switch (str){
+                            case 0:
+                                if(article.category.equals("자유게시판-null"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+
+                            case 2:
+                                if(article.category.equals("꿀 정보-null"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 3:
+                                if(article.category.equals("동호회 모집-null"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 4:
+                                if(article.category.equals("기타-null"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
                         }
                     }
                     notifyDataSetChanged();
@@ -226,13 +281,7 @@ public class Freeboard_Activity extends AppCompatActivity {
                 @Override
                 public void onClick(View view) {
                     Intent intent = new Intent(getApplicationContext(), Free_Board_Detail.class);
-                    intent.putExtra("profile", articles.get(position).imageUri);
-                    intent.putExtra("nickname", articles.get(position).nickname);
-                    intent.putExtra("content", articles.get(position).content);
-                    intent.putExtra("writing_time", articles.get(position).writing_time);
-                    intent.putExtra("title", articles.get(position).title);
-                    intent.putExtra("uid",articles.get(position).uid);
-
+                    intent.putExtra("articleid", articleid.get(position));
                     startActivity(intent);
                 }
             });
