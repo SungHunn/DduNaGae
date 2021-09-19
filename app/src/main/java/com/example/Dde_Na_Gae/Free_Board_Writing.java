@@ -159,9 +159,8 @@ public class Free_Board_Writing extends AppCompatActivity {
         article_database.content = content;
         article_database.imageUri = imageUri;
         article_database.writing_time = writing_time;
-        if(category_review == null){
-            article_database.category = category;
-        }
+
+
         article_database.category = category+"-"+category_review;
 
         mDatabase.child("Free_Board").push().setValue(article_database)

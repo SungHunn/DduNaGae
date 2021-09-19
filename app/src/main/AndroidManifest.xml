@@ -71,6 +71,8 @@
         <activity android:name=".My_Free_Board_List"/>
         <activity android:name=".Free_Board_Detail"/>
         <activity android:name=".My_Free_Board_detail_Change"/>
+        <activity android:name=".Free_Board_Review"/>
+        <activity android:name=".Free_Board_Detail"/>
     </application>
 
 </manifest>

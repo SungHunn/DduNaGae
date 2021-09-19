@@ -52,6 +52,7 @@ public class My_Free_Board_List extends AppCompatActivity {
                 List<Article_Model> articles;
                 List<String> articleid;
 
+
         public BoardRecyclerViewAdapter() {
                     articleid = new ArrayList<>();
                     articles = new ArrayList<>();
@@ -62,7 +63,6 @@ public class My_Free_Board_List extends AppCompatActivity {
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                             for (DataSnapshot item : snapshot.getChildren()) {
                                 Article_Model article = item.getValue(Article_Model.class);
-                                System.out.println(article.uid);
                                 if (article.uid.equals(uid)) {
                                     articles.add(article);
                                     articleid.add(item.getKey());

@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -34,6 +35,7 @@ public class Free_Board_Review extends AppCompatActivity {
     private RecyclerView recyclerView;
     private String uid;
 
+    Button whole;
     Button hotel;
     Button hospital;
     Button travel;
@@ -41,7 +43,7 @@ public class Free_Board_Review extends AppCompatActivity {
     Button park;
     Button etc;
 
-    String str;
+    int str = 0;
 
     @Override
     protected void onCreate(@Nullable  Bundle savedInstanceState) {
@@ -49,7 +51,10 @@ public class Free_Board_Review extends AppCompatActivity {
         setContentView(R.layout.free_board_review);
 
         recyclerView = (RecyclerView) findViewById(R.id.review_list);
+        recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        whole = findViewById(R.id.review_whole);
         hotel = findViewById(R.id.review_hotel);
         hospital = findViewById(R.id.review_hspt);
         travel = findViewById(R.id.review_travel);
@@ -57,16 +62,65 @@ public class Free_Board_Review extends AppCompatActivity {
         park = findViewById(R.id.review_park);
         etc = findViewById(R.id.review_etc);
 
+
+        whole.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = 0;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+            }
+        });
         hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                str = 1;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+            }
+        });
+        hospital.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = 2;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+            }
+        });
+        travel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = 3;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+            }
+        });
+        hair_cut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = 4;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+            }
+        });
+        park.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = 5;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+            }
+        });
+        etc.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = 6;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
+
 
             }
         });
-
-        recyclerView = (RecyclerView) findViewById(R.id.review_list);
-        recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     }
@@ -85,10 +139,57 @@ public class Free_Board_Review extends AppCompatActivity {
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     for (DataSnapshot item : snapshot.getChildren()) {
                         Article_Model article = item.getValue(Article_Model.class);
-                        System.out.println(article.uid);
-                        if (article.uid.equals(uid)) {
-                            articles.add(article);
-                            articleid.add(item.getKey());
+
+                        switch (str){
+                            case 0:
+                                if(article.category.substring(0,2).equals("리뷰"))
+                            {
+                                articles.add(article);
+                                articleid.add(item.getKey());
+                            }
+                            break;
+                            case 1:
+                                if(article.category.equals("리뷰-호텔"))
+                            {
+                                articles.add(article);
+                                articleid.add(item.getKey());
+                            }
+                            break;
+                            case 2:
+                                if(article.category.equals("리뷰-병원"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 3:
+                                if(article.category.equals("리뷰-여행"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 4:
+                                if(article.category.equals("리뷰-미용"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 5:
+                                if(article.category.equals("리뷰-공원"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 6:
+                                if(article.category.equals("리뷰-기타"))
+                                {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
                         }
                     }
                     notifyDataSetChanged();
@@ -130,7 +231,7 @@ public class Free_Board_Review extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), My_free_board_detail.class);
+                    Intent intent = new Intent(getApplicationContext(), Free_Board_Detail.class);
                     intent.putExtra("articleid", articleid.get(position));
                     startActivity(intent);
                 }
