@@ -39,6 +39,7 @@ public class My_Free_Board_List extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_free_board_list);
+        System.out.println("안녕");
 
         recyclerView = (RecyclerView) findViewById(R.id.my_free_board_list);
         recyclerView.setAdapter(new My_Free_Board_List.BoardRecyclerViewAdapter());
@@ -57,59 +58,31 @@ public class My_Free_Board_List extends AppCompatActivity {
             articles = new ArrayList<>();
             articles.clear();
 
-            String[] category = {"자유게시판", "리뷰", "꿀 정보", "동호회 모집", "기타"};
-            String[] category_review = {"숙소", "병원", "여행지", "미용실", "공원", "기타"};
-            for (int i = 0; i < 5; i++) {
-                if (i == 1) {
-                    for(int j = 0; j < 6; j++) {
-                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).child(category_review[j]).
-                                orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                for (DataSnapshot item : snapshot.getChildren()) {
-                                    Article_Model article = item.getValue(Article_Model.class);
-                                    if (article.uid.equals(uid)) {
-                                        articles.add(article);
-                                        articleid.add(item.getKey());
-                                    }
-                                }
-                                notifyDataSetChanged();
-                            }
 
-                            @Override
-                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
+                FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            Article_Model article = item.getValue(Article_Model.class);
+                            System.out.println(article.uid);
+                            if (article.uid.equals(uid)) {
+                                articles.add(article);
+                                articleid.add(item.getKey());
                             }
-                        });
+                        }
+                        notifyDataSetChanged();
                     }
-                }
-                else {
-                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(category[i]).orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                            for (DataSnapshot item : snapshot.getChildren()) {
-                                Article_Model article = item.getValue(Article_Model.class);
-                                if (article.uid.equals(uid)) {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                            }
-                            notifyDataSetChanged();
-                        }
+                    }
+                });
 
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                        }
-                    });
-                }
-
-            }
-
-            System.out.println(articles.size());
         }
+
+
 
 
         @NonNull

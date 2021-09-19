@@ -170,25 +170,25 @@ public class Free_Board_Writing extends AppCompatActivity {
         }
         article_database.category = category+"-"+category_review;
 
-            mDatabase.child("FreeBoard").push().setValue(article_database)
-                    .addOnSuccessListener(new OnSuccessListener<Void>() {
-                        @Override
-                        public void onSuccess(Void aVoid) {
-                            // Write was successful!
-                            // ...
+        mDatabase.child("FreeBoard").push().setValue(article_database)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        // ...
 
-                            Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                            startActivity(intent);
-                        }
-                    })
-                    .addOnFailureListener(new OnFailureListener() {
-                        @Override
-                        public void onFailure(@NonNull Exception e) {
-                            // Write failed
-                            // ...
-                            Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                        Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                        Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                    }
+                });
     }
 
 

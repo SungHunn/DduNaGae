@@ -169,7 +169,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         public BoardRecyclerViewAdapter() {
 
             articles = new ArrayList<>();
-            FirebaseDatabase.getInstance().getReference().child("Free_Board").child("자유게시판").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     articles.clear();
