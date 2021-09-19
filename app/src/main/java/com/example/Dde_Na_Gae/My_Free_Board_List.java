@@ -39,7 +39,6 @@ public class My_Free_Board_List extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.my_free_board_list);
-        System.out.println("안녕");
 
         recyclerView = (RecyclerView) findViewById(R.id.my_free_board_list);
         recyclerView.setAdapter(new My_Free_Board_List.BoardRecyclerViewAdapter());
@@ -50,48 +49,44 @@ public class My_Free_Board_List extends AppCompatActivity {
     }
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-        List<Article_Model> articles;
-        List<String> articleid;
+                List<Article_Model> articles;
+                List<String> articleid;
 
         public BoardRecyclerViewAdapter() {
-            articleid = new ArrayList<>();
-            articles = new ArrayList<>();
-            articles.clear();
+                    articleid = new ArrayList<>();
+                    articles = new ArrayList<>();
+                    articles.clear();
 
-
-
-                FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        for (DataSnapshot item : snapshot.getChildren()) {
-                            Article_Model article = item.getValue(Article_Model.class);
-                            System.out.println(article.uid);
-                            if (article.uid.equals(uid)) {
-                                articles.add(article);
-                                articleid.add(item.getKey());
+                    FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            for (DataSnapshot item : snapshot.getChildren()) {
+                                Article_Model article = item.getValue(Article_Model.class);
+                                System.out.println(article.uid);
+                                if (article.uid.equals(uid)) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
                             }
+                            notifyDataSetChanged();
                         }
-                        notifyDataSetChanged();
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
 
-        }
+                }
 
 
+                @NonNull
+                @NotNull
+                @Override
+                public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+                    View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
 
-
-        @NonNull
-        @NotNull
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
-
-            return new BoardViewHolder(view);
+                    return new BoardViewHolder(view);
         }
 
         @Override

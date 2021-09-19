@@ -144,16 +144,10 @@ public class Free_Board_Writing extends AppCompatActivity {
 
                             }
                         });
-
-
                     }
                 });
-
-
             }
         });
-
-
     }
 
     public void Article_Database(String uid, String nickname, String title, String content, String imageUri, String writing_time, String category, String category_review) {
@@ -170,7 +164,7 @@ public class Free_Board_Writing extends AppCompatActivity {
         }
         article_database.category = category+"-"+category_review;
 
-        mDatabase.child("FreeBoard").push().setValue(article_database)
+        mDatabase.child("Free_Board").push().setValue(article_database)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
                     @Override
                     public void onSuccess(Void aVoid) {

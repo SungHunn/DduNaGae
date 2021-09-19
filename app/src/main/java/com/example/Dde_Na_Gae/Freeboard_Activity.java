@@ -118,20 +118,24 @@ public class Freeboard_Activity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
+
                         break;
 
                     case 1:
+
                         break;
 
                     case 2:
+
                         break;
 
                     case 3:
+
                         break;
 
                     case 4:
-                        break;
 
+                        break;
                 }
             }
         });
@@ -163,11 +167,9 @@ public class Freeboard_Activity extends AppCompatActivity {
 
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
         List<Article_Model> articles;
 
         public BoardRecyclerViewAdapter() {
-
             articles = new ArrayList<>();
             FirebaseDatabase.getInstance().getReference().child("Free_Board").orderByChild("writing_time").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -183,7 +185,6 @@ public class Freeboard_Activity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
                 }
             });
         }
@@ -202,7 +203,6 @@ public class Freeboard_Activity extends AppCompatActivity {
 
         @Override
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-
             Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder BoardActivityviewholder = ((Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder)holder);
 
             Glide.with(holder.itemView.getContext())
