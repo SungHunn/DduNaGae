@@ -3,16 +3,10 @@
 
 
 
-    <item
-        android:id="@+id/action_people"
-        android:icon="@drawable/people"
-        android:title="People"/>
+
     <item
         android:id="@+id/action_chat"
         android:icon="@drawable/account"
         android:title="chat"/>
-    <item
-        android:id="@+id/action_account"
-        android:icon="@drawable/chatt"
-        android:title="account"/>
+
 </menu>

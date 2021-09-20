@@ -56,7 +56,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_activity);
 
-        freeboard_Title = findViewById(R.id.free_board_Text);
+        freeboard_Title = (TextView)findViewById(R.id.free_board_text);
 
         recyclerView = (RecyclerView)findViewById(R.id.free_board_list);
         recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
@@ -266,6 +266,9 @@ public class Freeboard_Activity extends AppCompatActivity {
         @Override
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
             Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder BoardActivityviewholder = ((Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder)holder);
+
+            System.out.println(articles.get(position).nickname);
+
 
             Glide.with(holder.itemView.getContext())
                     .load(articles.get(position).imageUri)

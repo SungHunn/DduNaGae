@@ -61,6 +61,8 @@ public class New_MessageActivity extends AppCompatActivity {
     DatabaseReference mDatabase;
     private RecyclerView recyclerView;
 
+    private RecyclerView single_chat_drawer_recyclerView;
+
     DrawerLayout drawerLayout;
     View drawerView;
 
@@ -74,12 +76,19 @@ public class New_MessageActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.single_chat_drawlayout);
         drawerView = findViewById(R.id.single_chatting_drawer);
 
+        single_chat_drawer_recyclerView = (RecyclerView)findViewById(R.id.single_chatting_drawer_recyclerview);
+
         single_chat_hbg = (ImageButton) findViewById(R.id.single_talkmenu_open);
 
         single_chat_hbg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 drawerLayout.openDrawer(drawerView);
+
+                single_chat_drawer_recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));
+                single_chat_drawer_recyclerView.setAdapter(new MemberRecyclerViewAdapter());
+
             }
         });
 
@@ -100,6 +109,8 @@ public class New_MessageActivity extends AppCompatActivity {
         chatting_room_option_selector = getIntent().getStringExtra("option_selector");
 
         recyclerView = (RecyclerView)findViewById(R.id.single_messageActivity_recyclerview);
+
+
 
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
@@ -439,6 +450,82 @@ public class New_MessageActivity extends AppCompatActivity {
     }
 
     private void stopPlay() {
+    }
+
+    class MemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+
+       List<UserModel> userModel;
+
+        public  MemberRecyclerViewAdapter() {
+
+            userModel = new ArrayList();
+
+            FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                    userModel.add(snapshot.getValue(UserModel.class));
+
+
+
+
+                }
+
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+
+
+
+
+        }
+
+
+
+        @NonNull
+        @NotNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chatroom_people,parent,false);
+
+            return new MemberViewHolder(view);
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder,final int position) {
+
+            MemberViewHolder memberViewHolder = ((MemberViewHolder)holder);
+
+            memberViewHolder.member_nickname.setText(userModel.get(position).nickname);
+
+
+
+
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return userModel.size();
+        }
+
+        private class MemberViewHolder extends RecyclerView.ViewHolder {
+
+            public TextView member_nickname;
+            public ImageView member_profile;
+
+
+            public MemberViewHolder(View view) {
+                super(view);
+
+                member_nickname = (TextView)view.findViewById(R.id.memeber_nickname);
+                member_profile = (ImageView)view.findViewById(R.id.memeber_profile);
+
+            }
+        }
     }
 
 }
