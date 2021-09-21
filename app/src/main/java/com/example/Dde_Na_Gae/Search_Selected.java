@@ -1,5 +1,6 @@
  package com.example.Dde_Na_Gae;
 
+import android.content.Context;
 import android.content.Intent;
 import android.media.Image;
 import android.net.Uri;
@@ -7,15 +8,21 @@ import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Html;
 import android.text.SpannableString;
+import android.text.SpannableStringBuilder;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
@@ -48,12 +55,10 @@ public class  Search_Selected extends AppCompatActivity {
     String title;
     String conId;
 
-    String homepage;
     String overview;
     String addr1;
 
     TextView selected_item_desciption;
-    TextView selected_item_hompage;
     TextView selected_item_addr;
 
     TextView selected_name;
@@ -77,16 +82,15 @@ public class  Search_Selected extends AppCompatActivity {
             e.printStackTrace();
         }
 
-        homepage = stripHtml(detail_api.getHomepage());
         overview = stripHtml(detail_api.getOverview());
         addr1 = stripHtml(detail_api.getAddr1());
 
-        selected_item_hompage = findViewById(R.id.selected_item_hompage);
         selected_item_desciption = findViewById(R.id.selected_item_desciption);
         selected_item_addr = findViewById(R.id.selected_item_addr);
-
-        selected_item_hompage.setText(homepage);
         selected_item_desciption.setText(overview);
+
+        // 내용이 3줄 이상 넘어가면 짜르고 더보기로 표시 -> 클릭시 전체 내용 확인
+        makeTextViewResizable(selected_item_desciption, 3, "More", true);
         selected_item_addr.setText(addr1);
 
         selected_name = findViewById(R.id.selected_name);
@@ -111,15 +115,6 @@ public class  Search_Selected extends AppCompatActivity {
 
 
         // 클릭 이벤트
-        selected_item_hompage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_VIEW);
-                intent.setData(Uri.parse(homepage));
-                startActivity(intent);
-                System.out.println(conId);
-            }
-        });
 
         // 바텀 네비
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
@@ -184,4 +179,64 @@ public class  Search_Selected extends AppCompatActivity {
 
     public String stripHtml(String html)
     { return Html.fromHtml(html).toString(); }
+
+    public static void makeTextViewResizable(final TextView tv, final int maxLine, final String expandText, final boolean viewMore) {
+
+        if (tv.getTag() == null) {
+            tv.setTag(tv.getText());
+        }
+        ViewTreeObserver vto = tv.getViewTreeObserver();
+        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+
+            @SuppressWarnings("deprecation")
+            @Override
+            public void onGlobalLayout() {
+                String text;
+                int lineEndIndex;
+                ViewTreeObserver obs = tv.getViewTreeObserver();
+                obs.removeGlobalOnLayoutListener(this);
+                if (maxLine == 0) {
+                    lineEndIndex = tv.getLayout().getLineEnd(0);
+                    text = tv.getText().subSequence(0, lineEndIndex - expandText.length() + 1) + " " + expandText;
+                } else if (maxLine > 0 && tv.getLineCount() >= maxLine) {
+                    lineEndIndex = tv.getLayout().getLineEnd(maxLine - 1);
+                    text = tv.getText().subSequence(0, lineEndIndex - expandText.length() + 1) + " " + expandText;
+                } else {
+                    lineEndIndex = tv.getLayout().getLineEnd(tv.getLayout().getLineCount() - 1);
+                    text = tv.getText().subSequence(0, lineEndIndex) + " " + expandText;
+                }
+                tv.setText(text);
+                tv.setMovementMethod(LinkMovementMethod.getInstance());
+                tv.setText(
+                        addClickablePartTextViewResizable(Html.fromHtml(tv.getText().toString()), tv, lineEndIndex, expandText,
+                                viewMore), TextView.BufferType.SPANNABLE);
+            }
+        });
+    }
+
+    private static SpannableStringBuilder addClickablePartTextViewResizable(final Spanned strSpanned, final TextView tv,
+                                                                            final int maxLine, final String spanableText, final boolean viewMore) {
+        String str = strSpanned.toString();
+        SpannableStringBuilder ssb = new SpannableStringBuilder(strSpanned);
+
+        if (str.contains(spanableText)) {
+            ssb.setSpan(new ClickableSpan() {
+
+                @Override
+                public void onClick(View widget) {
+                    tv.setLayoutParams(tv.getLayoutParams());
+                    tv.setText(tv.getTag().toString(), TextView.BufferType.SPANNABLE);
+                    tv.invalidate();
+                    if (viewMore) {
+                        makeTextViewResizable(tv, -1, "Less", false);
+                    } else {
+                        makeTextViewResizable(tv, 3, "More", true);
+                    }
+
+                }
+            }, str.indexOf(spanableText), str.indexOf(spanableText) + spanableText.length(), 0);
+
+        }
+        return ssb;
+    }
 }

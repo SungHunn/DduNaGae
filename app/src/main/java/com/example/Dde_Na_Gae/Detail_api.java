@@ -14,7 +14,6 @@ public class Detail_api implements Runnable {
     String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
     String conId;
 
-    String homepage;
     String overview;
     String addr1;
 
@@ -31,6 +30,7 @@ public class Detail_api implements Runnable {
                 "&MobileOS=AND" +
                 "&MobileApp=AppTest" +
                 "&contentId=" + conId +
+                "&contentTypeId=12" +
                 "&defaultYN=Y" +
                 "&firstImageYN=Y" +
                 "&areacodeYN=Y" +
@@ -66,18 +66,12 @@ public class Detail_api implements Runnable {
 //                    System.out.println(temp);
 
             addr1 = temp.getString("addr1");  // 주소 받아오기
-            homepage = temp.getString("homepage"); // 홈페이지 받아오기
             overview = temp.getString("overview"); // 개요(설명) 받아오기
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             e.printStackTrace();
         }
-    }
-
-
-    public String getHomepage() {
-        return homepage;
     }
 
     public String getOverview() {
