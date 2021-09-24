@@ -163,7 +163,6 @@ public class Mainactivity extends AppCompatActivity {
         list.add("공지사항");
         list.add("이벤트");
         list.add("예약내역");
-        list.add("매칭방 목록");
         list.add("좋아요 표시한 목록");
         list.add("고객센터");
         list.add("설정");
@@ -171,7 +170,7 @@ public class Mainactivity extends AppCompatActivity {
 
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            list.set(7, "로그아웃");
+            list.set(6, "로그아웃");
 
             layout_account.setVisibility(View.VISIBLE);
             my_nickname = (TextView) findViewById(R.id.my_page_login);

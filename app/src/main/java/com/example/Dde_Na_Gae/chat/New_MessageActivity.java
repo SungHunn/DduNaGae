@@ -53,6 +53,7 @@ public class New_MessageActivity extends AppCompatActivity {
     ImageButton single_chat_hbg;
     Button chattingroom_exit;
 
+    private TextView chat_text;
     private String uid;
     private String chatRoomUid;
     private String destinatonUid;
@@ -76,7 +77,11 @@ public class New_MessageActivity extends AppCompatActivity {
         drawerLayout = findViewById(R.id.single_chat_drawlayout);
         drawerView = findViewById(R.id.single_chatting_drawer);
 
+        chat_text = (TextView)findViewById(R.id.chatting_text);
+
         single_chat_drawer_recyclerView = (RecyclerView)findViewById(R.id.single_chatting_drawer_recyclerview);
+        single_chat_drawer_recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));
+        single_chat_drawer_recyclerView.setAdapter(new MemberRecyclerViewAdapter());
 
         single_chat_hbg = (ImageButton) findViewById(R.id.single_talkmenu_open);
 
@@ -86,8 +91,6 @@ public class New_MessageActivity extends AppCompatActivity {
 
                 drawerLayout.openDrawer(drawerView);
 
-                single_chat_drawer_recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));
-                single_chat_drawer_recyclerView.setAdapter(new MemberRecyclerViewAdapter());
 
             }
         });
@@ -452,15 +455,16 @@ public class New_MessageActivity extends AppCompatActivity {
     private void stopPlay() {
     }
 
-    class MemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+    class MemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-       List<UserModel> userModel;
+        List<UserModel> userModel;
 
-        public  MemberRecyclerViewAdapter() {
+        public MemberRecyclerViewAdapter() {
 
             userModel = new ArrayList();
+            String destinatonUid1 = getIntent().getStringExtra("chat-destinationUid");
 
-            FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).addListenerForSingleValueEvent(new ValueEventListener() {
+            FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid1).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
@@ -476,34 +480,37 @@ public class New_MessageActivity extends AppCompatActivity {
                 public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                 }
+
+
             });
 
 
-
-
         }
-
-
 
         @NonNull
         @NotNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chatroom_people,parent,false);
+
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message,parent,false);
 
             return new MemberViewHolder(view);
+
+
         }
 
         @Override
-        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder,final int position) {
+        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
 
             MemberViewHolder memberViewHolder = ((MemberViewHolder)holder);
 
-            memberViewHolder.member_nickname.setText(userModel.get(position).nickname);
+            System.out.println(userModel.get(0).nickname);
+            memberViewHolder.member_ninckname.setText(userModel.get(0).nickname);
 
-
-
-
+            Glide.with(holder.itemView.getContext())
+                    .load(userModel.get(0).imageUri)
+                    .apply(new RequestOptions().circleCrop())
+                    .into(memberViewHolder.member_profile);
 
         }
 
@@ -514,18 +521,26 @@ public class New_MessageActivity extends AppCompatActivity {
 
         private class MemberViewHolder extends RecyclerView.ViewHolder {
 
-            public TextView member_nickname;
+            public TextView member_ninckname;
             public ImageView member_profile;
 
 
             public MemberViewHolder(View view) {
                 super(view);
 
-                member_nickname = (TextView)view.findViewById(R.id.memeber_nickname);
+                member_ninckname = (TextView)view.findViewById(R.id.memeber_nickname);
                 member_profile = (ImageView)view.findViewById(R.id.memeber_profile);
+
 
             }
         }
+
+
     }
 
-}
+
+
+
+
+
+    }
