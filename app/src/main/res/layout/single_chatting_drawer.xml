@@ -21,11 +21,31 @@
             android:layout_marginLeft="10dp"
             android:textSize="30dp"
             />
-        <androidx.recyclerview.widget.RecyclerView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:id="@+id/single_chatting_drawer_recyclerview"/>
+       <LinearLayout
+           android:layout_width="wrap_content"
+           android:layout_height="wrap_content"
+           android:orientation="horizontal"
+           android:layout_marginTop="150dp">
 
+           <ImageView
+               android:layout_width="55dp"
+               android:layout_height="55dp"
+               android:layout_marginRight="35dp"
+               android:id="@+id/single_chatroom_memeber_profile"/>
+
+
+           <TextView
+               android:layout_width="wrap_content"
+               android:layout_height="wrap_content"
+               android:text="닉네임"
+               android:textSize="37dp"
+               android:id="@+id/single_chatroom_member_nickname"/>
+
+
+
+
+
+       </LinearLayout>
     </LinearLayout>
     <Button
         android:id="@+id/single_room_exit"

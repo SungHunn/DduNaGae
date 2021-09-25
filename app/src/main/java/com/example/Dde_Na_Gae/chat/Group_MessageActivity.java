@@ -68,6 +68,8 @@ public class Group_MessageActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
+    private RecyclerView groupmember_recyclerView;
+
     List<ChatModel.Comment> comments = new ArrayList<>();
 
     @Override
@@ -81,6 +83,10 @@ public class Group_MessageActivity extends AppCompatActivity {
         drawerView = findViewById(R.id.chatting_drawer);
 
         group_chat_hbg = (ImageButton) findViewById(R.id.talkmenu_open);
+
+        groupmember_recyclerView = (RecyclerView)findViewById(R.id.chatting_drawer_recyclerview);
+        groupmember_recyclerView.setAdapter(new GroupMemberRecyclerViewAdapter());
+        groupmember_recyclerView.setLayoutManager(new LinearLayoutManager(Group_MessageActivity.this));
 
         group_chat_hbg.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -388,6 +394,79 @@ public class Group_MessageActivity extends AppCompatActivity {
             }
         }
     }
+
+
+
+    class GroupMemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+        List<ChatModel> chatModels;
+        UserModel userModel;
+
+        Intent intent = getIntent();
+        String chat_masterUid = intent.getStringExtra("chat_masterUid");
+        String room_name = intent.getStringExtra("room_name");
+        String option_selector = intent.getStringExtra("option_selector");
+
+        public GroupMemberRecyclerViewAdapter() {
+
+            chatModels = new ArrayList<>();
+
+            FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                    chatroomuid = snapshot.getValue().toString();
+
+                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                            for (DataSnapshot item : snapshot.getChildren()) {
+
+                                chatModels.add(item.getValue(ChatModel.class));
+
+                            }
+
+                            System.out.println(chatModels.get(0).users);
+                        }
+
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+
+
+            });
+        }
+
+        @NonNull
+        @NotNull
+        @Override
+        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+            return null;
+        }
+
+        @Override
+        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+
+        }
+
+        @Override
+        public int getItemCount() {
+            return 0;
+        }
+    }
+
+
 
     @Override
     public void onBackPressed() {

@@ -62,7 +62,8 @@ public class New_MessageActivity extends AppCompatActivity {
     DatabaseReference mDatabase;
     private RecyclerView recyclerView;
 
-    private RecyclerView single_chat_drawer_recyclerView;
+    private TextView member_text;
+    private ImageView member_profile;
 
     DrawerLayout drawerLayout;
     View drawerView;
@@ -73,15 +74,13 @@ public class New_MessageActivity extends AppCompatActivity {
         setContentView(R.layout.activity_message2);
 
 
+        destinatonUid = getIntent().getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
+
         //햄버거
         drawerLayout = findViewById(R.id.single_chat_drawlayout);
         drawerView = findViewById(R.id.single_chatting_drawer);
 
         chat_text = (TextView)findViewById(R.id.chatting_text);
-
-        single_chat_drawer_recyclerView = (RecyclerView)findViewById(R.id.single_chatting_drawer_recyclerview);
-        single_chat_drawer_recyclerView.setLayoutManager(new LinearLayoutManager(New_MessageActivity.this));
-        single_chat_drawer_recyclerView.setAdapter(new MemberRecyclerViewAdapter());
 
         single_chat_hbg = (ImageButton) findViewById(R.id.single_talkmenu_open);
 
@@ -91,7 +90,6 @@ public class New_MessageActivity extends AppCompatActivity {
 
                 drawerLayout.openDrawer(drawerView);
 
-
             }
         });
 
@@ -99,15 +97,49 @@ public class New_MessageActivity extends AppCompatActivity {
         drawerView.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
+
+
+
                 return true;
             }
         });
+
+        member_text = (TextView)findViewById(R.id.single_chatroom_member_nickname);
+        member_profile = (ImageView)findViewById(R.id.single_chatroom_memeber_profile);
+
+        FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).addListenerForSingleValueEvent(new ValueEventListener() {
+
+            UserModel userModel = new UserModel();
+
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                userModel = snapshot.getValue(UserModel.class);
+
+                member_text.setText(userModel.nickname);
+
+                Glide.with(New_MessageActivity.this)
+                        .load(userModel.imageUri)
+                        .apply(new RequestOptions().circleCrop())
+                        .into(member_profile);
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();  //채팅을 요구 하는 아아디 즉 단말기에 로그인된 UID
         button = (Button) findViewById(R.id.messageActivity_button);
         editText = (EditText) findViewById(R.id.messageActivity_editText);
-        destinatonUid = getIntent().getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
+
         roomname = getIntent().getStringExtra("room-name");
         chatting_room_option_selector = getIntent().getStringExtra("option_selector");
 
@@ -442,6 +474,7 @@ public class New_MessageActivity extends AppCompatActivity {
         }
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -455,92 +488,4 @@ public class New_MessageActivity extends AppCompatActivity {
     private void stopPlay() {
     }
 
-    class MemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
-        List<UserModel> userModel;
-
-        public MemberRecyclerViewAdapter() {
-
-            userModel = new ArrayList();
-            String destinatonUid1 = getIntent().getStringExtra("chat-destinationUid");
-
-            FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid1).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                    userModel.add(snapshot.getValue(UserModel.class));
-
-
-
-
-                }
-
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-
-
-            });
-
-
-        }
-
-        @NonNull
-        @NotNull
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message,parent,false);
-
-            return new MemberViewHolder(view);
-
-
-        }
-
-        @Override
-        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-
-            MemberViewHolder memberViewHolder = ((MemberViewHolder)holder);
-
-            System.out.println(userModel.get(0).nickname);
-            memberViewHolder.member_ninckname.setText(userModel.get(0).nickname);
-
-            Glide.with(holder.itemView.getContext())
-                    .load(userModel.get(0).imageUri)
-                    .apply(new RequestOptions().circleCrop())
-                    .into(memberViewHolder.member_profile);
-
-        }
-
-        @Override
-        public int getItemCount() {
-            return userModel.size();
-        }
-
-        private class MemberViewHolder extends RecyclerView.ViewHolder {
-
-            public TextView member_ninckname;
-            public ImageView member_profile;
-
-
-            public MemberViewHolder(View view) {
-                super(view);
-
-                member_ninckname = (TextView)view.findViewById(R.id.memeber_nickname);
-                member_profile = (ImageView)view.findViewById(R.id.memeber_profile);
-
-
-            }
-        }
-
-
-    }
-
-
-
-
-
-
-    }
+}
