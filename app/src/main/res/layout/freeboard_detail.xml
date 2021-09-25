@@ -110,7 +110,7 @@
 
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="150dp"
+        android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:inputType="textPersonName"
         android:id="@+id/free_board_detail_content"
@@ -118,6 +118,48 @@
         android:textSize="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:orientation="horizontal"
+        android:weightSum="10">
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="5"/>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="좋아요"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="좋아수"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"/>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="댓글"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+        <TextView
+            android:layout_width="1dp"
+            android:layout_height="wrap_content"
+            android:text="댓글수"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center_vertical"/>
+    </LinearLayout>
     <View
         android:layout_width="match_parent"
         android:layout_height="1dp"
@@ -128,19 +170,21 @@
         android:layout_height="40dp"
         android:orientation="horizontal"
         android:weightSum="6"
-        android:layout_marginTop="20dp">
+        android:id="@+id/free_board_detail_iloveit"
+        >
 
         //빈하트 이미지
         <ImageView
-            android:visibility="gone"
-            android:layout_width="wrap_content"
+            android:visibility="visible"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:src="@drawable/unfilled_heart"
             android:id="@+id/unfilled_heart"/>
         //꽉찬하트 이미지
         <ImageView
             android:visibility="gone"
-            android:layout_width="wrap_content"
+            android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:src="@drawable/logo"
             android:layout_weight="1"
@@ -150,17 +194,11 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="좋아요"
-            android:layout_weight="2"
+            android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical"/>
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="3"
-            android:text="댓글달기"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"/>
+
     </LinearLayout>
     <View
         android:layout_width="match_parent"

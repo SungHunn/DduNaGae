@@ -51,6 +51,7 @@ public class Freeboard_Activity extends AppCompatActivity {
 
     ImageButton imageButton_open;
     ImageButton imageButton_close;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

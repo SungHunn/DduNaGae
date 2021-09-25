@@ -137,6 +137,7 @@ public class Free_Board_Writing extends AppCompatActivity {
                                 sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 
                                 Article_Database(uid, nickname, title.getText().toString(), content.getText().toString(), imageUrl.getResult().toString(), sdf.format(timestamp), category, category_review);
+
                             }
 
                             @Override
@@ -159,7 +160,7 @@ public class Free_Board_Writing extends AppCompatActivity {
         article_database.content = content;
         article_database.imageUri = imageUri;
         article_database.writing_time = writing_time;
-
+        article_database.have_comment = "none";
 
         article_database.category = category+"-"+category_review;
 
