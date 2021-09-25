@@ -9,4 +9,5 @@ public class Article_Model {
     public String writing_time;
     public String imageUri;
     public String category;
+    public String have_comment;
 }

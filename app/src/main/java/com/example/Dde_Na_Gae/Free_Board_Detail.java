@@ -10,6 +10,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,6 +24,8 @@ import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.CommentModel;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -83,6 +86,7 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
 
 
+        checkcomment();
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -90,10 +94,34 @@ public class Free_Board_Detail  extends AppCompatActivity {
                 CommentModel commentModel = new CommentModel();
                 commentModel.uid = uid;
                 commentModel.comment = edittext_comment.getText().toString();
-                FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").push().setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+
+
+                FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
-                    public void onComplete(@NonNull @NotNull Task<Void> task) {
-                        edittext_comment.setText("");
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        Article_Model article_model = snapshot.getValue(Article_Model.class);
+                        if (!article_model.have_comment.equals("none")) {
+                            FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").push().setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    edittext_comment.setText("");
+                                    set_comment_true();
+                                }
+                            });
+                        }else{
+                            FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").push().setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                @Override
+                                public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                    edittext_comment.setText("");
+                                }
+                            });
+                        }
+                        checkcomment();
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
                     }
                 });
             }
@@ -116,10 +144,15 @@ public class Free_Board_Detail  extends AppCompatActivity {
                             for(DataSnapshot item : snapshot.getChildren()){
                                 UserModel userModel = item.getValue(UserModel.class);
                                 if(userModel.uid.equals(uid)){
-                                  String key = snapshot.getKey();
-                                  FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").child(key).setValue(null);
+                                    String key = snapshot.getKey();
+                                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").child(key).setValue(null);
                                 }
                             }
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
                         }
                     });
                 }
@@ -127,7 +160,6 @@ public class Free_Board_Detail  extends AppCompatActivity {
         });
         Intent intent = getIntent();
         articleid =  intent.getStringExtra("articleid");
-
         FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -171,14 +203,22 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
     }
 
+
+
     public void checkcomment(){
-        FirebaseDatabase.getInstance().getReference().child("FreeBoard").child(articleid).child("comments").addListenerForSingleValueEvent(new ValueEventListener() {
+        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                if(snapshot != null){
-                    recyclerView.setAdapter(new Free_Board_Detail.BoardCommentRecyclerViewAdapter());
+                Article_Model article_model = snapshot.getValue(Article_Model.class);
+                if (!article_model.have_comment.equals("none")) {
+                    recyclerView.setAdapter(new BoardCommentRecyclerViewAdapter());
                     recyclerView.setLayoutManager(new LinearLayoutManager(Free_Board_Detail.this));
                 }
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
             }
         });
     }
@@ -201,6 +241,39 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
             }
         });
+    }
+
+    public void set_comment_true(){
+
+        Intent intent = getIntent();
+        articleid = intent.getStringExtra("my_articleid");
+
+        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                Article_Model article_model = snapshot.getValue(Article_Model.class);
+                article_model.have_comment = "true";
+                FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).setValue(article_model)
+                        .addOnSuccessListener(new OnSuccessListener<Void>() {
+                            @Override
+                            public void onSuccess(Void aVoid) {
+                            }
+                        })
+                        .addOnFailureListener(new OnFailureListener() {
+                            @Override
+                            public void onFailure(@NonNull Exception e) {
+
+                            }
+                        });
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
     }
 
     class BoardCommentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

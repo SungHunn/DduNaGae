@@ -160,7 +160,7 @@ public class Free_Board_Writing extends AppCompatActivity {
         article_database.content = content;
         article_database.imageUri = imageUri;
         article_database.writing_time = writing_time;
-
+        article_database.have_comment = "none";
 
         article_database.category = category+"-"+category_review;
 

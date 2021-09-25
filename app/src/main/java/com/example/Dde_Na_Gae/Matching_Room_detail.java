@@ -202,8 +202,6 @@ public class Matching_Room_detail extends AppCompatActivity {
                             user.put(uid, true);
 
 
-
-
                             mDatabase.child("chatting_room")
                                     .child(chatting_room_option_selector)
                                     .child("Room_Name").child(room_name).child("talk")
