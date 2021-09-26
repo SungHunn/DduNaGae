@@ -225,7 +225,7 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
-        final String[] items = {"공지사항", "이벤트", "예약내역", "매칭방 목록", "좋아요 표시한 목록", "고객센터", "설정", "로그인"};
+        final String[] items = {"공지사항", "이벤트","고객센터", "설정", "로그인"};
         ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
 
         listview = findViewById(R.id.navi_list);
@@ -252,20 +252,11 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 3:
-                        break;
-
-                    case 4:
-                        break;
-
-                    case 5:
-                        break;
-
-                    case 6:
                         Intent intent_setting = new Intent(getApplicationContext(), Setting.class);
                         startActivity(intent_setting);
                         break;
 
-                    case 7:
+                    case 4:
                         Intent intent = new Intent(getApplicationContext(), LoginPage.class);
                         startActivity(intent);
                         break;
@@ -331,7 +322,8 @@ public class Mainactivity extends AppCompatActivity {
     };
     //네비게이션바
 
-// serach box
+    // serach box
+
     private void main_search(){
 
         EditText main_search = findViewById(R.id.main_search);
@@ -444,40 +436,5 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
     }
-//
-//    public String getRegionCode(int code){
-//        String region="";
-//
-//        if (code == 1)
-//            region = "서울";
-//        else if (code == 2)
-//            region = "인천";
-//        else if (code == 3)
-//            region = "대전";
-//        else if (code == 4)
-//            region = "대구";
-//        else if (code == 5)
-//            region = "광주";
-//        else if (code == 6)
-//            region = "부산";
-//        else if (code == 7)
-//            region = "울산";
-//        else if (code == 8)
-//            region = "세종특별자치시";
-//        else if (code == 31)
-//            region = "경기도";
-//        else if (code == 32)
-//            region = "강원도";
-//        else if (code == 33 || code == 34)
-//            region = "충청도";
-//        else if (code == 35 || code == 36)
-//            region = "경상도";
-//        else if (code == 37 || code == 38)
-//            region = "전라도";
-//        else if (code == 39)
-//            region = "제주도";
-//
-//        return region;
-//    }
 
 }
