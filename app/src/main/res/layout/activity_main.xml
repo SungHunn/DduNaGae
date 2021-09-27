@@ -232,9 +232,11 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/to_day_place2"
                 app:layout_constraintTop_toBottomOf="@+id/main_today_place_title" />
 
             <TextView
@@ -253,9 +255,11 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@id/to_day_place1"
                 app:layout_constraintTop_toBottomOf="@+id/main_today_place_title" />
 
             <TextView
@@ -296,9 +300,11 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/best_tour2"
                 app:layout_constraintTop_toBottomOf="@+id/region_travel" />
 
             <TextView
@@ -317,9 +323,11 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/best_tour1"
                 app:layout_constraintTop_toBottomOf="@+id/region_travel" />
 
             <TextView
@@ -360,9 +368,11 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginLeft="7dp"
+                android:layout_marginRight="7dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/best_walk2"
                 app:layout_constraintTop_toBottomOf="@+id/region_walk" />
 
             <TextView
@@ -381,9 +391,11 @@
                 android:layout_height="130dp"
                 android:layout_marginTop="10dp"
                 android:layout_marginRight="7dp"
+                android:layout_marginLeft="7dp"
                 android:adjustViewBounds="true"
                 android:src="@mipmap/ic_launcher"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/best_walk1"
                 app:layout_constraintTop_toBottomOf="@+id/region_walk" />
 
             <TextView
@@ -405,6 +417,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/best_walk2_txt" />
+
 
                                     <!--        추가 메뉴       -->
 

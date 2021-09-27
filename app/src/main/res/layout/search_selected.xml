@@ -8,9 +8,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:weightSum="1">
 
-        <!-- 뒤로가기(홈) -->
+                                            <!--  상단 바  -->
+
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="30dp"
@@ -18,24 +20,33 @@
             android:layout_marginStart="10dp"
             android:layout_marginLeft="10dp"
             android:clickable="true"
+            android:layout_weight="0.2"
             android:src="@drawable/ic_baseline_arrow_back_ios_24" />
 
         <TextView
             android:id="@+id/selected_name"
+            android:layout_marginTop="5dp"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:gravity="center"
             android:text="클릭한 제목"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:layout_weight="0.8"/>
+
     </LinearLayout>
+
+                                    <!--     컨텐트 정보    -->
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
+
+                        <!--             selected img           -->
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -47,39 +58,48 @@
                     android:id="@+id/selected_img"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content" />
+
             </LinearLayout>
+
+
+                                    <!--            img 정보          -->
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"  >
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_margin="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:layout_weight="1">
 
                     <TextView
                         android:id="@+id/selected_name_main"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:gravity="center"
                         android:text="클릭한 제목"
-                        android:textSize="30sp" />
+                        android:textSize="30sp"
+                        android:layout_weight="0.5"/>
 
                     <ImageView
                         android:id="@+id/selected_map"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
-                        android:layout_gravity="center"
-                        android:src="@mipmap/ic_launcher" />
+                        android:src="@mipmap/ic_launcher"
+                        android:layout_weight="0.1"/>
 
                 </LinearLayout>
 
             </LinearLayout>
+
+
+                            <!--             상세 정보          -->
+
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -87,14 +107,6 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp"
                 android:orientation="vertical">
-
-                <LinearLayout
-                    android:id="@+id/isnone"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                </LinearLayout>
 
                 <View
                     android:layout_width="match_parent"
@@ -159,6 +171,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:menu="@menu/reservation_bar_menu" />
+
     </LinearLayout>
 
 </LinearLayout>
