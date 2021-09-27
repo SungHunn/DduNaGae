@@ -85,6 +85,19 @@ public class New_MessageActivity extends AppCompatActivity {
 
         single_chat_hbg = (ImageButton) findViewById(R.id.single_talkmenu_open);
 
+
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();  //채팅을 요구 하는 아아디 즉 단말기에 로그인된 UID
+        button = (Button) findViewById(R.id.messageActivity_button);
+        editText = (EditText) findViewById(R.id.messageActivity_editText);
+        destinatonUid = getIntent().getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
+        roomname = getIntent().getStringExtra("room-name");
+        chatting_room_option_selector = getIntent().getStringExtra("option_selector");
+
+        recyclerView = (RecyclerView)findViewById(R.id.single_messageActivity_recyclerview);
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
+
         single_chat_hbg.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -102,26 +115,6 @@ public class New_MessageActivity extends AppCompatActivity {
                 return true;
             }
         });
-
-        mDatabase = FirebaseDatabase.getInstance().getReference();
-        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();  //채팅을 요구 하는 아아디 즉 단말기에 로그인된 UID
-        button = (Button) findViewById(R.id.messageActivity_button);
-        editText = (EditText) findViewById(R.id.messageActivity_editText);
-        destinatonUid = getIntent().getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
-        roomname = getIntent().getStringExtra("room-name");
-        chatting_room_option_selector = getIntent().getStringExtra("option_selector");
-
-        recyclerView = (RecyclerView)findViewById(R.id.single_messageActivity_recyclerview);
-
-
-
-
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN);
-
-
-
-
-
 
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -296,12 +289,8 @@ public class New_MessageActivity extends AppCompatActivity {
             FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
                     userModel = snapshot.getValue(UserModel.class);
                     getMessageList();
-
-
-
                 }
 
 
@@ -348,6 +337,7 @@ public class New_MessageActivity extends AppCompatActivity {
             }
             else
             {
+
                 FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("comments").addValueEventListener(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -457,42 +447,93 @@ public class New_MessageActivity extends AppCompatActivity {
 
     class MemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        List<UserModel> userModel;
+        List<UserModel> userModel = new ArrayList();
 
         public MemberRecyclerViewAdapter() {
+            Intent intent = getIntent();
+            String key = intent.getStringExtra("key");
+            if(key.equals(1)) {
+                String chatroom_uid = intent.getStringExtra("chatroom_uid");
+                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatroom_uid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                        userModel.clear();
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            String user = item.getKey();
+                            FirebaseDatabase.getInstance().getReference().child("users").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                    userModel.add(snapshot.getValue(UserModel.class));
+                                }
 
-            userModel = new ArrayList();
-            String destinatonUid1 = getIntent().getStringExtra("chat-destinationUid");
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-            FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid1).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                }
+                            });
 
-                    userModel.add(snapshot.getValue(UserModel.class));
+                        }
+                    }
 
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
+                    }
+                });
+            } else {
+                destinatonUid = getIntent().getStringExtra("chat-destinationUid"); // 채팅을 당하는 아이디
+                roomname = getIntent().getStringExtra("room-name");
+                chatting_room_option_selector = getIntent().getStringExtra("option_selector");
+                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").orderByChild("users/"+uid).equalTo(true).addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        for(DataSnapshot item : dataSnapshot.getChildren()){
+                            ChatModel  chatModel = item.getValue(ChatModel.class);
+                            if(chatModel.users.containsKey(destinatonUid)){
+                                chatRoomUid = item.getKey();
+                                System.out.println(chatRoomUid);
+                            FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child(chatRoomUid).child("user").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                    for(DataSnapshot item : snapshot.getChildren()) {
+                                        String user = item.getKey();
+                                        System.out.println(user);
+                                        FirebaseDatabase.getInstance().getReference().child("users").child(user).addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                                userModel.add(snapshot.getValue(UserModel.class));
+                                            }
 
+                                            @Override
+                                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                }
+                                            }
+                                        });
+                                    }
+                                }
 
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                }
+                            });
+                        }
+                        }
+                    }
 
-                }
+                    @Override
+                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-
-            });
-
-
+                    }
+                });
+            }
         }
-
         @NonNull
         @NotNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_message,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_userslist,parent,false);
 
             return new MemberViewHolder(view);
 
@@ -504,11 +545,11 @@ public class New_MessageActivity extends AppCompatActivity {
 
             MemberViewHolder memberViewHolder = ((MemberViewHolder)holder);
 
-            System.out.println(userModel.get(0).nickname);
-            memberViewHolder.member_ninckname.setText(userModel.get(0).nickname);
+
+            memberViewHolder.member_nickname.setText(userModel.get(position).nickname);
 
             Glide.with(holder.itemView.getContext())
-                    .load(userModel.get(0).imageUri)
+                    .load(userModel.get(position).imageUri)
                     .apply(new RequestOptions().circleCrop())
                     .into(memberViewHolder.member_profile);
 
@@ -521,14 +562,14 @@ public class New_MessageActivity extends AppCompatActivity {
 
         private class MemberViewHolder extends RecyclerView.ViewHolder {
 
-            public TextView member_ninckname;
+            public TextView member_nickname;
             public ImageView member_profile;
 
 
             public MemberViewHolder(View view) {
                 super(view);
 
-                member_ninckname = (TextView)view.findViewById(R.id.memeber_nickname);
+                member_nickname = (TextView)view.findViewById(R.id.memeber_nickname);
                 member_profile = (ImageView)view.findViewById(R.id.memeber_profile);
 
 
