@@ -87,12 +87,6 @@
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="제목 : "
-            android:textSize="25dp"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
             android:id="@+id/free_board_detail_title"
             android:text="````` "
             android:textSize="25dp"/>
@@ -140,7 +134,8 @@
             android:text="좋아수"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:id="@+id/love_it_num"/>
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
@@ -158,7 +153,8 @@
             android:text="댓글수"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:id="@+id/comment_num"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -186,7 +182,7 @@
             android:visibility="gone"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:src="@drawable/logo"
+            android:src="@drawable/fill_heart"
             android:layout_weight="1"
             android:id="@+id/filled_heart"/>
 
@@ -194,9 +190,20 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="좋아요"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:gravity="center"
+            android:textSize="30dp"
             android:layout_gravity="center_vertical"/>
+
+        <TextView
+            android:id="@+id/free_board_detail_comment_view"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="댓글"
+            android:textSize="30dp"
+            android:gravity="center"
+            android:layout_weight="3"
+            />
 
 
     </LinearLayout>
@@ -204,13 +211,13 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:background="#000000"
+
         />
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/free_board_detail_comment_recyclerview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/free_board"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="20dp" />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
