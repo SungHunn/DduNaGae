@@ -54,6 +54,9 @@ public class Free_Board_Detail  extends AppCompatActivity {
     private TextView love_it_num;
     private TextView comment_num;
 
+    private TextView heart_count;
+    private TextView comment_count;
+
     private EditText edittext_comment;
 
     LinearLayout linearLayout;
@@ -97,6 +100,9 @@ public class Free_Board_Detail  extends AppCompatActivity {
         photo = (ImageView)findViewById(R.id.free_board_image);
         profile = (ImageView)findViewById(R.id.freeboard_detail_myprofile);
 
+        heart_count = (TextView)findViewById(R.id.love_it_num);
+        comment_count = (TextView)findViewById(R.id.comment_num);
+
         checkloveit(articleid,uid);
         checkcomment(articleid);
 
@@ -108,7 +114,7 @@ public class Free_Board_Detail  extends AppCompatActivity {
                 commentModel.uid = uid;
                 commentModel.comment = edittext_comment.getText().toString();
                 Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                SimpleDateFormat timeformat = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
+                SimpleDateFormat timeformat = new SimpleDateFormat("yyyy년 MM월 dd일  a kk:mm:ss");
                 timeformat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
                 commentModel.timestamp = timeformat.format(timestamp);
 
@@ -165,7 +171,7 @@ public class Free_Board_Detail  extends AppCompatActivity {
                                 UserModel userModel = item.getValue(UserModel.class);
                                 if(userModel.uid.equals(uid)){
                                     String key = item.getKey();
-                                    System.out.println(key);
+
                                     FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").child(key).setValue(null);
                                     filledheart.setVisibility(View.GONE);
                                     unfilledheart.setVisibility(View.VISIBLE);
@@ -224,6 +230,67 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
             }
         });
+
+        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                List<String> counting = new ArrayList<>();
+
+                for (DataSnapshot item : snapshot.getChildren()){
+
+                    counting.add(item.getKey());
+
+                }
+
+
+
+                if (counting.size() == 0 ){
+                    heart_count.setText(" ");
+                }else{
+                    heart_count.setText(String.valueOf(counting.size())+ " 개");
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").addListenerForSingleValueEvent(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                List<String> counting = new ArrayList<>();
+
+                for (DataSnapshot item : snapshot.getChildren()){
+
+                    counting.add(item.getKey());
+
+                }
+
+
+
+                if (counting.size() == 0 ){
+                    comment_count.setText(" ");
+                }else{
+                    comment_count.setText(String.valueOf(counting.size()) + " 개");
+                }
+
+
+            }
+
+            @Override
+            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+            }
+        });
+
+
+
 
     }
 
@@ -289,9 +356,10 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
         List<CommentModel> commentModels;
 
-
         public BoardCommentRecyclerViewAdapter(){
             commentModels = new ArrayList<>();
+
+
             FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").orderByChild("timestamp").addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
@@ -300,6 +368,8 @@ public class Free_Board_Detail  extends AppCompatActivity {
                         CommentModel commentModel = item.getValue(CommentModel.class);
                         commentModels.add(commentModel);
                     }
+
+
                 }
                 @Override
                 public void onCancelled(@NonNull @NotNull DatabaseError error) {
@@ -321,7 +391,7 @@ public class Free_Board_Detail  extends AppCompatActivity {
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
             Free_Board_Detail.BoardCommentRecyclerViewAdapter.BoardCommentViewHolder boardCommentViewHolder = ((Free_Board_Detail.BoardCommentRecyclerViewAdapter.BoardCommentViewHolder)holder);
 
-            System.out.println(commentModels.get(position).uid);
+
 
             boardCommentViewHolder.comment_comment.setText(commentModels.get(position).comment);
 

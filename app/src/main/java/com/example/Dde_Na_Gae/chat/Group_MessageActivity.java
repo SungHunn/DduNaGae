@@ -47,6 +47,7 @@ import java.util.Map;
 
 public class Group_MessageActivity extends AppCompatActivity {
     Map<String, UserModel> users = new HashMap<>();
+    List<String> members = new ArrayList<>();
     String uid;
     EditText editText;
 
@@ -84,24 +85,11 @@ public class Group_MessageActivity extends AppCompatActivity {
 
         group_chat_hbg = (ImageButton) findViewById(R.id.talkmenu_open);
 
+
         groupmember_recyclerView = (RecyclerView)findViewById(R.id.chatting_drawer_recyclerview);
         groupmember_recyclerView.setAdapter(new GroupMemberRecyclerViewAdapter());
         groupmember_recyclerView.setLayoutManager(new LinearLayoutManager(Group_MessageActivity.this));
 
-        group_chat_hbg.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(drawerView);
-            }
-        });
-
-        drawerLayout.setDrawerListener(listener);
-        drawerView.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
-            }
-        });
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         editText = (EditText) findViewById(R.id.group_messageActivity_editText);
@@ -208,7 +196,25 @@ public class Group_MessageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
 */
+
+        group_chat_hbg.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(drawerView);
+
+
+            }
+        });
+
+        drawerLayout.setDrawerListener(listener);
+        drawerView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                return true;
+            }
+        });
     }
 
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -399,8 +405,8 @@ public class Group_MessageActivity extends AppCompatActivity {
 
     class GroupMemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        List<ChatModel> chatModels;
-        UserModel userModel;
+        List<UserModel> userModels;
+
 
         Intent intent = getIntent();
         String chat_masterUid = intent.getStringExtra("chat_masterUid");
@@ -409,26 +415,46 @@ public class Group_MessageActivity extends AppCompatActivity {
 
         public GroupMemberRecyclerViewAdapter() {
 
-            chatModels = new ArrayList<>();
+            userModels = new ArrayList<>();
+
 
             FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
 
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                    chatroomuid = snapshot.getValue().toString();
+                    String chatroomuid1 = snapshot.getValue().toString();
 
-                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).addListenerForSingleValueEvent(new ValueEventListener() {
+                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid1).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
                         @Override
                         public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
+                             members.clear();
                             for (DataSnapshot item : snapshot.getChildren()) {
-
-                                chatModels.add(item.getValue(ChatModel.class));
+                                members.add(item.getKey());
 
                             }
 
-                            System.out.println(chatModels.get(0).users);
+
+                            for(int i=0; i < members.size(); i++) {
+                                int finalI = i;
+                                FirebaseDatabase.getInstance().getReference().child("users").child(members.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
+                                    @Override
+                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+
+                                        userModels.add(snapshot.getValue(UserModel.class));
+
+
+                                    }
+
+                                    @Override
+                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                                    }
+                                });
+
+
+                            }
+
                         }
 
 
@@ -446,24 +472,66 @@ public class Group_MessageActivity extends AppCompatActivity {
 
 
             });
+
+
+
+
+
+
+
         }
 
         @NonNull
         @NotNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            return null;
+
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chatroom_people, parent, false);
+
+
+            return new GroupMemberViewHodler(view);
+
+
         }
 
         @Override
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
 
+            GroupMemberViewHodler groupMemberViewHodler = ((GroupMemberViewHodler)holder);
+
+            System.out.println(userModels.get(position).nickname);
+
+            groupMemberViewHodler.group_member_nickname.setText(userModels.get(position).nickname);
+
+            Glide.with(holder.itemView.getContext())
+                    .load(userModels.get(position).imageUri)
+                    .apply(new RequestOptions().circleCrop())
+                    .into(groupMemberViewHodler.group_member_profile);
+
+
         }
 
         @Override
         public int getItemCount() {
-            return 0;
+            return userModels.size();
         }
+
+        private class GroupMemberViewHodler extends RecyclerView.ViewHolder {
+
+            public TextView group_member_nickname;
+            public ImageView group_member_profile;
+
+
+            public GroupMemberViewHodler(View view) {
+                super(view);
+
+                group_member_nickname = (TextView)view.findViewById(R.id.memeber_nickname);
+                group_member_profile = (ImageView)view.findViewById(R.id.memeber_profile);
+
+            }
+        }
+
+
     }
 
 

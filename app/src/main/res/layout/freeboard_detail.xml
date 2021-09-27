@@ -117,10 +117,7 @@
         android:layout_height="30dp"
         android:orientation="horizontal"
         android:weightSum="10">
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="5"/>
+
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
@@ -128,14 +125,15 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical"/>
+
         <TextView
+            android:id="@+id/love_it_num"
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:text="좋아수"
+            android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/love_it_num"/>
+            android:text="좋아수" />
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
@@ -223,7 +221,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="10"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="50dp">
         <EditText
             android:layout_width="0dp"
             android:layout_height="45dp"
