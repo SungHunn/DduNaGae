@@ -4,6 +4,8 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -30,6 +32,7 @@ public class My_Page extends AppCompatActivity {
     Uri url;
     TextView myname;
     BottomNavigationView bottomNavigationView;
+    TextView go_my_article;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,7 +40,7 @@ public class My_Page extends AppCompatActivity {
         setContentView(R.layout.my_page);
 
         bottomNavigationBar();
-        myprofile = (ImageView)findViewById(R.id.my_profile);
+        myprofile = (ImageView)findViewById(R.id.my_page_img);
         myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
         FirebaseDatabase.getInstance().getReference().child("users").child(myuid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -58,7 +61,7 @@ public class My_Page extends AppCompatActivity {
 
         });
 
-        myname = (TextView)findViewById(R.id.myname);
+        myname = (TextView)findViewById(R.id.my_page_nickname);
 
         FirebaseDatabase.getInstance().getReference().child("users").child(myuid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -69,6 +72,16 @@ public class My_Page extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
+            }
+        });
+
+        go_my_article = (TextView) findViewById(R.id.my_page_write);
+
+        go_my_article.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
+                startActivity(intent);
             }
         });
 
