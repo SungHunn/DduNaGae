@@ -72,7 +72,9 @@
         <activity android:name=".Free_Board_Detail"/>
         <activity android:name=".My_Free_Board_detail_Change"/>
         <activity android:name=".Free_Board_Review"/>
-        <activity android:name=".Free_Board_Detail"/>
+        <activity android:name=".WelcomeActivity"
+            android:screenOrientation="portrait"/>
+
     </application>
 
 </manifest>
