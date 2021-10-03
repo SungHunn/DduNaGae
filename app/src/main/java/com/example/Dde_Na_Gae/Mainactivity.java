@@ -133,6 +133,7 @@ public class Mainactivity extends AppCompatActivity {
         } catch (Exception e) {
             e.printStackTrace();
         }
+
         Today_FirstImage = today_api.getToday_images();
         Today_Title = today_api.getToday_titles();
         Today_ConId = today_api.getToday_contentids();
