@@ -19,6 +19,8 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -79,6 +81,10 @@ public class Mainactivity extends AppCompatActivity {
     ArrayList<String> Sub_ConId = new ArrayList<>();
 
 
+    private RecyclerView today_recyclerView;
+    private ArrayList<Today_RecyclerViewItem> todayList;
+    private Today_RecyclerViewAdapter today_recyclerViewAdapter;
+
     ImageView to_day_place1;
     TextView to_day_place1_txt;
     ImageView to_day_place2;
@@ -101,11 +107,12 @@ public class Mainactivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         // 오늘의 place 사진 및 텍스트 설정
-        to_day_place1 = (ImageView)findViewById(R.id.to_day_place1);
-        to_day_place1_txt = (TextView)findViewById(R.id.to_day_place1_txt);
-        to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
-        to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
+//        to_day_place1 = (ImageView)findViewById(R.id.to_day_place1);
+//        to_day_place1_txt = (TextView)findViewById(R.id.to_day_place1_txt);
+//        to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
+//        to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
 
 //        Today_FirstImage = getIntent().getStringArrayListExtra("Today_Image");
         Today_api today_api = new Today_api();
@@ -129,10 +136,10 @@ public class Mainactivity extends AppCompatActivity {
         Today_FirstImage = today_api.getToday_images();
         Today_Title = today_api.getToday_titles();
         Today_ConId = today_api.getToday_contentids();
-        Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
-        to_day_place1_txt.setText(Today_Title.get(0));
-        Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
-        to_day_place2_txt.setText(Today_Title.get(1));
+//        Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
+//        to_day_place1_txt.setText(Today_Title.get(0));
+//        Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
+//        to_day_place2_txt.setText(Today_Title.get(1));
         /////////////////////////
 
         best_tour1 = (ImageView) findViewById(R.id.best_tour1);
@@ -170,6 +177,28 @@ public class Mainactivity extends AppCompatActivity {
 
         region_walk = (TextView)findViewById(R.id.region_walk);
 //        region_walk.setText(getRegionCode((today % 9) + 31) + " 추천 여행지");
+
+        todayInit();
+        for (int i=0; i<7; i++){
+            today_addItem(Today_FirstImage.get(i), Today_Title.get(i), Today_ConId.get(i));
+        }
+
+        today_recyclerViewAdapter = new Today_RecyclerViewAdapter(todayList);
+
+//        today_recyclerViewAdapter.setOnItemClickListener(new Today_RecyclerViewAdapter.OnItemClickListener() {
+//            @Override
+//            public void onItemClick(int pos) {
+//                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+//                intent.putExtra("Image", Today_FirstImage.get(pos));
+//                intent.putExtra("Title", Today_Title.get(pos));
+//                intent.putExtra("ConId", Today_ConId.get(pos));
+//                startActivity(intent);
+//
+//            }
+//        });
+        today_recyclerView.setAdapter(today_recyclerViewAdapter);
+        today_recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
 
 
         // 바텀네비게이션바 클릭 이벤트 삽입 구간
@@ -298,7 +327,7 @@ public class Mainactivity extends AppCompatActivity {
 
 
 //        onTextViewClick();
-        toDayPlaceClick();
+//        toDayPlaceClick();
         bestPlaceClick();
         bestWalkClick();
         addMenuClick();
@@ -368,31 +397,31 @@ public class Mainactivity extends AppCompatActivity {
     }
 
     // 오늘의 place 클릭 이벤트
-    public void toDayPlaceClick() {
-        today_place1 = (ImageView) findViewById(R.id.to_day_place1);
-        today_place1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Today_FirstImage.get(0));
-                intent.putExtra("Title", Today_Title.get(0));
-                intent.putExtra("ConId", Today_ConId.get(0));
-                startActivity(intent);
-            }
-        });
-
-        today_place2 = (ImageView) findViewById(R.id.to_day_place2);
-        today_place2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Today_FirstImage.get(1));
-                intent.putExtra("Title", Today_Title.get(1));
-                intent.putExtra("ConId", Today_ConId.get(1));
-                startActivity(intent);
-            }
-        });
-    }
+//    public void toDayPlaceClick() {
+////        today_place1 = (ImageView) findViewById(R.id.to_day_place1);
+//        today_place1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+//                intent.putExtra("Image", Today_FirstImage.get(0));
+//                intent.putExtra("Title", Today_Title.get(0));
+//                intent.putExtra("ConId", Today_ConId.get(0));
+//                startActivity(intent);
+//            }
+//        });
+//
+////        today_place2 = (ImageView) findViewById(R.id.to_day_place2);
+//        today_place2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+//                intent.putExtra("Image", Today_FirstImage.get(1));
+//                intent.putExtra("Title", Today_Title.get(1));
+//                intent.putExtra("ConId", Today_ConId.get(1));
+//                startActivity(intent);
+//            }
+//        });
+//    }
 
     public void bestPlaceClick() {
         best_tour1 = (ImageView) findViewById(R.id.best_tour1);
@@ -480,4 +509,18 @@ public class Mainactivity extends AppCompatActivity {
 //        return region;
 //    }
 
+    public void todayInit(){
+        today_recyclerView = (RecyclerView)findViewById(R.id.today_recyclerView);
+        todayList = new ArrayList<>();
+    }
+
+    public void today_addItem(String url, String title, String conId){
+        Today_RecyclerViewItem today_item = new Today_RecyclerViewItem();
+
+        today_item.setUrl(url);
+        today_item.setTitle(title);
+        today_item.setConId(conId);
+
+        todayList.add(today_item);
+    }
 }

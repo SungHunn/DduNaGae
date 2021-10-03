@@ -2,7 +2,10 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.Dde_Na_Gae">
 
+    // 인터넷 권한 설정
     <uses-permission android:name="android.permission.INTERNET"/>
+    // 위치 서비스 권한 설정
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,7 +22,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
-<!--                <category android:name="android.intent.category.BROWSABLE"/>-->
+                <category android:name="android.intent.category.BROWSABLE"/>
+
+                <data android:scheme="@string/kakao_scheme"
+                    android:host="@string/kakaolink_host"/>
             </intent-filter>
         </activity>
         <activity android:name=".Alarm" />
@@ -33,7 +39,6 @@
         <activity android:name=".Matching_Option"/>
         <activity android:name=".My_Page" />
         <activity android:name=".Notice" />
-        <activity android:name=".Pay"/>
         <activity android:name=".Personal_information" />
         <activity android:name=".Search" />
         <activity android:name=".Search_Selected" />
@@ -41,10 +46,10 @@
         <activity android:name=".Setting" />
         <activity android:name="com.example.Dde_Na_Gae.Sign_up" />
         <activity android:name=".Terms_of_service" />
-        <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
 
-
-        // 몰랐는데 intent하려면 넘기려는 액티비티 추가해줘야 함.. 이거로 30분 날렸당
+        <meta-data
+            android:name="com.kakao.sdk.Appkey"
+            android:value="@string/kakao_app_key"/>
 
     </application>
 

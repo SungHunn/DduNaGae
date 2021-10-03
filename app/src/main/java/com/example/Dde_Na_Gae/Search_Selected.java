@@ -27,6 +27,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.kakao.kakaolink.AppActionBuilder;
+import com.kakao.kakaolink.AppActionInfoBuilder;
+import com.kakao.kakaolink.KakaoLink;
+import com.kakao.kakaolink.KakaoTalkLinkMessageBuilder;
+import com.kakao.util.KakaoParameterException;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -47,8 +52,6 @@ public class  Search_Selected extends AppCompatActivity {
 
     ImageView img_back;
 
-    ImageView selected_map;
-
     BottomNavigationView bottomNavigationView;
 
     String img;
@@ -57,7 +60,9 @@ public class  Search_Selected extends AppCompatActivity {
 
     String overview;
     String addr1;
+    String usetime;
 
+    TextView selected_item_usetime;
     TextView selected_item_desciption;
     TextView selected_item_addr;
 
@@ -65,6 +70,8 @@ public class  Search_Selected extends AppCompatActivity {
     TextView selected_name_main;
 
     ImageView selected_img;
+
+    ImageView btn_share;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,19 +81,31 @@ public class  Search_Selected extends AppCompatActivity {
         conId = getIntent().getStringExtra("ConId");
         Detail_api detail_api = new Detail_api(conId);
         Thread detail_thread = new Thread(detail_api);
+        Info_api info_api = new Info_api(conId);
+        Thread info_thread = new Thread(info_api);
 
         try {
             detail_thread.start();
             detail_thread.join();
+            info_thread.start();
+            info_thread.join();
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
 
         overview = stripHtml(detail_api.getOverview());
         addr1 = stripHtml(detail_api.getAddr1());
+        usetime = stripHtml(info_api.getUsetime());
 
+        selected_item_usetime = findViewById(R.id.selected_item_usetime);
         selected_item_desciption = findViewById(R.id.selected_item_desciption);
         selected_item_addr = findViewById(R.id.selected_item_addr);
+
+        if (usetime.isEmpty())
+            selected_item_usetime.setText("00:00~24:00");
+        else
+            selected_item_usetime.setText(usetime);
+
         selected_item_desciption.setText(overview);
 
         // 내용이 3줄 이상 넘어가면 짜르고 더보기로 표시 -> 클릭시 전체 내용 확인
@@ -111,8 +130,21 @@ public class  Search_Selected extends AppCompatActivity {
 //        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());
 //        viewPager2.setAdapter(adapter);
 
-        selected_map = findViewById(R.id.selected_map);
+        btn_share = (ImageView)findViewById(R.id.btn_share);
+        btn_share.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
 
+                intent.addCategory(Intent.CATEGORY_DEFAULT);
+                String text;
+                text = "https://youtube.com";
+                intent.putExtra(Intent.EXTRA_TEXT, text);
+                intent.setType("text/plain");
+//                intent.setPackage("com.kakao.talk");
+                startActivity(Intent.createChooser(intent, "공유"));
+            }
+        });
 
         // 클릭 이벤트
 
@@ -238,5 +270,25 @@ public class  Search_Selected extends AppCompatActivity {
 
         }
         return ssb;
+    }
+
+    public void shareKakao(){
+        try {
+            final KakaoLink kakaoLink = KakaoLink.getKakaoLink(this);
+            final KakaoTalkLinkMessageBuilder kakaoBuilder = kakaoLink.createKakaoTalkLinkMessageBuilder();
+
+            String url = "data:image/png;base64,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";
+            kakaoBuilder.addImage(url, 80, 80);
+            kakaoBuilder.addText("카카오 링크 테스트");
+            kakaoBuilder.addAppButton("앱 설치로 이동", new AppActionBuilder().addActionInfo(AppActionInfoBuilder.createAndroidActionInfoBuilder().setExecuteParam("execparamkey2=2222").setMarketParam("referrer=kakaotalklink").build())
+                    .addActionInfo(AppActionInfoBuilder.createiOSActionInfoBuilder(AppActionBuilder.DEVICE_TYPE.PHONE).setExecuteParam("execparamkey2=2222").build())
+                    .setUrl("이동할 url을 입력하세요").build());
+
+            kakaoBuilder.setForwardable(true);
+            kakaoLink.sendMessage(kakaoBuilder, this);
+
+        } catch (KakaoParameterException e) {
+            e.printStackTrace();
+        }
     }
 }

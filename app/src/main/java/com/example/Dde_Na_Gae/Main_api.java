@@ -62,7 +62,7 @@ public class Main_api implements Runnable{
             JSONObject galUrlResult = (JSONObject) test.get("items");
             JSONArray galUrl = (JSONArray) galUrlResult.get("item");
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < galUrl.length(); i++) {
                 JSONObject temp = galUrl.getJSONObject(i);
 //                            System.out.println(temp);
                 String firstimage = temp.getString("firstimage");
