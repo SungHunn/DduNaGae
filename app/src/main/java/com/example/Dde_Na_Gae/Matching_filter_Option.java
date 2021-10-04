@@ -8,11 +8,7 @@ import android.widget.Button;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
-import com.example.Dde_Na_Gae.fragment.RoomFragment;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class Matching_filter_Option extends AppCompatActivity {
@@ -85,7 +81,7 @@ public class Matching_filter_Option extends AppCompatActivity {
 
                 String chatting_room_option_selector = text_h_matching_sex+text_h_matching_age+text_h_matching_pet_age+text_h_matching_pet_option+text_matching_room_option+text_h_car_option;
 
-                Intent intent_matching_room_detail = new Intent(getApplicationContext(),Matching_Room_detail.class);
+                Intent intent_matching_room_detail = new Intent(getApplicationContext(), Single_Matching_Room_detail.class);
                 intent_matching_room_detail.putExtra("chatting_room_option_selector",chatting_room_option_selector);
 
                 Intent intent_chattinglist = new Intent(getApplicationContext(), Chatting_List.class);

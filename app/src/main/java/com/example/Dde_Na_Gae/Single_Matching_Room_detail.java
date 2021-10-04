@@ -26,14 +26,10 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static com.kakao.usermgmt.StringSet.user_id;
-
-public class Matching_Room_detail extends AppCompatActivity {
+public class Single_Matching_Room_detail extends AppCompatActivity {
 
     DatabaseReference mDatabase;
     public TextView Room_Name;
@@ -61,7 +57,7 @@ public class Matching_Room_detail extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.matching_room_detail);
+        setContentView(R.layout.single_matching_room_detail);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
         room_detail_member_number =(TextView)findViewById(R.id.room_detail_member_number);
@@ -135,7 +131,7 @@ public class Matching_Room_detail extends AppCompatActivity {
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 String imageuri = dataSnapshot.getValue(String.class);
-                Glide.with(Matching_Room_detail.this)
+                Glide.with(Single_Matching_Room_detail.this)
                         .load(imageuri)
                         .apply(new RequestOptions().circleCrop())
                         .into(petprofile);

@@ -17,15 +17,13 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.Dde_Na_Gae.Matching_Room_detail;
-import com.example.Dde_Na_Gae.My_Matching_Room_detail;
+import com.example.Dde_Na_Gae.Single_Matching_Room_detail;
 import com.example.Dde_Na_Gae.R;
 import com.example.Dde_Na_Gae.Room_Name_Detail_Database;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
@@ -130,7 +128,7 @@ public class RoomFragment extends Fragment {
                 public void onClick(View view) {
 
 
-                    Intent intent1 = new Intent(getActivity(), Matching_Room_detail.class);
+                    Intent intent1 = new Intent(getActivity(), Single_Matching_Room_detail.class);
                     intent1.putExtra("masteruid", chatroommodels1.get(position).master_uid);
                     intent1.putExtra("roomname", chatroommodels1.get(position).Room_name);
                     intent1.putExtra("option_selector", chatroommodels1.get(position).chatting_room_option_selector);
