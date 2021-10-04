@@ -9,7 +9,7 @@
         android:icon="@android:drawable/ic_menu_camera"
         android:title="홈" />
     <item
-        android:id="@+id/mylocation"
+        android:id="@+id/freeboard"
         android:icon="@android:drawable/ic_menu_call"
-        android:title="내 주변" />
+        android:title="자유게시판" />
 </menu>

@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.drawerlayout.widget.DrawerLayout
+        android:id="@+id/chat_drawlayout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            >
+
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:id="@+id/group_talkmenu"
+
+                >
+
+                <ImageButton
+                    android:id="@+id/chattingroom_back"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:adjustViewBounds="true"
+                    android:maxWidth="35dp"
+                    android:maxHeight="35dp"
+                    android:padding="1dp"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/go_back" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="그룹채팅  :"
+                    android:textSize="20dp"
+                    android:id="@+id/chatting_opt"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+
+                    android:textSize="20dp"
+                    android:id="@+id/chatting_mem_num"
+                    />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text=" 명"
+                    android:textSize="20dp"
+                    />
+                <View
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1" />
+
+                <ImageButton
+                    android:id="@+id/talkmenu_open"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="right"
+                    android:maxWidth="25dp"
+                    android:maxHeight="20dp"
+                    android:src="@drawable/ic_baseline_dehaze_24" />
+
+
+            </LinearLayout>
+
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/group_messageActivity_recyclerview"
+                android:layout_width="match_parent"
+                android:layout_height="569dp"
+                android:layout_below="@+id/group_talkmenu" />
+
+
+
+            <EditText
+                android:id="@+id/group_messageActivity_editText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentBottom="true"
+                android:layout_toLeftOf="@+id/group_messageActivity_button" />
+
+
+            <Button
+                android:id="@+id/group_messageActivity_button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="전송"
+                android:layout_alignParentRight="true"
+                android:layout_alignParentBottom="true"
+                />
+
+        </RelativeLayout>
+        <include layout="@layout/chatting_drawer"/>
+    </androidx.drawerlayout.widget.DrawerLayout>
+
+
+
+</LinearLayout>

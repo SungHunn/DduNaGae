@@ -12,16 +12,6 @@
         android:theme="@style/Theme.Login_Example"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".SplashActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-                <action android:name="android.intent.action.VIEW"/>
-                <category android:name="android.intent.category.DEFAULT"/>
-<!--                <category android:name="android.intent.category.BROWSABLE"/>-->
-            </intent-filter>
-        </activity>
         <activity android:name=".Alarm" />
         <activity android:name="com.example.Dde_Na_Gae.BestPlace" />
         <activity android:name="com.example.Dde_Na_Gae.BestWalk" />
@@ -43,6 +33,39 @@
         <activity android:name=".Terms_of_service" />
         <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
 
+
+        <meta-data
+            android:name="com.kakao.sdk.AppKey"
+            android:value="b214210d275c3c68a2ab5a59099d8b41" />
+
+        <activity android:name=".SplashActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".Api_date" />
+        <activity android:name=".My_Information" />
+        <activity android:name=".chat.New_MessageActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".New_ChatMainActivity"/>
+        <activity android:name=".My_Matching_Room_detail"/>
+        <activity android:name=".Matching_Room_detail"/>
+        <activity android:name=".Matching_filter_Option"/>
+        <activity android:name=".Chatting_List"/>
+        <activity android:name=".chat.Group_MessageActivity"
+            android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Free_Board_Writing"/>
+        <activity android:name=".Freeboard_Activity"/>
+        <activity android:name=".My_free_board_detail"/>
+        <activity android:name=".My_Free_Board_List"/>
+        <activity android:name=".Free_Board_Detail"/>
+        <activity android:name=".My_Free_Board_detail_Change"/>
+        <activity android:name=".Free_Board_Review"/>
+        <activity android:name=".WelcomeActivity"
+            android:screenOrientation="portrait"/>
 
         // 몰랐는데 intent하려면 넘기려는 액티비티 추가해줘야 함.. 이거로 30분 날렸당
 

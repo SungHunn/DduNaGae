@@ -1,7 +1,10 @@
 package com.example.Dde_Na_Gae;
 
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
+
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -11,6 +14,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -21,7 +25,17 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 
 import org.apache.log4j.chainsaw.Main;
 import org.json.JSONArray;
@@ -35,6 +49,7 @@ import java.io.InputStreamReader;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.List;
 
 public class Mainactivity extends AppCompatActivity {
 
@@ -44,6 +59,9 @@ public class Mainactivity extends AppCompatActivity {
     TextView category4;
     TextView category5;
     TextView category6;
+
+    DatabaseReference mDatabase;
+
 
     ImageView today_place1;
     ImageView today_place2;
@@ -61,7 +79,7 @@ public class Mainactivity extends AppCompatActivity {
     DrawerLayout drawerLayout;
     View drawerView;
     ListView listview = null;
-    TextView my_page;
+    LinearLayout my_page;
     //네비게이션바
 
     BottomNavigationView bottomNavigationView;
@@ -91,15 +109,26 @@ public class Mainactivity extends AppCompatActivity {
     TextView best_tour2_txt;
 
     TextView region_walk;
-    TextView region_travle;
+    TextView region_travel;
 
-//    Calendar cal = Calendar.getInstance();
-//    int today = cal.get(Calendar.DAY_OF_MONTH);
+    ImageView profile_photo;
+    TextView my_nickname;
+    TextView unlogin;
+    LinearLayout layout_account;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        profile_photo = (ImageView) findViewById(R.id.profile_photo);
+        listview = findViewById(R.id.navi_list);
+        layout_account = (LinearLayout) findViewById(R.id.my_account);
+        unlogin = (TextView) findViewById(R.id.my_page_unlogin);
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
+
 
         // 오늘의 place 사진 및 텍스트 설정
         to_day_place1 = (ImageView)findViewById(R.id.to_day_place1);
@@ -107,7 +136,6 @@ public class Mainactivity extends AppCompatActivity {
         to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
         to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
 
-//        Today_FirstImage = getIntent().getStringArrayListExtra("Today_Image");
         Today_api today_api = new Today_api();
         Thread today_thread = new Thread(today_api);
         Main_api main_api = new Main_api();
@@ -154,7 +182,6 @@ public class Mainactivity extends AppCompatActivity {
         best_walk2 = (ImageView) findViewById(R.id.best_walk2);
         best_walk2_txt = (TextView)findViewById(R.id.best_walk2_txt);
 
-        ////////////////////////////////////////////////////////////////
 
         Sub_FirstImage = sub_api.getSub_images();
         Sub_Title = sub_api.getSub_titles();
@@ -165,14 +192,10 @@ public class Mainactivity extends AppCompatActivity {
         Glide.with(this).load(Sub_FirstImage.get(1)).into(best_walk2);
         best_walk2_txt.setText(Sub_Title.get(1));
 
-        region_travle = (TextView)findViewById(R.id.region_travel);
-//        region_travle.setText(getRegionCode((today % 8) + 1) + " 추천 여행지");
+        region_travel = (TextView)findViewById(R.id.region_travel);
 
         region_walk = (TextView)findViewById(R.id.region_walk);
-//        region_walk.setText(getRegionCode((today % 9) + 31) + " 추천 여행지");
 
-
-        // 바텀네비게이션바 클릭 이벤트 삽입 구간
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -188,10 +211,11 @@ public class Mainactivity extends AppCompatActivity {
                         startActivity(intent2);
                         break;
 
-                    case R.id.mylocation:
-                        //Intent intent3 = new Intent(getApplicationContext(), );
-                        //startActivity(intent3);
+                    case R.id.freeboard:
+                        Intent intent3 = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                        startActivity(intent3);
                         break;
+
                 }
                 return false;
             }
@@ -225,11 +249,72 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
-        final String[] items = {"공지사항", "이벤트","고객센터", "설정", "로그인"};
-        ArrayAdapter adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, items);
+        List<String> list = new ArrayList<>();
+        list.add("공지사항");
+        list.add("이벤트");
+        list.add("고객센터");
+        list.add("설정");
+        list.add("로그인");
+
+        FirebaseAuth aAuth = FirebaseAuth.getInstance();
+
+        String uid = user != null ? user.getUid() : null; // 로그인한 유저의 고유 uid 가져오기
 
         listview = findViewById(R.id.navi_list);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        if (user != null) {
+            list.set(6, "로그아웃");
+
+            layout_account.setVisibility(View.VISIBLE);
+            my_nickname = (TextView) findViewById(R.id.my_page_login);
+            String myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+            FirebaseDatabase.getInstance().getReference().child("users").child(myuid).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    UserModel userModel = snapshot.getValue(UserModel.class);
+                    Glide.with(Mainactivity.this)
+                            .load(userModel.imageUri)
+                            .apply(new RequestOptions().circleCrop())
+                            .into(profile_photo);
+                    my_nickname.setText(userModel.nickname);
+                }
+
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                }
+            });
+            my_nickname.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), My_Page.class);
+                    startActivity(intent);
+                }
+            });
+
+        } else {
+            unlogin.setVisibility(View.VISIBLE);
+            unlogin.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
+                    startActivity(intent);
+                }
+            });
+        }
+
+
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.
+                simple_list_item_1, list);
+
         listview.setAdapter(adapter);
+
+
+
+
+
+
+        mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
@@ -257,14 +342,19 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        Intent intent = new Intent(getApplicationContext(), LoginPage.class);
-                        startActivity(intent);
+                        if (list.get(7).equals("로그아웃")) {
+                            //로그아웃 이벤트
+                        } else {
+                            Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
+                            startActivity(intent);
+                        }
                         break;
+
                 }
             }
         });
 
-        my_page = findViewById(R.id.my_page);
+        my_page = findViewById(R.id.my_account);
         my_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -288,7 +378,6 @@ public class Mainactivity extends AppCompatActivity {
         animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
 
 
-//        onTextViewClick();
         toDayPlaceClick();
         bestPlaceClick();
         bestWalkClick();
@@ -324,21 +413,78 @@ public class Mainactivity extends AppCompatActivity {
 
     // serach box
 
-    private void main_search(){
+    public String str;
+    private void main_search() {
+        final EditText main_search = findViewById(R.id.main_search);
+        str = main_search.getText().toString();
+        main_search.getText().clear();
 
-        EditText main_search = findViewById(R.id.main_search);
-        final String str;
-        str = main_search.toString();
+        main_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                str = main_search.getText().toString();
+                switch (actionId) {
+                    case IME_ACTION_SEARCH:
+                        Intent intent = new Intent(getApplicationContext(), Category.class);
+                        intent.putExtra("SEARCH", str);
 
-        main_search.setOnClickListener(new View.OnClickListener() {
+                        startActivity(intent);
+                }
+                return true;
+            }
+        });
+    }
+
+    public void onTextViewClick() {
+        category1 = (TextView) findViewById(R.id.category_1);
+        category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),Category.class);
-                intent.putExtra("SEARCH", str);
+                String getcategory1;
+                getcategory1 = category1.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
+
+                startActivity(intent);
+            }
+        });
+        category2 = (TextView) findViewById(R.id.category_2);
+        category2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getcategory1;
+                getcategory1 = category2.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
+
+                startActivity(intent);
+            }
+        });
+        category3 = (TextView) findViewById(R.id.category_3);
+        category3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getcategory1;
+                getcategory1 = category3.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
+
+                startActivity(intent);
+            }
+        });
+        category4 = (TextView) findViewById(R.id.category_4);
+        category4.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String getcategory1;
+                getcategory1 = category4.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
                 startActivity(intent);
             }
         });
     }
+
 
     private void addMenuClick() {
         add_menu1 = (ImageView) findViewById(R.id.add_menu1);
