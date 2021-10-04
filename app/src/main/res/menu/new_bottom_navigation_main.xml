@@ -6,10 +6,10 @@
         android:title="Freind"/>
     <item
         android:id="@+id/my_personal_room"
-        android:icon="@drawable/account"
-        android:title="Room"/>
+        android:icon="@drawable/chatt"
+        android:title="1대1 채팅방"/>
     <item
         android:id="@+id/my_group_room"
         android:icon="@drawable/chatt"
-        android:title="account"/>
+        android:title="그룹 채팅방"/>
 </menu>

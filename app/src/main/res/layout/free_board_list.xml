@@ -52,12 +52,14 @@
                     android:background="#000000"
                     />
             </LinearLayout>
+
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/free_board_list"
                 android:layout_width="match_parent"
                 android:layout_height="569dp"
                 android:layout_below="@+id/free_board"
                 />
+            
             <Button
                 android:id="@+id/my_text_list"
                 android:layout_width="wrap_content"

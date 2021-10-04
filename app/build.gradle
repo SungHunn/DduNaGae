@@ -47,6 +47,7 @@ dependencies {
     implementation 'com.google.firebase:firebase-database:20.0.2'
     implementation 'com.google.firebase:firebase-config:21.0.1'
     implementation 'com.google.android.gms:play-services-auth:19.2.0'
+    implementation 'androidx.drawerlayout:drawerlayout:1.1.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
     //이 위로 내가 추가한 것
 
