@@ -6,7 +6,8 @@ import android.view.MenuItem;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.Dde_Na_Gae.fragment.My_ChatFragment;
+import com.example.Dde_Na_Gae.fragment.My_Group_ChatFragment;
+import com.example.Dde_Na_Gae.fragment.My_Personal_ChatFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
@@ -24,8 +25,11 @@ public class New_ChatMainActivity extends AppCompatActivity {
             @Override
             public boolean onNavigationItemSelected(@NonNull @NotNull MenuItem item) {
                 switch (item.getItemId()){
-                    case R.id.my_room:
-                        getSupportFragmentManager().beginTransaction().replace(R.id.new_mainactivity_framelayout,new My_ChatFragment()).commit();
+                    case R.id.my_group_room:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.new_mainactivity_framelayout,new My_Group_ChatFragment()).commit();
+                        return true;
+                    case R.id.my_personal_room:
+                        getSupportFragmentManager().beginTransaction().replace(R.id.new_mainactivity_framelayout,new My_Personal_ChatFragment()).commit();
                         return true;
                 }
                 return false;

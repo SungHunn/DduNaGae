@@ -4,7 +4,10 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/chatting_list.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/drawer.xml" value="0.2046875" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/fragment_chat.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/fragment_personal_chat.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/free_board_drawer.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/free_board_list.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/free_board_review.xml" value="0.26875" />
@@ -13,12 +16,14 @@
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/group_chat_popup_activity.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/groupchattingdrawer.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/my_page.xml" value="0.26875" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/new_chatactivity_main.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/search.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/menu/bottomnavigation.xml" value="0.2046875" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/menu/new_bottom_navigation_main.xml" value="0.20208333333333334" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">
