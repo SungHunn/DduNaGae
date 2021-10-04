@@ -69,10 +69,10 @@ public class Search extends AppCompatActivity {
                 if (convertView == null) {
                     convertView = LayoutInflater.from(getContext()).inflate(R.layout.search_item, parent, false);
                 }
-                TextView name = (TextView) convertView.findViewById(R.id.search_name);
-                TextView description = (TextView) convertView.findViewById(R.id.search_description);
-                name.setText(search_item.item_name);
-                description.setText(search_item.item_description);
+//                TextView name = (TextView) convertView.findViewById(R.id.search_name);
+////                TextView description = (TextView) convertView.findViewById(R.id.search_description);
+//                name.setText(search_item.item_name);
+//                description.setText(search_item.item_description);
                 return convertView;
             }
         };

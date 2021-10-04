@@ -1,5 +1,7 @@
 package com.example.Dde_Na_Gae;
 
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.KeyEvent;
@@ -8,16 +10,21 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
@@ -30,17 +37,22 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.database.annotations.NotNull;
 
-import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.List;
 
-import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
-
 public class Mainactivity extends AppCompatActivity {
-
-    DatabaseReference mDatabase;
 
     TextView category1;
     TextView category2;
@@ -48,6 +60,9 @@ public class Mainactivity extends AppCompatActivity {
     TextView category4;
     TextView category5;
     TextView category6;
+
+    DatabaseReference mDatabase;
+
 
     ImageView today_place1;
     ImageView today_place2;
@@ -61,19 +76,51 @@ public class Mainactivity extends AppCompatActivity {
     ImageView add_menu1;
     ImageView add_menu2;
 
+    //네비게이션바
+    DrawerLayout drawerLayout;
+    View drawerView;
+    ListView listview = null;
+    LinearLayout my_page;
+    //네비게이션바
+
+    BottomNavigationView bottomNavigationView;
+
+    ArrayList<String> Today_FirstImage = new ArrayList<>();
+    ArrayList<String> Today_Title = new ArrayList<>();
+    ArrayList<String> Today_ConId = new ArrayList<>();
+
+    ArrayList<String> Main_FirstImage = new ArrayList<>();
+    ArrayList<String> Main_Title = new ArrayList<>();
+    ArrayList<String> Main_ConId = new ArrayList<>();
+
+    ArrayList<String> Sub_FirstImage = new ArrayList<>();
+    ArrayList<String> Sub_Title = new ArrayList<>();
+    ArrayList<String> Sub_ConId = new ArrayList<>();
+
+
+    private RecyclerView today_recyclerView;
+    private ArrayList<Today_RecyclerViewItem> todayList;
+    private Today_RecyclerViewAdapter today_recyclerViewAdapter;
+
+    ImageView to_day_place1;
+    TextView to_day_place1_txt;
+    ImageView to_day_place2;
+    TextView to_day_place2_txt;
+
+    TextView best_walk1_txt;
+    TextView best_walk2_txt;
+
+    TextView best_tour1_txt;
+    TextView best_tour2_txt;
+
+    TextView region_walk;
+    TextView region_travel;
+
     ImageView profile_photo;
     TextView my_nickname;
     TextView unlogin;
     LinearLayout layout_account;
 
-    //네비게이션바
-    DrawerLayout drawerLayout;
-    View drawerView;
-    ListView listview = null;
-    TextView my_page;
-    //네비게이션바
-
-    BottomNavigationView bottomNavigationView;
 
 
     @Override
@@ -86,7 +133,87 @@ public class Mainactivity extends AppCompatActivity {
         layout_account = (LinearLayout) findViewById(R.id.my_account);
         unlogin = (TextView) findViewById(R.id.my_page_unlogin);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
-        // 바텀네비게이션바 클릭 이벤트 삽입 구간
+
+
+        // 오늘의 place 사진 및 텍스트 설정
+//        to_day_place1 = (ImageView)findViewById(R.id.to_day_place1);
+//        to_day_place1_txt = (TextView)findViewById(R.id.to_day_place1_txt);
+//        to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
+//        to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
+
+        Today_api today_api = new Today_api();
+        Thread today_thread = new Thread(today_api);
+        Main_api main_api = new Main_api();
+        Thread main_thread = new Thread(main_api);
+        Sub_api sub_api = new Sub_api();
+        Thread sub_thread = new Thread(sub_api);
+
+        try {
+            today_thread.start();
+            today_thread.join();
+
+            main_thread.start();
+            main_thread.join();
+
+            sub_thread.start();
+            sub_thread.join();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        Today_FirstImage = today_api.getToday_images();
+        Today_Title = today_api.getToday_titles();
+        Today_ConId = today_api.getToday_contentids();
+//        Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
+//        to_day_place1_txt.setText(Today_Title.get(0));
+//        Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
+//        to_day_place2_txt.setText(Today_Title.get(1));
+        /////////////////////////
+
+        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
+        best_tour1_txt = (TextView)findViewById(R.id.best_tour1_txt);
+        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
+        best_tour2_txt = (TextView)findViewById(R.id.best_tour2_txt);
+
+        Main_FirstImage = main_api.getMain_images();
+        Main_Title = main_api.getMain_titles();
+        Main_ConId = main_api.getMain_contentids();
+
+        Glide.with(this).load(Main_FirstImage.get(0)).into(best_tour1);
+        best_tour1_txt.setText(Main_Title.get(0));
+        Glide.with(this).load(Main_FirstImage.get(1)).into(best_tour2);
+        best_tour2_txt.setText(Main_Title.get(1));
+
+        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
+        best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
+        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
+        best_walk2_txt = (TextView)findViewById(R.id.best_walk2_txt);
+
+
+        Sub_FirstImage = sub_api.getSub_images();
+        Sub_Title = sub_api.getSub_titles();
+        Sub_ConId = sub_api.getSub_contentids();
+
+        Glide.with(this).load(Sub_FirstImage.get(0)).into(best_walk1);
+        best_walk1_txt.setText(Sub_Title.get(0));
+        Glide.with(this).load(Sub_FirstImage.get(1)).into(best_walk2);
+        best_walk2_txt.setText(Sub_Title.get(1));
+//
+//        region_travel = (TextView)findViewById(R.id.region_travel);
+//
+//        region_walk = (TextView)findViewById(R.id.region_walk);
+
+
+        ////////////////////////////////////////////////////////
+        todayInit();
+        for (int i=0; i<7; i++){
+            today_addItem(Today_FirstImage.get(i), Today_Title.get(i), Today_ConId.get(i));
+        }
+
+        today_recyclerViewAdapter = new Today_RecyclerViewAdapter(todayList);
+
+//        today_recyclerView.setAdapter(today_recyclerViewAdapter);
+//        today_recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -106,6 +233,7 @@ public class Mainactivity extends AppCompatActivity {
                         Intent intent3 = new Intent(getApplicationContext(), Freeboard_Activity.class);
                         startActivity(intent3);
                         break;
+
                 }
                 return false;
             }
@@ -139,38 +267,21 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
 
+        List<String> list = new ArrayList<>();
+        list.add("공지사항");
+        list.add("이벤트");
+        list.add("고객센터");
+        list.add("설정");
+        list.add("로그인");
 
         FirebaseAuth aAuth = FirebaseAuth.getInstance();
 
         String uid = user != null ? user.getUid() : null; // 로그인한 유저의 고유 uid 가져오기
 
-
-        mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
-        // DatabaseReference firstname = mDatabase.child(uid).child("firstname");    // 이메일
-
-
-       /* firstname.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                String name = snapshot.getValue(String.class);
-                my_page.setText(name);
-            }
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) { }
-        }); */
-
-        List<String> list = new ArrayList<>();
-        list.add("공지사항");
-        list.add("이벤트");
-        list.add("예약내역");
-        list.add("좋아요 표시한 목록");
-        list.add("고객센터");
-        list.add("설정");
-        list.add("로그인");
-
+        listview = findViewById(R.id.navi_list);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            list.set(6, "로그아웃");
+            list.set(4, "로그아웃");
 
             layout_account.setVisibility(View.VISIBLE);
             my_nickname = (TextView) findViewById(R.id.my_page_login);
@@ -216,35 +327,39 @@ public class Mainactivity extends AppCompatActivity {
 
         listview.setAdapter(adapter);
 
+
+
+
+
+
+        mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
+
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 switch (position) {
                     case 0:
-
+                        Intent intent_notice =
+                                new Intent(getApplicationContext(), Notice.class);
+                        startActivity(intent_notice);
                         break;
 
                     case 1:
+                        // 공지사항이랑 이벤트는 같은 페이지임 나중에 이벤트 클릭된 상태로 넘어가게 하면됨
+                        Intent intent_event =
+                                new Intent(getApplicationContext(), Notice.class);
+                        startActivity(intent_event);
                         break;
 
                     case 2:
                         break;
 
                     case 3:
-                        break;
-
-                    case 4:
-                        break;
-
-                    case 5:
-                        break;
-
-                    case 6:
                         Intent intent_setting = new Intent(getApplicationContext(), Setting.class);
                         startActivity(intent_setting);
                         break;
 
-                    case 7:
+                    case 4:
                         if (list.get(7).equals("로그아웃")) {
                             //로그아웃 이벤트
                         } else {
@@ -252,26 +367,43 @@ public class Mainactivity extends AppCompatActivity {
                             startActivity(intent);
                         }
                         break;
+
                 }
             }
         });
 
-       /* my_page = findViewById(R.id.my_page);
+        my_page = findViewById(R.id.my_account);
         my_page.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), My_Page.class);
                 startActivity(intent);
             }
-        });*/
-
+        });
 
         //네비게이션바
-        onTextViewClick();
+
+        Intent intent = getIntent();
+
+        String new_id;
+        String new_pw;
+        String new_animal;
+        String animal_info;
+
+        new_id = getIntent().getStringExtra("NEW_ID");
+        new_pw = getIntent().getStringExtra("NEW_PW");
+        new_animal = getIntent().getStringExtra("ANIMAL_INFO");
+        animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
+
+
         toDayPlaceClick();
+        bestPlaceClick();
+        bestWalkClick();
+//        addMenuClick();
         main_search();
 
     }
+
 
     //네비게이션바
     DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
@@ -298,8 +430,8 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
 
     // serach box
-    public String str;
 
+    public String str;
     private void main_search() {
         final EditText main_search = findViewById(R.id.main_search);
         str = main_search.getText().toString();
@@ -320,7 +452,6 @@ public class Mainactivity extends AppCompatActivity {
             }
         });
     }
-
 
     public void onTextViewClick() {
         category1 = (TextView) findViewById(R.id.category_1);
@@ -367,54 +498,121 @@ public class Mainactivity extends AppCompatActivity {
                 getcategory1 = category4.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
                 intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-        category5 = (TextView) findViewById(R.id.category_5);
-        category5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category5.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
-                startActivity(intent);
-            }
-        });
-        category6 = (TextView) findViewById(R.id.category_6);
-        category6.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category6.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
-
                 startActivity(intent);
             }
         });
     }
 
+//
+//    private void addMenuClick() {
+//        add_menu1 = (ImageView) findViewById(R.id.add_menu1);
+//        add_menu1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+//                startActivity(intent);
+//            }
+//        });
+//        add_menu2 = (ImageView) findViewById(R.id.add_menu2);
+//        add_menu2.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
+//                startActivity(intent);
+//            }
+//        });
+//    }
+
+    // 오늘의 place 클릭 이벤트
     public void toDayPlaceClick() {
         today_place1 = (ImageView) findViewById(R.id.to_day_place1);
         today_place1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TodayPlace.class);
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Today_FirstImage.get(0));
+                intent.putExtra("Title", Today_Title.get(0));
+                intent.putExtra("ConId", Today_ConId.get(0));
                 startActivity(intent);
             }
         });
+
         today_place2 = (ImageView) findViewById(R.id.to_day_place2);
         today_place2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), TodayPlace.class);
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Today_FirstImage.get(1));
+                intent.putExtra("Title", Today_Title.get(1));
+                intent.putExtra("ConId", Today_ConId.get(1));
                 startActivity(intent);
             }
         });
     }
 
+    public void bestPlaceClick() {
+        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
+        best_tour1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Main_FirstImage.get(0));
+                intent.putExtra("Title", Main_Title.get(0));
+                intent.putExtra("ConId", Main_ConId.get(0));
+                startActivity(intent);
+            }
+        });
 
+        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
+        best_tour2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Main_FirstImage.get(1));
+                intent.putExtra("Title", Main_Title.get(1));
+                intent.putExtra("ConId", Main_ConId.get(1));
+                startActivity(intent);
+            }
+        });
+    }
+
+    private void bestWalkClick() {
+
+        best_walk1.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Sub_FirstImage.get(0));
+                intent.putExtra("Title", Sub_Title.get(0));
+                intent.putExtra("ConId", Sub_ConId.get(0));
+                startActivity(intent);
+            }
+        });
+
+        best_walk2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
+                intent.putExtra("Image", Sub_FirstImage.get(1));
+                intent.putExtra("Title", Sub_Title.get(1));
+                intent.putExtra("ConId", Sub_ConId.get(1));
+                startActivity(intent);
+            }
+        });
+    }
+
+    public void todayInit(){
+//        today_recyclerView = (RecyclerView)findViewById(R.id.today_recyclerView);
+        todayList = new ArrayList<>();
+    }
+
+    public void today_addItem(String url, String title, String conId){
+        Today_RecyclerViewItem today_item = new Today_RecyclerViewItem();
+
+        today_item.setUrl(url);
+        today_item.setTitle(title);
+        today_item.setConId(conId);
+
+        todayList.add(today_item);
+    }
 }

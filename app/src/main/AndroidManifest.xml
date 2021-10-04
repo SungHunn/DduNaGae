@@ -74,6 +74,9 @@
         <activity android:name=".Free_Board_Review"/>
         <activity android:name=".WelcomeActivity"
             android:screenOrientation="portrait"/>
+        <activity android:name=".Notice"/>
+        <activity android:name=".Terms_of_service"/>
+
 
     </application>
 
