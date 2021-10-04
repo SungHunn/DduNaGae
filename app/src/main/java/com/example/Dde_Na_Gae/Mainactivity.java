@@ -204,12 +204,12 @@ public class Mainactivity extends AppCompatActivity {
 
 
         ////////////////////////////////////////////////////////
-        todayInit();
-        for (int i=0; i<7; i++){
-            today_addItem(Today_FirstImage.get(i), Today_Title.get(i), Today_ConId.get(i));
-        }
+//        todayInit();
+//        for (int i=0; i<7; i++){
+//            today_addItem(Today_FirstImage.get(i), Today_Title.get(i), Today_ConId.get(i));
+//        }
 
-        today_recyclerViewAdapter = new Today_RecyclerViewAdapter(todayList);
+//        today_recyclerViewAdapter = new Today_RecyclerViewAdapter(todayList);
 
 //        today_recyclerView.setAdapter(today_recyclerViewAdapter);
 //        today_recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));

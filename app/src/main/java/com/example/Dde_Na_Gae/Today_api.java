@@ -63,7 +63,7 @@ public class Today_api implements Runnable{
             JSONObject galUrlResult = (JSONObject) test.get("items");
             JSONArray galUrl = (JSONArray) galUrlResult.get("item");
 
-            for (int i = 0; i < galUrl.length(); i++) {
+            for (int i = 0; i < 2; i++) {
                 JSONObject temp = galUrl.getJSONObject(i);
                 String firstimage = temp.getString("firstimage");
                 String title = temp.getString("title");
