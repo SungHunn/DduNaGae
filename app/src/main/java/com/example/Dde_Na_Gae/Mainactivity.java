@@ -340,10 +340,6 @@ public class Mainactivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
-
-
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {

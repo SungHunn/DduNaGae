@@ -1,11 +1,16 @@
 package com.example.Dde_Na_Gae;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
+import android.location.Address;
+import android.location.Geocoder;
+import android.location.Location;
 import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
+import android.telephony.CarrierConfigManager;
 import android.text.Html;
 import android.text.SpannableString;
 import android.text.SpannableStringBuilder;
@@ -41,6 +46,7 @@ import java.io.InputStreamReader;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.List;
 
 public class  Search_Selected extends AppCompatActivity {
     String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
@@ -51,7 +57,7 @@ public class  Search_Selected extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
 
     String img;
-    String title;
+    public String title;
     String conId;
 
     String overview;
@@ -68,11 +74,19 @@ public class  Search_Selected extends AppCompatActivity {
     ImageView selected_img;
 
     ImageView btn_share;
+    String url;
+    GpsTracker gpsTracker;
+    double latitude;
+    double longitude;
 
+    double end_point_latitude;
+    double end_point_longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_selected);
+
+        Context context = this;
 
         conId = getIntent().getStringExtra("ConId");
         Detail_api detail_api = new Detail_api(conId);
@@ -144,15 +158,30 @@ public class  Search_Selected extends AppCompatActivity {
 
         // 클릭 이벤트
 
+
+
         // 바텀 네비
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @SuppressLint("NonConstantResourceId")
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
-                    case R.id.love_it:
-                        //Intent intent = new Intent(getApplicationContext(), Matching.class);
-                        //startActivity(intent);
+                    case R.id.map:
+                        //sp = 출발지, ep = 도착지
+                        Location end_point;
+                        end_point = addrToPoint(context, title);
+
+                        gpsTracker = new GpsTracker(Search_Selected.this);
+                        latitude = gpsTracker.latitude;
+                        longitude = gpsTracker.longitude;
+                        url = "kakaomap://route?" +
+                                "sp=" + latitude + "," + longitude +
+                                "&ep=" + end_point.getLatitude() +"," + end_point.getLongitude() + "&by=CAR";
+
+
+                        Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                        startActivity(intent1);
                         break;
 
                     case R.id.home:
@@ -161,9 +190,9 @@ public class  Search_Selected extends AppCompatActivity {
                         break;
 
                     case R.id.more_room_activity:
-                        Intent intent = new Intent(getApplicationContext(), Search_Selected_More.class);
-                        intent.putExtra("More_info", getIntent().getStringExtra("NAME"));
-                        startActivity(intent);
+                        Intent intent3 = new Intent(getApplicationContext(), Search_Selected_More.class);
+                        intent3.putExtra("More_info", getIntent().getStringExtra("NAME"));
+                        startActivity(intent3);
                         break;
                 }
                 return false;
@@ -176,30 +205,6 @@ public class  Search_Selected extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
                 startActivity(intent);
-            }
-        });
-
-        bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
-        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
-            @Override
-            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()) {
-                    case R.id.matching:
-                        Intent intent = new Intent(getApplicationContext(), Matching.class);
-                        startActivity(intent);
-                        break;
-
-                    case R.id.home:
-                        Intent intent2 = new Intent(getApplicationContext(), Mainactivity.class);
-                        startActivity(intent2);
-                        break;
-
-                    case R.id.freeboard:
-                        Intent intent3 = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                        startActivity(intent3);
-                        break;
-                }
-                return false;
             }
         });
 
@@ -266,6 +271,28 @@ public class  Search_Selected extends AppCompatActivity {
 
         }
         return ssb;
+    }
+
+    public static Location addrToPoint(Context context, String title) {
+        List<Address> addresses = null;
+
+        Location location = new Location("");
+        Geocoder geocoder = new Geocoder(context);
+
+        try {
+            addresses = geocoder.getFromLocationName(title, 3);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        if (addresses != null){
+            for(int i = 0; i < addresses.size() ; i ++) {
+                Address lating = addresses.get(i);
+                location.setLatitude(lating.getLatitude());
+                location.setLongitude(lating.getLongitude());
+            }
+        }
+        return location;
     }
 
 }
