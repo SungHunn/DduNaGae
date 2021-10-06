@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.New_ChatMainActivity;
 import com.example.Dde_Na_Gae.R;
+import com.example.Dde_Na_Gae.fragment.RoomFragment;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -47,7 +48,8 @@ import java.util.Map;
 
 public class Group_MessageActivity extends AppCompatActivity {
     Map<String, UserModel> users = new HashMap<>();
-    List<String> members = new ArrayList<>();
+
+
     String uid;
     EditText editText;
 
@@ -405,8 +407,8 @@ public class Group_MessageActivity extends AppCompatActivity {
 
     class GroupMemberRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-        List<UserModel> userModels;
 
+        List<String> members;
 
         Intent intent = getIntent();
         String chat_masterUid = intent.getStringExtra("chat_masterUid");
@@ -415,70 +417,36 @@ public class Group_MessageActivity extends AppCompatActivity {
 
         public GroupMemberRecyclerViewAdapter() {
 
-            userModels = new ArrayList<>();
-
+            members = new ArrayList<>();
 
             FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
-
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                     String chatroomuid1 = snapshot.getValue().toString();
-
-                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid1).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                             members.clear();
-                            for (DataSnapshot item : snapshot.getChildren()) {
-                                members.add(item.getKey());
-
-                            }
-
-
-                            for(int i=0; i < members.size(); i++) {
-                                int finalI = i;
-                                FirebaseDatabase.getInstance().getReference().child("users").child(members.get(i)).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                                        userModels.add(snapshot.getValue(UserModel.class));
-
-
-                                    }
-
-                                    @Override
-                                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                                    }
-                                });
-
-
-                            }
-
-                        }
-
-
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                        }
-                    });
+                    getmemberslist(chatroomuid1);
                 }
-
                 @Override
                 public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                 }
-
-
             });
+        }
 
-
-
-
-
-
-
+        public void getmemberslist(String chatroomuid){
+            FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                    members.clear();
+                    for (DataSnapshot item : snapshot.getChildren()) {
+                        members.add(item.getKey());
+                    }
+                    notifyDataSetChanged();
+                }
+                @Override
+                public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                }
+            });
         }
 
         @NonNull
@@ -487,42 +455,44 @@ public class Group_MessageActivity extends AppCompatActivity {
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
 
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_chatroom_people, parent, false);
-
-
-            return new GroupMemberViewHodler(view);
-
-
+            return new GroupMemberViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
+            Group_MessageActivity.GroupMemberRecyclerViewAdapter.GroupMemberViewHolder groupMemberViewHolder = (Group_MessageActivity.GroupMemberRecyclerViewAdapter.GroupMemberViewHolder)holder;
 
-            GroupMemberViewHodler groupMemberViewHodler = ((GroupMemberViewHodler)holder);
+            FirebaseDatabase.getInstance().getReference().child("users").child(members.get(position)).addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                    UserModel userModel = snapshot.getValue(UserModel.class);
+                    groupMemberViewHolder.group_member_nickname.setText(userModel.nickname);
 
-            System.out.println(userModels.get(position).nickname);
+                    Glide.with(holder.itemView.getContext())
+                            .load(userModel.imageUri)
+                            .apply(new RequestOptions().circleCrop())
+                            .into(groupMemberViewHolder.group_member_profile);
+                }
 
-            groupMemberViewHodler.group_member_nickname.setText(userModels.get(position).nickname);
+                @Override
+                public void onCancelled(@NonNull DatabaseError error) {
 
-            Glide.with(holder.itemView.getContext())
-                    .load(userModels.get(position).imageUri)
-                    .apply(new RequestOptions().circleCrop())
-                    .into(groupMemberViewHodler.group_member_profile);
-
-
+                }
+            });
         }
 
         @Override
         public int getItemCount() {
-            return userModels.size();
+            return members.size();
         }
 
-        private class GroupMemberViewHodler extends RecyclerView.ViewHolder {
+        private class GroupMemberViewHolder extends RecyclerView.ViewHolder {
 
             public TextView group_member_nickname;
             public ImageView group_member_profile;
 
 
-            public GroupMemberViewHodler(View view) {
+            public GroupMemberViewHolder(View view) {
                 super(view);
 
                 group_member_nickname = (TextView)view.findViewById(R.id.memeber_nickname);
