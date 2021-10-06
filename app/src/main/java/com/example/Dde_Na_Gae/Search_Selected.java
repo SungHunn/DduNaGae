@@ -50,8 +50,6 @@ import java.util.List;
 
 public class  Search_Selected extends AppCompatActivity {
     String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
-
-
     ImageView img_back;
 
     BottomNavigationView bottomNavigationView;
@@ -79,8 +77,6 @@ public class  Search_Selected extends AppCompatActivity {
     double latitude;
     double longitude;
 
-    double end_point_latitude;
-    double end_point_longitude;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -123,22 +119,15 @@ public class  Search_Selected extends AppCompatActivity {
         selected_item_addr.setText(addr1);
 
         selected_name = findViewById(R.id.selected_name);
-//        selected_name.setText(getIntent().getStringExtra("NAME"));
         selected_name_main = findViewById(R.id.selected_name_main);
-//        selected_name_main.setText(getIntent().getStringExtra("NAME"));
 
-        title = getIntent().getStringExtra("Title");
+        title = detail_api.getTitle();
         selected_name.setText(title);
         selected_name_main.setText(title);
 
-        img = getIntent().getStringExtra("Image");
+        img = detail_api.getImg_url();
         selected_img = (ImageView)findViewById(R.id.selected_img);
         Glide.with(this).load(img).into(selected_img);
-
-
-//        viewPager2 = findViewById(R.id.selected_img);
-//        ViewpagerAdapter adapter = new ViewpagerAdapter(setItem());
-//        viewPager2.setAdapter(adapter);
 
         btn_share = (ImageView)findViewById(R.id.btn_share);
         btn_share.setOnClickListener(new View.OnClickListener() {
@@ -155,10 +144,6 @@ public class  Search_Selected extends AppCompatActivity {
                 startActivity(Intent.createChooser(intent, "공유"));
             }
         });
-
-        // 클릭 이벤트
-
-
 
         // 바텀 네비
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);

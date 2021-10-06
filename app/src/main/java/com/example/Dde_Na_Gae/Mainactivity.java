@@ -2,13 +2,8 @@ package com.example.Dde_Na_Gae;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
 
-import android.Manifest;
 import android.content.Intent;
-import android.content.pm.PackageManager;
-import android.location.LocationManager;
-import android.net.Uri;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
@@ -21,14 +16,13 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,11 +54,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class Mainactivity extends AppCompatActivity {
-    private static final int MY_PERMISSION_REQUEST_LOCATION = 0;
-
-    private static final int GPS_ENABLE_REQUEST_CODE = 2001;
-    private static final int PERMISSIONS_REQUEST_CODE = 100;
-    String[] REQUIRED_PERMISSIONS = {Manifest.permission.ACCESS_FINE_LOCATION};
 
     TextView category1;
     TextView category2;
@@ -97,43 +86,20 @@ public class Mainactivity extends AppCompatActivity {
 
     BottomNavigationView bottomNavigationView;
 
-    ArrayList<String> Today_FirstImage = new ArrayList<>();
-    ArrayList<String> Today_Title = new ArrayList<>();
-    ArrayList<String> Today_ConId = new ArrayList<>();
-
-    ArrayList<String> Main_FirstImage = new ArrayList<>();
-    ArrayList<String> Main_Title = new ArrayList<>();
-    ArrayList<String> Main_ConId = new ArrayList<>();
-
-    ArrayList<String> Sub_FirstImage = new ArrayList<>();
-    ArrayList<String> Sub_Title = new ArrayList<>();
-    ArrayList<String> Sub_ConId = new ArrayList<>();
-
-
-    private RecyclerView today_recyclerView;
-    private ArrayList<Today_RecyclerViewItem> todayList;
-    private Today_RecyclerViewAdapter today_recyclerViewAdapter;
-
-    ImageView to_day_place1;
-    TextView to_day_place1_txt;
-    ImageView to_day_place2;
-    TextView to_day_place2_txt;
-
-    TextView best_walk1_txt;
-    TextView best_walk2_txt;
-
-    TextView best_tour1_txt;
-    TextView best_tour2_txt;
-
-    TextView region_walk;
-    TextView region_travel;
-
     ImageView profile_photo;
     TextView my_nickname;
     TextView unlogin;
     LinearLayout layout_account;
 
+    ArrayList<String> Main_urls = new ArrayList<>();
+    ArrayList<String> Main_titles = new ArrayList<>();
+    ArrayList<String> Main_addrs = new ArrayList<>();
+    ArrayList<String> Main_conIds = new ArrayList<>();
 
+    int region_code=1;
+    private RecyclerView main_recyclerview;
+    private ArrayList<MainRecyclerViewItem> mainlist;
+    private MainRecyclerViewAdapter main_recyclerviewadapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -146,85 +112,54 @@ public class Mainactivity extends AppCompatActivity {
         unlogin = (TextView) findViewById(R.id.my_page_unlogin);
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
 
+        Spinner region_spinner = findViewById(R.id.region_spinner);
+        ArrayAdapter region_adapter = ArrayAdapter.createFromResource(this, R.array.region, android.R.layout.simple_spinner_dropdown_item);
+        region_adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
+        region_spinner.setAdapter(region_adapter);
 
-        // 오늘의 place 사진 및 텍스트 설정
-//        to_day_place1 = (ImageView)findViewById(R.id.to_day_place1);
-//        to_day_place1_txt = (TextView)findViewById(R.id.to_day_place1_txt);
-//        to_day_place2 = (ImageView)findViewById(R.id.to_day_place2);
-//        to_day_place2_txt = (TextView)findViewById(R.id.to_day_place2_txt);
+        region_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-        Today_api today_api = new Today_api();
-        Thread today_thread = new Thread(today_api);
-        Main_api main_api = new Main_api();
-        Thread main_thread = new Thread(main_api);
-        Sub_api sub_api = new Sub_api();
-        Thread sub_thread = new Thread(sub_api);
+                TextView region_travel = (TextView)findViewById(R.id.region_travel);
+                region_travel.setText(region_spinner.getSelectedItem() + " 관광지");
+                if (position < 8){
+                    region_code = position + 1;
+                }
+                else{
+                    region_code = position + 23;
+                }
 
-        try {
-            today_thread.start();
-            today_thread.join();
+                Main_api main_api = new Main_api(String.valueOf(region_code));
+                Thread main_thread = new Thread(main_api);
 
-            main_thread.start();
-            main_thread.join();
+                try {
+                    main_thread.start();
+                    main_thread.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
 
-            sub_thread.start();
-            sub_thread.join();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        Today_FirstImage = today_api.getToday_images();
-        Today_Title = today_api.getToday_titles();
-        Today_ConId = today_api.getToday_contentids();
-//        Glide.with(this).load(Today_FirstImage.get(0)).into(to_day_place1);
-//        to_day_place1_txt.setText(Today_Title.get(0));
-//        Glide.with(this).load(Today_FirstImage.get(1)).into(to_day_place2);
-//        to_day_place2_txt.setText(Today_Title.get(1));
-        /////////////////////////
+                Main_urls = main_api.getMain_urls();
+                Main_titles = main_api.getMain_titles();
+                Main_addrs = main_api.getMain_addrs();
+                Main_conIds = main_api.getMain_contentids();
 
-        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
-        best_tour1_txt = (TextView)findViewById(R.id.best_tour1_txt);
-        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
-        best_tour2_txt = (TextView)findViewById(R.id.best_tour2_txt);
+                Init();
+                for (int i=0; i < Main_conIds.size(); i++){
+                    addItem(Main_urls.get(i), Main_titles.get(i), Main_addrs.get(i), Main_conIds.get(i));
+                }
 
-        Main_FirstImage = main_api.getMain_images();
-        Main_Title = main_api.getMain_titles();
-        Main_ConId = main_api.getMain_contentids();
+                main_recyclerviewadapter = new MainRecyclerViewAdapter(mainlist);
+                main_recyclerview.setAdapter(main_recyclerviewadapter);
+                main_recyclerview.setLayoutManager(new LinearLayoutManager(Mainactivity.this));
+            }
 
-        Glide.with(this).load(Main_FirstImage.get(0)).into(best_tour1);
-        best_tour1_txt.setText(Main_Title.get(0));
-        Glide.with(this).load(Main_FirstImage.get(1)).into(best_tour2);
-        best_tour2_txt.setText(Main_Title.get(1));
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
 
-        best_walk1 = (ImageView) findViewById(R.id.best_walk1);
-        best_walk1_txt = (TextView)findViewById(R.id.best_walk1_txt);
-        best_walk2 = (ImageView) findViewById(R.id.best_walk2);
-        best_walk2_txt = (TextView)findViewById(R.id.best_walk2_txt);
-
-
-        Sub_FirstImage = sub_api.getSub_images();
-        Sub_Title = sub_api.getSub_titles();
-        Sub_ConId = sub_api.getSub_contentids();
-
-        Glide.with(this).load(Sub_FirstImage.get(0)).into(best_walk1);
-        best_walk1_txt.setText(Sub_Title.get(0));
-        Glide.with(this).load(Sub_FirstImage.get(1)).into(best_walk2);
-        best_walk2_txt.setText(Sub_Title.get(1));
-//
-//        region_travel = (TextView)findViewById(R.id.region_travel);
-//
-//        region_walk = (TextView)findViewById(R.id.region_walk);
-
-
-        ////////////////////////////////////////////////////////
-//        todayInit();
-//        for (int i=0; i<7; i++){
-//            today_addItem(Today_FirstImage.get(i), Today_Title.get(i), Today_ConId.get(i));
-//        }
-
-//        today_recyclerViewAdapter = new Today_RecyclerViewAdapter(todayList);
-
-//        today_recyclerView.setAdapter(today_recyclerViewAdapter);
-//        today_recyclerView.setLayoutManager(new LinearLayoutManager(this, RecyclerView.HORIZONTAL, false));
+            }
+        });
 
         bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -340,6 +275,10 @@ public class Mainactivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
+
+
+
+
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -403,12 +342,8 @@ public class Mainactivity extends AppCompatActivity {
         new_animal = getIntent().getStringExtra("ANIMAL_INFO");
         animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
 
+        main_search();
 
-        toDayPlaceClick();
-        bestPlaceClick();
-        bestWalkClick();
-//        addMenuClick();
-        permissionCheck();
     }
 
 
@@ -438,21 +373,37 @@ public class Mainactivity extends AppCompatActivity {
 
     // serach box
 
-    double latitude;
-    double longitude;
-    GpsTracker gpsTracker;
-    String url;
-    public void onTextViewClick() {
-        gpsTracker = new GpsTracker(Mainactivity.this);
+    public String str;
+    private void main_search() {
+        final EditText main_search = findViewById(R.id.main_search);
+        str = main_search.getText().toString();
+        main_search.getText().clear();
 
-        latitude = gpsTracker.getLatitude();
-        longitude = gpsTracker.getLongitude();
+        main_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
+                str = main_search.getText().toString();
+                switch (actionId) {
+                    case IME_ACTION_SEARCH:
+                        Intent intent = new Intent(getApplicationContext(), Category.class);
+                        intent.putExtra("SEARCH", str);
+
+                        startActivity(intent);
+                }
+                return true;
+            }
+        });
+    }
+
+    public void onTextViewClick() {
         category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Category.class);
-                intent.putExtra("SEARCH", "애견카페");
+                String getcategory1;
+                getcategory1 = category1.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -461,8 +412,10 @@ public class Mainactivity extends AppCompatActivity {
         category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category_Accommodation.class);
-                intent.putExtra("SEARCH", "숙소");
+                String getcategory1;
+                getcategory1 = category2.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -471,8 +424,10 @@ public class Mainactivity extends AppCompatActivity {
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Category.class);
-                intent.putExtra("SEARCH", "애견 미용실");
+                String getcategory1;
+                getcategory1 = category3.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
 
                 startActivity(intent);
             }
@@ -481,196 +436,27 @@ public class Mainactivity extends AppCompatActivity {
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplication(), Category.class);
-                intent.putExtra("SEARCH", "동물병원");
-
+                String getcategory1;
+                getcategory1 = category4.getText().toString();
+                Intent intent = new Intent(getApplicationContext(), Category.class);
+                intent.putExtra("SEARCH", getcategory1);
                 startActivity(intent);
             }
         });
     }
 
-//
-//    private void addMenuClick() {
-//        add_menu1 = (ImageView) findViewById(R.id.add_menu1);
-//        add_menu1.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-//                startActivity(intent);
-//            }
-//        });
-//        add_menu2 = (ImageView) findViewById(R.id.add_menu2);
-//        add_menu2.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                Intent intent = new Intent(getApplicationContext(), BestWalk.class);
-//                startActivity(intent);
-//            }
-//        });
-//    }
-
-    // 오늘의 place 클릭 이벤트
-    public void toDayPlaceClick() {
-        today_place1 = (ImageView) findViewById(R.id.to_day_place1);
-        today_place1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Today_FirstImage.get(0));
-                intent.putExtra("Title", Today_Title.get(0));
-                intent.putExtra("ConId", Today_ConId.get(0));
-                startActivity(intent);
-            }
-        });
-
-        today_place2 = (ImageView) findViewById(R.id.to_day_place2);
-        today_place2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Today_FirstImage.get(1));
-                intent.putExtra("Title", Today_Title.get(1));
-                intent.putExtra("ConId", Today_ConId.get(1));
-                startActivity(intent);
-            }
-        });
+    public void Init(){
+        main_recyclerview = (RecyclerView)findViewById(R.id.main_recyclerview);
+        mainlist = new ArrayList<>();
     }
 
-    public void bestPlaceClick() {
-        best_tour1 = (ImageView) findViewById(R.id.best_tour1);
-        best_tour1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Main_FirstImage.get(0));
-                intent.putExtra("Title", Main_Title.get(0));
-                intent.putExtra("ConId", Main_ConId.get(0));
-                startActivity(intent);
-            }
-        });
+    public void addItem(String url, String title, String addr, String conId){
+        MainRecyclerViewItem main_item = new MainRecyclerViewItem();
 
-        best_tour2 = (ImageView) findViewById(R.id.best_tour2);
-        best_tour2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Main_FirstImage.get(1));
-                intent.putExtra("Title", Main_Title.get(1));
-                intent.putExtra("ConId", Main_ConId.get(1));
-                startActivity(intent);
-            }
-        });
+        main_item.setUrl(url);
+        main_item.setTitle(title);
+        main_item.setAddr(addr);
+        main_item.setConId(conId);
+        mainlist.add(main_item);
     }
-
-    private void bestWalkClick() {
-
-        best_walk1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Sub_FirstImage.get(0));
-                intent.putExtra("Title", Sub_Title.get(0));
-                intent.putExtra("ConId", Sub_ConId.get(0));
-                startActivity(intent);
-            }
-        });
-
-        best_walk2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Search_Selected.class);
-                intent.putExtra("Image", Sub_FirstImage.get(1));
-                intent.putExtra("Title", Sub_Title.get(1));
-                intent.putExtra("ConId", Sub_ConId.get(1));
-                startActivity(intent);
-            }
-        });
-    }
-
-    public void todayInit(){
-//        today_recyclerView = (RecyclerView)findViewById(R.id.today_recyclerView);
-        todayList = new ArrayList<>();
-    }
-
-    public void today_addItem(String url, String title, String conId){
-        Today_RecyclerViewItem today_item = new Today_RecyclerViewItem();
-
-        today_item.setUrl(url);
-        today_item.setTitle(title);
-        today_item.setConId(conId);
-
-        todayList.add(today_item);
-    }
-
-    private void permissionCheck(){
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED){
-            //Manifest.permission.ACCESS_FINE_LOCATION 접근 승낙 상태 일때
-            onTextViewClick();
-        } else{
-            //Manifest.permission.ACCESS_FINE_LOCATION 접근 거절 상태 일때
-            //사용자에게 접근권한 설정을 요구하는 다이얼로그를 띄운다.
-            ActivityCompat.requestPermissions(this,new String[]{Manifest.permission.ACCESS_FINE_LOCATION},MY_PERMISSION_REQUEST_LOCATION);
-        }
-    }
-    @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        if(requestCode == MY_PERMISSION_REQUEST_LOCATION){
-            onTextViewClick();
-        }
-    }
-
-    void checkRunTimePermission() {
-
-        //런타임 퍼미션 처리
-        // 1. 위치 퍼미션을 가지고 있는지 체크합니다.
-        int hasFineLocationPermission = ContextCompat.checkSelfPermission(Mainactivity.this,
-                Manifest.permission.ACCESS_FINE_LOCATION);
-
-        if (hasFineLocationPermission == PackageManager.PERMISSION_GRANTED) {
-            // 2. 이미 퍼미션을 가지고 있다면
-            // ( 안드로이드 6.0 이하 버전은 런타임 퍼미션이 필요없기 때문에 이미 허용된 걸로 인식합니다.)
-            // 3.  위치 값을 가져올 수 있음
-
-        } else {  //2. 퍼미션 요청을 허용한 적이 없다면 퍼미션 요청이 필요합니다. 2가지 경우(3-1, 4-1)가 있습니다.
-            // 3-1. 사용자가 퍼미션 거부를 한 적이 있는 경우에는
-            if (ActivityCompat.shouldShowRequestPermissionRationale(Mainactivity.this, REQUIRED_PERMISSIONS[0])) {
-                // 3-2. 요청을 진행하기 전에 사용자가에게 퍼미션이 필요한 이유를 설명해줄 필요가 있습니다.
-                Toast.makeText(Mainactivity.this, "이 앱을 실행하려면 위치 접근 권한이 필요합니다.", Toast.LENGTH_LONG).show();
-                // 3-3. 사용자게에 퍼미션 요청을 합니다. 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions(Mainactivity.this, REQUIRED_PERMISSIONS,
-                        PERMISSIONS_REQUEST_CODE);
-            } else {
-                // 4-1. 사용자가 퍼미션 거부를 한 적이 없는 경우에는 퍼미션 요청을 바로 합니다.
-                // 요청 결과는 onRequestPermissionResult에서 수신됩니다.
-                ActivityCompat.requestPermissions(Mainactivity.this, REQUIRED_PERMISSIONS,
-                        PERMISSIONS_REQUEST_CODE);
-            }
-        }
-    }
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        switch (requestCode) {
-            case GPS_ENABLE_REQUEST_CODE:
-                //사용자가 GPS 활성 시켰는지 검사
-                if (checkLocationServicesStatus()) {
-                    if (checkLocationServicesStatus()) {
-                        Log.d("@@@", "onActivityResult : GPS 활성화 되있음");
-                        checkRunTimePermission();
-                        return;
-                    }
-                }
-                break;
-        }
-    }
-
-    public boolean checkLocationServicesStatus() {
-        LocationManager locationManager = (LocationManager) getSystemService(LOCATION_SERVICE);
-
-        return locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)
-                || locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
-    }
-
 }

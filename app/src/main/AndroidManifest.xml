@@ -22,7 +22,7 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="b214210d275c3c68a2ab5a59099d8b41" />
 
-        <activity android:name=".SplashActivity">
+        <activity android:name=".Mainactivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -49,7 +49,7 @@
                     android:scheme="kakaob214210d275c3c68a2ab5a59099d8b41" />
             </intent-filter>
         </activity>
-        <activity android:name=".Mainactivity" />
+<!--        <activity android:name=".Mainactivity" />-->
         <activity android:name=".Login_New_Page" />
         <activity android:name=".My_Information" />
         <activity android:name=".My_Page" />

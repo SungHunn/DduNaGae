@@ -16,6 +16,8 @@ public class Detail_api implements Runnable {
 
     String overview;
     String addr1;
+    String title;
+    String img_url;
 
     public Detail_api(String conId) {
         this.conId = conId;
@@ -63,8 +65,8 @@ public class Detail_api implements Runnable {
             JSONObject items = (JSONObject) body.get("items");
             JSONObject temp = items.getJSONObject("item");
 
-//                    System.out.println(temp);
-
+            title = temp.getString("title");
+            img_url = temp.getString("firstimage");
             addr1 = temp.getString("addr1");  // 주소 받아오기
             overview = temp.getString("overview"); // 개요(설명) 받아오기
         } catch (IOException e) {
@@ -77,8 +79,13 @@ public class Detail_api implements Runnable {
     public String getOverview() {
         return overview;
     }
-
     public String getAddr1() {
         return addr1;
+    }
+    public String getTitle() {
+        return title;
+    }
+    public String getImg_url() {
+        return img_url;
     }
 }

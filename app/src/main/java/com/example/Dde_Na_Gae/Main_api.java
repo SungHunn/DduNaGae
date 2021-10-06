@@ -16,13 +16,16 @@ public class Main_api implements Runnable{
 
     String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
 
-    Calendar cal = Calendar.getInstance();
-    int today = cal.get(Calendar.DAY_OF_MONTH);
-    int main_index = (today % 6) + 3;
-
-    ArrayList<String> main_images = new ArrayList<>();
+    ArrayList<String> main_urls = new ArrayList<>();
     ArrayList<String> main_titles = new ArrayList<>();
     ArrayList<String> main_contentids = new ArrayList<>();
+    ArrayList<String> main_addrs = new ArrayList<>();
+
+    String region_code;
+
+    public Main_api(String region_code){
+        this.region_code = region_code;
+    }
 
     @Override
     public void run() {
@@ -30,13 +33,13 @@ public class Main_api implements Runnable{
                 "?ServiceKey=" + key +
                 "&MobileOS=AND" +
                 "&MobileApp=TestApp" +
-                "&numOfRows=10" +
+                "&numOfRows=100" +
                 "&arrange=P" +
                 "&contentTypeId=12" +
                 "&cat1=A01" +
                 "&cat2=A0101" +
                 "&listYN=Y" +
-                "&areaCode=" + main_index + // 지역코드
+                "&areaCode=" + region_code + // 지역코드
                 "&_type=json";
         try {
             URL url = new URL(urlAdress);
@@ -54,7 +57,7 @@ public class Main_api implements Runnable{
             }
 
             String jsonData = buffer.toString();
-//                        System.out.println(jsonData);
+//            System.out.println(jsonData);
 
             JSONObject obj = new JSONObject(jsonData);
             JSONObject response = (JSONObject) obj.get("response");
@@ -62,16 +65,25 @@ public class Main_api implements Runnable{
             JSONObject galUrlResult = (JSONObject) test.get("items");
             JSONArray galUrl = (JSONArray) galUrlResult.get("item");
 
-            for (int i = 0; i < 2; i++) {
+            for (int i = 0; i < galUrl.length(); i++) {
                 JSONObject temp = galUrl.getJSONObject(i);
-//                            System.out.println(temp);
                 String firstimage = temp.getString("firstimage");
                 String title = temp.getString("title");
+                String addr = temp.getString("addr1");
                 String contentid = temp.getString("contentid");
 
-                main_images.add(firstimage);
+                if (title.contains("(")){
+                    title = title.substring(0, title.indexOf("("));
+                }
+
+                // 두번째 "공백" 인덱스 값
+                int index = addr.indexOf(" ", addr.indexOf(" ")+1);
+                addr = addr.substring(0, index);
+
+                main_urls.add(firstimage);
                 main_titles.add(title);
                 main_contentids.add(contentid);
+                main_addrs.add(addr);
 
             } // for 종료
         } catch (IOException e) {
@@ -81,10 +93,11 @@ public class Main_api implements Runnable{
         } catch (Exception e) {
             e.printStackTrace();
         }
+
     }
 
-    public ArrayList<String> getMain_images() {
-        return main_images;
+    public ArrayList<String> getMain_urls() {
+        return main_urls;
     }
 
     public ArrayList<String> getMain_titles() {
@@ -93,5 +106,9 @@ public class Main_api implements Runnable{
 
     public ArrayList<String> getMain_contentids() {
         return main_contentids;
+    }
+
+    public ArrayList<String> getMain_addrs() {
+        return main_addrs;
     }
 }
