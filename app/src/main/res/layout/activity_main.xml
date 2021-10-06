@@ -6,11 +6,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:layout_margin="10dp"
+
+
     tools:ignore="MissingConstraints">
 
     <androidx.drawerlayout.widget.DrawerLayout
         android:id="@+id/drawlayout"
+        android:layout_margin="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -21,10 +23,9 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent" >
-
+                android:layout_height="match_parent"
+                >
                 <!--    상단 서치 및 네비게이션 바 설정 위치   -->
-
                 <ImageView
                     android:id="@+id/main_logo"
                     android:layout_width="90dp"
@@ -110,7 +111,8 @@
                             android:text="카       페"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
 
                         <View
                             android:layout_width="2dp"
@@ -141,7 +143,8 @@
                             android:text="숙       소"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -167,10 +170,11 @@
                             android:layout_weight="4"
                             android:clickable="true"
                             android:gravity="center"
-                            android:text="여       행"
+                            android:text="미  용  실"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
 
                         <View
                             android:layout_width="2dp"
@@ -201,7 +205,8 @@
                             android:text="병       원"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
                     </LinearLayout>
                 </LinearLayout>
 
@@ -486,9 +491,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        app:itemBackground="@android:color/white"
         app:itemIconTint="#000000"
         app:itemTextColor="#000000"
+        android:background="#FFDCD5"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"

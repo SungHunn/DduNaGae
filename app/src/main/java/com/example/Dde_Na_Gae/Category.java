@@ -5,6 +5,7 @@ import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.LocationManager;
+import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -23,6 +24,8 @@ import androidx.core.content.ContextCompat;
 public class Category extends AppCompatActivity {
     String category;
     String url;
+    double latitude;
+    double longitude;
     private WebView webView;
 
     private GpsTracker gpsTracker;
@@ -40,10 +43,8 @@ public class Category extends AppCompatActivity {
 
         gpsTracker = new GpsTracker(Category.this);
 
-        double latitude = gpsTracker.getLatitude();
-        double longitude = gpsTracker.getLongitude();
-
-        webView = findViewById(R.id.map_view);
+        latitude = gpsTracker.getLatitude();
+        longitude = gpsTracker.getLongitude();
 
         permissionCheck();
     }
@@ -53,45 +54,10 @@ public class Category extends AppCompatActivity {
         Intent intent = getIntent();
         category = intent.getStringExtra("SEARCH");
 
-        switch (category) {
-            case "카페":
-                category = "애견 카페";
-                break;
-
-            case "숙소":
-                category = "동물 반입 가능 숙소";
-                break;
-
-            case "산책" :
-                category = "동물 반입 가능 공원";
-                break;
-
-            case "여행지" :
-                category = "동물 반입 가능 여행지";
-                break;
-
-            case "병원" :
-                category = "동물 병원";
-                break;
-        }
-        url = "https://www.google.com/maps/search/" + category;
-
-        webView.getSettings().setSupportZoom(true);
-        webView.getSettings().getBuiltInZoomControls();
-        webView.getSettings().setDisplayZoomControls(true);
-        WebSettings.ZoomDensity zoomDensity = WebSettings.ZoomDensity.CLOSE;
-        webView.getSettings().setDefaultZoom(zoomDensity);
-        webView.getSettings().setJavaScriptEnabled(true);
-
-        webView.setWebViewClient(new WebViewClient());
-        webView.setWebChromeClient(new WebChromeClient(){
-            @Override
-            public void onGeolocationPermissionsShowPrompt(String origin, GeolocationPermissions.Callback callback) {
-                super.onGeolocationPermissionsShowPrompt(origin, callback);
-                callback.invoke(origin, true, false);
-            }
-        });
-        webView.loadUrl(url);
+        String url;
+        url = "kakaomap://search?q=" + category + "&p=" + latitude + "," + longitude;
+        Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+        startActivity(intent1);
     }
 
     private void permissionCheck(){
