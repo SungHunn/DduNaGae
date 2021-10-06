@@ -6,6 +6,9 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebChromeClient;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
@@ -38,6 +41,8 @@ public class Category_Accommodation extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
+    WebView webView;
+
     ArrayList<String> city = new ArrayList<>();
     ArrayList<String> name = new ArrayList<>();
     ArrayList<String> address = new ArrayList<>();
@@ -52,10 +57,31 @@ public class Category_Accommodation extends AppCompatActivity {
     String selected_city;
 
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.category_accommodation);
+
+        webView = findViewById(R.id.accommodation_webView);
+        String url;
+
+        url = "https://map.kakao.com/";
+        webView.getSettings().setJavaScriptEnabled(true);
+        webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setLoadWithOverviewMode(true);
+        webView.getSettings().setLoadsImagesAutomatically(true);
+        webView.getSettings().setUseWideViewPort(true);
+        webView.getSettings().setSupportZoom(false);
+        webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+        webView.getSettings().setAppCacheEnabled(false);
+        webView.getSettings().setDomStorageEnabled(true);
+        webView.getSettings().setAllowFileAccess(true);
+        webView.setWebChromeClient(new WebChromeClient());
+        webView.getSettings().setUserAgentString("app");
+
+        webView.loadUrl(url);
 
         textView = findViewById(R.id.textView);
 
@@ -180,6 +206,8 @@ public class Category_Accommodation extends AppCompatActivity {
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
             View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_accommodation,parent, false);
+
+
             return new Category_Accommodation.AccommodationRecyclerViewAdapter.AccommodationViewHolder(view);
         }
 
@@ -189,6 +217,32 @@ public class Category_Accommodation extends AppCompatActivity {
 
             AccommodationHolder.address.setText(contents.get(position).accommodation_address);
             AccommodationHolder.title.setText(contents.get(position).accommodation_title);
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @SuppressLint("SetJavaScriptEnabled")
+                @Override
+                public void onClick(View v) {
+                    webView = findViewById(R.id.accommodation_webView);
+                    String url;
+
+                    url = "https://map.kakao.com/?q=" + contents.get(position).accommodation_title;
+                    webView.getSettings().setJavaScriptEnabled(true);
+                    webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
+                    webView.getSettings().setUseWideViewPort(true);
+                    webView.getSettings().setLoadWithOverviewMode(true);
+                    webView.getSettings().setLoadsImagesAutomatically(true);
+                    webView.getSettings().setUseWideViewPort(true);
+                    webView.getSettings().setSupportZoom(false);
+                    webView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+                    webView.getSettings().setAppCacheEnabled(false);
+                    webView.getSettings().setDomStorageEnabled(true);
+                    webView.getSettings().setAllowFileAccess(true);
+                    webView.setWebChromeClient(new WebChromeClient());
+                    webView.getSettings().setUserAgentString("app");
+
+                    webView.loadUrl(url);
+                }
+            });
         }
 
         @Override

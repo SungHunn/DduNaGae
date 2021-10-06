@@ -455,9 +455,10 @@ public class Mainactivity extends AppCompatActivity {
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=애견카페" + "&p=" + latitude + "," + longitude;
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent1);
+                Intent intent = new Intent(getApplication(), Category.class);
+                intent.putExtra("SEARCH", "애견카페");
+
+                startActivity(intent);
             }
         });
         category2 = (TextView) findViewById(R.id.category_2);
@@ -474,18 +475,20 @@ public class Mainactivity extends AppCompatActivity {
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=애견미용실" + "&p=" + latitude + "," + longitude;
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent1);
+                Intent intent = new Intent(getApplication(), Category.class);
+                intent.putExtra("SEARCH", "애견 미용실");
+
+                startActivity(intent);
             }
         });
         category4 = (TextView) findViewById(R.id.category_4);
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=동물병원" + "&p=" + latitude + "," + longitude;
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent1);
+                Intent intent = new Intent(getApplication(), Category.class);
+                intent.putExtra("SEARCH", "동물병원");
+
+                startActivity(intent);
             }
         });
     }
