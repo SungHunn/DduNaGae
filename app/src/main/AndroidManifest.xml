@@ -29,7 +29,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".Category_Accommodation" />
         <activity android:name=".Api_date" />
         <activity android:name=".Search_Selected" />
         <activity android:name=".Search_Selected_More" />

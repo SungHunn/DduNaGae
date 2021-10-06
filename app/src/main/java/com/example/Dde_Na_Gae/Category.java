@@ -23,11 +23,8 @@ import androidx.core.content.ContextCompat;
 
 public class Category extends AppCompatActivity {
     String category;
-    String url;
     double latitude;
     double longitude;
-    private WebView webView;
-
     private GpsTracker gpsTracker;
 
     private static final int MY_PERMISSION_REQUEST_LOCATION = 0;
@@ -77,16 +74,6 @@ public class Category extends AppCompatActivity {
         if(requestCode == MY_PERMISSION_REQUEST_LOCATION){
             initWebView();
         }
-    }
-
-
-    @Override
-    public boolean onKeyDown(int keyCode, KeyEvent event) {//뒤로가기 버튼 이벤트
-        if ((keyCode == KeyEvent.KEYCODE_BACK) && webView.canGoBack()) {//웹뷰에서 뒤로가기 버튼을 누르면 뒤로가짐
-            webView.goBack();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
     }
 
     void checkRunTimePermission() {

@@ -412,8 +412,6 @@ public class Mainactivity extends AppCompatActivity {
         bestPlaceClick();
         bestWalkClick();
 //        addMenuClick();
-        main_search();
-
         permissionCheck();
     }
 
@@ -444,28 +442,6 @@ public class Mainactivity extends AppCompatActivity {
 
     // serach box
 
-    public String str;
-    private void main_search() {
-        final EditText main_search = findViewById(R.id.main_search);
-        str = main_search.getText().toString();
-        main_search.getText().clear();
-
-        main_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
-                str = main_search.getText().toString();
-                switch (actionId) {
-                    case IME_ACTION_SEARCH:
-                        Intent intent = new Intent(getApplicationContext(), Category.class);
-                        intent.putExtra("SEARCH", str);
-
-                        startActivity(intent);
-                }
-                return true;
-            }
-        });
-    }
-
     double latitude;
     double longitude;
     GpsTracker gpsTracker;
@@ -488,7 +464,7 @@ public class Mainactivity extends AppCompatActivity {
         category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
+                Intent intent = new Intent(getApplicationContext(), Category_Accommodation.class);
                 intent.putExtra("SEARCH", "숙소");
 
                 startActivity(intent);
