@@ -62,6 +62,8 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
         recyclerView.setLayoutManager(new LinearLayoutManager(Group_Matching_Room_detail.this));
         recyclerView.setAdapter(new RecyclerViewAdapter());
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         room_title = (TextView) findViewById(R.id.room_title1);
         h_sex = (TextView) findViewById(R.id.room_text2);
         h_age = (TextView) findViewById(R.id.room_text4);
@@ -143,12 +145,12 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
         Intent intent = getIntent();
         String chatting_room_option_selector = intent.getStringExtra("option_selector");
         for (int i = 0; i < 5; i++) {
-            DatabaseReference data_master_nickname = mDatabase.child("chatting_room").child(chatting_room_option_selector).child(child[i]);
             int finalI = i;
-            data_master_nickname.addValueEventListener(new ValueEventListener() {
+            mDatabase.child("chatting_room").child(chatting_room_option_selector).child(child[finalI]).addValueEventListener(new ValueEventListener() {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String name = snapshot.getValue(String.class);
+                    System.out.println(data[finalI]);
                     data[finalI].setText(name);
                 }
 
@@ -253,7 +255,7 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
                             UserModel userModel = snapshot.getValue(UserModel.class);
 
                             Intent intent1 = new Intent(getApplicationContext(), Profile_Detail.class);
-                            intent1.putExtra("uid", userModel.uid);
+                            intent1.putExtra("destinationuid", userModel.uid);
                             startActivity(intent1);
                         }
 
