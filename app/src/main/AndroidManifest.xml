@@ -34,7 +34,6 @@
         <activity android:name=".Search_Selected" />
         <activity android:name=".Search_Selected_More" />
         <activity android:name="com.example.Dde_Na_Gae.Category" />
-        <activity android:name="com.example.Dde_Na_Gae.TodayPlace" />
         <activity android:name="com.example.Dde_Na_Gae.Matching" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
@@ -76,6 +75,8 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Notice"/>
         <activity android:name=".Terms_of_service"/>
+        <activity android:name=".Profile_Detail"/>
+        <activity android:name=".Group_Matching_Room_detail"/>
 
 
     </application>

@@ -43,30 +43,21 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
 
-                    <EditText
-                        android:id="@+id/main_search"
-                        android:layout_width="230dp"
-                        android:layout_height="50dp"
-                        android:layout_marginTop="29dp"
-                        android:background="@drawable/rounded_edittext"
-                        android:clickable="true"
-                        android:focusable="true"
-                        app:layout_constraintStart_toEndOf="@id/main_logo"
-                        app:layout_constraintTop_toTopOf="parent" />
 
                     <ImageButton
                         android:id="@+id/nvg_open"
                         android:layout_width="40dp"
                         android:layout_height="40dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="33dp"
+                        android:layout_marginTop="32dp"
                         android:layout_marginRight="5dp"
                         android:adjustViewBounds="true"
-                        android:scaleType="fitCenter"
                         android:background="#CCFFDCD5"
+                        android:scaleType="fitCenter"
                         android:src="@drawable/ic_baseline_share_24"
                         app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/main_search"
+                        app:layout_constraintHorizontal_bias="0.874"
+                        app:layout_constraintStart_toEndOf="@id/main_logo"
                         app:layout_constraintTop_toTopOf="parent" />
 
                     <View
@@ -124,7 +115,8 @@
                             android:text="카       페"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
 
                         <View
                             android:layout_width="2dp"
@@ -155,7 +147,8 @@
                             android:text="숙       소"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
                     </LinearLayout>
 
                     <LinearLayout
@@ -181,10 +174,11 @@
                             android:layout_weight="4"
                             android:clickable="true"
                             android:gravity="center"
-                            android:text="여       행"
+                            android:text="미  용  실"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
 
                         <View
                             android:layout_width="2dp"
@@ -215,7 +209,8 @@
                             android:text="병       원"
                             android:textColor="#000000"
                             android:textSize="20dp"
-                            android:textStyle="bold" />
+                            android:textStyle="bold"
+                            android:focusable="true" />
                     </LinearLayout>
                 </LinearLayout>
 

@@ -18,6 +18,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.Group_Matching_Room_detail;
 import com.example.Dde_Na_Gae.Single_Matching_Room_detail;
 import com.example.Dde_Na_Gae.R;
 import com.example.Dde_Na_Gae.Room_Name_Detail_Database;
@@ -28,6 +29,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -128,14 +131,41 @@ public class RoomFragment extends Fragment {
                 @Override
                 public void onClick(View view) {
 
+                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatroommodels1.get(position).chatting_room_option_selector).child("matching_room_option").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            if(snapshot.getValue().toString().equals("그룹 매칭방")){
+                                Intent intent = new Intent(getActivity(), Group_Matching_Room_detail.class);
+                                intent.putExtra("masteruid", chatroommodels1.get(position).master_uid);
+                                intent.putExtra("roomname", chatroommodels1.get(position).Room_name);
+                                intent.putExtra("option_selector", chatroommodels1.get(position).chatting_room_option_selector);
 
-                    Intent intent1 = new Intent(getActivity(), Single_Matching_Room_detail.class);
-                    intent1.putExtra("masteruid", chatroommodels1.get(position).master_uid);
-                    intent1.putExtra("roomname", chatroommodels1.get(position).Room_name);
-                    intent1.putExtra("option_selector", chatroommodels1.get(position).chatting_room_option_selector);
+                                startActivity(intent);
 
 
-                    startActivity(intent1);
+
+                            }
+                            else{
+
+                                Intent intent1 = new Intent(getActivity(), Single_Matching_Room_detail.class);
+                                intent1.putExtra("masteruid", chatroommodels1.get(position).master_uid);
+                                intent1.putExtra("roomname", chatroommodels1.get(position).Room_name);
+                                intent1.putExtra("option_selector", chatroommodels1.get(position).chatting_room_option_selector);
+
+                                startActivity(intent1);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
+
+
+
 
                 }
             });
