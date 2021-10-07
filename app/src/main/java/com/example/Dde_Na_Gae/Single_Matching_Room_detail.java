@@ -168,57 +168,57 @@ public class Single_Matching_Room_detail extends AppCompatActivity {
             }
         });
 
-        group_room_detail_go_chatting.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Group_MessageActivity.class);
-                intent.putExtra("chat_masterUid", master_uid);
-                intent.putExtra("room_name",room_name);
-                intent.putExtra("option_selector",chatting_room_option_selector);
-                ActivityOptions activityOptions = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-
-
-                    activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fromright, R.anim.toleft);
-                    startActivity(intent, activityOptions.toBundle());
-
-
-                    mDatabase.child("users").child(master_uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                            String abc= snapshot.getValue(String.class);
-
-
-                            ChatModel chatModel = new ChatModel();
-                            chatModel.users.put(uid, true);
-
-
-                            Map<String, Object> user = new HashMap<>();
-                            user.put(uid, true);
-
-
-                            mDatabase.child("chatting_room")
-                                    .child(chatting_room_option_selector)
-                                    .child("Room_Name").child(room_name).child("talk")
-                                    .child(abc).child("users")
-                                    .updateChildren(user, chatModel);
-
-                            group_room_name_database(room_name,chatting_room_option_selector);
-
-                        }
-
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                        }
-                    });
-
-
-                }
-                startActivity(intent);
-            }
-        });
+//        group_room_detail_go_chatting.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(getApplicationContext(), Group_MessageActivity.class);
+//                intent.putExtra("chat_masterUid", master_uid);
+//                intent.putExtra("room_name",room_name);
+//                intent.putExtra("option_selector",chatting_room_option_selector);
+//                ActivityOptions activityOptions = null;
+//                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+//
+//
+//                    activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fromright, R.anim.toleft);
+//                    startActivity(intent, activityOptions.toBundle());
+//
+//
+//                    mDatabase.child("users").child(master_uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+//                        @Override
+//                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+//
+//                            String abc= snapshot.getValue(String.class);
+//
+//
+//                            ChatModel chatModel = new ChatModel();
+//                            chatModel.users.put(uid, true);
+//
+//
+//                            Map<String, Object> user = new HashMap<>();
+//                            user.put(uid, true);
+//
+//
+//                            mDatabase.child("chatting_room")
+//                                    .child(chatting_room_option_selector)
+//                                    .child("Room_Name").child(room_name).child("talk")
+//                                    .child(abc).child("users")
+//                                    .updateChildren(user, chatModel);
+//
+//                            group_room_name_database(room_name,chatting_room_option_selector);
+//
+//                        }
+//
+//                        @Override
+//                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+//
+//                        }
+//                    });
+//
+//
+//                }
+//                startActivity(intent);
+//            }
+//        });
 
 
     }
@@ -242,6 +242,7 @@ public class Single_Matching_Room_detail extends AppCompatActivity {
 
     }
     public void gettextview1(String[] child,TextView[] data) {
+
         Intent intent = getIntent();
         String chatting_room_option_selector = intent.getStringExtra("option_selector");
         for (int i = 0; i < 5; i++) {

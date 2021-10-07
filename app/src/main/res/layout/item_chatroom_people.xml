@@ -7,22 +7,22 @@
     android:layout_marginBottom="10dp">
 
     <LinearLayout
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:padding="20dp"
-        android:orientation="horizontal"
+        android:orientation="vertical"
 
         >
 
         <!--프로필 사진-->
         <ImageView
             android:id="@+id/memeber_profile"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
             android:layout_marginRight="5dp"
             />
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
             android:layout_gravity="left">
@@ -31,9 +31,9 @@
                 android:id="@+id/memeber_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
                 android:text="사람 이름"
                 android:textSize="25dp"
+                android:layout_gravity="center"
                 android:textColor="#000000"/>
 
 
