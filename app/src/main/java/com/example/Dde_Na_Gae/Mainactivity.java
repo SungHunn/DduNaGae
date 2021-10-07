@@ -342,8 +342,7 @@ public class Mainactivity extends AppCompatActivity {
         new_animal = getIntent().getStringExtra("ANIMAL_INFO");
         animal_info = getIntent().getStringExtra("ANIMAL_MORE_INFO");
 
-        main_search();
-
+        onTextViewClick();
     }
 
 
@@ -373,37 +372,13 @@ public class Mainactivity extends AppCompatActivity {
 
     // serach box
 
-    public String str;
-    private void main_search() {
-        final EditText main_search = findViewById(R.id.main_search);
-        str = main_search.getText().toString();
-        main_search.getText().clear();
-
-        main_search.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView textView, int actionId, KeyEvent event) {
-                str = main_search.getText().toString();
-                switch (actionId) {
-                    case IME_ACTION_SEARCH:
-                        Intent intent = new Intent(getApplicationContext(), Category.class);
-                        intent.putExtra("SEARCH", str);
-
-                        startActivity(intent);
-                }
-                return true;
-            }
-        });
-    }
-
-    public void onTextViewClick() {
+        public void onTextViewClick() {
         category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category1.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
+                intent.putExtra("SEARCH", "애견카페");
 
                 startActivity(intent);
             }
@@ -412,10 +387,7 @@ public class Mainactivity extends AppCompatActivity {
         category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category2.getText().toString();
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
+                Intent intent = new Intent(getApplicationContext(), Category_Accommodation.class);
 
                 startActivity(intent);
             }
@@ -424,10 +396,8 @@ public class Mainactivity extends AppCompatActivity {
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category3.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
+                intent.putExtra("SEARCH", "애견미용실");
 
                 startActivity(intent);
             }
@@ -436,10 +406,8 @@ public class Mainactivity extends AppCompatActivity {
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String getcategory1;
-                getcategory1 = category4.getText().toString();
                 Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", getcategory1);
+                intent.putExtra("SEARCH", "동물병원");
                 startActivity(intent);
             }
         });

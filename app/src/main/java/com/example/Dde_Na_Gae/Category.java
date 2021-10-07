@@ -24,6 +24,7 @@ import androidx.core.content.ContextCompat;
 public class Category extends AppCompatActivity {
     WebView webView;
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
