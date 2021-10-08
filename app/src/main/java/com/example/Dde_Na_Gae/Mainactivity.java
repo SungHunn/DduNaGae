@@ -1,27 +1,20 @@
 package com.example.Dde_Na_Gae;
 
-import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
-
 import android.content.Intent;
 import android.os.Bundle;
-import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -40,17 +33,8 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.database.annotations.NotNull;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.net.URL;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.List;
 
 public class Mainactivity extends AppCompatActivity {
@@ -59,23 +43,8 @@ public class Mainactivity extends AppCompatActivity {
     TextView category2;
     TextView category3;
     TextView category4;
-    TextView category5;
-    TextView category6;
 
     DatabaseReference mDatabase;
-
-
-    ImageView today_place1;
-    ImageView today_place2;
-
-    ImageView best_tour1;
-    ImageView best_tour2;
-
-    ImageView best_walk1;
-    ImageView best_walk2;
-
-    ImageView add_menu1;
-    ImageView add_menu2;
 
     //네비게이션바
     DrawerLayout drawerLayout;

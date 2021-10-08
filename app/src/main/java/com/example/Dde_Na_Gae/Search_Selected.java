@@ -71,7 +71,6 @@ public class  Search_Selected extends AppCompatActivity {
 
     ImageView selected_img;
 
-    ImageView btn_share;
     String url;
     GpsTracker gpsTracker;
     double latitude;
@@ -84,7 +83,7 @@ public class  Search_Selected extends AppCompatActivity {
 
         Context context = this;
 
-        conId = getIntent().getStringExtra("ConId");
+        conId = getIntent().getStringExtra("conId");
         Detail_api detail_api = new Detail_api(conId);
         Thread detail_thread = new Thread(detail_api);
         Info_api info_api = new Info_api(conId);
@@ -129,22 +128,6 @@ public class  Search_Selected extends AppCompatActivity {
         selected_img = (ImageView)findViewById(R.id.selected_img);
         Glide.with(this).load(img).into(selected_img);
 
-        btn_share = (ImageView)findViewById(R.id.btn_share);
-        btn_share.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(Intent.ACTION_SEND);
-
-                intent.addCategory(Intent.CATEGORY_DEFAULT);
-                String text;
-                text = "https://youtube.com";
-                intent.putExtra(Intent.EXTRA_TEXT, text);
-                intent.setType("text/plain");
-//                intent.setPackage("com.kakao.talk");
-                startActivity(Intent.createChooser(intent, "공유"));
-            }
-        });
-
         // 바텀 네비
         bottomNavigationView = (BottomNavigationView)findViewById(R.id.bottomNavi);
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -174,10 +157,16 @@ public class  Search_Selected extends AppCompatActivity {
                         startActivity(intent2);
                         break;
 
-                    case R.id.more_room_activity:
-                        Intent intent3 = new Intent(getApplicationContext(), Search_Selected_More.class);
-                        intent3.putExtra("More_info", getIntent().getStringExtra("NAME"));
-                        startActivity(intent3);
+                    case R.id.share:
+                        Intent intent = new Intent(Intent.ACTION_SEND);
+
+                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+                        String text;
+                        text = "https://youtube.com";
+                        intent.putExtra(Intent.EXTRA_TEXT, text);
+                        intent.setType("text/plain");
+//                intent.setPackage("com.kakao.talk");
+                        startActivity(Intent.createChooser(intent, "공유"));
                         break;
                 }
                 return false;
