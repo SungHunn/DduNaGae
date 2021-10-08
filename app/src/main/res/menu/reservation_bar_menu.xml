@@ -9,7 +9,7 @@
         android:icon="@android:drawable/ic_menu_camera"
         android:title="홈" />
     <item
-        android:id="@+id/more_room_activity"
-        android:icon="@android:drawable/ic_menu_agenda"
-        android:title="객실 보기" />
+        android:id="@+id/share"
+        android:icon="@drawable/ic_baseline_share_24"
+        android:title="공유" />
 </menu>
