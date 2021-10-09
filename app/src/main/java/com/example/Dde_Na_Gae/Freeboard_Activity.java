@@ -41,25 +41,26 @@ public class Freeboard_Activity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private String uid;
 
-    int str = 0;
+    TextView category1;
+    TextView category2;
+    TextView category3;
+    TextView category4;
+    TextView category5;
 
-    DrawerLayout drawerLayout;
-    View drawerView;
-    ListView listview = null;
+
+    int str = 0;
 
     TextView freeboard_Title;
 
-    ImageButton imageButton_open;
-    ImageButton imageButton_close;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_activity);
 
-        freeboard_Title = (TextView)findViewById(R.id.free_board_text);
+        freeboard_Title = (TextView) findViewById(R.id.free_board_text);
 
-        recyclerView = (RecyclerView)findViewById(R.id.free_board_list);
+        recyclerView = (RecyclerView) findViewById(R.id.free_board_list);
         recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
@@ -67,8 +68,6 @@ public class Freeboard_Activity extends AppCompatActivity {
 
         writing = (Button) findViewById(R.id.go_writing);
         my_list = (Button) findViewById(R.id.my_text_list);
-
-        listview = findViewById(R.id.Free_board_drawer_list);
 
         writing.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,113 +85,58 @@ public class Freeboard_Activity extends AppCompatActivity {
             }
         });
 
-        drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
-        drawerView = findViewById(R.id.free_board_drawer);
-        drawerLayout = findViewById(R.id.free_board_activity_drawlayout);
-
-        imageButton_open = findViewById(R.id.free_board_category_open);
-        imageButton_open.setOnClickListener(new View.OnClickListener() {
+        category1 = findViewById(R.id.free_board1);
+        category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.openDrawer(drawerView);
+                freeboard_Title.setText("자유게시판");
+                str = 0;
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
             }
         });
-
-        imageButton_close = findViewById(R.id.drawer_close);
-        imageButton_close.setOnClickListener(new View.OnClickListener() {
+        category2 = findViewById(R.id.free_board2);
+        category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                drawerLayout.closeDrawers();
+                Intent intent = new Intent(getApplicationContext(), Free_Board_Review.class);
+                startActivity(intent);
             }
         });
-
-        drawerLayout.setDrawerListener(listener);
-        drawerView.setOnTouchListener(new View.OnTouchListener() {
+        category3 = findViewById(R.id.free_board3);
+        category3.setOnClickListener(new View.OnClickListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                return true;
+            public void onClick(View v) {
+                str = 2;
+                freeboard_Title.setText("꿀 정보");
+
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
             }
         });
-
-        List<String> list = new ArrayList<>();
-        list.add("자유게시판");
-        list.add("리뷰");
-        list.add("꿀 정보");
-        list.add("동호회 모집");
-        list.add("기타");
-
-        ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, list);
-        listview.setAdapter(adapter);
-
-        listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-
+        category4 = findViewById(R.id.free_board4);
+        category4.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                switch (position) {
-                    case 0:
-                        freeboard_Title.setText("자유게시판");
-                        str = 0;
-                        recyclerView.removeAllViewsInLayout();
-                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
-                        break;
+            public void onClick(View v) {
+                str = 3;
+                freeboard_Title.setText("동호회 모집");
 
-                    case 1:
-
-                        Intent intent = new Intent(getApplicationContext(), Free_Board_Review.class);
-                        startActivity(intent);
-                        break;
-
-                    case 2:
-                        str = 2;
-                        freeboard_Title.setText("꿀 정보");
-
-                        recyclerView.removeAllViewsInLayout();
-                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
-                        break;
-
-                    case 3:
-                        str = 3;
-                        freeboard_Title.setText("동호회 모집");
-
-                        recyclerView.removeAllViewsInLayout();
-                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
-                        break;
-
-                    case 4:
-                        str = 4;
-                        freeboard_Title.setText("기타");
-
-                        recyclerView.removeAllViewsInLayout();
-                        recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
-                        break;
-                }
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
             }
         });
+        category5 = findViewById(R.id.free_board5);
+        category5.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                str = 4;
+                freeboard_Title.setText("기타");
 
+                recyclerView.removeAllViewsInLayout();
+                recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
+            }
+        });
     }
-
-    DrawerLayout.DrawerListener listener = new DrawerLayout.DrawerListener() {
-        @Override
-        public void onDrawerSlide(@NonNull View drawerView, float slideOffset) {
-
-        }
-
-        @Override
-        public void onDrawerOpened(@NonNull View drawerView) {
-
-        }
-
-        @Override
-        public void onDrawerClosed(@NonNull View drawerView) {
-
-        }
-
-        @Override
-        public void onDrawerStateChanged(int newState) {
-
-        }
-    };
-
 
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -208,35 +152,31 @@ public class Freeboard_Activity extends AppCompatActivity {
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     articles.clear();
 
-                    for(DataSnapshot item:snapshot.getChildren()){
+                    for (DataSnapshot item : snapshot.getChildren()) {
                         Article_Model article = item.getValue(Article_Model.class);
 
-                        switch (str){
+                        switch (str) {
                             case 0:
-                                if(article.category.equals("자유게시판-null"))
-                                {
+                                if (article.category.equals("자유게시판-null")) {
                                     articles.add(article);
                                     articleid.add(item.getKey());
                                 }
                                 break;
 
                             case 2:
-                                if(article.category.equals("꿀 정보-null"))
-                                {
+                                if (article.category.equals("꿀 정보-null")) {
                                     articles.add(article);
                                     articleid.add(item.getKey());
                                 }
                                 break;
                             case 3:
-                                if(article.category.equals("동호회 모집-null"))
-                                {
+                                if (article.category.equals("동호회 모집-null")) {
                                     articles.add(article);
                                     articleid.add(item.getKey());
                                 }
                                 break;
                             case 4:
-                                if(article.category.equals("기타-null"))
-                                {
+                                if (article.category.equals("기타-null")) {
                                     articles.add(article);
                                     articleid.add(item.getKey());
                                 }
@@ -253,20 +193,18 @@ public class Freeboard_Activity extends AppCompatActivity {
         }
 
 
-
-
         @NonNull
         @NotNull
         @Override
         public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article,parent,false);
+            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
 
             return new Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder(view);
         }
 
         @Override
         public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-            Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder BoardActivityviewholder = ((Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder)holder);
+            Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder BoardActivityviewholder = ((Freeboard_Activity.BoardRecyclerViewAdapter.BoardActivityViewHolder) holder);
 
             System.out.println(articles.get(position).nickname);
 
@@ -275,7 +213,7 @@ public class Freeboard_Activity extends AppCompatActivity {
                     .load(articles.get(position).imageUri)
                     .apply(new RequestOptions().circleCrop())
                     .into(BoardActivityviewholder.imageView);
-            String Time = articles.get(position).writing_time.substring(2,4)+"."+articles.get(position).writing_time.substring(6,8)+"."+articles.get(position).writing_time.substring(10,12)+"."+articles.get(position).writing_time.substring(18,20)+":"+articles.get(position).writing_time.substring(21,23);
+            String Time = articles.get(position).writing_time.substring(2, 4) + "." + articles.get(position).writing_time.substring(6, 8) + "." + articles.get(position).writing_time.substring(10, 12) + "." + articles.get(position).writing_time.substring(18, 20) + ":" + articles.get(position).writing_time.substring(21, 23);
             BoardActivityviewholder.nickname.setText(articles.get(position).nickname);
             BoardActivityviewholder.time.setText(Time);
             BoardActivityviewholder.title.setText(articles.get(position).title);
@@ -306,10 +244,10 @@ public class Freeboard_Activity extends AppCompatActivity {
 
             public BoardActivityViewHolder(View view) {
                 super(view);
-                imageView = (ImageView)view.findViewById(R.id.freeboard_imageview);
-                nickname = (TextView)view.findViewById(R.id.freeboard_nickname);
-                time = (TextView)view.findViewById(R.id.freeboard_time);
-                title = (TextView)view.findViewById(R.id.freeboard_title);
+                imageView = (ImageView) view.findViewById(R.id.freeboard_imageview);
+                nickname = (TextView) view.findViewById(R.id.freeboard_nickname);
+                time = (TextView) view.findViewById(R.id.freeboard_time);
+                title = (TextView) view.findViewById(R.id.freeboard_title);
 
             }
 

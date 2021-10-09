@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.KeyEvent;
 import android.view.MenuItem;
@@ -72,7 +73,7 @@ public class Mainactivity extends AppCompatActivity {
     ArrayList<String> Main_addrs = new ArrayList<>();
     ArrayList<String> Main_conIds = new ArrayList<>();
 
-    int region_code=1;
+    int region_code = 1;
     private RecyclerView main_recyclerview;
     private ArrayList<MainRecyclerViewItem> mainlist;
     private MainRecyclerViewAdapter main_recyclerviewadapter;
@@ -97,12 +98,11 @@ public class Mainactivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView region_travel = (TextView)findViewById(R.id.region_travel);
+                TextView region_travel = (TextView) findViewById(R.id.region_travel);
                 region_travel.setText(region_spinner.getSelectedItem() + " 관광지");
-                if (position < 8){
+                if (position < 8) {
                     region_code = position + 1;
-                }
-                else{
+                } else {
                     region_code = position + 23;
                 }
 
@@ -122,7 +122,7 @@ public class Mainactivity extends AppCompatActivity {
                 Main_conIds = main_api.getMain_contentids();
 
                 Init();
-                for (int i=0; i < Main_conIds.size(); i++){
+                for (int i = 0; i < Main_conIds.size(); i++) {
                     addItem(Main_urls.get(i), Main_titles.get(i), Main_addrs.get(i), Main_conIds.get(i));
                 }
 
@@ -247,10 +247,6 @@ public class Mainactivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
-
-
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -304,7 +300,7 @@ public class Mainactivity extends AppCompatActivity {
                             alert.setTitle("로그아웃");
                             alert.setIcon(R.drawable.logo);
                             // 대화창 배경 색 설정
-                            alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.rgb( 255,220,213)));
+                            alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.rgb(255, 220, 213)));
                             alert.show();
                         } else {
                             Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
@@ -368,15 +364,17 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
 
     // serach box
+    String url;
+    GpsTracker gpsTracker;
 
-        public void onTextViewClick() {
+    public void onTextViewClick() {
         category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", "애견카페");
-
+                url = "kakaomap://search?q=" + "애견카페" +
+                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
@@ -393,9 +391,9 @@ public class Mainactivity extends AppCompatActivity {
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", "애견미용실");
-
+                url = "kakaomap://search?q=" + "애견 미용실" +
+                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
@@ -403,19 +401,20 @@ public class Mainactivity extends AppCompatActivity {
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", "동물병원");
+                url = "kakaomap://search?q=" + "동물 병원" +
+                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
     }
 
-    public void Init(){
-        main_recyclerview = (RecyclerView)findViewById(R.id.main_recyclerview);
+    public void Init() {
+        main_recyclerview = (RecyclerView) findViewById(R.id.main_recyclerview);
         mainlist = new ArrayList<>();
     }
 
-    public void addItem(String url, String title, String addr, String conId){
+    public void addItem(String url, String title, String addr, String conId) {
         MainRecyclerViewItem main_item = new MainRecyclerViewItem();
 
         main_item.setUrl(url);
