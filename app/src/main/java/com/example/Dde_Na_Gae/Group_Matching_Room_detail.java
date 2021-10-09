@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,10 +18,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.example.Dde_Na_Gae.chat.Group_MessageActivity;
-import com.example.Dde_Na_Gae.chat.New_MessageActivity;
+import com.example.Dde_Na_Gae.database.Room_Name_Database;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
@@ -36,6 +38,9 @@ import java.util.Map;
 
 public class Group_Matching_Room_detail extends AppCompatActivity {
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user != null ? user.getUid() : null;
+
     private RecyclerView recyclerView;
 
     DatabaseReference mDatabase;
@@ -48,8 +53,6 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
     private TextView room_title;
 
     private Button go_chattingroom;
-
-    public String uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
     public String[] hopechild = {"matching_age", "matching_sex", "matching_pet_age", "matching_pet_option", "matching_car_option"};
 
@@ -86,54 +89,50 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
         go_chattingroom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (user == null) {
+                    Toast.makeText(Group_Matching_Room_detail.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), Group_MessageActivity.class);
+                    intent.putExtra("chat_masterUid", master_uid);
+                    intent.putExtra("room_name", room_name);
+                    intent.putExtra("option_selector", chatting_room_option_selector);
+                    ActivityOptions activityOptions = null;
+                    if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
+                        activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fromright, R.anim.toleft);
+                        startActivity(intent, activityOptions.toBundle());
+                        mDatabase.child("users").child(master_uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
-                Intent intent = new Intent(getApplicationContext(), Group_MessageActivity.class);
-                intent.putExtra("chat_masterUid", master_uid);
-                intent.putExtra("room_name", room_name);
-                intent.putExtra("option_selector", chatting_room_option_selector);
-                ActivityOptions activityOptions = null;
-                if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.JELLY_BEAN) {
-
-
-                    activityOptions = ActivityOptions.makeCustomAnimation(getApplicationContext(), R.anim.fromright, R.anim.toleft);
-                    startActivity(intent, activityOptions.toBundle());
-
-
-                    mDatabase.child("users").child(master_uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                            String abc = snapshot.getValue(String.class);
+                                String abc = snapshot.getValue(String.class);
 
 
-                            ChatModel chatModel = new ChatModel();
-                            chatModel.users.put(uid, true);
+                                ChatModel chatModel = new ChatModel();
+                                chatModel.users.put(uid, true);
 
 
-                            Map<String, Object> user = new HashMap<>();
-                            user.put(uid, true);
+                                Map<String, Object> user = new HashMap<>();
+                                user.put(uid, true);
 
 
-                            mDatabase.child("chatting_room")
-                                    .child(chatting_room_option_selector)
-                                    .child("Room_Name").child(room_name).child("talk")
-                                    .child(abc).child("users")
-                                    .updateChildren(user, chatModel);
+                                mDatabase.child("chatting_room")
+                                        .child(chatting_room_option_selector)
+                                        .child("Room_Name").child(room_name).child("talk")
+                                        .child(abc).child("users")
+                                        .updateChildren(user, chatModel);
 
-                            group_room_name_database(room_name, chatting_room_option_selector);
+                                group_room_name_database(room_name, chatting_room_option_selector);
 
-                        }
+                            }
 
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                        }
-                    });
-
-
+                            }
+                        });
+                    }
+                    startActivity(intent);
                 }
-                startActivity(intent);
-
             }
         });
 

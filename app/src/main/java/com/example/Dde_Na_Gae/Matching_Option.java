@@ -7,17 +7,17 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
 
-import com.example.Dde_Na_Gae.chat.New_MessageActivity;
+import com.example.Dde_Na_Gae.database.Group_Room_Database;
+import com.example.Dde_Na_Gae.database.Group_Room_Name_Database;
+import com.example.Dde_Na_Gae.database.Room_Database;
+import com.example.Dde_Na_Gae.database.Room_Name_Detail_Database;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -31,15 +31,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import org.jetbrains.annotations.NotNull;
-import android.graphics.Color;
-import android.os.Bundle;
-import android.view.MotionEvent;
-import android.view.View;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Matching_Option extends AppCompatActivity {
 

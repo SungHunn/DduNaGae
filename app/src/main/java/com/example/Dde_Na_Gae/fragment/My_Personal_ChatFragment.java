@@ -17,7 +17,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
-import com.example.Dde_Na_Gae.Group_Room_Name_Database;
+import com.example.Dde_Na_Gae.database.Group_Room_Name_Database;
 import com.example.Dde_Na_Gae.R;
 import com.example.Dde_Na_Gae.chat.New_MessageActivity;
 import com.example.Dde_Na_Gae.model.ChatModel;

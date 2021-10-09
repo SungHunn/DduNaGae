@@ -97,7 +97,7 @@ public class My_Page extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.matching:
-                        Intent intent = new Intent(getApplicationContext(), Matching.class);
+                        Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
                         startActivity(intent);
                         break;
 

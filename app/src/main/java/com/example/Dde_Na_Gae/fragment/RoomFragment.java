@@ -21,9 +21,10 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.Group_Matching_Room_detail;
 import com.example.Dde_Na_Gae.Single_Matching_Room_detail;
 import com.example.Dde_Na_Gae.R;
-import com.example.Dde_Na_Gae.Room_Name_Detail_Database;
+import com.example.Dde_Na_Gae.database.Room_Name_Detail_Database;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -38,8 +39,10 @@ import java.util.List;
 
 public class RoomFragment extends Fragment {
 
-    String myUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
     public  String chatting_room_option_selector;
+
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String myUid = user != null ? user.getUid() : null;
 
     @Nullable
     @Override
@@ -47,6 +50,7 @@ public class RoomFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_room_list, container, false);
 
         chatting_room_option_selector = getArguments().getString("chatting_room_option_selector");
+
 
 
         RecyclerView recyclerView = (RecyclerView)view.findViewById(R.id.search_room_fragment_recyclerview);
@@ -60,6 +64,8 @@ public class RoomFragment extends Fragment {
     class RoomFragmentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
         List<Room_Name_Detail_Database> chatroommodels1;
 
+
+
         public RoomFragmentRecyclerViewAdapter() {
             chatroommodels1 = new ArrayList<>();
 
@@ -71,6 +77,9 @@ public class RoomFragment extends Fragment {
                     for (DataSnapshot snapshot : dataSnapshot.getChildren()) {
                         Room_Name_Detail_Database chatroommodel1 = snapshot.getValue(Room_Name_Detail_Database.class);
                         if(chatroommodel1.master_uid.equals(myUid)){
+                            continue;
+                        }else if(user == null) {
+                            chatroommodels1.add(chatroommodel1);
                             continue;
                         }
                         chatroommodels1.add(chatroommodel1);

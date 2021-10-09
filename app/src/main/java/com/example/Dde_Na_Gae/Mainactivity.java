@@ -1,7 +1,14 @@
 package com.example.Dde_Na_Gae;
 
+import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
+
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -15,6 +22,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -65,7 +73,7 @@ public class Mainactivity extends AppCompatActivity {
     ArrayList<String> Main_addrs = new ArrayList<>();
     ArrayList<String> Main_conIds = new ArrayList<>();
 
-    int region_code=1;
+    int region_code = 1;
     private RecyclerView main_recyclerview;
     private ArrayList<MainRecyclerViewItem> mainlist;
     private MainRecyclerViewAdapter main_recyclerviewadapter;
@@ -79,7 +87,7 @@ public class Mainactivity extends AppCompatActivity {
         listview = findViewById(R.id.navi_list);
         layout_account = (LinearLayout) findViewById(R.id.my_account);
         unlogin = (TextView) findViewById(R.id.my_page_unlogin);
-        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser(); // 로그인한 유저의 정보 가져오기
+        FirebaseUser user;
 
         Spinner region_spinner = findViewById(R.id.region_spinner);
         ArrayAdapter region_adapter = ArrayAdapter.createFromResource(this, R.array.region, android.R.layout.simple_spinner_dropdown_item);
@@ -90,12 +98,11 @@ public class Mainactivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-                TextView region_travel = (TextView)findViewById(R.id.region_travel);
+                TextView region_travel = (TextView) findViewById(R.id.region_travel);
                 region_travel.setText(region_spinner.getSelectedItem() + " 관광지");
-                if (position < 8){
+                if (position < 8) {
                     region_code = position + 1;
-                }
-                else{
+                } else {
                     region_code = position + 23;
                 }
 
@@ -115,7 +122,7 @@ public class Mainactivity extends AppCompatActivity {
                 Main_conIds = main_api.getMain_contentids();
 
                 Init();
-                for (int i=0; i < Main_conIds.size(); i++){
+                for (int i = 0; i < Main_conIds.size(); i++) {
                     addItem(Main_urls.get(i), Main_titles.get(i), Main_addrs.get(i), Main_conIds.get(i));
                 }
 
@@ -136,7 +143,7 @@ public class Mainactivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.matching:
-                        Intent intent = new Intent(getApplicationContext(), Matching.class);
+                        Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
                         startActivity(intent);
                         break;
 
@@ -190,10 +197,6 @@ public class Mainactivity extends AppCompatActivity {
         list.add("설정");
         list.add("로그인");
 
-        FirebaseAuth aAuth = FirebaseAuth.getInstance();
-
-        String uid = user != null ? user.getUid() : null; // 로그인한 유저의 고유 uid 가져오기
-
         listview = findViewById(R.id.navi_list);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
@@ -244,10 +247,6 @@ public class Mainactivity extends AppCompatActivity {
         listview.setAdapter(adapter);
 
 
-
-
-
-
         mDatabase = FirebaseDatabase.getInstance().getReference(); // 파이어베이스 realtime database 에서 정보 가져오기
 
         listview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -276,8 +275,33 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 4:
-                        if (list.get(7).equals("로그아웃")) {
-                            //로그아웃 이벤트
+                        if (list.get(4).equals("로그아웃")) {
+                            AlertDialog.Builder alt_bld = new AlertDialog.Builder(view.getContext());
+                            alt_bld.setMessage("로그아웃 하시겠습니까?").setCancelable(false)
+                                    .setPositiveButton("네",
+                                            new DialogInterface.OnClickListener() {
+                                                public void onClick(DialogInterface dialog, int id) {
+                                                    FirebaseAuth.getInstance().signOut();
+                                                    Intent intent = getIntent();
+                                                    finish();
+                                                    overridePendingTransition(0, 0);
+                                                    startActivity(intent);
+                                                    overridePendingTransition(0, 0);
+                                                }
+                                            }).setNegativeButton("아니오",
+                                    new DialogInterface.OnClickListener() {
+                                        public void onClick(DialogInterface dialog, int id) {
+                                            dialog.cancel();
+                                        }
+                                    });
+                            AlertDialog alert = alt_bld.create();
+                            // 대화창 클릭시 뒷 배경 어두워지는 것 막기
+                            //alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                            alert.setTitle("로그아웃");
+                            alert.setIcon(R.drawable.logo);
+                            // 대화창 배경 색 설정
+                            alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.rgb(255, 220, 213)));
+                            alert.show();
                         } else {
                             Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
                             startActivity(intent);
@@ -340,15 +364,17 @@ public class Mainactivity extends AppCompatActivity {
     //네비게이션바
 
     // serach box
+    String url;
+    GpsTracker gpsTracker;
 
-        public void onTextViewClick() {
+    public void onTextViewClick() {
         category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", "애견카페");
-
+                url = "kakaomap://search?q=" + "애견카페" +
+                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
@@ -365,9 +391,9 @@ public class Mainactivity extends AppCompatActivity {
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", "애견미용실");
-
+                url = "kakaomap://search?q=" + "애견 미용실" +
+                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
@@ -375,19 +401,20 @@ public class Mainactivity extends AppCompatActivity {
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Category.class);
-                intent.putExtra("SEARCH", "동물병원");
+                url = "kakaomap://search?q=" + "동물 병원" +
+                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
         });
     }
 
-    public void Init(){
-        main_recyclerview = (RecyclerView)findViewById(R.id.main_recyclerview);
+    public void Init() {
+        main_recyclerview = (RecyclerView) findViewById(R.id.main_recyclerview);
         mainlist = new ArrayList<>();
     }
 
-    public void addItem(String url, String title, String addr, String conId){
+    public void addItem(String url, String title, String addr, String conId) {
         MainRecyclerViewItem main_item = new MainRecyclerViewItem();
 
         main_item.setUrl(url);

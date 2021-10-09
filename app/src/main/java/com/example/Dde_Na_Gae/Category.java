@@ -48,6 +48,8 @@ public class Category extends AppCompatActivity {
         webView.getSettings().setAppCacheEnabled(false);
         webView.getSettings().setDomStorageEnabled(true);
         webView.getSettings().setAllowFileAccess(true);
+        webView.getSettings().setUseWideViewPort( true );
+        webView.setInitialScale( 150 );
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setUserAgentString("app");
 
