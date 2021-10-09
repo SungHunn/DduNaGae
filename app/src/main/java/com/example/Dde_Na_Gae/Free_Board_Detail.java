@@ -29,6 +29,7 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -69,7 +70,9 @@ public class Free_Board_Detail  extends AppCompatActivity {
     private ImageView profile;
 
     private String articleid;
-    private String uid;
+
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user != null ? user.getUid() : null;
 
     private RecyclerView recyclerView;
 
@@ -102,51 +105,58 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
         heart_count = (TextView)findViewById(R.id.love_it_num);
         comment_count = (TextView)findViewById(R.id.comment_num);
+        if (user != null) {
+            checkloveit(articleid,uid);
+            checkcomment(articleid);
+        }
 
-        checkloveit(articleid,uid);
-        checkcomment(articleid);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                CommentModel commentModel = new CommentModel();
+                if (user == null) {
+                    Toast.makeText(Free_Board_Detail.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
+                }else{
 
-                commentModel.uid = uid;
-                commentModel.comment = edittext_comment.getText().toString();
-                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-                SimpleDateFormat timeformat = new SimpleDateFormat("yyyy년 MM월 dd일  a kk:mm:ss");
-                timeformat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
-                commentModel.timestamp = timeformat.format(timestamp);
+                    CommentModel commentModel = new CommentModel();
+                    commentModel.uid = uid;
+                    commentModel.comment = edittext_comment.getText().toString();
+                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                    SimpleDateFormat timeformat = new SimpleDateFormat("yyyy년 MM월 dd일  a kk:mm:ss");
+                    timeformat.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                    commentModel.timestamp = timeformat.format(timestamp);
 
-                FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        Article_Model article_model = snapshot.getValue(Article_Model.class);
-                        if (article_model.have_comment.equals("none")) {
-                            FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").push().setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                    edittext_comment.setText("");
-                                    set_comment_true(articleid);
-                                    checkcomment(articleid);
-                                }
-                            });
-                        }else{
-                            FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").push().setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
-                                @Override
-                                public void onComplete(@NonNull @NotNull Task<Void> task) {
-                                    edittext_comment.setText("");
-                                }
-                            });
+                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            Article_Model article_model = snapshot.getValue(Article_Model.class);
+                            if (article_model.have_comment.equals("none")) {
+                                FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").push().setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        edittext_comment.setText("");
+                                        set_comment_true(articleid);
+                                        checkcomment(articleid);
+                                    }
+                                });
+                            }else{
+                                FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").push().setValue(commentModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+                                    @Override
+                                    public void onComplete(@NonNull @NotNull Task<Void> task) {
+                                        edittext_comment.setText("");
+                                    }
+                                });
+                            }
+                            checkcomment(articleid);
                         }
-                        checkcomment(articleid);
-                    }
 
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                    }
-                });
+                        }
+                    });
+                }
+
             }
         });
 
@@ -158,34 +168,37 @@ public class Free_Board_Detail  extends AppCompatActivity {
         linearLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                UserModel usermodels = new UserModel();
-                if(unfilledheart.getVisibility() == View.VISIBLE) {
-                    usermodels.uid = uid;
-                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").push().setValue(usermodels);
-                    checkloveit(articleid, uid);
+                if (user == null) {
+                    Toast.makeText(Free_Board_Detail.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
                 }else{
-                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").orderByChild("uid").addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                            for(DataSnapshot item : snapshot.getChildren()){
-                                UserModel userModel = item.getValue(UserModel.class);
-                                if(userModel.uid.equals(uid)){
-                                    String key = item.getKey();
+                    UserModel usermodels = new UserModel();
+                    if(unfilledheart.getVisibility() == View.VISIBLE) {
+                        usermodels.uid = uid;
+                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").push().setValue(usermodels);
+                        checkloveit(articleid, uid);
+                    }else{
+                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").orderByChild("uid").addListenerForSingleValueEvent(new ValueEventListener() {
+                            @Override
+                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                for(DataSnapshot item : snapshot.getChildren()){
+                                    UserModel userModel = item.getValue(UserModel.class);
+                                    if(userModel.uid.equals(uid)){
+                                        String key = item.getKey();
 
-                                    FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").child(key).setValue(null);
-                                    filledheart.setVisibility(View.GONE);
-                                    unfilledheart.setVisibility(View.VISIBLE);
-                                    break;
+                                        FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").child(key).setValue(null);
+                                        filledheart.setVisibility(View.GONE);
+                                        unfilledheart.setVisibility(View.VISIBLE);
+                                        break;
+                                    }
+
                                 }
+                            }
+                            @Override
+                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
                             }
-                        }
-                        @Override
-                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                        }
-                    });
-
+                        });
+                    }
                 }
             }
         });
