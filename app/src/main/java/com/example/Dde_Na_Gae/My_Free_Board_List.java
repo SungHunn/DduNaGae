@@ -30,8 +30,6 @@ import java.util.List;
 
 public class My_Free_Board_List extends AppCompatActivity {
 
-
-
     private RecyclerView recyclerView;
     private String uid;
 

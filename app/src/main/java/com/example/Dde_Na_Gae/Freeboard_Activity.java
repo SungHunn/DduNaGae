@@ -13,6 +13,7 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,8 +23,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
+import com.example.Dde_Na_Gae.fragment.My_Personal_ChatFragment;
 import com.example.Dde_Na_Gae.model.Article_Model;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
@@ -39,7 +42,6 @@ public class Freeboard_Activity extends AppCompatActivity {
     private Button writing;
     private Button my_list;
     private RecyclerView recyclerView;
-    private String uid;
 
     TextView category1;
     TextView category2;
@@ -47,6 +49,8 @@ public class Freeboard_Activity extends AppCompatActivity {
     TextView category4;
     TextView category5;
 
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+    String uid = user != null ? user.getUid() : null;
 
     int str = 0;
 
@@ -64,7 +68,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
 
         writing = (Button) findViewById(R.id.go_writing);
         my_list = (Button) findViewById(R.id.my_text_list);
@@ -72,16 +76,25 @@ public class Freeboard_Activity extends AppCompatActivity {
         writing.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Free_Board_Writing.class);
-                startActivity(intent);
+                if (user == null) {
+                    Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), Free_Board_Writing.class);
+                    startActivity(intent);
+                }
+
             }
         });
 
         my_list.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
-                startActivity(intent);
+                if (user == null) {
+                    Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
+                }else{
+                    Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
+                    startActivity(intent);
+                }
             }
         });
 
