@@ -1,6 +1,7 @@
 package com.example.Dde_Na_Gae;
 
 import android.app.ActivityOptions;
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -54,6 +55,7 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
     private TextView room_title;
 
     private Button go_chattingroom;
+    private ImageView img_goback;
 
     public String[] hopechild = {"matching_age", "matching_sex", "matching_pet_age", "matching_pet_option", "matching_car_option"};
 
@@ -63,7 +65,7 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
         setContentView(R.layout.group_room_matching_detail);
 
         recyclerView = (RecyclerView) findViewById(R.id.room_recylerview);
-        recyclerView.setLayoutManager(new LinearLayoutManager(Group_Matching_Room_detail.this));
+        recyclerView.setLayoutManager(new LinearLayoutManager(Group_Matching_Room_detail.this, LinearLayoutManager.HORIZONTAL, false));
         recyclerView.setAdapter(new RecyclerViewAdapter());
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
@@ -82,7 +84,17 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
         String room_name = intent.getStringExtra("roomname");
         String chatting_room_option_selector = intent.getStringExtra("option_selector");
 
+        room_title.setText(room_name);
+
         gettextview1(hopechild, hopedata);
+
+        // 뒤로가기
+        img_goback = (ImageView)findViewById(R.id.img_back);
+        img_goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
 
 
         go_chattingroom = (Button) findViewById(R.id.room_group_btn);
@@ -150,7 +162,7 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull DataSnapshot snapshot) {
                     String name = snapshot.getValue(String.class);
-                    System.out.println(data[finalI]);
+//                    System.out.println(data[finalI]);
                     data[finalI].setText(name);
                 }
 
@@ -159,6 +171,7 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
                 }
             });
         }
+        System.out.println(room_title);
     }
 
     public void group_room_name_database(String room_name, String Room_selector_option) {
@@ -169,7 +182,6 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
     }
 
     class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
-
 
         List<String> members;
 
@@ -235,7 +247,7 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
                     profileViewHolder.group_member_nickname.setText(userModel.nickname);
 
                     Glide.with(holder.itemView.getContext())
-                            .load(userModel.imageUri)
+                            .load(userModel.imageUri).circleCrop()
                             .into(profileViewHolder.group_member_profile);
                 }
 

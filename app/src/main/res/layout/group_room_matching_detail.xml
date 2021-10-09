@@ -27,7 +27,7 @@
                 android:layout_height="wrap_content"    >
 
                 <ImageView
-                    android:id="@+id/room1"
+                    android:id="@+id/img_back"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_width="30dp"
@@ -36,7 +36,7 @@
 
                 <TextView
                     android:id="@+id/room_title1"
-                    app:layout_constraintStart_toEndOf="@+id/room1"
+                    app:layout_constraintStart_toEndOf="@+id/img_back"
                     app:layout_constraintTop_toTopOf="parent"
                     android:layout_marginLeft="10dp"
                     android:layout_width="wrap_content"
@@ -53,7 +53,7 @@
                 android:id="@+id/room_group_view1"
                 android:layout_width="wrap_content"
                 android:layout_height="1dp"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:background="#000000"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
@@ -63,7 +63,7 @@
                 android:id="@+id/room_title2"
                 app:layout_constraintTop_toBottomOf="@+id/room_group_view1"
                 app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="참여자 목록"
