@@ -14,14 +14,21 @@
             android:layout_width="match_parent"
             android:layout_height="32dp"
             android:text="그룹 채팅방"
-            android:textSize="23dp"/>
+            android:textSize="23dp"
+            android:layout_marginTop="5dp"
+            android:layout_marginHorizontal="5dp"
+            android:background="@color/white"/>
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000" />
+            android:background="#000000"
+            android:layout_marginVertical="5dp"/>
+
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/chatgroupFragment_recyclerview"/>
+        android:id="@+id/chatgroupFragment_recyclerview"
+        android:layout_marginHorizontal="5dp"
+        android:background="@color/white"/>
     </LinearLayout>
 </LinearLayout>

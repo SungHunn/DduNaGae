@@ -5,15 +5,19 @@
     android:orientation="vertical"
     android:weightSum="5"
     android:layout_margin="15dp">
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="숙소 위치"
-            android:textSize="20sp"/>
+            android:textSize="20sp"
+            android:background="@color/white"/>
     </LinearLayout>
 
     <View
@@ -31,22 +35,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="5">
+        android:weightSum="5"
+        android:background="@color/white">
+
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_weight="4">
+            android:layout_weight="4"
+            android:background="@color/white">
+
             <ListView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/accommodation_city"/>
+                android:id="@+id/accommodation_city"
+                android:background="@color/white"/>
 
         </LinearLayout>
         <androidx.recyclerview.widget.RecyclerView
             android:layout_weight="1"
             android:id="@+id/accommodation_list"
             android:layout_width="match_parent"
-            android:layout_height="569dp" />
+            android:layout_height="569dp"
+            android:background="@color/white"/>
     </LinearLayout>
 </LinearLayout>

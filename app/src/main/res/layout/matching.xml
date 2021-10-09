@@ -7,14 +7,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/go_back"/>
+            android:src="@drawable/go_back"
+            android:background="@color/white"/>
 
     </LinearLayout>
 
@@ -23,14 +25,16 @@
         android:layout_height="wrap_content"
         android:text="매 칭"
         android:textSize="30sp"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:textColor="@color/black"/>
 
     <ImageView
         android:layout_width="150dp"
         android:layout_height="180dp"
         android:src="@drawable/logo"
         android:layout_marginBottom="50dp"
-        android:layout_marginTop="15dp"/>
+        android:layout_marginTop="15dp"
+        android:background="@color/white"/>
 
 
 
@@ -40,13 +44,14 @@
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
         android:text="매칭방 찾기"
-        />
+        android:background="@color/skyblue"/>
 
     <Button
         android:id="@+id/btn_matchmake"
         android:layout_width="200dp"
         android:layout_height="wrap_content"
         android:layout_margin="10dp"
-        android:text="매칭방 만들기"/>
+        android:text="매칭방 만들기"
+        android:background="@color/skyblue"/>
 
 </LinearLayout>

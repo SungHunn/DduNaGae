@@ -11,21 +11,24 @@
         <ImageView
             android:id="@+id/item_comment_imageview"
             android:layout_width="50dp"
-            android:layout_height="50dp" />
+            android:layout_height="50dp"
+            android:background="@color/white"/>
 
 
     <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="15dp">
+        android:layout_marginBottom="15dp"
+        android:background="@color/white">
 
         <TextView
             android:id="@+id/item_comment_nickname"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="10dp"
-            android:text="닉네임" />
+            android:text="닉네임"
+            android:background="@color/white"/>
 
     <TextView
         android:id="@+id/item_comment_comment"

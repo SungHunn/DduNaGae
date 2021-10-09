@@ -9,7 +9,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="center">
+        android:gravity="center"
+        android:background="@color/white">
 
         <Button
             android:layout_marginRight="100dp"
@@ -17,14 +18,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="지역 선택"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:background="@color/skyblue"/>
 
         <Button
             android:id="@+id/dataSave"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="지역코드 저장"
-            android:textAllCaps="false" />
+            android:textAllCaps="false"
+            android:background="@color/skyblue"/>
     </LinearLayout>
 
     <LinearLayout
@@ -35,23 +38,27 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ListView
                 android:id="@+id/listView1"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
         </LinearLayout>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:background="@color/white">
 
             <ListView
                 android:id="@+id/listView2"
                 android:layout_width="wrap_content"
-                android:layout_height="match_parent" />
+                android:layout_height="match_parent"
+                android:background="@color/white"/>
         </LinearLayout>
     </LinearLayout>
 </LinearLayout>

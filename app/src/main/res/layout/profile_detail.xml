@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_gravity="center"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
 
         <ImageView
@@ -11,20 +12,22 @@
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_gravity="center"
-            />
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:background="@color/white">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="닉네임 : "
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
             <TextView
                 android:id="@+id/members_nickname"
@@ -32,7 +35,8 @@
                 android:layout_height="wrap_content"
                 android:text="123456"
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
 
 
@@ -44,13 +48,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:background="@color/white">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="성별 : "
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
             <TextView
                 android:id="@+id/members_sex"
@@ -58,7 +64,8 @@
                 android:layout_height="wrap_content"
                 android:text="123456"
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
 
 
@@ -70,13 +77,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:background="@color/white">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="나이 : "
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
             <TextView
                 android:id="@+id/members_age"
@@ -84,7 +93,8 @@
                 android:layout_height="wrap_content"
                 android:text="123456"
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
 
 
@@ -97,13 +107,15 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center"
-            android:layout_marginTop="15dp">
+            android:layout_marginTop="15dp"
+            android:background="@color/white">
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="펫 종류 : "
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
             <TextView
                 android:id="@+id/members_pet_type"
@@ -111,7 +123,8 @@
                 android:layout_height="wrap_content"
                 android:text="123456"
                 android:textSize="20dp"
-                android:layout_marginTop="8dp"/>
+                android:layout_marginTop="8dp"
+                android:background="@color/white"/>
 
 
 

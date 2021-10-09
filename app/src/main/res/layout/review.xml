@@ -3,13 +3,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="10dp">
+    android:layout_margin="10dp"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="리뷰"
-        android:textSize="40sp"/>
+        android:textSize="40sp"
+        android:background="@color/white"/>
 
     <View
         android:layout_width="match_parent"
@@ -19,23 +21,27 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Category\t:\t" />
+            android:text="Category\t:\t"
+            android:background="@color/white"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ex) 숙소, 카페, 등등"
-            android:id="@+id/review_Category"/>
+            android:id="@+id/review_Category"
+            />
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -50,7 +56,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -65,7 +72,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -80,12 +88,14 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
-            android:text="Contents\t:\t" />
+            android:text="Contents\t:\t"
+            android:background="@color/white"/>
         <EditText
             android:layout_width="match_parent"
             android:layout_height="150dp"
@@ -98,7 +108,8 @@
         android:layout_height="wrap_content"
         android:text="리뷰 저장"
         android:layout_gravity="right"
-        android:id="@+id/review_Save"/>
+        android:id="@+id/review_Save"
+        android:background="@color/skyblue"/>
 
 
 </LinearLayout>

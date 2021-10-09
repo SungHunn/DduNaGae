@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 
 
         <LinearLayout
@@ -21,14 +22,16 @@
                 android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"
-                android:src="@drawable/go_back" />
+                android:src="@drawable/go_back"
+                android:background="@color/white"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="게시물 작성"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:background="@color/white"/>
 
 
         </LinearLayout>
@@ -37,14 +40,16 @@
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="제목 : "
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:background="@color/white"/>
 
             <EditText
                 android:id="@+id/article_title"
@@ -53,42 +58,49 @@
                 android:layout_marginTop="20dp"
                 android:ems="12"
                 android:hint="게시물 제목 입력"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:background="@color/white"/>
 
         </LinearLayout>
 
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#000000" />
+            android:background="#000000"
+            android:layout_marginVertical="5dp"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal">
+                android:orientation="horizontal"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="카테고리"
-                    android:textSize="19sp" />
+                    android:textSize="19sp"
+                    android:background="@color/white"/>
 
                 <Spinner
                     android:id="@+id/free_board_category"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/white" />
 
 
                 <Spinner
                     android:id="@+id/review_category"
                     android:visibility="gone"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:background="@color/white"/>
 
             </LinearLayout>
 
@@ -97,7 +109,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="50dp"
                 android:text="내용 : "
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:background="@color/white"/>
 
 
             <EditText
@@ -110,7 +123,8 @@
                 android:layout_weight="1"
                 android:background="@drawable/type_edittext"
                 android:hint="게시물 내용"
-                android:inputType="textPersonName" />
+                android:inputType="textPersonName"
+                android:backgroundTint="@color/white"/>
 
         </LinearLayout>
 
@@ -130,7 +144,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="이미지 첨부 : "
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:background="@color/white"/>
 
 
             <ImageView
@@ -139,7 +154,8 @@
                 android:layout_height="100dp"
                 android:layout_gravity="center"
                 android:layout_margin="50dp"
-                android:src="@drawable/gallery" />
+                android:src="@drawable/gallery"
+                android:background="@color/white"/>
 
             <Button
                 android:id="@+id/writing_button"
@@ -147,7 +163,8 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="완료"
-                android:textSize="20dp" />
+                android:textSize="20dp"
+                android:background="@color/skyblue"/>
 
 
         </LinearLayout>

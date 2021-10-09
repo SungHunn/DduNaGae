@@ -9,7 +9,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <EditText
             android:id="@+id/search_box"
@@ -27,12 +28,13 @@
 
         <ImageButton
             android:id="@+id/search_nvg_open"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
             android:maxWidth="25dp"
             android:maxHeight="25dp"
             android:scaleType="fitCenter"
-            android:src="@drawable/ic_baseline_dehaze_24" />
+            android:src="@drawable/ic_baseline_dehaze_24"
+            android:background="@color/white"/>
 
 
     </LinearLayout>
@@ -41,6 +43,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
+        android:background="@color/white"
         >
     <TextView
         android:id="@+id/search_hashTag"
@@ -55,7 +58,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="지역선택"
-        android:id="@+id/area_choice"/>
+        android:id="@+id/area_choice"
+        android:background="@color/skyblue"/>
     </LinearLayout>
     <View
         android:layout_width="370dp"
@@ -68,12 +72,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <ListView
             android:id="@+id/search_result"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
 
     </LinearLayout>
 

@@ -11,7 +11,8 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white">
 
 
             <TextView
@@ -19,11 +20,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
                 android:text="나의 정보"
-                android:textSize="25dp" />
+                android:textSize="25dp"
+                android:background="@color/white"/>
 
             <LinearLayout
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:background="@color/white">
 
                 <EditText
                     android:id="@+id/nick_name"
@@ -32,14 +35,14 @@
                     android:layout_weight="1"
                     android:ems="6"
                     android:hint="닉네임 입력"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"/>
 
                 <Button
                     android:id="@+id/overlap_button"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="right"
-                    android:backgroundTint="#FFFEE6"
+                    android:backgroundTint="@color/skyblue"
                     android:text="중복 확인"
                     android:textColor="#000000" />
             </LinearLayout>
@@ -48,7 +51,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="25dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -79,7 +83,8 @@
 <LinearLayout
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/white">
                 <EditText
                     android:id="@+id/my_age"
                     android:layout_width="wrap_content"
@@ -117,19 +122,22 @@
                 android:layout_marginTop="25dp"
                 android:text="반려동물사진"
                 android:textSize="20dp"
-                android:layout_marginBottom="5dp"/>
+                android:layout_marginBottom="5dp"
+                android:background="@color/white"/>
 
             <ImageView
                 android:src="@drawable/gallery"
                 android:id="@+id/information_imageview_profile"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
-                android:layout_margin="50dp"/>
+                android:layout_margin="50dp"
+                android:background="@color/white"/>
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
 
                 <LinearLayout
