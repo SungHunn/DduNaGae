@@ -76,7 +76,7 @@
         <activity android:name=".Terms_of_service"/>
         <activity android:name=".Profile_Detail"/>
         <activity android:name=".Group_Matching_Room_detail"/>
-
+        <activity android:name=".My_Page_Information"/>
 
     </application>
 
