@@ -269,6 +269,8 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
                             Intent intent1 = new Intent(getApplicationContext(), Profile_Detail.class);
                             intent1.putExtra("destinationuid", userModel.uid);
                             startActivityForResult(intent1, 1);
+
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
                         }
 
                         @Override
