@@ -90,7 +90,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="569dp"
                 android:layout_below="@+id/group_talkmenu"
-                android:background="@color/white"/>
+                android:background="@color/main_blue"/>
 
 
 

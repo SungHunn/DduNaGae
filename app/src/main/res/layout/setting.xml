@@ -39,7 +39,7 @@
                 android:textSize="30sp"
                 android:layout_gravity="center"
                 android:layout_marginLeft="125dp"
-                android:background=""/>
+                android:background="@color/white"/>
 
         </LinearLayout>
 

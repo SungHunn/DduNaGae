@@ -22,13 +22,14 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="b214210d275c3c68a2ab5a59099d8b41" />
 
-        <activity android:name=".Mainactivity">
+        <activity android:name=".SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Mainactivity"/>
         <activity android:name=".Category_Accommodation" />
         <activity android:name=".Api_date" />
         <activity android:name=".Search_Selected" />
@@ -74,7 +75,7 @@
             android:screenOrientation="portrait"/>
         <activity android:name=".Notice"/>
         <activity android:name=".Terms_of_service"/>
-        <activity android:name=".Profile_Detail"/>
+        <activity android:name=".Profile_Detail" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".Group_Matching_Room_detail"/>
         <activity android:name=".My_Page_Information"/>
 

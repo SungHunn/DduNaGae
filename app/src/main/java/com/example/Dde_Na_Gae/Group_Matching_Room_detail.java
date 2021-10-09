@@ -12,6 +12,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -255,13 +256,15 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
 
                             Intent intent1 = new Intent(getApplicationContext(), Profile_Detail.class);
                             intent1.putExtra("destinationuid", userModel.uid);
-                            startActivity(intent1);
+                            startActivityForResult(intent1, 1);
                         }
 
                         @Override
                         public void onCancelled(@NonNull DatabaseError error) {
 
                         }
+
+
                     });
 
                 }
@@ -292,5 +295,13 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
 
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if (requestCode == RESULT_OK) {
+            }
+        }
+    }
 
 }

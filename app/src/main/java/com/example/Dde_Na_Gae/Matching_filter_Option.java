@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.Spinner;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -16,6 +17,7 @@ public class Matching_filter_Option extends AppCompatActivity {
 
     private Button button;
     private String uid = FirebaseAuth.getInstance().getUid();
+    private ImageView img_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,6 +93,14 @@ public class Matching_filter_Option extends AppCompatActivity {
             }
         });
 
+        img_back = (ImageView)findViewById(R.id.img_back);
+        img_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
+                startActivity(intent);
+            }
+        });
 
     }
 
