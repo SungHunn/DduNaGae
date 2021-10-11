@@ -370,12 +370,14 @@ public class Mainactivity extends AppCompatActivity {
     GpsTracker gpsTracker;
 
     public void onTextViewClick() {
+        gpsTracker = new GpsTracker(Mainactivity.this);
         category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=" + "애견카페" +
+                url = "kakaomap://search?q=애견카페" +
                         "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
             }
@@ -393,7 +395,7 @@ public class Mainactivity extends AppCompatActivity {
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=" + "애견 미용실" +
+                url = "kakaomap://search?q=애견미용실" +
                         "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
@@ -403,7 +405,7 @@ public class Mainactivity extends AppCompatActivity {
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=" + "동물 병원" +
+                url = "kakaomap://search?q=동물병원" +
                         "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                 startActivity(intent);
