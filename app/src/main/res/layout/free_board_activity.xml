@@ -36,6 +36,7 @@
                         android:layout_marginLeft="15dp"
                         android:text="자유게시판"
                         android:textSize="20dp"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <View
@@ -62,6 +63,7 @@
                         android:focusable="true"
                         android:textSize="18sp"
                         android:id="@+id/free_board1"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
                     <TextView
                         android:layout_width="wrap_content"
@@ -71,6 +73,7 @@
                         android:focusable="true"
                         android:textSize="18sp"
                         android:id="@+id/free_board2"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <TextView
@@ -80,7 +83,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
-
+                        android:textColor="@color/black"
                         android:id="@+id/free_board3"
                         android:background="@color/white"/>
 
@@ -91,7 +94,7 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
-
+                        android:textColor="@color/black"
                         android:id="@+id/free_board4"
                         android:background="@color/white"/>
 
@@ -103,6 +106,7 @@
                         android:focusable="true"
                         android:textSize="18sp"
                         android:id="@+id/free_board5"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
                 </LinearLayout>
             </LinearLayout>
