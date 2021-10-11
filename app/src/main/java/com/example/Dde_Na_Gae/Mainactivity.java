@@ -368,18 +368,22 @@ public class Mainactivity extends AppCompatActivity {
     // serach box
     String url;
     GpsTracker gpsTracker;
-
     public void onTextViewClick() {
         gpsTracker = new GpsTracker(Mainactivity.this);
         category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=애견카페" +
-                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                try {
+                    url = "kakaomap://search?q=애견카페" +
+                            "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
 
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
+
             }
         });
         category2 = (TextView) findViewById(R.id.category_2);
@@ -395,20 +399,30 @@ public class Mainactivity extends AppCompatActivity {
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=애견미용실" +
-                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
+                try {
+                    url = "kakaomap://search?q=애견미용실" +
+                            "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
         category4 = (TextView) findViewById(R.id.category_4);
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                url = "kakaomap://search?q=동물병원" +
-                        "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
-                Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
-                startActivity(intent);
+                try {
+                    url = "kakaomap://search?q=동물병원" +
+                            "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+
+                    Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent);
+                }catch (Exception e) {
+                    e.printStackTrace();
+                }
             }
         });
     }
