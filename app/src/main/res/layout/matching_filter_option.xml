@@ -38,6 +38,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="매칭방 필터"
                 android:textSize="25sp"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
 
@@ -56,6 +57,7 @@
                     android:layout_margin="5dp"
                     android:text="매칭자 옵션"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -75,6 +77,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="매칭자 성별"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -90,6 +93,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="매칭자 나이"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -118,6 +122,7 @@
                     android:layout_margin="5dp"
                     android:text="반려동물 옵션"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -137,6 +142,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="반려 동물 나이"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -153,6 +159,7 @@
                         android:layout_margin="5dp"
                         android:text="반려 동물 종류"
                         android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -169,6 +176,7 @@
                     android:text="1~6살 개린이 / 7~10 개춘기 / 11~16 개저씨"
                     android:textSize="10dp"
                     android:textStyle="bold"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
             </LinearLayout>
 
@@ -186,6 +194,7 @@
                     android:layout_margin="5dp"
                     android:text="채팅방 종류"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -225,6 +234,7 @@
                     android:layout_margin="5dp"
                     android:text="차량 여부"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -269,6 +279,7 @@
                         android:layout_margin="5dp"
                         android:text="사는 지역"
                         android:textSize="20sp"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <ImageView
@@ -335,6 +346,7 @@
                         android:layout_margin="5dp"
                         android:text="여행 지역"
                         android:textSize="20sp"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <ImageView

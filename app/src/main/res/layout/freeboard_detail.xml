@@ -59,6 +59,7 @@
                 android:text="닉네임"
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
             <TextView
@@ -69,6 +70,7 @@
                 android:text="AABBCCDD"
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
 
@@ -97,6 +99,7 @@
             android:id="@+id/free_board_detail_title"
             android:text="````` "
             android:textSize="25dp"
+            android:textColor="@color/black"
             android:background="@color/white"/>
 
 
@@ -121,6 +124,7 @@
         android:textSize="15dp"
         android:layout_marginTop="20dp"
         android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
         android:background="@color/white"/>
     <LinearLayout
         android:layout_width="match_parent"
@@ -136,6 +140,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
             android:background="@color/white"/>
 
         <TextView
@@ -146,11 +151,13 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="좋아수"
+            android:textColor="@color/black"
             android:background="@color/white"/>
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:textColor="@color/black"
             android:background="@color/white"/>
         <TextView
             android:layout_width="1dp"
@@ -159,6 +166,7 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
             android:background="@color/white"/>
         <TextView
             android:layout_width="1dp"
@@ -168,6 +176,7 @@
             android:gravity="center"
             android:layout_gravity="center_vertical"
             android:id="@+id/comment_num"
+            android:textColor="@color/black"
             android:background="@color/white"/>
     </LinearLayout>
     <View
@@ -210,6 +219,7 @@
             android:gravity="center"
             android:textSize="30dp"
             android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
             android:background="@color/white"/>
 
         <TextView
@@ -220,6 +230,7 @@
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="3"
+            android:textColor="@color/black"
             android:background="@color/white"/>
 
 

@@ -22,6 +22,7 @@
             android:layout_gravity="center"
             android:layout_marginLeft="10dp"
             android:textSize="25dp"
+            android:textColor="@color/black"
             android:id="@+id/my_room_detail_room_name"
             />
     </LinearLayout>
@@ -64,6 +65,7 @@
                     android:layout_height="wrap_content"
                     android:textSize="25dp"
                     android:text="최대인원 수 : "
+                    android:textColor="@color/black"
                     android:layout_marginVertical="15dp"
                     />
                 <TextView
@@ -72,6 +74,7 @@
                     android:id="@+id/my_room_detail_member_number"
                     android:textSize="25dp"
                     android:text="명 수"
+                    android:textColor="@color/black"
                     android:layout_marginVertical="15dp"
                     />
             </LinearLayout>
@@ -90,6 +93,7 @@
                     android:id="@+id/my_room_detail_master"
                     android:textSize="25dp"
                     android:text="방 만든 사람 닉네임"
+                    android:textColor="@color/black"
                     android:layout_marginVertical="15dp"
                     />
             </LinearLayout>
@@ -114,12 +118,14 @@
                         android:layout_height="wrap_content"
                         android:text="성별 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_room_detail_sex"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -132,12 +138,14 @@
                         android:layout_height="wrap_content"
                         android:text="나이대 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_room_detail_age"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -150,12 +158,14 @@
                         android:layout_height="wrap_content"
                         android:text="반려동물 나이 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_room_detail_pet_age"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -168,12 +178,14 @@
                         android:layout_height="wrap_content"
                         android:text="반려동물 종류 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_room_detail_pet_option"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -186,12 +198,14 @@
                         android:layout_height="wrap_content"
                         android:text="차 여부 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_room_detail_have_car"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
 
@@ -213,6 +227,7 @@
                     android:text="희망자 "
                     android:textSize="25dp"
                     android:layout_marginVertical="15dp"
+                    android:textColor="@color/black"
                     />
             </LinearLayout>
             <View
@@ -237,12 +252,14 @@
                         android:layout_height="wrap_content"
                         android:text="희망 성별 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_h_room_detail_sex"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -255,12 +272,14 @@
                         android:layout_height="wrap_content"
                         android:text="희망 나이대 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_h_room_detail_age"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -273,12 +292,14 @@
                         android:layout_height="wrap_content"
                         android:text="희망 반려동물 나이 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_h_room_detail_pet_age"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -291,12 +312,14 @@
                         android:layout_height="wrap_content"
                         android:text="희망 반려동물 종류 : "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_h_room_detail_pet_option"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <LinearLayout
@@ -309,12 +332,14 @@
                         android:layout_height="wrap_content"
                         android:text="차 여부 :   "
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:id="@+id/my_h_room_detail_have_car"
                         android:textSize="25dp"
+                        android:textColor="@color/black"
                         />
                 </LinearLayout>
                 <View

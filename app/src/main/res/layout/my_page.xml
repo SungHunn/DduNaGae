@@ -42,7 +42,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MY PAGE"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/my_page_nickname"
@@ -53,7 +54,8 @@
             android:text="내 이름"
             android:textSize="25sp"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp"
+            android:textColor="@color/black"/>
 
 
         <!--    이미지 가져와야됨   -->
@@ -71,16 +73,6 @@
             android:src="@mipmap/ic_launcher_round"
             android:background="#ffe375"/>
 
-        <Button
-            android:id="@+id/my_page_login_btn"
-            app:layout_constraintTop_toBottomOf="@+id/my_page_img"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginRight="45dp"
-            android:layout_marginTop="5dp"
-            android:layout_width="80dp"
-            android:layout_height="40dp"
-            android:text="로그인" />
-
         <TextView
             android:id="@+id/my_page_good"
             app:layout_constraintTop_toBottomOf="@+id/my_page_nickname"
@@ -89,7 +81,8 @@
             android:layout_marginTop="39dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="좋아요 2개" />
+            android:text="좋아요 2개"
+            android:textColor="@color/black"/>
 
         <View
             android:id="@+id/my_page_view"
@@ -113,7 +106,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이 주의 관광지 보러가기"
-            android:clickable="true"/>
+            android:clickable="true"
+            android:textColor="@color/black"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -128,7 +122,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="예약 내역"
-        android:textSize="25dp"/>
+        android:textSize="25dp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/my_page_write"
@@ -139,7 +134,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="내가 쓴 글"
-        android:textSize="25dp"/>
+        android:textSize="25dp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/my_page_info"
@@ -150,7 +146,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="내 정보"
-        android:textSize="25dp"/>
+        android:textSize="25dp"
+        android:textColor="@color/black"/>
 
     <TextView
         android:id="@+id/my_page_service_center"
@@ -161,7 +158,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="고객 센터"
-        android:textSize="25dp"/>
+        android:textSize="25dp"
+        android:textColor="@color/black"/>
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

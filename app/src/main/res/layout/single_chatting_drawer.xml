@@ -20,6 +20,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textSize="30dp"
+            android:textColor="@color/black"
             />
        <LinearLayout
            android:layout_width="wrap_content"
@@ -39,6 +40,7 @@
                android:layout_height="wrap_content"
                android:text="닉네임"
                android:textSize="37dp"
+               android:textColor="@color/black"
                android:id="@+id/single_chatroom_member_nickname"/>
 
 

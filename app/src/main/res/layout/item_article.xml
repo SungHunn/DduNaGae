@@ -29,20 +29,23 @@
 
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="글쓴이  : " />
+            android:text="글쓴이  : "
+            android:textColor="@color/black"/>
 
 
             <TextView
                 android:id="@+id/freeboard_nickname"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="abcd" />
+                android:text="abcd"
+                android:textColor="@color/black"/>
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/freeboard_time"
                 android:text="올린 시간"
                 android:layout_marginLeft="160dp"
+                android:textColor="@color/black"
                 />
     </LinearLayout>
 
@@ -55,14 +58,16 @@
             android:text="제목 : "
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/freeboard_title"
                 android:text="aabbcc"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
 
 
         </LinearLayout>

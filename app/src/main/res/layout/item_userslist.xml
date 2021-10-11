@@ -24,6 +24,7 @@
         android:layout_gravity="center_vertical"
         android:textSize="15dp"
         android:text="유저 닉네임"
+        android:textColor="@color/black"
         android:background="@color/white"/>
 
 </LinearLayout>

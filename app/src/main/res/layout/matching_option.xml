@@ -39,6 +39,7 @@
                 android:layout_marginLeft="8dp"
                 android:text="매칭방 만들기"
                 android:textSize="25sp"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
             <LinearLayout
@@ -55,6 +56,7 @@
                     android:layout_margin="5dp"
                     android:text="채팅방 이름"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -94,6 +96,7 @@
                     android:layout_margin="5dp"
                     android:text="매칭자 옵션"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -113,6 +116,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="매칭자 성별"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -128,6 +132,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="매칭자 나이"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -161,6 +166,7 @@
                     android:layout_margin="5dp"
                     android:text="반려동물 옵션"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -180,6 +186,7 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="반려 동물 나이"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -194,6 +201,7 @@
                         android:layout_height="wrap_content"
                         android:layout_marginTop="5dp"
                         android:text="반려 동물 종류"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <Spinner
@@ -220,6 +228,7 @@
                     android:layout_margin="5dp"
                     android:text="채팅방 종류"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
                 <View
                     android:layout_width="match_parent"
@@ -253,6 +262,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="그룹 채팅방 인원수"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
                     <Spinner
                         android:id="@+id/h_group_member_number"
@@ -277,6 +287,7 @@
                     android:layout_margin="5dp"
                     android:text="차량 여부"
                     android:textSize="20sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <View
@@ -321,6 +332,7 @@
                         android:layout_margin="5dp"
                         android:text="사는 지역"
                         android:textSize="20sp"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <ImageView
@@ -387,6 +399,7 @@
                         android:layout_margin="5dp"
                         android:text="여행 지역"
                         android:textSize="20sp"
+                        android:textColor="@color/black"
                         android:background="@color/white"/>
 
                     <ImageView

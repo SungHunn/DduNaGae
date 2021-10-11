@@ -25,13 +25,15 @@
         android:id="@+id/group_chatitem_textview_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="방 이름" />
+        android:text="방 이름"
+        android:textColor="@color/black"/>
     <TextView
         android:id="@+id/group_chatitem_textview_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="참여한 사용자"
         android:layout_marginLeft="20dp"
+        android:textColor="@color/black"
         />
     <TextView
         android:id="@+id/group_chatitem_textview_member_num"
@@ -39,6 +41,7 @@
         android:layout_height="wrap_content"
         android:text="참여한 사용자 수"
         android:layout_marginLeft="20dp"
+        android:textColor="@color/black"
         />
 
 </LinearLayout>
@@ -50,6 +53,7 @@
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:background="@color/white"/>
     </LinearLayout>
     <View

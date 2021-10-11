@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="리뷰"
         android:textSize="40sp"
+        android:textColor="@color/black"
         android:background="@color/white"/>
 
     <View
@@ -28,6 +29,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="Category\t:\t"
+            android:textColor="@color/black"
             android:background="@color/white"/>
         <EditText
             android:layout_width="match_parent"
@@ -46,6 +48,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textColor="@color/black"
             android:text="Date\t\t\t\t\t\t:\t" />
         <EditText
             android:layout_width="match_parent"
@@ -62,6 +65,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textColor="@color/black"
             android:text="Address\t\t:\t" />
         <EditText
             android:layout_width="match_parent"
@@ -78,6 +82,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="20sp"
+            android:textColor="@color/black"
             android:text="Title\t\t\t\t\t\t:\t" />
         <EditText
             android:layout_width="match_parent"
@@ -95,6 +100,7 @@
             android:layout_height="wrap_content"
             android:textSize="20sp"
             android:text="Contents\t:\t"
+            android:textColor="@color/black"
             android:background="@color/white"/>
         <EditText
             android:layout_width="match_parent"

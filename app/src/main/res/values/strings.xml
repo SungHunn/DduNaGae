@@ -10,9 +10,9 @@
 
 
     <string name="title_activity_welcome">Home Screen</string>
-    <string name="next">NEXT</string>
-    <string name="skip">SKIP</string>
-    <string name="start">GOT IT</string>
+    <string name="next">다음</string>
+    <string name="skip">다시 보지 않기</string>
+    <string name="start">확인</string>
 
 
 

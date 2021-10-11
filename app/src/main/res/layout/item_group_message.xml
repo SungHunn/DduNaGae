@@ -23,6 +23,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="이름"
+            android:textColor="@color/black"
             android:background="@color/white"/>
 
     </LinearLayout>
@@ -39,6 +40,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="메세지"
+            android:textColor="@color/black"
             android:background="@color/white"/>
 
         <LinearLayout
@@ -54,7 +56,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
-                android:background="@color/white"/>
+                android:background="@color/white" />
 
             <TextView
                 android:id="@+id/messageItem_textview_readCounter_right"

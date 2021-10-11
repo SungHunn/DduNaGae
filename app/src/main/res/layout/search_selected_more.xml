@@ -11,6 +11,7 @@
         android:layout_height="wrap_content"
         android:text="아 하기 싫어"
         android:textSize="50dp"
+        android:textColor="@color/black"
         android:id="@+id/more_page_name"
         android:background="@color/white"/>
 

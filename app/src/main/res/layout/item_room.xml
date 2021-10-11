@@ -35,7 +35,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="방이름"
                 android:textSize="25dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
             <!--상태 메시지-->
@@ -46,7 +46,7 @@
                 android:layout_margin="10dp"
                 android:text="개 정보"
                 android:textSize="12dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
             <!--상태 메시지-->
             <TextView
@@ -56,7 +56,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="희망 여행지"
                 android:textSize="12dp"
-                android:textColor="#000000"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
         </LinearLayout>
     </LinearLayout>
