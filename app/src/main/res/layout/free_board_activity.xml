@@ -12,7 +12,8 @@
                 android:id="@+id/free_board"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -24,7 +25,8 @@
                         android:layout_width="30dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="10dp"
-                        android:src="@drawable/go_back" />
+                        android:src="@drawable/go_back"
+                        android:background="@color/white"/>
 
                     <TextView
                         android:id="@+id/free_board_text"
@@ -33,7 +35,8 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="15dp"
                         android:text="자유게시판"
-                        android:textSize="20dp" />
+                        android:textSize="20dp"
+                        android:background="@color/white"/>
 
                     <View
                         android:layout_width="0dp"
@@ -49,7 +52,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:weightSum="5"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/white">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -57,7 +61,8 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
-                        android:id="@+id/free_board1" />
+                        android:id="@+id/free_board1"
+                        android:background="@color/white"/>
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -65,7 +70,8 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
-                        android:id="@+id/free_board2"/>
+                        android:id="@+id/free_board2"
+                        android:background="@color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -75,7 +81,8 @@
                         android:focusable="true"
                         android:textSize="18sp"
 
-                        android:id="@+id/free_board3"/>
+                        android:id="@+id/free_board3"
+                        android:background="@color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -85,7 +92,8 @@
                         android:focusable="true"
                         android:textSize="18sp"
 
-                        android:id="@+id/free_board4"/>
+                        android:id="@+id/free_board4"
+                        android:background="@color/white"/>
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -94,7 +102,8 @@
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
-                        android:id="@+id/free_board5"/>
+                        android:id="@+id/free_board5"
+                        android:background="@color/white"/>
                 </LinearLayout>
             </LinearLayout>
 
@@ -104,7 +113,8 @@
                 android:id="@+id/free_board_list"
                 android:layout_width="match_parent"
                 android:layout_height="569dp"
-                android:layout_below="@+id/free_board" />
+                android:layout_below="@+id/free_board"
+                android:background="@color/white"/>
 
             <Button
                 android:id="@+id/my_text_list"
@@ -112,7 +122,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-                android:text="내 글 목록" />
+                android:text="내 글 목록"
+                android:background="@color/skyblue"/>
 
 
             <Button
@@ -121,6 +132,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                android:text="글쓰기" />
+                android:text="글쓰기"
+                android:background="@color/skyblue"/>
         </RelativeLayout>
 </RelativeLayout>

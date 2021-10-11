@@ -19,7 +19,8 @@
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="@dimen/dots_margin_bottom"
         android:gravity="center"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
     </LinearLayout>
 
     <View

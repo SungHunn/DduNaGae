@@ -25,20 +25,20 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:id="@+id/single_talkmenu"
-
-                >
+                android:background="@color/white">
 
                 <ImageButton
                     android:id="@+id/single_chattingroom_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="right"
                     android:adjustViewBounds="true"
                     android:maxWidth="35dp"
                     android:maxHeight="35dp"
                     android:padding="1dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/go_back" />
+                    android:src="@drawable/go_back"
+                    android:background="@color/white"/>
 
 
                 //채팅방 상대 닉네임
@@ -57,12 +57,13 @@
 
                 <ImageButton
                     android:id="@+id/single_talkmenu_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="right"
                     android:maxWidth="25dp"
                     android:maxHeight="20dp"
-                    android:src="@drawable/ic_baseline_dehaze_24" />
+                    android:src="@drawable/ic_baseline_dehaze_24"
+                    android:background="@color/white"/>
 
 
             </LinearLayout>
@@ -72,9 +73,8 @@
                 android:id="@+id/single_messageActivity_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="569dp"
-                android:layout_below="@+id/single_talkmenu" />
-
-
+                android:layout_below="@+id/single_talkmenu"
+                android:background="@color/white"/>
 
             <EditText
                 android:id="@+id/messageActivity_editText"
@@ -82,8 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/messageActivity_button" />
-
+                android:layout_toLeftOf="@+id/messageActivity_button"
+                android:background="@color/white"/>
 
             <Button
                 android:id="@+id/messageActivity_button"
@@ -92,7 +92,7 @@
                 android:text="전송"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                />
+                android:background="@color/skyblue"/>
 
         </RelativeLayout>
         <include layout="@layout/single_chatting_drawer"/>

@@ -25,20 +25,22 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:id="@+id/group_talkmenu"
-
+                android:background="@color/white"
                 >
 
                 <ImageButton
                     android:id="@+id/chattingroom_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="30dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="right"
                     android:adjustViewBounds="true"
-                    android:maxWidth="35dp"
-                    android:maxHeight="35dp"
+                    android:maxWidth="30dp"
+                    android:maxHeight="50dp"
                     android:padding="1dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/go_back" />
+                    android:src="@drawable/go_back"
+                    android:background="@color/white"
+                    android:layout_marginLeft="5dp"/>
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -46,14 +48,15 @@
                     android:text="그룹채팅  :"
                     android:textSize="20dp"
                     android:id="@+id/chatting_opt"
+                    android:background="@color/white"
                     />
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-
                     android:textSize="20dp"
                     android:id="@+id/chatting_mem_num"
+                    android:background="@color/white"
                     />
 
                 <TextView
@@ -61,6 +64,7 @@
                     android:layout_height="wrap_content"
                     android:text=" 명"
                     android:textSize="20dp"
+                    android:background="@color/white"
                     />
                 <View
                     android:layout_width="0dp"
@@ -69,12 +73,13 @@
 
                 <ImageButton
                     android:id="@+id/talkmenu_open"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
                     android:layout_gravity="right"
                     android:maxWidth="25dp"
                     android:maxHeight="20dp"
-                    android:src="@drawable/ic_baseline_dehaze_24" />
+                    android:src="@drawable/ic_baseline_dehaze_24"
+                    android:background="@color/white"/>
 
 
             </LinearLayout>
@@ -84,7 +89,8 @@
                 android:id="@+id/group_messageActivity_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="569dp"
-                android:layout_below="@+id/group_talkmenu" />
+                android:layout_below="@+id/group_talkmenu"
+                android:background="@color/main_blue"/>
 
 
 
@@ -94,7 +100,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
-                android:layout_toLeftOf="@+id/group_messageActivity_button" />
+                android:layout_toLeftOf="@+id/group_messageActivity_button"/>
 
 
             <Button
@@ -104,7 +110,7 @@
                 android:text="전송"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
-                />
+                android:background="@color/skyblue"/>
 
         </RelativeLayout>
         <include layout="@layout/chatting_drawer"/>

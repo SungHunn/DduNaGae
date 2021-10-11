@@ -76,6 +76,7 @@ public class Free_Board_Writing extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
                 startActivityForResult(intent, PICK_FROM_ALBUM);
             }
         });
@@ -189,10 +190,12 @@ public class Free_Board_Writing extends AppCompatActivity {
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
+         if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
             photo.setImageURI(data.getData()); // 가운데 뷰를 바꿈
             imageUri = data.getData();// 이미지 경로 원본
         }
+
+
     }
 
 

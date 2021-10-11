@@ -7,19 +7,22 @@
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/go_back"/>
+            android:src="@drawable/go_back"
+            android:background="@color/white"/>
 
     </LinearLayout>
     <View
@@ -32,18 +35,21 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="20dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <ImageView
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:id="@+id/freeboard_detail_myprofile"
-            android:layout_marginLeft="5dp"/>
+            android:layout_marginLeft="5dp"
+            android:background="@color/white"/>
 
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:background="@color/white">
 
             <TextView
 
@@ -53,7 +59,8 @@
                 android:text="닉네임"
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"
-                />
+                android:textColor="@color/black"
+                android:background="@color/white"/>
 
             <TextView
                 android:id="@+id/writer_nickname"
@@ -63,7 +70,8 @@
                 android:text="AABBCCDD"
                 android:layout_gravity="center_vertical"
                 android:textSize="15dp"
-                />
+                android:textColor="@color/black"
+                android:background="@color/white"/>
 
 
             <ImageView
@@ -72,7 +80,7 @@
                 android:src="@drawable/ic_baseline_more_horiz_24"
                 android:layout_gravity="center_vertical"
                 android:layout_marginLeft="200dp"
-
+                android:background="@color/white"
                 />
         </LinearLayout>
     </LinearLayout>
@@ -82,14 +90,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="20dp">
+        android:layout_marginTop="20dp"
+        android:background="@color/white">
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/free_board_detail_title"
             android:text="````` "
-            android:textSize="25dp"/>
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
 
 
     </LinearLayout>
@@ -100,7 +111,8 @@
         android:layout_height="150dp"
         android:id="@+id/free_board_image"
         android:layout_gravity="center"
-        android:layout_marginTop="30dp"/>
+        android:layout_marginTop="30dp"
+        android:background="@color/white"/>
 
     <TextView
         android:layout_width="match_parent"
@@ -111,12 +123,15 @@
         android:text="내용"
         android:textSize="15dp"
         android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:textColor="@color/black"
+        android:background="@color/white"/>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:orientation="horizontal"
-        android:weightSum="10">
+        android:weightSum="10"
+        android:background="@color/white">
 
         <TextView
             android:layout_width="1dp"
@@ -124,7 +139,9 @@
             android:text="좋아요"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
 
         <TextView
             android:id="@+id/love_it_num"
@@ -133,18 +150,24 @@
             android:layout_gravity="center_vertical"
             android:layout_weight="1"
             android:gravity="center"
-            android:text="좋아수" />
+            android:text="좋아수"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1"/>
+            android:layout_weight="1"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
             android:text="댓글"
             android:layout_weight="1"
             android:gravity="center"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
         <TextView
             android:layout_width="1dp"
             android:layout_height="wrap_content"
@@ -152,7 +175,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:layout_gravity="center_vertical"
-            android:id="@+id/comment_num"/>
+            android:id="@+id/comment_num"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"
@@ -174,7 +199,8 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:src="@drawable/unfilled_heart"
-            android:id="@+id/unfilled_heart"/>
+            android:id="@+id/unfilled_heart"
+            android:background="@color/white"/>
         //꽉찬하트 이미지
         <ImageView
             android:visibility="gone"
@@ -182,7 +208,8 @@
             android:layout_height="wrap_content"
             android:src="@drawable/fill_heart"
             android:layout_weight="1"
-            android:id="@+id/filled_heart"/>
+            android:id="@+id/filled_heart"
+            android:background="@color/white"/>
 
         <TextView
             android:layout_width="0dp"
@@ -191,7 +218,9 @@
             android:layout_weight="2"
             android:gravity="center"
             android:textSize="30dp"
-            android:layout_gravity="center_vertical"/>
+            android:layout_gravity="center_vertical"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
 
         <TextView
             android:id="@+id/free_board_detail_comment_view"
@@ -201,7 +230,8 @@
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="3"
-            />
+            android:textColor="@color/black"
+            android:background="@color/white"/>
 
 
     </LinearLayout>
@@ -221,18 +251,21 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:weightSum="10"
-        android:layout_marginTop="50dp">
+        android:layout_marginTop="50dp"
+        android:background="@color/white">
         <EditText
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="7"
-            android:id="@+id/free_board_detail_comment"/>
+            android:id="@+id/free_board_detail_comment"
+            android:background="@color/white"/>
         <Button
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_weight="3"
             android:text="댓글달기"
-            android:id="@+id/free_board_detail_post_comment"/>
+            android:id="@+id/free_board_detail_post_comment"
+            android:background="@color/skyblue"/>
 
     </LinearLayout>
 

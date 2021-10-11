@@ -26,7 +26,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="10dp"
                 android:text="카테고리"
-                android:textSize="30dp" />
+                android:textSize="30dp"
+                android:background="#FFFEE6"/>
 
             <ImageButton
                 android:layout_gravity="center"
@@ -38,14 +39,16 @@
                 android:maxWidth="35dp"
                 android:maxHeight="35dp"
                 android:scaleType="fitCenter"
-                android:src="@drawable/ic_baseline_arrow_forward_24" />
+                android:src="@drawable/ic_baseline_arrow_forward_24"
+                android:background="#FFFEE6"/>
 
         </LinearLayout>
 
         <ListView
             android:id="@+id/Free_board_drawer_list"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="#FFFEE6"/>
 
     </LinearLayout>
 

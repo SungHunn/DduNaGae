@@ -1,50 +1,27 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="vertical"
-    android:layout_marginBottom="10dp">
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:padding="20dp"
-        android:orientation="vertical"
-
-        >
+    android:layout_width="150dp"
+    android:layout_height="170dp"
+    android:padding="10dp"
+    android:orientation="vertical">
 
         <!--프로필 사진-->
         <ImageView
             android:id="@+id/memeber_profile"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
-            android:layout_marginRight="5dp"
-            />
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:layout_gravity="left">
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_gravity="center"/>
+
             <!--방이름-->
             <TextView
                 android:id="@+id/memeber_nickname"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="사람 이름"
                 android:textSize="25dp"
-                android:layout_gravity="center"
-                android:textColor="#000000"/>
-
-
-        </LinearLayout>
-    </LinearLayout>
-
-    <!--구분선-->
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginHorizontal="10dp"
-        android:background="#000000"/>
+                android:textColor="@color/black"
+                android:textAlignment="center"
+                android:layout_gravity="center" />
 
 </LinearLayout>

@@ -4,7 +4,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:layout_margin="16dp">
+    android:layout_margin="16dp"
+    android:background="@color/white">
 
     <TextView
         android:layout_width="wrap_content"
@@ -13,19 +14,23 @@
         android:textSize="30sp"
         android:layout_gravity="center"
         android:textColor="#000000"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="20dp"
+        android:background="@color/white"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="제1조 (개인정보의 처리 목적)"
-        android:layout_marginBottom="10dp"/>
+        android:layout_marginBottom="10dp"
+        android:background="@color/white"
+        android:textColor="@color/black"/>
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="① 개인정보보호위원회는 개인정보를 다음의 목적을 위해 처리합니다. 처리한 개인정보는 다음의 목적이외의 용도로는 사용되지
                       않으며 이용 목적이 변경되는 경우에는 개인정보 보호법 제18조에 따라 별도의 동의를 받는 등 필요한 조치를 이행할 예정입니다."
-        />
+        android:background="@color/white"
+        android:textColor="@color/black"/>
 
 </LinearLayout>

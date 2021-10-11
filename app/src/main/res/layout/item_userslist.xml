@@ -5,14 +5,15 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="20dp"
     android:id="@+id/chatting_drawer_useritem"
-    >
+    android:background="@color/white">
 
 
         <ImageView
             android:layout_marginLeft="10dp"
             android:id="@+id/chatting_drawer_profile"
             android:layout_width="60dp"
-            android:layout_height="60dp" />
+            android:layout_height="60dp"
+            android:background="@color/white"/>
 
 
     <TextView
@@ -22,6 +23,8 @@
         android:layout_marginLeft="10dp"
         android:layout_gravity="center_vertical"
         android:textSize="15dp"
-        android:text="유저 닉네임"/>
+        android:text="유저 닉네임"
+        android:textColor="@color/black"
+        android:background="@color/white"/>
 
 </LinearLayout>

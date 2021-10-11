@@ -8,14 +8,16 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
 
         <ImageView
             android:id="@+id/img_back"
             android:layout_width="30dp"
             android:layout_height="50dp"
             android:layout_marginLeft="10dp"
-            android:src="@drawable/go_back" />
+            android:src="@drawable/go_back"
+            android:background="@color/white"/>
 
 
     </LinearLayout>
@@ -27,14 +29,17 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="vertical">
+            android:orientation="vertical"
+            android:background="@color/white">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="8dp"
                 android:text="매칭방 필터"
-                android:textSize="25sp" />
+                android:textSize="25sp"
+                android:textColor="@color/black"
+                android:background="@color/white"/>
 
 
 
@@ -43,14 +48,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:layout_marginHorizontal="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="매칭자 옵션"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -61,13 +69,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/white">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="매칭자 성별" />
+                        android:text="매칭자 성별"
+                        android:textColor="@color/black"
+                        android:background="@color/white"/>
 
                     <Spinner
                         android:id="@+id/h_matching_sex_filter"
@@ -81,7 +92,9 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="매칭자 나이" />
+                        android:text="매칭자 나이"
+                        android:textColor="@color/black"
+                        android:background="@color/white"/>
 
                     <Spinner
                         android:id="@+id/h_matching_age_filter"
@@ -100,14 +113,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:layout_marginHorizontal="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="반려동물 옵션"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -118,13 +134,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:orientation="vertical">
+                    android:orientation="vertical"
+                    android:background="@color/white">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
-                        android:text="반려 동물 나이" />
+                        android:text="반려 동물 나이"
+                        android:textColor="@color/black"
+                        android:background="@color/white"/>
 
                     <Spinner
                         android:id="@+id/h_matching_pet_age_filter"
@@ -139,7 +158,9 @@
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="반려 동물 종류"
-                        android:layout_marginTop="20dp"/>
+                        android:layout_marginTop="20dp"
+                        android:textColor="@color/black"
+                        android:background="@color/white"/>
 
                     <Spinner
                         android:id="@+id/h_matching_pet_option_filter"
@@ -153,9 +174,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="1~6살 개린이 / 7~10 개춘기 / 11~16 개저씨"
-                    android:textSize="6dp"
+                    android:textSize="10dp"
                     android:textStyle="bold"
-                    />
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
             </LinearLayout>
 
             <LinearLayout
@@ -163,14 +185,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:layout_marginHorizontal="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="채팅방 종류"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -181,7 +206,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/white">
 
                     <Spinner
                         android:id="@+id/matching_room_option_filter"
@@ -199,14 +225,17 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:layout_marginHorizontal="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_margin="5dp"
                     android:text="차량 여부"
-                    android:textSize="20sp" />
+                    android:textSize="20sp"
+                    android:textColor="@color/black"
+                    android:background="@color/white"/>
 
                 <View
                     android:layout_width="match_parent"
@@ -217,7 +246,8 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:background="@color/white">
 
                     <Spinner
                         android:id="@+id/h_car_option_filter"
@@ -235,25 +265,30 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:layout_marginHorizontal="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="사는 지역"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:background="@color/white"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:layout_marginLeft="270dp"
-                        android:src="@drawable/ic_baseline_location_on_24" />
+                        android:src="@drawable/ic_baseline_location_on_24"
+                        android:background="@color/white"/>
 
                 </LinearLayout>
 
@@ -265,7 +300,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:orientation="vertical"
+                    android:background="@color/white"/>
 
                 <Spinner
                     android:id="@+id/live_area_1"
@@ -296,25 +332,30 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="15dp"
                 android:layout_marginHorizontal="10dp"
-                android:orientation="vertical">
+                android:orientation="vertical"
+                android:background="@color/white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@color/white">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_margin="5dp"
                         android:text="여행 지역"
-                        android:textSize="20sp" />
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:background="@color/white"/>
 
                     <ImageView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginVertical="5dp"
                         android:layout_marginLeft="270dp"
-                        android:src="@drawable/ic_baseline_location_on_24" />
+                        android:src="@drawable/ic_baseline_location_on_24"
+                        android:background="@color/white"/>
 
                 </LinearLayout>
 
@@ -326,7 +367,8 @@
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:orientation="vertical" />
+                    android:orientation="vertical"
+                    android:background="@color/white"/>
 
                 <Spinner
                     android:id="@+id/trip_area_1"
@@ -357,7 +399,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:text="완료" />
+                android:text="완료"
+                android:background="@color/skyblue"/>
         </LinearLayout>
      </ScrollView>
 </LinearLayout>

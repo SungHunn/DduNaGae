@@ -33,6 +33,7 @@ public class My_Page extends AppCompatActivity {
     TextView myname;
     BottomNavigationView bottomNavigationView;
     TextView go_my_article;
+    TextView go_my_info;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -85,7 +86,19 @@ public class My_Page extends AppCompatActivity {
             }
         });
 
+        go_my_info = (TextView)findViewById(R.id.my_page_info);
+
+        go_my_info.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), My_Page_Information.class);
+                startActivity(intent);
+            }
+        });
+
     }
+
+
 
 
 

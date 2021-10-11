@@ -1,8 +1,10 @@
 package com.example.Dde_Na_Gae;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.view.Window;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -21,7 +23,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.kakao.sdk.user.model.User;
 
-public class Profile_Detail extends AppCompatActivity {
+public class Profile_Detail extends Activity {
 
     String destinationuid;
     TextView members_nickname;
@@ -33,6 +35,7 @@ public class Profile_Detail extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.profile_detail);
 
         members_nickname = findViewById(R.id.members_nickname);
@@ -68,6 +71,12 @@ public class Profile_Detail extends AppCompatActivity {
 
     }
 
+    public void mOnClose(View v){
+        Intent intent = new Intent();
+        intent.putExtra("result", "Close Popup");
+        setResult(RESULT_OK, intent);
 
+        finish();
+    }
 }
 

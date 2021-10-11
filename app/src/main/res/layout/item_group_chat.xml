@@ -8,27 +8,32 @@
         android:id="@+id/group_chatitem_imageview"
         android:layout_width="50dp"
         android:layout_height="50dp"
-        android:layout_margin="10dp" />
+        android:layout_margin="10dp"
+        android:background="@color/white"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:background="@color/white">
 <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:orientation="horizontal">
+    android:orientation="horizontal"
+    android:background="@color/white">
     <TextView
         android:id="@+id/group_chatitem_textview_title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="방 이름" />
+        android:text="방 이름"
+        android:textColor="@color/black"/>
     <TextView
         android:id="@+id/group_chatitem_textview_member"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="참여한 사용자"
         android:layout_marginLeft="20dp"
+        android:textColor="@color/black"
         />
     <TextView
         android:id="@+id/group_chatitem_textview_member_num"
@@ -36,6 +41,7 @@
         android:layout_height="wrap_content"
         android:text="참여한 사용자 수"
         android:layout_marginLeft="20dp"
+        android:textColor="@color/black"
         />
 
 </LinearLayout>
@@ -46,7 +52,9 @@
             android:text="마지막 메세지"
             android:layout_marginTop="10dp"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
     </LinearLayout>
     <View
         android:layout_width="match_parent"

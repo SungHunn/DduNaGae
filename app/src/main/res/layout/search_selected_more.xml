@@ -2,7 +2,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/white">
 
     <TextView
         android:layout_gravity="center"
@@ -10,18 +11,22 @@
         android:layout_height="wrap_content"
         android:text="아 하기 싫어"
         android:textSize="50dp"
-        android:id="@+id/more_page_name"/>
+        android:textColor="@color/black"
+        android:id="@+id/more_page_name"
+        android:background="@color/white"/>
 
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_margin="15dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
         <ListView
             android:id="@+id/room_info"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            android:background="@color/white"/>
 
     </LinearLayout>
 </LinearLayout>

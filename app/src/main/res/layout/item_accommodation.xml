@@ -8,7 +8,8 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="89dp"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="@color/white">
 
 
         <LinearLayout
@@ -21,14 +22,16 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="숙소 명칭" />
+                android:text="숙소 명칭"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/accommodation_address"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="10dp"
-                android:text="숙소 주소" />
+                android:text="숙소 주소"
+                android:textColor="@color/black"/>
         </LinearLayout>
 
     </LinearLayout>

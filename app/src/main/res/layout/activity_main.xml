@@ -18,7 +18,8 @@
 
         <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/main_box"
@@ -236,6 +237,7 @@
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
                     android:text="관광지"
+                    android:textColor="@color/black"
                     android:textSize="35dp" />
 
                 <Spinner
