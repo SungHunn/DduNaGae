@@ -42,6 +42,7 @@ public class Freeboard_Activity extends AppCompatActivity {
     private Button writing;
     private Button my_list;
     private RecyclerView recyclerView;
+    private ImageView go_back;
 
     TextView category1;
     TextView category2;
@@ -68,6 +69,14 @@ public class Freeboard_Activity extends AppCompatActivity {
         recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
+        go_back = (ImageView)findViewById(R.id.freeboard_home_img_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
+                startActivity(intent);
+            }
+        });
 
 
         writing = (Button) findViewById(R.id.go_writing);

@@ -68,6 +68,7 @@ public class Free_Board_Detail  extends AppCompatActivity {
     private ImageView unfilledheart;
     private ImageView photo;
     private ImageView profile;
+    private ImageView go_back;
 
     private String articleid;
 
@@ -102,6 +103,17 @@ public class Free_Board_Detail  extends AppCompatActivity {
         unfilledheart = findViewById(R.id.unfilled_heart);
         photo = (ImageView)findViewById(R.id.free_board_image);
         profile = (ImageView)findViewById(R.id.freeboard_detail_myprofile);
+
+
+        go_back = (ImageView)findViewById(R.id.freeboard_detail_img_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                startActivity(intent);
+            }
+        });
 
         heart_count = (TextView)findViewById(R.id.love_it_num);
         comment_count = (TextView)findViewById(R.id.comment_num);

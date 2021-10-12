@@ -32,7 +32,7 @@ public class My_Free_Board_List extends AppCompatActivity {
 
     private RecyclerView recyclerView;
     private String uid;
-
+    private ImageView go_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +46,15 @@ public class My_Free_Board_List extends AppCompatActivity {
 
 
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+        go_back = (ImageView)findViewById(R.id.My_article_list_img_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                startActivity(intent);
+            }
+        });
     }
 
     class BoardRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

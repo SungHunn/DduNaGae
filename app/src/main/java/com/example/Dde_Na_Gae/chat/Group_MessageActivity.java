@@ -27,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.New_ChatMainActivity;
 import com.example.Dde_Na_Gae.R;
+import com.example.Dde_Na_Gae.fragment.My_Group_ChatFragment;
 import com.example.Dde_Na_Gae.fragment.RoomFragment;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.UserModel;
@@ -60,6 +61,7 @@ public class Group_MessageActivity extends AppCompatActivity {
     Button chattingroom_exit;
 
     ImageButton group_chat_hbg;
+    ImageButton groupchat_goback;
 
 
 
@@ -87,6 +89,13 @@ public class Group_MessageActivity extends AppCompatActivity {
 
         group_chat_hbg = (ImageButton) findViewById(R.id.talkmenu_open);
 
+        groupchat_goback = (ImageButton)findViewById(R.id.group_chattingroom_back);
+        groupchat_goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              finish();
+            }
+        });
 
         groupmember_recyclerView = (RecyclerView)findViewById(R.id.chatting_drawer_recyclerview);
         groupmember_recyclerView.setAdapter(new GroupMemberRecyclerViewAdapter());

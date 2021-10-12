@@ -26,6 +26,7 @@ import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.database.Group_Room_Name_Database;
 import com.example.Dde_Na_Gae.New_ChatMainActivity;
 import com.example.Dde_Na_Gae.R;
+import com.example.Dde_Na_Gae.fragment.My_Personal_ChatFragment;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.example.Dde_Na_Gae.model.UserModel;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -50,6 +51,7 @@ public class New_MessageActivity extends AppCompatActivity {
     private EditText editText;
     ImageButton single_chat_hbg;
     Button chattingroom_exit;
+    ImageButton singlechat_goback;
 
     private TextView chat_text;
     private String uid;
@@ -79,6 +81,14 @@ public class New_MessageActivity extends AppCompatActivity {
         drawerView = findViewById(R.id.single_chatting_drawer);
 
         chat_text = (TextView)findViewById(R.id.chatting_text);
+
+        singlechat_goback = (ImageButton)findViewById(R.id.single_chattingroom_back);
+        singlechat_goback.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+              finish();
+            }
+        });
 
         single_chat_hbg = (ImageButton) findViewById(R.id.single_talkmenu_open);
 
@@ -470,20 +480,6 @@ public class New_MessageActivity extends AppCompatActivity {
 
             }
         }
-    }
-
-
-    @Override
-    public void onBackPressed() {
-        super.onBackPressed();
-        stopPlay(); //이 액티비티에서 종료되어야 하는 활동 종료시켜주는 함수
-        Intent intent = new Intent(New_MessageActivity.this, New_ChatMainActivity.class); //지금 액티비티에서 다른 액티비티로 이동하는 인텐트 설정
-        intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);    //인텐트 플래그 설정
-        startActivity(intent);  //인텐트 이동
-        finish();   //현재 액티비티 종료
-    }
-
-    private void stopPlay() {
     }
 
 }

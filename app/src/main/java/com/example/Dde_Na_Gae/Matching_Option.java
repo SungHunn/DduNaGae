@@ -7,17 +7,20 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.constraintlayout.widget.ConstraintLayout;
 
 import com.example.Dde_Na_Gae.database.Group_Room_Database;
 import com.example.Dde_Na_Gae.database.Group_Room_Name_Database;
 import com.example.Dde_Na_Gae.database.Room_Database;
 import com.example.Dde_Na_Gae.database.Room_Name_Detail_Database;
+import com.example.Dde_Na_Gae.fragment.Matching_Fragment;
 import com.example.Dde_Na_Gae.model.ChatModel;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -42,6 +45,7 @@ public class Matching_Option extends AppCompatActivity {
     private String uid;
     private String ChatRoomUid;
     private LinearLayout group_member_number;
+    private ImageView matching_option_back;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +59,15 @@ public class Matching_Option extends AppCompatActivity {
         group_button = (Button) findViewById(R.id.group_matching_okay);
         mDatabase = FirebaseDatabase.getInstance().getReference();
         Room_Name = (EditText) findViewById(R.id.chatting_name);
+
+        matching_option_back = (ImageView)findViewById(R.id.matching_option_back);
+        matching_option_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
+                startActivity(intent);
+            }
+        });
 
         Spinner h_matching_sex_spinner = (Spinner) findViewById(R.id.h_matching_sex);
         ArrayAdapter h_matching_sexAdapter = ArrayAdapter.createFromResource(this,

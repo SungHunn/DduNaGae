@@ -31,7 +31,7 @@ public class My_free_board_detail extends AppCompatActivity {
     private Button send;
     private ImageView photo;
     private ImageView profile;
-
+    private ImageView go_back;
 
     private Button change;
     private Button delete;
@@ -51,6 +51,15 @@ public class My_free_board_detail extends AppCompatActivity {
         send = (Button)findViewById(R.id.my_free_board_detail_post_comment);
         photo = (ImageView)findViewById(R.id.my_free_board_detail_profile_image);
         profile = (ImageView)findViewById(R.id.my_profile_image);
+
+        go_back = (ImageView)findViewById(R.id.My_article_detail_img_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
+                startActivity(intent);
+            }
+        });
 
 
 

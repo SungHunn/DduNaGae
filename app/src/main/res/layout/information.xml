@@ -1,266 +1,262 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:background="@color/main_color"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <ScrollView
+    <!--        내 정보 입력     -->
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/information_box1"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        android:layout_margin="10dp">
 
-        <LinearLayout
+
+        <TextView
+            android:id="@+id/information_title"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="vertical"
-            android:background="@color/white">
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:text="나의 정보"
+            android:textSize="30sp" />
+
+        <EditText
+            android:id="@+id/nick_name"
+            app:layout_constraintTop_toBottomOf="@+id/information_title"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="6"
+            android:hint="닉네임 입력"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/overlap_button"
+            app:layout_constraintTop_toBottomOf="@id/information_title"
+            app:layout_constraintStart_toEndOf="@id/nick_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:backgroundTint="#FFFEE6"
+            android:text="중복 확인"
+            android:textColor="#000000" />
+
+        <EditText
+            android:id="@+id/my_name"
+            app:layout_constraintTop_toBottomOf="@+id/nick_name"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:ems="7"
+            android:hint="이름"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/phone_number"
+            app:layout_constraintTop_toBottomOf="@+id/my_name"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:ems="15"
+            android:hint="전화번호"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/my_age"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:ems="6"
+            android:hint="나이"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/information_box2"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number"
+            app:layout_constraintStart_toEndOf="@+id/my_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:text="성별"
+            android:textSize="19dp"/>
+
+        <Spinner
+            android:id="@+id/my_sex"
+            app:layout_constraintTop_toBottomOf="@+id/phone_number"
+            app:layout_constraintStart_toEndOf="@+id/information_box2"
+            android:layout_marginTop="10dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <!--        반려동물 정보         -->
+
+        <TextView
+            android:id="@+id/information_pet_name_title"
+            app:layout_constraintTop_toBottomOf="@+id/my_age"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="반려동물정보"
+            android:textSize="25dp" />
+
+        <TextView
+            android:id="@+id/information_pet_picture_title"
+            app:layout_constraintTop_toBottomOf="@+id/information_pet_name_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="25dp"
+            android:text="반려동물사진"
+            android:textSize="20dp"
+            android:layout_marginBottom="5dp"/>
+
+        <ImageView
+            android:id="@+id/information_imageview_profile"
+            app:layout_constraintTop_toBottomOf="@+id/information_pet_picture_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:maxWidth="200dp"
+            android:maxHeight="200dp"
+            android:layout_height="150dp"
+            android:layout_width="150dp"
+            android:src="@drawable/gallery"/>
+
+        <!--        반려동물 옵션 -->
+
+        <TextView
+            android:id="@+id/information_box3"
+            app:layout_constraintTop_toBottomOf="@+id/information_imageview_profile"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="15dp"
+            android:text="반려 동물 옵션"
+            android:textSize="19dp"/>
+
+        <Spinner
+            android:id="@+id/pet_type"
+            app:layout_constraintTop_toBottomOf="@+id/information_imageview_profile"
+            app:layout_constraintStart_toEndOf="@+id/information_box3"
+            android:layout_marginTop="15dp"
+            android:layout_marginLeft="10dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            />
+
+        <EditText
+            android:id="@+id/pet_real_type"
+            app:layout_constraintTop_toBottomOf="@id/information_box3"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:layout_marginTop="5dp"
+            android:ems="6"
+            android:hint="(ex) 견종)"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/pet_age"
+            app:layout_constraintTop_toBottomOf="@+id/pet_real_type"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:ems="6"
+            android:layout_marginTop="5dp"
+            android:hint="동물 나이"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/pet_weight"
+            app:layout_constraintTop_toBottomOf="@+id/pet_real_type"
+            app:layout_constraintStart_toEndOf="@id/pet_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:ems="6"
+            android:hint="무게"
+            android:inputType="textPersonName" />
+
+        <EditText
+            android:id="@+id/pet_name"
+            app:layout_constraintTop_toBottomOf="@id/pet_age"
+            app:layout_constraintStart_toStartOf="@id/pet_age"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_weight="1"
+            android:ems="6"
+            android:hint="동물 이름"
+            android:inputType="textPersonName" />
+
+        <TextView
+            android:id="@+id/information_car_existence"
+            app:layout_constraintTop_toBottomOf="@id/pet_name"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="차 유무"
+            android:textSize="15dp" />
+
+        <Spinner
+            android:id="@+id/car"
+            app:layout_constraintTop_toBottomOf="@+id/pet_name"
+            app:layout_constraintStart_toEndOf="@+id/information_car_existence"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_weight="1" />
+
+        <EditText
+            android:id="@+id/uniqueness"
+            app:layout_constraintTop_toBottomOf="@+id/information_car_existence"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="350dp"
+            android:layout_height="260dp"
+            android:layout_weight="1"
+            android:layout_marginTop="10dp"
+            android:ems="6"
+            android:hint="ex)\n동물 등록번호\n 사회성 \n 동물 성격"
+            android:inputType="textPersonName" />
+
+        <Button
+            android:id="@+id/okay"
+            app:layout_constraintTop_toBottomOf="@id/uniqueness"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="완료" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="나의 정보"
-                android:textSize="25dp"
-                android:background="@color/white"/>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/white">
-
-                <EditText
-                    android:id="@+id/nick_name"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="6"
-                    android:hint="닉네임 입력"
-                    android:inputType="textPersonName"/>
-
-                <Button
-                    android:id="@+id/overlap_button"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="right"
-                    android:backgroundTint="@color/skyblue"
-                    android:text="중복 확인"
-                    android:textColor="#000000" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:orientation="vertical"
-                android:background="@color/white">
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-
-                    <EditText
-                        android:id="@+id/my_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="7"
-                        android:hint="이름"
-                        android:inputType="textPersonName" />
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/phone_number"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="15"
-                    android:hint="전화번호"
-                    android:inputType="textPersonName" />
-<LinearLayout
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal"
-    android:background="@color/white">
-                <EditText
-                    android:id="@+id/my_age"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="6"
-                    android:hint="나이"
-                    android:inputType="textPersonName" />
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="15dp"
-        android:text="성별"
-        android:textSize="19dp"/>
-
-    <Spinner
-        android:id="@+id/my_sex"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        />
-
-</LinearLayout>
-            </LinearLayout>
-
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="반려동물정보"
-                android:textSize="25dp" />
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:text="반려동물사진"
-                android:textSize="20dp"
-                android:layout_marginBottom="5dp"
-                android:background="@color/white"/>
-
-            <ImageView
-                android:src="@drawable/gallery"
-                android:id="@+id/information_imageview_profile"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:layout_margin="50dp"
-                android:background="@color/white"/>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:background="@color/white">
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginRight="15dp"
-                        android:text="반려 동물 옵션"
-                        android:textSize="19dp" />
-
-                    <Spinner
-                        android:id="@+id/pet_type"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="1" />
-
-
-                </LinearLayout>
-
-                <EditText
-                    android:id="@+id/pet_real_type"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:ems="6"
-                    android:hint="(ex) 견종)"
-                    android:inputType="textPersonName" />
-
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/pet_age"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="6"
-                        android:hint="동물 나이"
-                        android:inputType="textPersonName" />
-
-
-                    <EditText
-                        android:id="@+id/pet_weight"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginLeft="25dp"
-                        android:layout_weight="1"
-                        android:ems="6"
-                        android:hint="무게"
-                        android:inputType="textPersonName" />
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-                    <EditText
-                        android:id="@+id/pet_name"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:ems="6"
-                        android:hint="동물 이름"
-                        android:inputType="textPersonName" />
-
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal">
-
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="25dp"
-                        android:text="차 유무"
-                        android:textSize="15dp" />
-
-                    <Spinner
-                        android:id="@+id/car"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="bottom"
-                        android:layout_weight="1" />
-
-
-                </LinearLayout>
-
-
-                <EditText
-                    android:id="@+id/uniqueness"
-                    android:layout_width="350dp"
-                    android:layout_height="260dp"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:background="@drawable/type_edittext"
-                    android:ems="6"
-                    android:hint="ex)\n동물 등록번호\n 사회성 \n 동물 성격"
-                    android:inputType="textPersonName" />
-
-                <Button
-                    android:id="@+id/okay"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:text="완료" />
-
-
-            </LinearLayout>
-        </LinearLayout>
-    </ScrollView>
-</LinearLayout>
+</ScrollView>

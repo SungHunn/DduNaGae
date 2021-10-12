@@ -29,7 +29,7 @@
                 >
 
                 <ImageButton
-                    android:id="@+id/chattingroom_back"
+                    android:id="@+id/group_chattingroom_back"
                     android:layout_width="30dp"
                     android:layout_height="50dp"
                     android:layout_gravity="right"
