@@ -79,6 +79,10 @@
         <activity android:name=".Profile_Detail" android:theme="@android:style/Theme.Dialog"/>
         <activity android:name=".Group_Matching_Room_detail"/>
         <activity android:name=".My_Page_Information"/>
+        <activity android:name=".Service_Center"/>
+        <activity android:name=".Service_Center_Writing"/>
+        <activity android:name=".Service_Center_Detail"/>
+        <activity android:name=".My_Service_Center_List"/>
 
     </application>
 

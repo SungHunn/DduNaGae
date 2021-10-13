@@ -3,11 +3,14 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/drawable/ic_baseline_dehaze_24.xml" value="0.26979166666666665" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/drawable/ic_baseline_filter_alt_24.xml" value="0.26979166666666665" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/activity_main.xml" value="0.2046875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/chatting_list.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/drawer.xml" value="0.2046875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/fragment_chat.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/fragment_personal_chat.xml" value="0.20208333333333334" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/free_board_activity.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/free_board_drawer.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/free_board_list.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/free_board_review.xml" value="0.26875" />
@@ -17,10 +20,15 @@
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/group_room_matching_detail.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/groupchattingdrawer.xml" value="0.26875" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/my_page.xml" value="0.26875" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/my_service_center_list.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/new_chatactivity_main.xml" value="0.20208333333333334" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/practive.xml" value="0.264" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/profile_detail.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/search.xml" value="0.26875" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/service_center.xml" value="0.4" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/service_center_detail.xml" value="0.26614583333333336" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/service_center_writing.xml" value="0.264" />
+        <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/service_senter.xml" value="0.14791666666666667" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/single_matching_room_detail.xml" value="0.25364583333333335" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/layout/welcome_slide1.xml" value="0.24947916666666667" />
         <entry key="..\:/Users/dudrh/Desktop/Login_Example3/app/src/main/res/menu/bottomnavigation.xml" value="0.2046875" />
@@ -28,7 +36,7 @@
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="false" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="1.8" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="service_center_list">
+        <item>일반 문의</item>
+        <item>개선 및 제안</item>
+        <item>버그 신고</item>
+        <item>기타</item>
+    </string-array>
+</resources>

@@ -280,6 +280,9 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 2:
+                        Intent intent_service_center =
+                                new Intent(getApplicationContext(), Service_Center.class);
+                        startActivity(intent_service_center);
                         break;
 
                     case 3:

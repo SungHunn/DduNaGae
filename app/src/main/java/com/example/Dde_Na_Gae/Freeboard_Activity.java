@@ -117,6 +117,7 @@ public class Freeboard_Activity extends AppCompatActivity {
                 recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
             }
         });
+
         category2 = findViewById(R.id.free_board2);
         category2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -125,6 +126,7 @@ public class Freeboard_Activity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
         category3 = findViewById(R.id.free_board3);
         category3.setOnClickListener(new View.OnClickListener() {
             @Override

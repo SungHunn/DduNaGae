@@ -119,9 +119,8 @@ public class Free_Board_Detail  extends AppCompatActivity {
         comment_count = (TextView)findViewById(R.id.comment_num);
         if (user != null) {
             checkloveit(articleid,uid);
-            checkcomment(articleid);
         }
-
+        checkcomment(articleid);
 
         send.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -419,6 +418,9 @@ public class Free_Board_Detail  extends AppCompatActivity {
 
 
             boardCommentViewHolder.comment_comment.setText(commentModels.get(position).comment);
+
+
+            System.out.println(commentModels.get(1).uid);
 
             FirebaseDatabase.getInstance().getReference().child("users").child(commentModels.get(position).uid).addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
