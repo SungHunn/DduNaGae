@@ -2,9 +2,12 @@ package com.example.Dde_Na_Gae;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
@@ -21,10 +24,12 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -47,6 +52,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Mainactivity extends AppCompatActivity {
+
+    int nCurrentPermission = 0;
+    static final int PERMISSIONS_REQUEST = 0x0000001;
 
     TextView category1;
     TextView category2;
@@ -83,6 +91,8 @@ public class Mainactivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        OnCheckPermission();
 
         profile_photo = (ImageView) findViewById(R.id.profile_photo);
         listview = findViewById(R.id.navi_list);
@@ -146,7 +156,7 @@ public class Mainactivity extends AppCompatActivity {
                     case R.id.matching:
                         Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(0,R.anim.fromleft);
+                        overridePendingTransition(0, R.anim.fromleft);
                         break;
 
                     case R.id.home:
@@ -157,7 +167,7 @@ public class Mainactivity extends AppCompatActivity {
                     case R.id.freeboard:
                         Intent intent3 = new Intent(getApplicationContext(), Freeboard_Activity.class);
                         startActivity(intent3);
-                        overridePendingTransition(0,R.anim.fromright);
+                        overridePendingTransition(0, R.anim.fromright);
                         break;
 
                 }
@@ -369,19 +379,30 @@ public class Mainactivity extends AppCompatActivity {
     // serach box
     String url;
     GpsTracker gpsTracker;
+    double latitude;
+    double longitude;
+
     public void onTextViewClick() {
-        gpsTracker = new GpsTracker(Mainactivity.this);
         category1 = (TextView) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 try {
+                    Toast.makeText(Mainactivity.this, "카카오맵으로 이동합니다.", Toast.LENGTH_SHORT).show();
+
+                    gpsTracker = new GpsTracker(Mainactivity.this);
+                    latitude = gpsTracker.latitude;
+                    longitude = gpsTracker.longitude;
                     url = "kakaomap://search?q=애견카페" +
-                            "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                            "&p=" + latitude + "," + longitude;
+
+                    System.out.println(latitude + ", " + longitude);
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
-                }catch (ActivityNotFoundException e) {
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(Mainactivity.this, "카카오맵 설치를 위해 Play Store로 이동합니다.", Toast.LENGTH_SHORT).show();
+
                     url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
 
                     Intent intent_error = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -404,12 +425,16 @@ public class Mainactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    Toast.makeText(Mainactivity.this, "카카오맵으로 이동합니다.", Toast.LENGTH_SHORT).show();
+
                     url = "kakaomap://search?q=애견미용실" +
-                            "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                            "&p=" + gpsTracker.latitude + "," + gpsTracker.longitude;
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
-                }catch (ActivityNotFoundException e) {
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(Mainactivity.this, "카카오맵 설치를 위해 Play Store로 이동합니다.", Toast.LENGTH_SHORT).show();
+
                     url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
 
                     Intent intent_error = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -422,12 +447,16 @@ public class Mainactivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 try {
+                    Toast.makeText(Mainactivity.this, "카카오맵으로 이동합니다.", Toast.LENGTH_SHORT).show();
+
                     url = "kakaomap://search?q=동물병원" +
-                            "&p=" + gpsTracker.latitude  + "," + gpsTracker.longitude;
+                            "&p=" + gpsTracker.latitude + "," + gpsTracker.longitude;
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
-                }catch (ActivityNotFoundException e) {
+                } catch (ActivityNotFoundException e) {
+                    Toast.makeText(Mainactivity.this, "카카오맵 설치를 위해 Play Store로 이동합니다.", Toast.LENGTH_SHORT).show();
+
                     url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
 
                     Intent intent_error = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
@@ -450,5 +479,36 @@ public class Mainactivity extends AppCompatActivity {
         main_item.setAddr(addr);
         main_item.setConId(conId);
         mainlist.add(main_item);
+    }
+
+    public void OnCheckPermission() {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED
+                || ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            if (ActivityCompat.shouldShowRequestPermissionRationale(this, Manifest.permission.ACCESS_FINE_LOCATION)) {
+                Toast.makeText(this, "앱 실행을 위해서는 권한을 설정하셔야 합니다.", Toast.LENGTH_SHORT).show();
+
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        PERMISSIONS_REQUEST);
+            } else {
+                ActivityCompat.requestPermissions(this,
+                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION},
+                        PERMISSIONS_REQUEST);
+            }
+        }
+    }
+
+    @SuppressLint("MissingSuperCall")
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        switch (requestCode) {
+            case PERMISSIONS_REQUEST:
+                if (grantResults.length > 0
+                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                    Toast.makeText(this, "앱 실행을 위한 권한이 설정 되었습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(this, "앱 실행을 위한 권한이 취소 되었습니다.", Toast.LENGTH_SHORT).show();
+                }
+        }
     }
 }

@@ -24,6 +24,7 @@ import android.view.ViewTreeObserver;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -142,6 +143,8 @@ public class  Search_Selected extends AppCompatActivity {
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                 switch (item.getItemId()) {
                     case R.id.map:
+                        Toast.makeText(Search_Selected.this, "카카오맵으로 이동합니다.", Toast.LENGTH_SHORT).show();
+
                         //sp = 출발지, ep = 도착지
                         Location end_point;
                         end_point = addrToPoint(context, title);
@@ -153,6 +156,7 @@ public class  Search_Selected extends AppCompatActivity {
                                 "sp=" + latitude + "," + longitude +
                                 "&ep=" + end_point.getLatitude() +"," + end_point.getLongitude() + "&by=CAR";
 
+                        System.out.println(latitude + ", " + longitude);
 
                         Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                         startActivity(intent1);
