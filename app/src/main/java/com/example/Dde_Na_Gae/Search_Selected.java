@@ -31,9 +31,15 @@ import androidx.core.content.ContextCompat;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.firebase.dynamiclinks.DynamicLink;
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.kakao.util.KakaoParameterException;
 
+import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -158,15 +164,29 @@ public class  Search_Selected extends AppCompatActivity {
                         break;
 
                     case R.id.share:
-                        Intent intent = new Intent(Intent.ACTION_SEND);
+//                        Intent intent = new Intent(Intent.ACTION_SEND);
 
-                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-                        String text;
-                        text = "https://youtube.com";
-                        intent.putExtra(Intent.EXTRA_TEXT, text);
+                        DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
+                                .setLink(Uri.parse("https://search.daum.net/search?nil_suggest=btn&w=tot&DA=SBC&q=" + title))
+                                .setDomainUriPrefix("https://ddunagae.page.link/mVFa")
+                                // Open links with this app on Android
+                                .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
+                                .buildDynamicLink();
+
+                        Intent intent = new Intent();
+                        Uri dynamicLinkUri = dynamicLink.getUri();
+                        String msg = dynamicLinkUri.toString();
+                        intent.setAction(Intent.ACTION_SEND);
+                        intent.putExtra(Intent.EXTRA_TEXT, msg);
                         intent.setType("text/plain");
-//                intent.setPackage("com.kakao.talk");
-                        startActivity(Intent.createChooser(intent, "공유"));
+                        startActivity(intent);
+
+//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
+//                        String text = "check" + dynamicLinkUri;
+//                        intent.putExtra(Intent.EXTRA_TEXT, text);
+//                        intent.setType("text/plain");
+//                        startActivity(Intent.createChooser(intent, title + "공유하기"));
+
                         break;
                 }
                 return false;
