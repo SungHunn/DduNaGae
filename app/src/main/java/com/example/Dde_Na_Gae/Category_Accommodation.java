@@ -66,7 +66,6 @@ public class Category_Accommodation extends AppCompatActivity {
         webView = findViewById(R.id.accommodation_webView);
         String url;
 
-        url = "https://map.kakao.com/";
         webView.getSettings().setJavaScriptEnabled(true);
         webView.getSettings().setJavaScriptCanOpenWindowsAutomatically(true);
         webView.getSettings().setUseWideViewPort(true);
@@ -80,6 +79,7 @@ public class Category_Accommodation extends AppCompatActivity {
         webView.getSettings().setAllowFileAccess(true);
         webView.setWebChromeClient(new WebChromeClient());
         webView.getSettings().setUserAgentString("app");
+        url = "https://map.kakao.com/";
 
         webView.loadUrl(url);
 
@@ -97,8 +97,6 @@ public class Category_Accommodation extends AppCompatActivity {
         adapter = new ArrayAdapter(this, android.R.layout.simple_list_item_1, city_selected);
         accommodation_city.setAdapter(adapter);
 
-
-
         recyclerView = findViewById(R.id.accommodation_list);
         recyclerView.setLayoutManager(new LinearLayoutManager( this));
 
@@ -106,15 +104,12 @@ public class Category_Accommodation extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
                 selected_city = city_selected.get(position);
 
                 textView.setText(selected_city + " 반려동물 동반 가능 숙소");
                 recyclerView.setAdapter(new Category_Accommodation.AccommodationRecyclerViewAdapter(selected_city));
             }
         });
-
-
     }
 
     InputStream inputStream;
@@ -179,7 +174,6 @@ public class Category_Accommodation extends AppCompatActivity {
 
 
                 for (int i = 0; i < get_data.length(); i++) {
-
                     JSONObject temp = get_data.getJSONObject(i);
 
                     String get_city = temp.getString("시/군/도");

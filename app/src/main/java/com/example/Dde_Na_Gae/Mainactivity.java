@@ -2,6 +2,7 @@ package com.example.Dde_Na_Gae;
 
 import static android.view.inputmethod.EditorInfo.IME_ACTION_SEARCH;
 
+import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
@@ -380,8 +381,11 @@ public class Mainactivity extends AppCompatActivity {
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
-                }catch (Exception e) {
-                    e.printStackTrace();
+                }catch (ActivityNotFoundException e) {
+                    url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
+
+                    Intent intent_error = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent_error);
                 }
 
             }
@@ -405,8 +409,11 @@ public class Mainactivity extends AppCompatActivity {
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
-                }catch (Exception e) {
-                    e.printStackTrace();
+                }catch (ActivityNotFoundException e) {
+                    url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
+
+                    Intent intent_error = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent_error);
                 }
             }
         });
@@ -420,8 +427,11 @@ public class Mainactivity extends AppCompatActivity {
 
                     Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
                     startActivity(intent);
-                }catch (Exception e) {
-                    e.printStackTrace();
+                }catch (ActivityNotFoundException e) {
+                    url = "https://play.google.com/store/apps/details?id=net.daum.android.map";
+
+                    Intent intent_error = new Intent(Intent.ACTION_VIEW, Uri.parse(url));
+                    startActivity(intent_error);
                 }
             }
         });
