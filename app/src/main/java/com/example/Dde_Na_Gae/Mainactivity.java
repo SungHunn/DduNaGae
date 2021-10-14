@@ -158,7 +158,7 @@ public class Mainactivity extends AppCompatActivity {
                     case R.id.matching:
                         Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
                         startActivity(intent);
-                        overridePendingTransition(0, R.anim.fromleft);
+
                         break;
 
                     case R.id.home:
@@ -169,7 +169,7 @@ public class Mainactivity extends AppCompatActivity {
                     case R.id.freeboard:
                         Intent intent3 = new Intent(getApplicationContext(), Freeboard_Activity.class);
                         startActivity(intent3);
-                        overridePendingTransition(0, R.anim.fromright);
+
                         break;
 
                 }

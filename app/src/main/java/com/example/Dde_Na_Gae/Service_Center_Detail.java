@@ -66,7 +66,7 @@ public class Service_Center_Detail extends AppCompatActivity {
         Intent intent = getIntent();
         articleid =  intent.getStringExtra("articleid");
 
-        recyclerView = findViewById(R.id.service_center_answer_recyclerview);
+
 
 
         title = (TextView)findViewById(R.id.service_center_detail_title) ;
@@ -125,91 +125,6 @@ public class Service_Center_Detail extends AppCompatActivity {
                         });
 
 
-    }
-
-    class BoardCommentRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
-
-        List<CommentModel> commentModels;
-
-        public BoardCommentRecyclerViewAdapter(){
-            commentModels = new ArrayList<>();
-
-
-            FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("comments").orderByChild("timestamp").addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    commentModels.clear();
-                    for (DataSnapshot item : snapshot.getChildren()) {
-                        CommentModel commentModel = item.getValue(CommentModel.class);
-                        commentModels.add(commentModel);
-                    }
-
-
-                }
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                }
-            });
-        }
-
-        @NonNull
-        @NotNull
-        @Override
-        public RecyclerView.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
-            View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_comment,parent,false);
-            return new Service_Center_Detail.BoardCommentRecyclerViewAdapter.BoardCommentViewHolder(view);
-        }
-
-
-        @Override
-        public void onBindViewHolder(@NonNull @NotNull RecyclerView.ViewHolder holder, int position) {
-            Service_Center_Detail.BoardCommentRecyclerViewAdapter.BoardCommentViewHolder boardCommentViewHolder = ((Service_Center_Detail.BoardCommentRecyclerViewAdapter.BoardCommentViewHolder)holder);
-
-
-
-            boardCommentViewHolder.comment_comment.setText(commentModels.get(position).comment);
-
-
-            System.out.println(commentModels.get(1).uid);
-
-            FirebaseDatabase.getInstance().getReference().child("users").child(commentModels.get(position).uid).addListenerForSingleValueEvent(new ValueEventListener() {
-                @Override
-                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                    UserModel usermodel = snapshot.getValue(UserModel.class);
-                    Glide.with(holder.itemView.getContext())
-                            .load(usermodel.imageUri)
-                            .apply(new RequestOptions().circleCrop())
-                            .into(boardCommentViewHolder.comment_image);
-
-                    boardCommentViewHolder.comment_nickname.setText(usermodel.nickname);
-                }
-
-                @Override
-                public void onCancelled(@NonNull @NotNull DatabaseError error) { }
-            });
-        }
-
-
-        @Override
-        public int getItemCount() {
-            return commentModels.size();
-        }
-        private class BoardCommentViewHolder extends RecyclerView.ViewHolder {
-            public ImageView comment_image;
-            public TextView comment_nickname;
-            public TextView comment_comment;
-
-
-            public BoardCommentViewHolder(View view) {
-                super(view);
-                comment_comment= view.findViewById(R.id.item_comment_comment);
-                comment_nickname= view.findViewById(R.id.item_comment_nickname);
-                comment_image = view.findViewById(R.id.item_comment_imageview);
-
-            }
-
-        }
     }
 
 }

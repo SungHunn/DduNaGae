@@ -82,6 +82,8 @@
         <activity android:name=".Service_Center_Writing"/>
         <activity android:name=".Service_Center_Detail"/>
         <activity android:name=".My_Service_Center_List"/>
+        <activity android:name=".My_Service_Center_Detail"/>
+        <activity android:name=".My_Service_Center_detail_Change"/>
 
     </application>
 
