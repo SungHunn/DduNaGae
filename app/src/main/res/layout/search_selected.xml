@@ -1,161 +1,189 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingConstraints">
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/title_layout"
+        android:id="@+id/selected_box"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        android:background="@color/main_color">
 
-        <!-- 뒤로가기(홈) -->
         <ImageView
-            android:id="@+id/img_back"
-            android:layout_width="30dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="5dp"
-            android:clickable="true"
-            android:src="@drawable/go_back"
+            android:id="@+id/selected_back"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
+            android:src="@drawable/ic_baseline_arrow_back_ios_24"
+            android:layout_width="30dp"
+            android:layout_height="50dp" />
 
         <TextView
-            android:id="@+id/selected_name"
+            android:id="@id/selected_name"
+            app:layout_constraintStart_toEndOf="@+id/selected_back"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:gravity="center"
-            android:text="클릭한 제목"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="10dp"
             android:textSize="30sp"
-            android:textColor="@color/black"
-            app:layout_constraintLeft_toRightOf="@id/img_back"
-            app:layout_constraintTop_toTopOf="@id/img_back"/>
+            android:gravity="center"
+            android:text="클릭한 제목"    />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <ScrollView
+        android:id="@+id/selected_scrollview"
+        app:layout_constraintTop_toBottomOf="@+id/selected_box"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toBottomOf="@id/title_layout" >
+        android:layout_height="wrap_content">
 
-        <LinearLayout
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/selected_box2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginRight="10dp"
-            android:orientation="vertical">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/selected_img"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"/>
-
-            <TextView
-                android:id="@+id/selected_name_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="left"
-                android:text="클릭한 제목"
-                android:textSize="30sp"
-                android:textColor="@color/black"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="5dp"
-                android:text="이용 시간"
-                android:textSize="30sp"
-                android:textColor="@color/black"/>
-
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/black" />
-
-            <TextView
-                android:id="@+id/selected_item_usetime"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="이용시간 설명"
-                android:textColor="@color/black"/>
+                android:layout_margin="15dp"
+                android:src="@mipmap/ic_launcher_round"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="상세 정보"
-                android:textSize="30sp"
-                android:textColor="@color/black"/>
-
-            <View
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/selected_box3"
+                app:layout_constraintTop_toBottomOf="@+id/selected_img"
+                app:layout_constraintStart_toStartOf="parent"
+                android:background="@color/main_color"
+                android:layout_margin="10dp"
                 android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/black" />
+                android:layout_height="wrap_content"    >
 
-            <TextView
-                android:id="@+id/selected_item_desciption"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="아이템 설명"
-                android:textSize="15sp"
-                android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/selected_name_main"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="클릭한 제목"
+                    android:textSize="30sp"/>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="주소"
-                android:textSize="30sp"
-                android:textColor="@color/black"/>
+                <View
+                    android:id="@+id/selected_view1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_name_main"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black" />
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginVertical="5dp"
-                android:background="@color/black" />
+                <TextView
+                    android:id="@+id/selected_time"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_view1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="이용 시간"
+                    android:textSize="30sp"/>
 
-            <TextView
-                android:id="@+id/selected_item_addr"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:text="주소 설명"
-                android:textSize="15sp"
-                android:textColor="@color/black"/>
+                <TextView
+                    android:id="@+id/selected_item_usetime"
+                    app:layout_constraintTop_toBottomOf="@id/selected_time"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:text="이용시간 설명"/>
 
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="100dp" />
+                <View
+                    android:id="@+id/selected_view3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_item_usetime"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black" />
 
-        </LinearLayout>
+                <TextView
+                    android:id="@+id/selected_info"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_view3"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="상세 정보"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/selected_item_desciption"
+                    app:layout_constraintTop_toBottomOf="@id/selected_info"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:text="이용시간 설명"/>
+
+                <View
+                    android:id="@+id/selected_view4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_item_desciption"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/black" />
+
+                <TextView
+                    android:id="@+id/selected_addr_title"
+                    app:layout_constraintTop_toBottomOf="@+id/selected_view4"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:text="주 소"
+                    android:textSize="30sp"/>
+
+                <TextView
+                    android:id="@+id/selected_item_addr"
+                    app:layout_constraintTop_toBottomOf="@id/selected_addr_title"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:textSize="15sp"
+                    android:text="주소 설명"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </ScrollView>
 
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavi"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:itemBackground="@android:color/white"
-            app:itemIconTint="#000000"
-            app:itemTextColor="#000000"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:menu="@menu/reservation_bar_menu"/>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomNavi"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:background="@color/main_color"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:menu="@menu/selected_bottom_nav" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

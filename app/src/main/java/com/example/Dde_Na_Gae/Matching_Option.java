@@ -44,7 +44,7 @@ public class Matching_Option extends AppCompatActivity {
     private EditText Room_Name;
     private String uid;
     private String ChatRoomUid;
-    private LinearLayout group_member_number;
+    private ConstraintLayout group_member_number;
     private ImageView matching_option_back;
 
     @Override
@@ -54,7 +54,7 @@ public class Matching_Option extends AppCompatActivity {
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
 
-        group_member_number = (LinearLayout) findViewById(R.id.h_group_member_number_text);
+        group_member_number = (ConstraintLayout) findViewById(R.id.h_group_member_number_text);
         personal_button = (Button) findViewById(R.id.personal_matching_okay);
         group_button = (Button) findViewById(R.id.group_matching_okay);
         mDatabase = FirebaseDatabase.getInstance().getReference();
