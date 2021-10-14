@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.Dde_Na_Gae.database.Article_Database;
+import com.example.Dde_Na_Gae.database.Article_No_Photo_Database;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -212,7 +213,7 @@ public class Free_Board_Writing extends AppCompatActivity {
 
     public void Article_No_Photo_Database(String uid, String nickname, String title, String content, String writing_time, String category, String category_review) {
 
-        Article_Database article_database = new Article_Database();
+        Article_No_Photo_Database article_database = new Article_No_Photo_Database();
         article_database.uid = uid;
         article_database.nickname = nickname;
         article_database.title = title;

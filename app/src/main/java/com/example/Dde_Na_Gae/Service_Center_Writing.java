@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.Dde_Na_Gae.database.Article_Database;
 import com.example.Dde_Na_Gae.database.Service_Database;
+import com.example.Dde_Na_Gae.database.Service_No_Photo_Database;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -93,35 +94,60 @@ public class Service_Center_Writing extends AppCompatActivity {
 
                 category = service_spinner.getSelectedItem().toString();
 
-                FirebaseStorage.getInstance().getReference().child("Service_Center_Images").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        @SuppressWarnings("VisibleForTests")
-                        Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-                        while (!imageUrl.isComplete()) ;
+
+                if (imageUri != null) {
+                    FirebaseStorage.getInstance().getReference().child("Service_Center_Images").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            @SuppressWarnings("VisibleForTests")
+                            Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
+                            while (!imageUrl.isComplete()) ;
 
 
-                        FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                String nickname = snapshot.getValue(String.class);
+                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                    String nickname = snapshot.getValue(String.class);
 
-                                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
-                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
+                                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 
-                                Service_Database(uid, nickname, title.getText().toString(), content.getText().toString(), imageUrl.getResult().toString(), sdf.format(timestamp), category);
+                                    Service_Database(uid, nickname, title.getText().toString(), content.getText().toString(), imageUrl.getResult().toString(), sdf.format(timestamp), category);
 
-                            }
+                                }
 
-                            @Override
-                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                            }
-                        });
-                    }
-                });
+                                }
+                            });
+                        }
+                    });
+                }else {
+
+                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            String nickname = snapshot.getValue(String.class);
+
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
+                            sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+
+                            Service_No_Photo_Database(uid, nickname, title.getText().toString(), content.getText().toString(), sdf.format(timestamp), category);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
             }
         });
     }
@@ -134,6 +160,35 @@ public class Service_Center_Writing extends AppCompatActivity {
         service_database.title = title;
         service_database.content = content;
         service_database.imageUri = imageUri;
+        service_database.writing_time = writing_time;
+        service_database.have_answer = "none";
+        service_database.category = category;
+
+        mDatabase.child("Service_Center").push().setValue(service_database)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        Intent intent = new Intent(getApplicationContext(), Service_Center.class);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                        Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void Service_No_Photo_Database(String uid, String nickname, String title, String content, String writing_time, String category) {
+
+        Service_No_Photo_Database service_database = new Service_No_Photo_Database();
+        service_database.uid = uid;
+        service_database.nickname = nickname;
+        service_database.title = title;
+        service_database.content = content;
         service_database.writing_time = writing_time;
         service_database.have_answer = "none";
         service_database.category = category;
