@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,6 +27,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.fragment.My_Personal_ChatFragment;
 import com.example.Dde_Na_Gae.model.Article_Model;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -50,6 +52,8 @@ public class Freeboard_Activity extends AppCompatActivity {
     TextView category3;
     TextView category4;
     TextView category5;
+
+    BottomNavigationView bottomNavigationView;
 
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
     String uid = user != null ? user.getUid() : null;
@@ -79,34 +83,55 @@ public class Freeboard_Activity extends AppCompatActivity {
             }
         });
 
-
-        writing = (Button) findViewById(R.id.go_writing);
-        my_list = (Button) findViewById(R.id.my_text_list);
-
-        writing.setOnClickListener(new View.OnClickListener() {
+        bottomNavigationView = (BottomNavigationView) findViewById(R.id.free_board_bottomNavi);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
-            public void onClick(View v) {
-                if (user == null) {
-                    Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), Free_Board_Writing.class);
-                    startActivity(intent);
-                }
+            public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.my_text_list:
+                        Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
+                        startActivity(intent);
+                        break;
 
+                    case R.id.go_writing:
+                        Intent intent3 = new Intent(getApplicationContext(), Free_Board_Writing.class);
+                        startActivity(intent3);
+                        break;
+
+                }
+                return false;
             }
         });
 
-        my_list.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (user == null) {
-                    Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
-                } else {
-                    Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
-                    startActivity(intent);
-                }
-            }
-        });
+
+
+//        writing = (Button) findViewById(R.id.go_writing);
+//        my_list = (Button) findViewById(R.id.my_text_list);
+//
+//        writing.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (user == null) {
+//                    Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Intent intent = new Intent(getApplicationContext(), Free_Board_Writing.class);
+//                    startActivity(intent);
+//                }
+//
+//            }
+//        });
+//
+//        my_list.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                if (user == null) {
+//                    Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
+//                } else {
+//                    Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
+//                    startActivity(intent);
+//                }
+//            }
+//        });
 
         category1 = findViewById(R.id.free_board1);
         category1.setOnClickListener(new View.OnClickListener() {

@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/white">
+    android:background="@color/main_color">
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -356,7 +356,7 @@
                 android:layout_height="wrap_content"
                 android:text="내 채팅 목록 보기"
                 android:id="@+id/room_detail_go_my_chatting_list"
-                android:background="@color/skyblue"/>
+                android:background="@color/main_blue"/>
         </LinearLayout>
 
     </ScrollView>
