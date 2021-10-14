@@ -29,6 +29,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".Terms_of_service" />
+        <activity android:name=".Personal_information" />
         <activity android:name=".Mainactivity"/>
         <activity android:name=".Category_Accommodation" />
         <activity android:name=".Api_date" />
