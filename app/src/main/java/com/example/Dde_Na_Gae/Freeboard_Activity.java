@@ -2,6 +2,7 @@ package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -69,7 +70,7 @@ public class Freeboard_Activity extends AppCompatActivity {
         recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        go_back = (ImageView)findViewById(R.id.freeboard_home_img_back);
+        go_back = (ImageView) findViewById(R.id.freeboard_home_img_back);
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -87,7 +88,7 @@ public class Freeboard_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if (user == null) {
                     Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Intent intent = new Intent(getApplicationContext(), Free_Board_Writing.class);
                     startActivity(intent);
                 }
@@ -100,7 +101,7 @@ public class Freeboard_Activity extends AppCompatActivity {
             public void onClick(View v) {
                 if (user == null) {
                     Toast.makeText(Freeboard_Activity.this, "로그인한 회원만 이용할 수 있습니다!", Toast.LENGTH_SHORT).show();
-                }else{
+                } else {
                     Intent intent = new Intent(getApplicationContext(), My_Free_Board_List.class);
                     startActivity(intent);
                 }
@@ -165,36 +166,36 @@ public class Freeboard_Activity extends AppCompatActivity {
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     articles.clear();
 
-                    for (DataSnapshot item : snapshot.getChildren()) {
-                        Article_Model article = item.getValue(Article_Model.class);
+                    try {
 
-                        switch (str) {
-                            case 0:
-                                if (article.category.equals("자유게시판-null")) {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
 
-                            case 2:
-                                if (article.category.equals("꿀 정보-null")) {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
-                            case 3:
-                                if (article.category.equals("동호회 모집-null")) {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
-                            case 4:
-                                if (article.category.equals("기타-null")) {
-                                    articles.add(article);
-                                    articleid.add(item.getKey());
-                                }
-                                break;
+                        for (DataSnapshot item : snapshot.getChildren()) {
+                            Article_Model article = item.getValue(Article_Model.class);
+
+                            switch (str) {
+                                case 0:
+                                    if (article.category.equals("자유게시판-null")) {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+
+                                case 2:
+                                    if (article.category.equals("꿀 정보-null")) {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+                                case 3:
+                                    if (article.category.equals("동호회 모집-null")) {
+                                        articles.add(article);
+                                        articleid.add(item.getKey());
+                                    }
+                                    break;
+                            }
                         }
+                    } catch (NullPointerException e) {
+                        e.printStackTrace();
                     }
                     notifyDataSetChanged();
                 }

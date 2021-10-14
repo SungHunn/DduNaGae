@@ -49,7 +49,7 @@ public class Free_Board_Review extends AppCompatActivity {
     int str = 0;
 
     @Override
-    protected void onCreate(@Nullable  Bundle savedInstanceState) {
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.free_board_review);
 
@@ -139,54 +139,48 @@ public class Free_Board_Review extends AppCompatActivity {
                 @Override
                 public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
                     for (DataSnapshot item : snapshot.getChildren()) {
-                        Article_Model article = item.getValue(Article_Model.class);
+                        Article_Model article = new Article_Model();
+                        article = item.getValue(Article_Model.class);
 
-                        switch (str){
-                                case 0:
-                                    if(article.category.substring(0,2).equals("리뷰"))
-                                    {
-                                        articles.add(article);
-                                        articleid.add(item.getKey());
-                                    }
-                                    break;
-                                case 1:
-                                    if(article.category.equals("리뷰-숙소"))
-                                    {
-                                        articles.add(article);
-                                        articleid.add(item.getKey());
-                                    }
-                                    break;
-                                case 2:
-                                    if(article.category.equals("리뷰-병원"))
-                                    {
-                                        articles.add(article);
-                                        articleid.add(item.getKey());
-                                    }
-                                    break;
-                                case 3:
-                                    if(article.category.equals("리뷰-여행지"))
-                                    {
-                                        articles.add(article);
-                                        articleid.add(item.getKey());
-                                    }
-                                    break;
-                                case 4:
-                                    if(article.category.equals("리뷰-미용실"))
-                                    {
-                                        articles.add(article);
-                                        articleid.add(item.getKey());
-                                    }
-                                    break;
-                                case 5:
-                                    if(article.category.equals("리뷰-공원"))
-                                    {
-                                        articles.add(article);
-                                        articleid.add(item.getKey());
-                                    }
-                                    break;
+                        switch (str) {
+                            case 0:
+                                if (article.category.equals("리뷰")) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 1:
+                                if (article.category.equals("리뷰-숙소")) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 2:
+                                if (article.category.equals("리뷰-병원")) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 3:
+                                if (article.category.equals("리뷰-여행지")) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 4:
+                                if (article.category.equals("리뷰-미용실")) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
+                            case 5:
+                                if (article.category.equals("리뷰-공원")) {
+                                    articles.add(article);
+                                    articleid.add(item.getKey());
+                                }
+                                break;
                             case 6:
-                                if(article.category.equals("리뷰-기타"))
-                                {
+                                if (article.category.equals("리뷰-기타")) {
                                     articles.add(article);
                                     articleid.add(item.getKey());
                                 }
