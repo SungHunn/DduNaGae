@@ -63,7 +63,6 @@ public class Free_Board_Writing extends AppCompatActivity {
 
         category_review = null;
 
-
         mDatabase = FirebaseDatabase.getInstance().getReference();
         uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 

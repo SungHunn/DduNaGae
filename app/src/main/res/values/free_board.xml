@@ -5,7 +5,6 @@
         <item>리뷰</item>
         <item>꿀 정보</item>
         <item>동호회 모집</item>
-        <item>기타</item>
     </string-array>
 
     <string-array name="review_category_list">

@@ -149,17 +149,6 @@ public class Freeboard_Activity extends AppCompatActivity {
                 recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
             }
         });
-        category5 = findViewById(R.id.free_board5);
-        category5.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                str = 4;
-                freeboard_Title.setText("기타");
-
-                recyclerView.removeAllViewsInLayout();
-                recyclerView.setAdapter(new Freeboard_Activity.BoardRecyclerViewAdapter());
-            }
-        });
     }
 
 

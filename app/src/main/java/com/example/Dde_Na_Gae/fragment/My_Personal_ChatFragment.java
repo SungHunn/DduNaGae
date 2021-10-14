@@ -58,9 +58,6 @@ public class My_Personal_ChatFragment extends Fragment {
         private String uid;
         String[] user;
         public PersonalChatRecyclerViewAdapter() {
-
-
-
             uid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
             FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").addListenerForSingleValueEvent(new ValueEventListener() {

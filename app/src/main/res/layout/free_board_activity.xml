@@ -10,7 +10,7 @@
 
             <LinearLayout
                 android:id="@+id/free_board"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
                 android:background="@color/white">
@@ -52,23 +52,31 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:weightSum="5"
                     android:orientation="horizontal"
+                    android:gravity="center"
                     android:background="@color/white">
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="#자유게시판"
+                        android:text="자유게시판"
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
                         android:id="@+id/free_board1"
                         android:textColor="@color/black"
                         android:background="@color/white"/>
+
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/black"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=", #리뷰"
+                        android:text="리뷰"
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
@@ -76,10 +84,17 @@
                         android:textColor="@color/black"
                         android:background="@color/white"/>
 
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/black"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=", #꿀정보"
+                        android:text="꿀정보"
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
@@ -87,10 +102,17 @@
                         android:id="@+id/free_board3"
                         android:background="@color/white"/>
 
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/black"/>
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text=", #동호회 모집"
+                        android:text="동호회 모집"
                         android:clickable="true"
                         android:focusable="true"
                         android:textSize="18sp"
@@ -98,17 +120,20 @@
                         android:id="@+id/free_board4"
                         android:background="@color/white"/>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text=", #기타"
-                        android:clickable="true"
-                        android:focusable="true"
-                        android:textSize="18sp"
-                        android:id="@+id/free_board5"
-                        android:textColor="@color/black"
-                        android:background="@color/white"/>
+                    <View
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginRight="10dp"
+                        android:background="@color/black"/>
+
+
                 </LinearLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"/>
             </LinearLayout>
 
 
