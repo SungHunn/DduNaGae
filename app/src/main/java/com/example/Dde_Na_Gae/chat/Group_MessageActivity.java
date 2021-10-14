@@ -1,6 +1,9 @@
 package com.example.Dde_Na_Gae.chat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 
 import android.view.Gravity;
@@ -18,6 +21,7 @@ import android.widget.TextView;
 
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -150,53 +154,69 @@ public class Group_MessageActivity extends AppCompatActivity {
         chattingroom_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        chatroomuid = snapshot.getValue().toString();
-                        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").child(uid).setValue(null);
+                AlertDialog.Builder alt_bld = new AlertDialog.Builder(Group_MessageActivity.this);
+                alt_bld.setMessage("방을 나가시겠습니까??").setCancelable(false)
+                        .setPositiveButton("네",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        FirebaseDatabase.getInstance().getReference().child("users").child(chat_masterUid).child("my_chatting_list").child("그룹 채팅방").child(room_name).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                                chatroomuid = snapshot.getValue().toString();
+                                                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").child(uid).setValue(null);
+                                                if(uid.equals(chat_masterUid))
+                                                {
+                                                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
+                                                        String[] user = new String[8];
+                                                        @Override
+                                                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                                            for (DataSnapshot item : snapshot.getChildren()) {
+                                                                int i=0;
+                                                                user[i] = item.getKey();
+                                                                i++;
+                                                            }
+                                                            if(user[1]==null){
+                                                                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).setValue(null);
+                                                            }
+                                                            else{
+                                                                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("master_uid").setValue(user[0]);
+                                                                FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
+                                                            }
+                                                        }
+                                                        @Override
+                                                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                                        }
+                                                    });
+                                                }
+                                                else{
+                                                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
+                                                }
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                        if(uid.equals(chat_masterUid))
-                        {
-                            FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("talk").child(chatroomuid).child("users").addListenerForSingleValueEvent(new ValueEventListener() {
-                                String[] user = new String[8];
-                                @Override
-                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-
-                                    for (DataSnapshot item : snapshot.getChildren()) {
-                                        int i=0;
-                                        user[i] = item.getKey();
-                                        i++;
+                                            }
+                                        });
+                                        onBackPressed();
                                     }
+                                }).setNegativeButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = alt_bld.create();
+                // 대화창 클릭시 뒷 배경 어두워지는 것 막기
+                //alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                alert.setTitle("로그아웃");
+                alert.setIcon(R.drawable.logo);
+                // 대화창 배경 색 설정
+                alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.rgb(255, 220, 213)));
+                alert.show();
 
-                                    FirebaseDatabase.getInstance().getReference().child("chatting_room").child(option_selector).child("Room_Name").child(room_name).child("master_uid").setValue(user[0]);
-                                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
-                                }
+                //
 
-
-
-                                @Override
-                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                                }
-                            });
-                        }
-                        else{
-                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("그룹 채팅방").child(room_name).setValue(null);
-                        }
-
-                    }
-
-
-
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                    }
-                });
-
-                onBackPressed();
-
+//
             }
         });
 

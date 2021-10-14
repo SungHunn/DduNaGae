@@ -1,6 +1,9 @@
 package com.example.Dde_Na_Gae.chat;
 
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -16,6 +19,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -206,28 +210,39 @@ public class New_MessageActivity extends AppCompatActivity {
         chattingroom_exit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                AlertDialog.Builder alt_bld = new AlertDialog.Builder(New_MessageActivity.this);
+                alt_bld.setMessage("방을 나가시겠습니까??").setCancelable(false)
+                        .setPositiveButton("네",
+                                new DialogInterface.OnClickListener() {
+                                    public void onClick(DialogInterface dialog, int id) {
+                                        FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").child(roomname).setValue(null);
+                                        FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).child("my_chatting_list").child("1대1 채팅방").child(roomname).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
+                                            @Override
+                                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                                chatRoomUid = snapshot.getValue().toString();
+                                                FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("users").child(uid).setValue(null);
+                                            }
+                                            @Override
+                                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("my_chatting_list").child("1대1 채팅방").child(roomname).setValue(null);
-                FirebaseDatabase.getInstance().getReference().child("users").child(destinatonUid).child("my_chatting_list").child("1대1 채팅방").child(roomname).child("chatroomuid").addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                        chatRoomUid = snapshot.getValue().toString();
-
-                        FirebaseDatabase.getInstance().getReference().child("chatting_room").child(chatting_room_option_selector).child("Room_Name").child(roomname).child("talk").child(chatRoomUid).child("users").child(uid).setValue(null);
-
-
-                    }
-
-
-
-                    @Override
-                    public void onCancelled(@NonNull @NotNull DatabaseError error) {
-
-                    }
-                });
-
-                onBackPressed();
-
+                                            }
+                                        });
+                                        onBackPressed();
+                                    }
+                                }).setNegativeButton("아니오",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog, int id) {
+                                dialog.cancel();
+                            }
+                        });
+                AlertDialog alert = alt_bld.create();
+                // 대화창 클릭시 뒷 배경 어두워지는 것 막기
+                //alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
+                alert.setTitle("로그아웃");
+                alert.setIcon(R.drawable.logo);
+                // 대화창 배경 색 설정
+                alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.rgb(255, 220, 213)));
+                alert.show();
             }
         });
 

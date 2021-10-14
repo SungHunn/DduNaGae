@@ -290,106 +290,10 @@
                 android:layout_marginTop="5dp"
                 android:layout_weight="1" />
 
-            <!--             사는 지역       -->
-
-            <TextView
-                android:id="@+id/matching_option_content_title6"
-                app:layout_constraintTop_toBottomOf="@+id/h_car_option"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="15dp"
-                android:text="사는 지역"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
-
-            <View
-                android:id="@+id/matching_option_view6"
-                app:layout_constraintTop_toBottomOf="@id/matching_option_content_title6"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <Spinner
-                android:id="@+id/live_area_1"
-                app:layout_constraintTop_toBottomOf="@+id/matching_option_view6"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/live_area_2"
-                app:layout_constraintTop_toBottomOf="@+id/live_area_1"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/live_area_3"
-                app:layout_constraintTop_toBottomOf="@+id/live_area_2"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <!--            여행 지역       -->
-
-            <TextView
-                android:id="@+id/matching_option_content_title7"
-                app:layout_constraintTop_toBottomOf="@+id/live_area_3"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="15dp"
-                android:text="여행 지역"
-                android:textSize="20sp"
-                android:textColor="@color/black"/>
-
-            <View
-                android:id="@+id/matching_option_view7"
-                app:layout_constraintTop_toBottomOf="@id/matching_option_content_title7"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="#000000" />
-
-            <Spinner
-                android:id="@+id/trip_area_1"
-                app:layout_constraintTop_toBottomOf="@+id/matching_option_view7"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/trip_area_2"
-                app:layout_constraintTop_toBottomOf="@+id/trip_area_1"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
-            <Spinner
-                android:id="@+id/trip_area_3"
-                app:layout_constraintTop_toBottomOf="@+id/trip_area_2"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1" />
-
             <Button
                 android:id="@+id/personal_matching_okay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/trip_area_3"
+                app:layout_constraintTop_toBottomOf="@id/h_car_option"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"
@@ -401,7 +305,7 @@
             <Button
                 android:id="@+id/group_matching_okay"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/trip_area_3"
+                app:layout_constraintTop_toBottomOf="@id/h_car_option"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"
                 android:layout_width="wrap_content"

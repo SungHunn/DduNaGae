@@ -19,6 +19,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager.widget.PagerAdapter;
 import androidx.viewpager.widget.ViewPager;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+
 public class WelcomeActivity extends AppCompatActivity {
 
     private ViewPager viewPager;
@@ -29,10 +32,13 @@ public class WelcomeActivity extends AppCompatActivity {
     private Button btnSkip, btnNext;
     private Session session;
 
+    FirebaseUser user;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        user = FirebaseAuth.getInstance().getCurrentUser();
         // Checking for first time launch - before calling setContentView()
         session = new Session(this);
         if (!session.isFirstTimeLaunch()) {
@@ -118,9 +124,14 @@ public class WelcomeActivity extends AppCompatActivity {
     }
 
     private void launchHomeScreen() {
-        session.setFirstTimeLaunch(false);
-        startActivity(new Intent(WelcomeActivity.this, Login_New_Page.class));
-        finish();
+        if(user == null){ session.setFirstTimeLaunch(false);
+            startActivity(new Intent(WelcomeActivity.this, Login_New_Page.class));
+            finish();
+        }else{
+            Intent intent = new Intent(getApplicationContext(),Mainactivity.class);
+            startActivity(intent);
+        }
+
     }
 
     //  viewpager change listener
