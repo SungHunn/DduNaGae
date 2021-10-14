@@ -87,6 +87,8 @@ public class Mainactivity extends AppCompatActivity {
     private ArrayList<MainRecyclerViewItem> mainlist;
     private MainRecyclerViewAdapter main_recyclerviewadapter;
 
+    private BackkeyHandler backkeyHandler = new BackkeyHandler(this);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -513,5 +515,11 @@ public class Mainactivity extends AppCompatActivity {
                     Toast.makeText(this, "앱 실행을 위한 권한이 취소 되었습니다.", Toast.LENGTH_SHORT).show();
                 }
         }
+    }
+
+    @Override
+    public void onBackPressed() {
+        backkeyHandler.onBackPressed("한번 더 누르시면 종료됩니다.", 5);
+
     }
 }

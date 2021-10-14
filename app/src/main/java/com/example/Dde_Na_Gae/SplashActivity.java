@@ -45,8 +45,6 @@ public class SplashActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             boolean updated = task.getResult();
 
-
-
                         } else {
 
                         }
