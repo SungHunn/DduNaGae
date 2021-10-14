@@ -56,10 +56,10 @@ public class Mainactivity extends AppCompatActivity {
     int nCurrentPermission = 0;
     static final int PERMISSIONS_REQUEST = 0x0000001;
 
-    TextView category1;
-    TextView category2;
-    TextView category3;
-    TextView category4;
+    LinearLayout category1;
+    LinearLayout category2;
+    LinearLayout category3;
+    LinearLayout category4;
 
     DatabaseReference mDatabase;
 
@@ -388,7 +388,7 @@ public class Mainactivity extends AppCompatActivity {
     double longitude;
 
     public void onTextViewClick() {
-        category1 = (TextView) findViewById(R.id.category_1);
+        category1 = (LinearLayout) findViewById(R.id.category_1);
         category1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -416,7 +416,7 @@ public class Mainactivity extends AppCompatActivity {
 
             }
         });
-        category2 = (TextView) findViewById(R.id.category_2);
+        category2 = (LinearLayout) findViewById(R.id.category_2);
         category2.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -425,7 +425,7 @@ public class Mainactivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-        category3 = (TextView) findViewById(R.id.category_3);
+        category3 = (LinearLayout) findViewById(R.id.category_3);
         category3.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -447,7 +447,7 @@ public class Mainactivity extends AppCompatActivity {
                 }
             }
         });
-        category4 = (TextView) findViewById(R.id.category_4);
+        category4 = (LinearLayout) findViewById(R.id.category_4);
         category4.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
