@@ -8,6 +8,7 @@ import android.location.Geocoder;
 import android.location.Location;
 import android.media.Image;
 import android.net.Uri;
+import android.nfc.Tag;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.telephony.CarrierConfigManager;
@@ -18,6 +19,7 @@ import android.text.Spanned;
 import android.text.TextPaint;
 import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewTreeObserver;
@@ -33,10 +35,12 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.dynamiclinks.DynamicLink;
 import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
+import com.google.firebase.dynamiclinks.PendingDynamicLinkData;
 import com.google.firebase.dynamiclinks.ShortDynamicLink;
 import com.kakao.util.KakaoParameterException;
 
@@ -56,7 +60,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class  Search_Selected extends AppCompatActivity {
-    String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
     ImageView selected_back;
 
     BottomNavigationView bottomNavigationView;
@@ -168,28 +171,19 @@ public class  Search_Selected extends AppCompatActivity {
                         break;
 
                     case R.id.share:
-//                        Intent intent = new Intent(Intent.ACTION_SEND);
-
                         DynamicLink dynamicLink = FirebaseDynamicLinks.getInstance().createDynamicLink()
                                 .setLink(Uri.parse("https://search.daum.net/search?nil_suggest=btn&w=tot&DA=SBC&q=" + title))
-                                .setDomainUriPrefix("https://ddunagae.page.link/mVFa")
+                                .setDomainUriPrefix("https://ddunagae.page.link/mVFa/" + conId)
                                 // Open links with this app on Android
                                 .setAndroidParameters(new DynamicLink.AndroidParameters.Builder().build())
                                 .buildDynamicLink();
 
-                        Intent intent = new Intent();
+                        Intent intent = new Intent(Intent.ACTION_SEND);
                         Uri dynamicLinkUri = dynamicLink.getUri();
                         String msg = dynamicLinkUri.toString();
-                        intent.setAction(Intent.ACTION_SEND);
                         intent.putExtra(Intent.EXTRA_TEXT, msg);
                         intent.setType("text/plain");
                         startActivity(intent);
-
-//                        intent.addCategory(Intent.CATEGORY_DEFAULT);
-//                        String text = "check" + dynamicLinkUri;
-//                        intent.putExtra(Intent.EXTRA_TEXT, text);
-//                        intent.setType("text/plain");
-//                        startActivity(Intent.createChooser(intent, title + "공유하기"));
 
                         break;
                 }

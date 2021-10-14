@@ -28,10 +28,19 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+
         </activity>
         <activity android:name=".Terms_of_service" />
         <activity android:name=".Personal_information" />
-        <activity android:name=".Mainactivity"/>
+        <activity android:name=".Mainactivity">
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
+                <data android:host="ddunagae.page.link"
+                    android:scheme="https"/>
+            </intent-filter>
+        </activity>
         <activity android:name=".Category_Accommodation" />
         <activity android:name=".Api_date" />
         <activity android:name=".Search_Selected" />

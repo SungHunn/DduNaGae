@@ -107,6 +107,24 @@ public class Mainactivity extends AppCompatActivity {
         region_adapter.setDropDownViewResource(R.layout.support_simple_spinner_dropdown_item);
         region_spinner.setAdapter(region_adapter);
 
+        Init();
+        for (int i = 0; i < Main_conIds.size(); i++) {
+            addItem(Main_urls.get(i), Main_titles.get(i), Main_addrs.get(i), Main_conIds.get(i));
+        }
+
+        main_recyclerviewadapter = new MainRecyclerViewAdapter(mainlist);
+        main_recyclerview.setAdapter(main_recyclerviewadapter);
+        main_recyclerview.setLayoutManager(new LinearLayoutManager(Mainactivity.this));
+
+        Uri uri = getIntent().getData();
+        if (uri != null){
+            List<String> params = uri.getPathSegments();
+            String id = params.get(params.size()-1);
+            Intent intent = new Intent(this, Search_Selected.class);
+            intent.putExtra("conId", id);
+            startActivity(intent);
+        }
+
         region_spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
