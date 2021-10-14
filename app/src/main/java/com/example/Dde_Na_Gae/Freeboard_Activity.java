@@ -223,6 +223,8 @@ public class Freeboard_Activity extends AppCompatActivity {
             System.out.println(articles.get(position).nickname);
 
 
+
+
             Glide.with(holder.itemView.getContext())
                     .load(articles.get(position).imageUri)
                     .apply(new RequestOptions().circleCrop())
