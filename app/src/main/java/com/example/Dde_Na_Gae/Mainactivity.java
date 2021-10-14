@@ -209,13 +209,15 @@ public class Mainactivity extends AppCompatActivity {
         list.add("공지사항");
         list.add("이벤트");
         list.add("고객센터");
-        list.add("설정");
+        list.add("이용약관");
+        list.add("개인정보 처리방식");
         list.add("로그인");
+
 
         listview = findViewById(R.id.navi_list);
         user = FirebaseAuth.getInstance().getCurrentUser();
         if (user != null) {
-            list.set(4, "로그아웃");
+            list.set(5, "로그아웃");
 
             layout_account.setVisibility(View.VISIBLE);
             my_nickname = (TextView) findViewById(R.id.my_page_login);
@@ -288,11 +290,16 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 3:
-                        Intent intent_setting = new Intent(getApplicationContext(), Setting.class);
-                        startActivity(intent_setting);
+                        Intent intent_terms_of_service = new Intent(getApplicationContext(), Terms_of_service.class);
+                        startActivity(intent_terms_of_service);
                         break;
 
                     case 4:
+                        Intent intent_personal = new Intent(getApplicationContext(), Personal_information.class);
+                        startActivity(intent_personal);
+                        break;
+
+                    case 5:
                         if (list.get(4).equals("로그아웃")) {
                             AlertDialog.Builder alt_bld = new AlertDialog.Builder(view.getContext());
                             alt_bld.setMessage("로그아웃 하시겠습니까?").setCancelable(false)
