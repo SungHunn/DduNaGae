@@ -52,7 +52,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/selected_box2"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:background="@color/white">
 
             <ImageView
                 android:id="@+id/selected_img"
@@ -68,7 +69,6 @@
                 android:id="@+id/selected_box3"
                 app:layout_constraintTop_toBottomOf="@+id/selected_img"
                 app:layout_constraintStart_toStartOf="parent"
-                android:background="@color/main_color"
                 android:layout_margin="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"    >
@@ -169,6 +169,12 @@
                     android:layout_marginTop="10dp"
                     android:textSize="15sp"
                     android:text="주소 설명"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="120dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/selected_item_addr"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

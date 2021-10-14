@@ -57,7 +57,7 @@ import java.util.List;
 
 public class  Search_Selected extends AppCompatActivity {
     String key = "8BcG%2FMNcIlI4r4BCz1t52mWldmD8sC%2Bqgb57Ent23BrZc2cqqZShLoRAURa3%2BE%2FIZqmEv7PWWZitWmqqaTjU1g%3D%3D";
-    ImageView img_back;
+    ImageView selected_back;
 
     BottomNavigationView bottomNavigationView;
 
@@ -197,8 +197,8 @@ public class  Search_Selected extends AppCompatActivity {
             }
         });
 
-        img_back = (ImageView)findViewById(R.id.img_back);
-        img_back.setOnClickListener(new View.OnClickListener() {
+        selected_back = (ImageView)findViewById(R.id.selected_back);
+        selected_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getApplicationContext(), Mainactivity.class);

@@ -23,7 +23,8 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/main_box"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="match_parent"
+                android:background="@color/white">
 
                 <!--    상단 서치 및 네비게이션 바 설정 위치   -->
 
@@ -269,9 +270,16 @@
                     android:orientation="vertical"
                     tools:listitem="@layout/main_items"
                     app:layout_constraintStart_toStartOf="@id/main_box"
-                    app:layout_constraintTop_toBottomOf="@id/region_travel"     />
+                    app:layout_constraintTop_toBottomOf="@id/region_travel"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp"
+                    android:background="@color/white"
+                    app:layout_constraintTop_toBottomOf="@id/main_recyclerview"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
+
 
         </ScrollView>
 
