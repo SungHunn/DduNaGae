@@ -5,14 +5,13 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:layout_marginBottom="10dp"
-    android:background="@color/main_color">
+    android:background="@color/white">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:orientation="horizontal"
-        android:background="@color/main_color"
         >
 
         <!--프로필 사진-->
