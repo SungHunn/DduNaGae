@@ -82,7 +82,6 @@ public class My_free_board_detail extends AppCompatActivity {
 
                 Glide.with(My_free_board_detail.this)
                         .load(article.imageUri)
-                        .apply(new RequestOptions().circleCrop())
                         .into(photo);
 
                 FirebaseDatabase.getInstance().getReference().child("users").child(article.uid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {

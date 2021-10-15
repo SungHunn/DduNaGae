@@ -51,7 +51,7 @@ public class My_Service_Center_List extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                Intent intent = new Intent(getApplicationContext(), Service_Center.class);
                 startActivity(intent);
             }
         });
@@ -115,7 +115,7 @@ public class My_Service_Center_List extends AppCompatActivity {
             holder.itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent intent = new Intent(getApplicationContext(), Service_Center_Detail.class);
+                    Intent intent = new Intent(getApplicationContext(), My_Service_Center_Detail.class);
                     intent.putExtra("articleid", articleid.get(position));
                     startActivity(intent);
                 }

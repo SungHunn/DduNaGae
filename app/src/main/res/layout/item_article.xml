@@ -1,81 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="90dp"
-    android:orientation="vertical">
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="89dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
-    <ImageView
-        android:id="@+id/freeboard_imageview"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_margin="10dp" />
+    android:layout_height="100dp"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingConstraints"
+    android:background="@color/white"
+    android:layout_margin="10dp">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:orientation="vertical">
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-        <TextView
-
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="글쓴이  : "
-            android:textColor="@color/black"/>
-
-
-            <TextView
-                android:id="@+id/freeboard_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="abcd"
-                android:textColor="@color/black"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/freeboard_time"
-                android:text="올린 시간"
-                android:layout_marginLeft="160dp"
-                android:textColor="@color/black"
-                />
-    </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-        <TextView
-            android:text="제목 : "
-            android:layout_marginTop="10dp"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textColor="@color/black"/>
-
-            <TextView
-                android:id="@+id/freeboard_title"
-                android:text="aabbcc"
-                android:layout_marginTop="10dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/black"/>
-
-
-        </LinearLayout>
-    </LinearLayout>
-    </LinearLayout>
     <View
+        android:id="@+id/item_article_view1"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         android:layout_width="match_parent"
         android:layout_height="1dp"
+        android:layout_marginTop="5dp"
         android:background="#000000"
         />
-</LinearLayout>
+
+    <ImageView
+        android:id="@+id/freeboard_imageview"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="20dp" />
+
+    <TextView
+        android:id="@+id/item_article_writer"
+        app:layout_constraintStart_toEndOf="@+id/freeboard_imageview"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="15dp"
+        android:text="글쓴이  : "
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/freeboard_nickname"
+        app:layout_constraintStart_toEndOf="@+id/item_article_writer"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:layout_marginLeft="5dp"
+        android:text="abcd"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/item_article_title"
+        app:layout_constraintTop_toBottomOf="@+id/item_article_writer"
+        app:layout_constraintStart_toEndOf="@+id/freeboard_imageview"
+        android:text="제목 : "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/freeboard_title"
+        app:layout_constraintStart_toEndOf="@+id/item_article_title"
+        app:layout_constraintTop_toBottomOf="@+id/freeboard_nickname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="5dp"
+        android:text="abcd"
+        android:textColor="@color/black"/>
+
+    <TextView
+        android:id="@+id/freeboard_time"
+        app:layout_constraintTop_toBottomOf="@+id/item_article_title"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="10dp"
+        android:text="올린 시간"
+        android:textColor="@color/black" />
+
+    <View
+        android:id="@+id/item_article_view2"
+        app:layout_constraintTop_toBottomOf="@+id/freeboard_time"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="10dp"
+        android:background="#000000" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

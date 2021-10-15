@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/my_text_list"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="내 글 목록" />
+    <item
+        android:title="  " />
+    <item
+        android:id="@+id/go_writing"
+        android:icon="@android:drawable/ic_menu_call"
+        android:title="글쓰기" />
+</menu>

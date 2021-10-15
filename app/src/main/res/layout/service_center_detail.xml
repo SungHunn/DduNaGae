@@ -23,6 +23,15 @@
             android:layout_marginLeft="10dp"
             android:src="@drawable/go_back"
             android:background="@color/white"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="고객센터 글"
+            android:background="@color/white"
+            android:layout_marginLeft="10dp"
+            android:textSize="25dp"
+            android:textColor="@color/black"
+            android:layout_gravity="center"/>
 
     </LinearLayout>
     <View
@@ -93,10 +102,5 @@
         android:background="#000000"
 
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/service_center_answer_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
 </LinearLayout>
 </ScrollView>

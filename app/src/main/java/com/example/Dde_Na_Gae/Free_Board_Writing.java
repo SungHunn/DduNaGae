@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 
 import com.example.Dde_Na_Gae.database.Article_Database;
+import com.example.Dde_Na_Gae.database.Article_No_Photo_Database;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -75,7 +76,7 @@ public class Free_Board_Writing extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(Intent.ACTION_PICK);
                 intent.setType(MediaStore.Images.Media.CONTENT_TYPE);
-                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+                intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
                 startActivityForResult(intent, PICK_FROM_ALBUM);
             }
         });
@@ -118,35 +119,60 @@ public class Free_Board_Writing extends AppCompatActivity {
                     category_review = review_category_spinner.getSelectedItem().toString();
                 }
 
-                FirebaseStorage.getInstance().getReference().child("Freeboard_Images").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
-                    @Override
-                    public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
-                        @SuppressWarnings("VisibleForTests")
-                        Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
-                        while (!imageUrl.isComplete()) ;
+                if (imageUri != null) {
+
+                    FirebaseStorage.getInstance().getReference().child("Freeboard_Images").child(uid).putFile(imageUri).addOnCompleteListener(new OnCompleteListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onComplete(@NonNull Task<UploadTask.TaskSnapshot> task) {
+                            @SuppressWarnings("VisibleForTests")
+                            Task<Uri> imageUrl = task.getResult().getStorage().getDownloadUrl();
+                            while (!imageUrl.isComplete()) ;
 
 
-                        FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
-                            @Override
-                            public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
-                                String nickname = snapshot.getValue(String.class);
+                            FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                                    String nickname = snapshot.getValue(String.class);
 
-                                Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+                                    Timestamp timestamp = new Timestamp(System.currentTimeMillis());
 
-                                SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
-                                sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+                                    SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
+                                    sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
 
-                                Article_Database(uid, nickname, title.getText().toString(), content.getText().toString(), imageUrl.getResult().toString(), sdf.format(timestamp), category, category_review);
+                                    Article_Database(uid, nickname, title.getText().toString(), content.getText().toString(), imageUrl.getResult().toString(), sdf.format(timestamp), category, category_review);
 
-                            }
+                                }
 
-                            @Override
-                            public void onCancelled(@NonNull @NotNull DatabaseError error) {
+                                @Override
+                                public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
-                            }
-                        });
-                    }
-                });
+                                }
+                            });
+                        }
+                    });
+                } else {
+
+                    FirebaseDatabase.getInstance().getReference().child("users").child(uid).child("nickname").addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
+                            String nickname = snapshot.getValue(String.class);
+
+                            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+
+                            SimpleDateFormat sdf = new SimpleDateFormat("yyyy년 MM월 dd일  a hh:mm:ss");
+                            sdf.setTimeZone(TimeZone.getTimeZone("Asia/Seoul"));
+
+                            Article_No_Photo_Database(uid, nickname, title.getText().toString(), content.getText().toString(), sdf.format(timestamp), category, category_review);
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull @NotNull DatabaseError error) {
+
+                        }
+                    });
+
+                }
             }
         });
     }
@@ -162,7 +188,40 @@ public class Free_Board_Writing extends AppCompatActivity {
         article_database.writing_time = writing_time;
         article_database.have_comment = "none";
 
-        article_database.category = category+"-"+category_review;
+        article_database.category = category + "-" + category_review;
+
+        mDatabase.child("Free_Board").push().setValue(article_database)
+                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                    @Override
+                    public void onSuccess(Void aVoid) {
+                        // Write was successful!
+                        // ...
+
+                        Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                        startActivity(intent);
+                    }
+                })
+                .addOnFailureListener(new OnFailureListener() {
+                    @Override
+                    public void onFailure(@NonNull Exception e) {
+                        // Write failed
+                        // ...
+                        Toast.makeText(getApplicationContext(), "오류 발생", Toast.LENGTH_SHORT).show();
+                    }
+                });
+    }
+
+    public void Article_No_Photo_Database(String uid, String nickname, String title, String content, String writing_time, String category, String category_review) {
+
+        Article_No_Photo_Database article_database = new Article_No_Photo_Database();
+        article_database.uid = uid;
+        article_database.nickname = nickname;
+        article_database.title = title;
+        article_database.content = content;
+        article_database.writing_time = writing_time;
+        article_database.have_comment = "none";
+
+        article_database.category = category + "-" + category_review;
 
         mDatabase.child("Free_Board").push().setValue(article_database)
                 .addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -186,16 +245,16 @@ public class Free_Board_Writing extends AppCompatActivity {
     }
 
 
+
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-         if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
+        if (requestCode == PICK_FROM_ALBUM && resultCode == RESULT_OK) {
             photo.setImageURI(data.getData()); // 가운데 뷰를 바꿈
             imageUri = data.getData();// 이미지 경로 원본
+
         }
 
 
     }
-
-
 }

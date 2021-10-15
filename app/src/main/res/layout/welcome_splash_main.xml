@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:ignore="MissingConstraints"
+    android:background="#22D1C1">
+
+    <ImageView
+        android:id="@+id/welcome_main_img1"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.15"
+        android:layout_width="200dp"
+        android:layout_height="390dp"
+        android:alpha="0.2"
+        android:foreground="@drawable/splash_overlay"
+        android:src="@drawable/splash_main_big" />
+
+    <ImageView
+        android:id="@+id/welcome_main_img2"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.4"
+        android:layout_width="200dp"
+        android:layout_height="250dp"
+        android:background="@drawable/welcome_splash_border"
+        android:padding="5dp"
+        android:src="@drawable/splash_main_small"/>
+
+
+    <ImageView
+        android:id="@+id/welcome_main_dog"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintVertical_bias="0.8"
+        app:layout_constraintHorizontal_bias="0.1"
+        android:layout_width="105dp"
+        android:layout_height="85dp"
+        android:src="@drawable/welcome_main_dog" />
+
+    <TextView
+        android:id="@+id/welcome_main_text"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/welcome_main_dog"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintVertical_bias="0.79"
+        android:layout_marginLeft="3dp"
+        android:layout_width="248dp"
+        android:layout_height="42dp"
+        android:text="한눈에 알아보고 떠나보개~"
+        android:textColor="@color/white"
+        android:textSize="20sp" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

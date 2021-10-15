@@ -38,7 +38,7 @@ public class Free_Board_Review extends AppCompatActivity {
 
     private RecyclerView recyclerView;
 
-    Button whole;
+
     Button hotel;
     Button hospital;
     Button travel;
@@ -46,7 +46,7 @@ public class Free_Board_Review extends AppCompatActivity {
     Button park;
     Button etc;
 
-    int str = 0;
+    int str = 1;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -57,7 +57,6 @@ public class Free_Board_Review extends AppCompatActivity {
         recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        whole = findViewById(R.id.review_whole);
         hotel = findViewById(R.id.review_hotel);
         hospital = findViewById(R.id.review_hspt);
         travel = findViewById(R.id.review_travel);
@@ -65,15 +64,6 @@ public class Free_Board_Review extends AppCompatActivity {
         park = findViewById(R.id.review_park);
         etc = findViewById(R.id.review_etc);
 
-
-        whole.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                str = 0;
-                recyclerView.removeAllViewsInLayout();
-                recyclerView.setAdapter(new Free_Board_Review.BoardRecyclerViewAdapter());
-            }
-        });
         hotel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

@@ -4,14 +4,15 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:layout_marginBottom="10dp">
+    android:layout_marginBottom="10dp"
+    android:background="@color/main_color">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="20dp"
         android:orientation="horizontal"
-        android:background="@color/white"
+        android:background="@color/main_color"
         >
 
         <!--프로필 사진-->
@@ -25,8 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="vertical"
-            android:layout_gravity="left"
-            android:background="@color/white">
+            android:layout_gravity="left">
             <TextView
                 android:id="@+id/chatting_room_list_room_name"
                 android:layout_width="wrap_content"
@@ -34,8 +34,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="방이름"
                 android:textSize="25dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+                android:textColor="@color/black"/>
             <!--이름-->
             <TextView
                 android:id="@+id/chatting_room_list_nickname"
@@ -44,8 +43,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="닉네임"
                 android:textSize="25dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+                android:textColor="@color/black"/>
 
             <!--상태 메시지-->
             <TextView
@@ -55,8 +53,8 @@
                 android:layout_marginLeft="10dp"
                 android:text="사는 곳"
                 android:textSize="12dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+                android:textColor="@color/black"/>
+
             <TextView
                 android:id="@+id/chatting_hope_area"
                 android:layout_width="wrap_content"
@@ -64,8 +62,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="희망 여행지"
                 android:textSize="12dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+                android:textColor="@color/black"/>
         </LinearLayout>
     </LinearLayout>
 
@@ -74,6 +71,6 @@
         android:layout_width="match_parent"
         android:layout_height="1dp"
         android:layout_marginHorizontal="10dp"
-        android:background="#000000"/>
+        android:background="@color/black"/>
 
 </LinearLayout>

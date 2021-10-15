@@ -8,7 +8,7 @@
     android:background="@color/main_color">
 
     <ImageView
-        android:id="@+id/img_back"
+        android:id="@+id/matching_roomlist_img_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="30dp"
@@ -18,7 +18,7 @@
 
     <TextView
         android:id="@+id/chatting_list_title"
-        app:layout_constraintStart_toEndOf="@+id/img_back"
+        app:layout_constraintStart_toEndOf="@+id/matching_roomlist_img_back"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
