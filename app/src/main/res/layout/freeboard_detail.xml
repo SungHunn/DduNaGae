@@ -217,7 +217,7 @@
             android:id="@+id/free_board_detail_comment_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="댓글"
+            android:text="댓글달기"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="3"
@@ -232,34 +232,6 @@
         android:background="#000000"
 
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/free_board_detail_comment_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        android:layout_marginTop="50dp"
-        android:background="@color/white">
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="7"
-            android:id="@+id/free_board_detail_comment"
-            android:background="@color/white"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="3"
-            android:text="댓글달기"
-            android:id="@+id/free_board_detail_post_comment"
-            android:background="@color/skyblue"/>
-
-    </LinearLayout>
-
 
 
 </LinearLayout>
