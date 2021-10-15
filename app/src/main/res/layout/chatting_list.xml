@@ -5,41 +5,34 @@
     xmlns:tools="http://schemas.android.com/tools"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:ignore="MissingConstraints"
-    android:background="@color/white">
+    android:background="@color/main_color">
 
-    <LinearLayout
-        android:id="@+id/chatting_list_layout"
-        android:layout_width="match_parent"
+    <ImageView
+        android:id="@+id/matching_roomlist_img_back"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="30dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="10dp"
+        android:src="@drawable/go_back" />
+
+    <TextView
+        android:id="@+id/chatting_list_title"
+        app:layout_constraintStart_toEndOf="@+id/matching_roomlist_img_back"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/main_color">
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="7dp"
+        android:text="매칭방 목록"
+        android:textColor="@color/black"
+        android:textSize="25sp" />
 
-        <ImageView
-            android:id="@+id/matching_roomlist_img_back"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="30dp"
-            android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
-            android:src="@drawable/go_back" />
-
-        <TextView
-            android:id="@+id/chatting_list_title"
-            app:layout_constraintStart_toEndOf="@+id/matching_roomlist_img_back"
-            app:layout_constraintTop_toTopOf="parent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:layout_marginTop="7dp"
-            android:text="매칭방 목록"
-            android:textSize="25sp" />
-
-    </LinearLayout>
     <View
         android:id="@+id/chatting_list_view1"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/chatting_list_layout"
+        app:layout_constraintTop_toBottomOf="@+id/chatting_list_title"
         android:layout_marginTop="7dp"
         android:layout_width="match_parent"
         android:layout_height="1dp"

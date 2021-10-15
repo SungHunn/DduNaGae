@@ -38,26 +38,26 @@
                 android:textColor="@color/black"
                 android:background="@color/white"/>
 
-            <!--상태 메시지-->
-            <TextView
-                android:id="@+id/matchroom_chatting_dog_inf"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="10dp"
-                android:text="개 정보"
-                android:textSize="12dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
-            <!--상태 메시지-->
-            <TextView
-                android:id="@+id/matchroom_chatting_hope_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="희망 여행지"
-                android:textSize="12dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
+<!--            &lt;!&ndash;상태 메시지&ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/matchroom_chatting_dog_inf"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_margin="10dp"-->
+<!--                android:text="개 정보"-->
+<!--                android:textSize="12dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:background="@color/white"/>-->
+<!--            &lt;!&ndash;상태 메시지&ndash;&gt;-->
+<!--            <TextView-->
+<!--                android:id="@+id/matchroom_chatting_hope_area"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:text="희망 여행지"-->
+<!--                android:textSize="12dp"-->
+<!--                android:textColor="@color/black"-->
+<!--                android:background="@color/white"/>-->
         </LinearLayout>
     </LinearLayout>
 

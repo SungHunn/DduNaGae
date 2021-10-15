@@ -49,7 +49,7 @@ public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ItemVi
             super(view);
             this.nickname = (TextView)view.findViewById(R.id.chatting_nickname);
            // this.pet_inf = (TextView)view.findViewById(R.id.chatting_dog_inf);
-            this.h_trip_area = (TextView)view.findViewById(R.id.chatting_hope_area);
+//            this.h_trip_area = (TextView)view.findViewById(R.id.chatting_hope_area);
             this.profile_photo = (ImageView)view.findViewById(R.id.profile_photo);
         }
         void onBind(Data data){

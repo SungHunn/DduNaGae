@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:background="@color/black"
+        android:background="#673AB7"
         android:textColor="@color/white"
         android:text="@string/next" />
 
@@ -45,7 +45,7 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentLeft="true"
         android:text="@string/skip"
-        android:background="@color/black"
+        android:background="#673AB7"
         android:textColor="@color/white"
       />
 

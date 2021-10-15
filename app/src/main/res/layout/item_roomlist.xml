@@ -45,23 +45,23 @@
                 android:textColor="@color/black"/>
 
             <!--상태 메시지-->
-            <TextView
-                android:id="@+id/chatting_live_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="사는 곳"
-                android:textSize="12dp"
-                android:textColor="@color/black"/>
+<!--            <TextView-->
+<!--                android:id="@+id/chatting_live_area"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:text="사는 곳"-->
+<!--                android:textSize="12dp"-->
+<!--                android:textColor="@color/black"/>-->
 
-            <TextView
-                android:id="@+id/chatting_hope_area"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="희망 여행지"
-                android:textSize="12dp"
-                android:textColor="@color/black"/>
+<!--            <TextView-->
+<!--                android:id="@+id/chatting_hope_area"-->
+<!--                android:layout_width="wrap_content"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_marginLeft="10dp"-->
+<!--                android:text="희망 여행지"-->
+<!--                android:textSize="12dp"-->
+<!--                android:textColor="@color/black"/>-->
         </LinearLayout>
     </LinearLayout>
 

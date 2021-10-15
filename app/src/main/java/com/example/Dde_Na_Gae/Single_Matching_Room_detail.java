@@ -75,7 +75,7 @@ public class Single_Matching_Room_detail extends AppCompatActivity {
         hope_have_car = (TextView)findViewById(R.id.h_room_detail_have_car);
         petprofile = (ImageView)findViewById(R.id.room_detail_room_image);
         single_room_detail_go_chatting = (Button)findViewById(R.id.single_room_detail_go_chatting);
-        group_room_detail_go_chatting = (Button)findViewById(R.id.group_room_detail_go_chatting);
+
 
         TextView[] masterdata = {master_nickname,master_age,master_sex,master_pet_age,master_pet_option, master_have_car};
         TextView[] hopedata = {hope_age,hope_sex,hope_pet_age,hope_pet_option, hope_have_car};

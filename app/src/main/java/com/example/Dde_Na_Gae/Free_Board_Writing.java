@@ -48,6 +48,7 @@ public class Free_Board_Writing extends AppCompatActivity {
     private Button okay;
     private String uid;
     private Uri imageUri;
+    private ImageView go_back;
 
     private DatabaseReference mDatabase;
 
@@ -69,6 +70,15 @@ public class Free_Board_Writing extends AppCompatActivity {
 
         title = (EditText) findViewById(R.id.article_title);
         content = (EditText) findViewById(R.id.article_content);
+
+        go_back = (ImageView)findViewById(R.id.free_board_writing_back);
+        go_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
+                startActivity(intent);
+            }
+        });
 
         photo = (ImageView) findViewById(R.id.article_image);
         photo.setOnClickListener(new View.OnClickListener() {

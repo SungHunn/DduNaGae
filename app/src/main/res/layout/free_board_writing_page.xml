@@ -18,7 +18,7 @@
             android:orientation="horizontal">
 
             <ImageView
-                android:id="@+id/img_back"
+                android:id="@+id/free_board_writing_back"
                 android:layout_width="30dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="10dp"

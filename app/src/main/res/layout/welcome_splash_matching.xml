@@ -18,7 +18,7 @@
         app:layout_constraintHorizontal_bias="0.07"
         android:layout_width="200dp"
         android:layout_height="390dp"
-        android:foreground="@drawable/splash_overlay"
+        android:foreground="@drawable/welcome_matching_list"
         android:src="@drawable/rectangle_back" />
 
     <ImageView
@@ -43,7 +43,7 @@
         app:layout_constraintHorizontal_bias="0.97"
         android:layout_width="130dp"
         android:layout_height="180dp"
-        android:src="@drawable/rectangle_back"/>
+        android:src="@drawable/welcome_matching_talk"/>
 
 
     <ImageView
@@ -68,7 +68,7 @@
         android:layout_marginLeft="3dp"
         android:layout_width="248dp"
         android:layout_height="42dp"
-        android:text="한눈에 알아보고 떠나보개~"
+        android:text="좋은 친구 만들고 떠나보개~"
         android:textColor="@color/white"
         android:textSize="20sp" />
 
