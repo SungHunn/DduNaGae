@@ -73,15 +73,6 @@
                 android:textColor="@color/black"
                 android:background="@color/white"/>
 
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_baseline_more_horiz_24"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="200dp"
-                android:background="@color/white"
-                />
         </LinearLayout>
     </LinearLayout>
 
