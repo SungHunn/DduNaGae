@@ -42,7 +42,8 @@
                 android:text="매칭방 필터"
                 android:textSize="25sp"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/matching_filter_content_title1"
@@ -51,6 +52,7 @@
                 android:layout_margin="10dp"
                 android:text="매칭자 옵션"
                 android:textSize="20sp"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_main_title" />
 
@@ -70,6 +72,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="매칭자 성별"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_view1" />
 
@@ -88,6 +91,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="15dp"
                 android:layout_marginTop="8dp"
+                android:textColor="@color/black"
                 android:text="매칭자 성별"
                 app:layout_constraintStart_toEndOf="@+id/h_matching_sex_filter"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_view1" />
@@ -111,6 +115,7 @@
                 android:layout_margin="10dp"
                 android:text="반려동물 옵션"
                 android:textSize="20sp"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_content2" />
 
@@ -130,6 +135,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="반려 동물 나이"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_view2" />
 
@@ -137,8 +143,7 @@
                 android:id="@+id/h_matching_pet_age_filter"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginBottom="10dp"
+                android:layout_margin="8dp"
                 android:layout_weight="1"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_content3" />
 
@@ -148,6 +153,7 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="8dp"
                 android:text="반려 동물 종류"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/h_matching_pet_age_filter" />
 
@@ -168,6 +174,7 @@
                 android:text="1~6살 개린이 / 7~10 개춘기 / 11~16 개저씨"
                 android:textSize="6dp"
                 android:textStyle="bold"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/h_matching_pet_option_filter" />
 
@@ -181,6 +188,7 @@
                 android:layout_marginTop="30dp"
                 android:text="채팅방 종류"
                 android:textSize="20sp"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_content4_nickname" />
 
@@ -214,6 +222,7 @@
                 android:layout_marginTop="15dp"
                 android:text="차량 여부"
                 android:textSize="20sp"
+                android:textColor="@color/black"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/matching_room_option_filter" />
 
@@ -237,99 +246,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/matching_filter_view4" />
 
-            <!--             사는 지역      -->
 
-            <TextView
-                android:id="@+id/matching_filter_content_title6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="15dp"
-                android:text="사는 지역"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/h_car_option_filter" />
-
-            <View
-                android:id="@+id/matching_filter_view5"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="#000000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/matching_filter_content_title6" />
-
-            <Spinner
-                android:id="@+id/live_area_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/matching_filter_view5" />
-
-            <Spinner
-                android:id="@+id/live_area_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/live_area_1" />
-
-            <Spinner
-                android:id="@+id/live_area_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/live_area_2" />
-
-            <!--            여행 지역       -->
-
-            <TextView
-                android:id="@+id/matching_filter_content_title7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginTop="15dp"
-                android:text="여행 지역"
-                android:textSize="20sp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/live_area_3" />
-
-            <View
-                android:id="@+id/matching_filter_view6"
-                android:layout_width="match_parent"
-                android:layout_height="1dp"
-                android:layout_marginTop="5dp"
-                android:background="#000000"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/matching_filter_content_title7" />
-
-            <Spinner
-                android:id="@+id/trip_area_1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/matching_filter_view6" />
-
-            <Spinner
-                android:id="@+id/trip_area_2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/trip_area_1" />
-
-            <Spinner
-                android:id="@+id/trip_area_3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/trip_area_2" />
 
             <Button
                 android:id="@+id/matching_filter_okay"
@@ -340,11 +257,11 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:background="@color/main_blue"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/trip_area_3" />
+                app:layout_constraintTop_toBottomOf="@id/h_car_option_filter" />
 
             <View
                 android:layout_width="match_parent"
-                android:layout_height="40dp"
+                android:layout_height="70dp"
                 app:layout_constraintTop_toBottomOf="@id/matching_filter_okay"/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
