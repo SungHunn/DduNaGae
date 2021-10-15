@@ -1,10 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-<LinearLayout
+       <ScrollView
+           android:layout_width="match_parent"
+           android:layout_height="match_parent">
+       <LinearLayout
+           android:layout_width="match_parent"
+           android:layout_height="match_parent"
+           android:orientation="vertical"
+           >
+       <LinearLayout
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
@@ -31,6 +39,7 @@
         android:background="#000000"
         />
 
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -44,13 +53,6 @@
             android:id="@+id/freeboard_detail_myprofile"
             android:layout_marginLeft="5dp"
             android:background="@color/white"/>
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/white">
-
             <TextView
 
                 android:layout_width="wrap_content"
@@ -72,17 +74,6 @@
                 android:textSize="15dp"
                 android:textColor="@color/black"
                 android:background="@color/white"/>
-
-
-            <ImageView
-                android:layout_width="35dp"
-                android:layout_height="35dp"
-                android:src="@drawable/ic_baseline_more_horiz_24"
-                android:layout_gravity="center_vertical"
-                android:layout_marginLeft="200dp"
-                android:background="@color/white"
-                />
-        </LinearLayout>
     </LinearLayout>
 
 
@@ -189,44 +180,48 @@
         android:layout_height="40dp"
         android:orientation="horizontal"
         android:weightSum="6"
-        android:id="@+id/free_board_detail_iloveit"
         >
+<LinearLayout
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:layout_weight="3"
+    android:weightSum="3"
+    android:id="@+id/free_board_detail_iloveit">
+    <ImageView
+        android:visibility="visible"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:src="@drawable/unfilled_heart"
+        android:id="@+id/unfilled_heart"
+        android:background="@color/white"/>
+    //꽉찬하트 이미지
+    <ImageView
+        android:visibility="gone"
+        android:layout_width="1dp"
+        android:layout_height="wrap_content"
+        android:src="@drawable/fill_heart"
+        android:layout_weight="1"
+        android:id="@+id/filled_heart"
+        android:background="@color/white"/>
 
-        //빈하트 이미지
-        <ImageView
-            android:visibility="visible"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/unfilled_heart"
-            android:id="@+id/unfilled_heart"
-            android:background="@color/white"/>
-        //꽉찬하트 이미지
-        <ImageView
-            android:visibility="gone"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fill_heart"
-            android:layout_weight="1"
-            android:id="@+id/filled_heart"
-            android:background="@color/white"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="좋아요"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:layout_gravity="center_vertical"
-            android:textColor="@color/black"
-            android:background="@color/white"/>
+    <TextView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="좋아요"
+        android:layout_weight="2"
+        android:gravity="center"
+        android:textSize="30dp"
+        android:layout_gravity="center_vertical"
+        android:textColor="@color/black"
+        android:background="@color/white"/>
+</LinearLayout>
 
         <TextView
             android:id="@+id/free_board_detail_comment_view"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="댓글"
+            android:text="댓글달기"
             android:textSize="30dp"
             android:gravity="center"
             android:layout_weight="3"
@@ -241,35 +236,11 @@
         android:background="#000000"
 
         />
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/free_board_detail_comment_recyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp" />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        android:layout_marginTop="50dp"
-        android:background="@color/white">
-        <EditText
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="7"
-            android:id="@+id/free_board_detail_comment"
-            android:background="@color/white"/>
-        <Button
-            android:layout_width="0dp"
-            android:layout_height="45dp"
-            android:layout_weight="3"
-            android:text="댓글달기"
-            android:id="@+id/free_board_detail_post_comment"
-            android:background="@color/skyblue"/>
+</LinearLayout>
 
-    </LinearLayout>
+       </LinearLayout>
 
+       </ScrollView>
 
 
 </LinearLayout>
-</ScrollView>
