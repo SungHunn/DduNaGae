@@ -13,11 +13,7 @@
     android:minHeight="5000dp"
     android:id="@+id/dialog_freeboard_comment"
     >
-    <FrameLayout
-        android:id="@+id/frameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-      />
+
 
     <TextView
         android:layout_width="wrap_content"
