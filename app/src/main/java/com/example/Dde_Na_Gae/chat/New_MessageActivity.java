@@ -238,7 +238,7 @@ public class New_MessageActivity extends AppCompatActivity {
                 AlertDialog alert = alt_bld.create();
                 // 대화창 클릭시 뒷 배경 어두워지는 것 막기
                 //alert.getWindow().clearFlags(WindowManager.LayoutParams.FLAG_DIM_BEHIND);
-                alert.setTitle("로그아웃");
+                alert.setTitle("정말 나가개?");
                 alert.setIcon(R.drawable.logo);
                 // 대화창 배경 색 설정
                 alert.getWindow().setBackgroundDrawable(new ColorDrawable(Color.rgb(255, 220, 213)));

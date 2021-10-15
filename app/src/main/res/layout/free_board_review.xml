@@ -30,13 +30,6 @@
             <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전체"
-                android:id="@+id/review_whole"
-                android:background="@color/skyblue"
-                android:layout_marginVertical="5dp"/>
-            <Button
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
                 android:text="숙소"
                 android:id="@+id/review_hotel"
                 android:background="@color/skyblue"/>
