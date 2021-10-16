@@ -165,25 +165,14 @@
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <ScrollView
-                app:layout_constraintTop_toBottomOf="@+id/free_board_activity_box2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginLeft="10dp"
-                android:layout_marginRight="10dp"
-                android:layout_marginTop="20dp"
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/free_board_list"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/free_board_list"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
-
-            </ScrollView>
-
-
-
+                android:layout_height="0dp"
+                android:layout_marginTop="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/free_board_bottomNavi"
+                app:layout_constraintTop_toBottomOf="@+id/free_board_activity_box2"
+                tools:layout_editor_absoluteX="4dp" />
             <com.google.android.material.bottomnavigation.BottomNavigationView
                 android:id="@+id/free_board_bottomNavi"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -193,7 +182,6 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 app:menu="@menu/freeboard_bottom_nav" />
-
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
