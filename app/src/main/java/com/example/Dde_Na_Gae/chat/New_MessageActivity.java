@@ -68,6 +68,7 @@ public class New_MessageActivity extends AppCompatActivity {
 
     private TextView member_text;
     private ImageView member_profile;
+    TextView chatting_user_nickname;
 
     DrawerLayout drawerLayout;
     View drawerView;
@@ -93,6 +94,8 @@ public class New_MessageActivity extends AppCompatActivity {
               finish();
             }
         });
+
+        chatting_user_nickname = findViewById(R.id.chatting_user_nickname);
 
         single_chat_hbg = (ImageButton) findViewById(R.id.single_talkmenu_open);
 
@@ -127,7 +130,7 @@ public class New_MessageActivity extends AppCompatActivity {
             public void onDataChange(@NonNull @NotNull DataSnapshot snapshot) {
 
                 userModel = snapshot.getValue(UserModel.class);
-
+                chatting_user_nickname.setText(userModel.nickname);
                 member_text.setText(userModel.nickname);
 
                 Glide.with(New_MessageActivity.this)

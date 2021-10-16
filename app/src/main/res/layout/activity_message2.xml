@@ -18,14 +18,12 @@
             >
 
 
-
-
             <LinearLayout
+                android:id="@+id/single_talkmenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/single_talkmenu"
-                android:background="@color/white">
+                android:background="@color/white"
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/single_chattingroom_back"
@@ -33,21 +31,24 @@
                     android:layout_height="50dp"
                     android:layout_gravity="right"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
                     android:maxWidth="35dp"
                     android:maxHeight="35dp"
                     android:padding="1dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/go_back"
-                    android:background="@color/white"/>
+                    android:src="@drawable/go_back" />
 
 
                 //채팅방 상대 닉네임
+
                 <TextView
+                    android:id="@+id/chatting_user_nickname"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:id="@+id/chatting_user_nickname"
-                    />
+                    android:textColor="@color/black"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:textSize="20dp" />
 
 
                 <View
@@ -60,21 +61,27 @@
                     android:layout_width="30dp"
                     android:layout_height="50dp"
                     android:layout_gravity="right"
+                    android:background="@color/white"
                     android:maxWidth="25dp"
                     android:maxHeight="20dp"
-                    android:src="@drawable/ic_baseline_dehaze_24"
-                    android:background="@color/white"/>
+                    android:src="@drawable/ic_baseline_dehaze_24" />
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_weight="1"
+                android:layout_alignBottom="@+id/single_talkmenu"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/single_messageActivity_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="569dp"
                 android:layout_below="@+id/single_talkmenu"
-                android:background="@color/white"/>
+                android:background="@color/white" />
 
             <EditText
                 android:id="@+id/messageActivity_editText"

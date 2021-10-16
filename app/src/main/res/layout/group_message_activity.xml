@@ -18,49 +18,44 @@
             >
 
 
-
-
             <LinearLayout
+                android:id="@+id/group_talkmenu"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:id="@+id/group_talkmenu"
                 android:background="@color/white"
-                >
+                android:orientation="horizontal">
 
                 <ImageButton
                     android:id="@+id/group_chattingroom_back"
                     android:layout_width="30dp"
                     android:layout_height="50dp"
                     android:layout_gravity="right"
+                    android:layout_marginLeft="5dp"
                     android:adjustViewBounds="true"
+                    android:background="@color/white"
                     android:maxWidth="30dp"
                     android:maxHeight="50dp"
                     android:padding="1dp"
                     android:scaleType="fitCenter"
-                    android:src="@drawable/go_back"
-                    android:background="@color/white"
-                    android:layout_marginLeft="5dp"/>
+                    android:src="@drawable/go_back" />
 
                 <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="그룹채팅 "
-                    android:textSize="20dp"
                     android:id="@+id/chatting_opt"
-                    android:background="@color/white"
-                    android:layout_marginTop="10dp"
-                    android:textColor="@color/black"
-                    />
-
-                <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="20dp"
-                    android:id="@+id/chatting_mem_num"
-                    android:background="@color/white"
                     android:layout_marginTop="10dp"
-                    />
+                    android:background="@color/white"
+                    android:text="그룹채팅 "
+                    android:textColor="@color/black"
+                    android:textSize="20dp" />
+
+                <TextView
+                    android:id="@+id/chatting_mem_num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="10dp"
+                    android:background="@color/white"
+                    android:textSize="20dp" />
 
                 <View
                     android:layout_width="0dp"
@@ -72,21 +67,27 @@
                     android:layout_width="50dp"
                     android:layout_height="50dp"
                     android:layout_gravity="right"
+                    android:background="@color/white"
                     android:maxWidth="25dp"
                     android:maxHeight="20dp"
-                    android:src="@drawable/ic_baseline_dehaze_24"
-                    android:background="@color/white"/>
+                    android:src="@drawable/ic_baseline_dehaze_24" />
 
 
             </LinearLayout>
-
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="@color/black"
+                android:layout_weight="1"
+                android:layout_alignBottom="@+id/group_talkmenu"
+                />
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/group_messageActivity_recyclerview"
                 android:layout_width="match_parent"
                 android:layout_height="569dp"
                 android:layout_below="@+id/group_talkmenu"
-                android:background="@color/main_blue"/>
+                android:background="@color/white" />
 
 
 
@@ -104,11 +105,11 @@
                 android:id="@+id/group_messageActivity_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="전송"
                 android:layout_alignParentRight="true"
-                android:textColor="@color/black"
                 android:layout_alignParentBottom="true"
-                android:background="@color/skyblue"/>
+                android:background="@color/skyblue"
+                android:text="전송"
+                android:textColor="@color/black" />
 
         </RelativeLayout>
         <include layout="@layout/chatting_drawer"/>
