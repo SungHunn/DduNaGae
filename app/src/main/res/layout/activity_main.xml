@@ -262,6 +262,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:layout_marginLeft="10dp"
+                    android:textColor="@color/black"
                     android:text="관광지"
                     android:textSize="35dp" />
 
