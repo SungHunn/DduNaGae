@@ -291,6 +291,7 @@ public class Mainactivity extends AppCompatActivity {
                     case 0:
                         Intent intent_notice =
                                 new Intent(getApplicationContext(), Notice.class);
+                        intent_notice.putExtra("key","1");
                         startActivity(intent_notice);
                         break;
 
@@ -298,6 +299,7 @@ public class Mainactivity extends AppCompatActivity {
                         // 공지사항이랑 이벤트는 같은 페이지임 나중에 이벤트 클릭된 상태로 넘어가게 하면됨
                         Intent intent_event =
                                 new Intent(getApplicationContext(), Notice.class);
+                        intent_event.putExtra("key","2");
                         startActivity(intent_event);
                         break;
 

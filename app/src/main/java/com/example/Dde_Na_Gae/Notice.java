@@ -1,5 +1,6 @@
 package com.example.Dde_Na_Gae;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
@@ -36,6 +37,17 @@ public class Notice extends AppCompatActivity{
 
         notice_listview.setAdapter(notice_adapter);
         event_listview.setAdapter(event_adapter);
+
+        Intent intent =getIntent();
+        String key = intent.getStringExtra("key");
+
+        if(key.equals("1")){
+            event_listview.setVisibility(View.INVISIBLE);
+            notice_listview.setVisibility(View.VISIBLE);
+        }else{
+            notice_listview.setVisibility(View.INVISIBLE);
+            event_listview.setVisibility(View.VISIBLE);
+        }
 
         notice_button.setOnClickListener(new View.OnClickListener() {
             @Override

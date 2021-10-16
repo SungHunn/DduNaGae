@@ -2,237 +2,235 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical">
 
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    android:background="@color/white">
-
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:background="@color/white">
+        android:layout_height="match_parent"
+        tools:ignore="MissingConstraints"
+        android:layout_margin="10dp">
+
+        <!--        상단바     -->
 
         <ImageView
             android:id="@+id/freeboard_detail_img_back"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             android:layout_width="30dp"
             android:layout_height="50dp"
-            android:layout_marginLeft="10dp"
             android:src="@drawable/go_back"
             android:background="@color/white"/>
 
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000"
-        />
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:orientation="horizontal"
-        android:background="@color/white">
+        <View
+            android:id="@+id/freeboard_detail_view1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/freeboard_detail_img_back"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#000000"
+            />
 
         <ImageView
+            android:id="@+id/freeboard_detail_myprofile"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freeboard_detail_view1"
             android:layout_width="40dp"
             android:layout_height="40dp"
-            android:id="@+id/freeboard_detail_myprofile"
-            android:layout_marginLeft="5dp"
+            android:layout_marginTop="10dp"
             android:background="@color/white"/>
 
-        <LinearLayout
+        <TextView
+            android:id="@+id/freeboard_detail_writer_nickname"
+            app:layout_constraintStart_toEndOf="@+id/freeboard_detail_myprofile"
+            app:layout_constraintTop_toBottomOf="@+id/freeboard_detail_view1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:background="@color/white">
-
-            <TextView
-
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="닉네임"
-                android:layout_gravity="center_vertical"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
-
-            <TextView
-                android:id="@+id/writer_nickname"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:text="AABBCCDD"
-                android:layout_gravity="center_vertical"
-                android:textSize="15dp"
-                android:textColor="@color/black"
-                android:background="@color/white"/>
-
-        </LinearLayout>
-    </LinearLayout>
-
-
-    <LinearLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginTop="20dp"
-        android:background="@color/white">
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="닉네임"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
 
         <TextView
+            android:id="@+id/writer_nickname"
+            app:layout_constraintStart_toEndOf="@+id/freeboard_detail_writer_nickname"
+            app:layout_constraintTop_toBottomOf="@+id/freeboard_detail_view1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:layout_marginTop="10dp"
+            android:text="AABBCCDD"
+            android:textSize="15dp"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/free_board_detail_title"
+            app:layout_constraintTop_toBottomOf="@id/freeboard_detail_myprofile"
+            app:layout_constraintStart_toStartOf="parent"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/free_board_detail_title"
+            android:layout_marginTop="15dp"
             android:text="````` "
             android:textSize="25dp"
             android:textColor="@color/black"
             android:background="@color/white"/>
 
-
-    </LinearLayout>
-
-
-    <ImageView
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:id="@+id/free_board_image"
-        android:layout_gravity="center"
-        android:layout_marginTop="30dp"
-        android:background="@color/white"/>
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:inputType="textPersonName"
-        android:id="@+id/free_board_detail_content"
-        android:text="내용"
-        android:textSize="15dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginBottom="20dp"
-        android:textColor="@color/black"
-        android:background="@color/white"/>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        android:orientation="horizontal"
-        android:weightSum="10"
-        android:background="@color/white">
+        <ImageView
+            android:id="@+id/free_board_image"
+            app:layout_constraintTop_toBottomOf="@id/free_board_detail_title"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_width="150dp"
+            android:layout_height="150dp"
+            android:layout_marginTop="30dp"
+            android:background="@color/white"/>
 
         <TextView
-            android:layout_width="1dp"
+            android:id="@+id/free_board_detail_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/free_board_image"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPersonName"
+            android:text="내용"
+            android:textSize="15dp"
+            android:layout_marginTop="20dp"
+            android:layout_marginBottom="20dp"
+            android:textColor="@color/black"
+            android:background="@color/white"/>
+
+        <TextView
+            android:id="@+id/free_board_detail_good"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/free_board_detail_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="좋아요"
+            android:layout_marginTop="5dp"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
             android:textColor="@color/black"
             android:background="@color/white"/>
 
         <TextView
             android:id="@+id/love_it_num"
-            android:layout_width="1dp"
+            app:layout_constraintStart_toEndOf="@+id/free_board_detail_good"
+            app:layout_constraintTop_toBottomOf="@+id/free_board_detail_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_vertical"
             android:layout_weight="1"
-            android:gravity="center"
             android:text="좋아수"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:textColor="@color/black"
             android:background="@color/white"/>
+
         <TextView
-            android:layout_width="1dp"
+            android:id="@+id/free_board_detail_comment_box"
+            app:layout_constraintStart_toEndOf="@+id/love_it_num"
+            app:layout_constraintTop_toBottomOf="@+id/free_board_detail_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:textColor="@color/black"
-            android:background="@color/white"/>
-        <TextView
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="50dp"
             android:text="댓글"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
             android:textColor="@color/black"
             android:background="@color/white"/>
+
         <TextView
-            android:layout_width="1dp"
+            android:id="@+id/comment_num"
+            app:layout_constraintStart_toEndOf="@+id/free_board_detail_comment_box"
+            app:layout_constraintTop_toBottomOf="@+id/free_board_detail_content"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="5dp"
             android:text="댓글수"
             android:layout_weight="1"
-            android:gravity="center"
-            android:layout_gravity="center_vertical"
-            android:id="@+id/comment_num"
-            android:textColor="@color/black"
-            android:background="@color/white"/>
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000"
-        />
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="40dp"
-        android:orientation="horizontal"
-        android:weightSum="6"
-        android:id="@+id/free_board_detail_iloveit"
-        >
-
-        //빈하트 이미지
-        <ImageView
-            android:visibility="visible"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:src="@drawable/unfilled_heart"
-            android:id="@+id/unfilled_heart"
-            android:background="@color/white"/>
-        //꽉찬하트 이미지
-        <ImageView
-            android:visibility="gone"
-            android:layout_width="1dp"
-            android:layout_height="wrap_content"
-            android:src="@drawable/fill_heart"
-            android:layout_weight="1"
-            android:id="@+id/filled_heart"
-            android:background="@color/white"/>
-
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="좋아요"
-            android:layout_weight="2"
-            android:gravity="center"
-            android:textSize="30dp"
-            android:layout_gravity="center_vertical"
             android:textColor="@color/black"
             android:background="@color/white"/>
 
-        <TextView
-            android:id="@+id/free_board_detail_comment_view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:text="댓글달기"
-            android:textSize="30dp"
-            android:gravity="center"
-            android:layout_weight="3"
-            android:textColor="@color/black"
-            android:background="@color/white"/>
+        <View
+            android:id="@+id/freeboard_detail_view2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/free_board_detail_good"
+            android:layout_width="match_parent"
+            android:layout_marginTop="10dp"
+            android:layout_height="1dp"
+            android:background="#000000"    />
+
+        <LinearLayout
+            android:id="@+id/free_board_detail_iloveit"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/freeboard_detail_view2"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:orientation="horizontal"
+            android:weightSum="6"   >
+
+            //빈하트 이미지
+            <ImageView
+                android:visibility="visible"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:src="@drawable/unfilled_heart"
+                android:id="@+id/unfilled_heart"
+                android:background="@color/white"/>
+            //꽉찬하트 이미지
+            <ImageView
+                android:visibility="gone"
+                android:layout_width="1dp"
+                android:layout_height="wrap_content"
+                android:src="@drawable/fill_heart"
+                android:layout_weight="1"
+                android:id="@+id/filled_heart"
+                android:background="@color/white"/>
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="좋아요"
+                android:layout_weight="2"
+                android:gravity="center"
+                android:textSize="30dp"
+                android:layout_gravity="center_vertical"
+                android:textColor="@color/black"
+                android:background="@color/white"/>
+
+            <TextView
+                android:id="@+id/free_board_detail_comment_view"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="댓글달기"
+                android:textSize="30dp"
+                android:gravity="center"
+                android:layout_weight="3"
+                android:textColor="@color/black"
+                android:background="@color/white"/>
+
+        </LinearLayout>
+
+        <View
+            android:id="@+id/freeboard_detail_view3"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/free_board_detail_iloveit"
+            android:layout_width="match_parent"
+            android:layout_marginTop="7dp"
+            android:layout_height="1dp"
+            android:background="#000000"
+            />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </LinearLayout>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:background="#000000"
 
-        />
-
-
-</LinearLayout>
 </ScrollView>

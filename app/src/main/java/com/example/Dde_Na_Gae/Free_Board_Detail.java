@@ -2,6 +2,7 @@ package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -88,7 +89,6 @@ public class Free_Board_Detail  extends AppCompatActivity {
         comment_view.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 Bundle bundle = new Bundle();
                 bundle.putString("articleid",articleid);
                 Dialog_FreeBoard_Comment bottom_sheet_freeBoard_comment = new Dialog_FreeBoard_Comment();
@@ -139,6 +139,9 @@ public class Free_Board_Detail  extends AppCompatActivity {
                         usermodels.uid = uid;
                         FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").push().setValue(usermodels);
                         checkloveit(articleid, uid);
+                        Handler mHandler = new Handler();
+                        mHandler.postDelayed(new Runnable() { public void run() {
+                        } }, 800);
                     }else{
                         FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").orderByChild("uid").addListenerForSingleValueEvent(new ValueEventListener() {
                             @Override
@@ -150,11 +153,14 @@ public class Free_Board_Detail  extends AppCompatActivity {
                                         FirebaseDatabase.getInstance().getReference().child("Free_Board").child(articleid).child("Loveit").child(key).setValue(null);
                                         filledheart.setVisibility(View.GONE);
                                         unfilledheart.setVisibility(View.VISIBLE);
-                                        break;
+                                        Handler mHandler = new Handler();
+                                        mHandler.postDelayed(new Runnable() { public void run() {
+                                            } }, 800);
+                                        }
+                                    break;
                                     }
 
                                 }
-                            }
                             @Override
                             public void onCancelled(@NonNull @NotNull DatabaseError error) {
 
