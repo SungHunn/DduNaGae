@@ -31,6 +31,7 @@
                 android:layout_gravity="center"
                 android:text="고객 센터 글 작성"
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
 
@@ -48,6 +49,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:text="제목 : "
+                android:textColor="@color/black"
                 android:textSize="25dp"
                 android:background="@color/white"/>
 
@@ -58,6 +60,7 @@
                 android:layout_marginTop="20dp"
                 android:ems="12"
                 android:hint="제목 입력"
+                android:textColor="@color/black"
                 android:textSize="25dp"
                 android:background="@color/white"/>
 
@@ -86,6 +89,7 @@
                     android:layout_height="wrap_content"
                     android:text="문의 내용"
                     android:textSize="19sp"
+                    android:textColor="@color/black"
                     android:background="@color/white"/>
 
                 <Spinner
@@ -103,6 +107,7 @@
                 android:layout_marginTop="50dp"
                 android:text="내용 : "
                 android:textSize="25dp"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
 
@@ -116,6 +121,7 @@
                 android:layout_weight="1"
                 android:background="@drawable/type_edittext"
                 android:hint="내용"
+                android:textColor="@color/black"
                 android:inputType="textPersonName"
                 android:backgroundTint="@color/white"/>
 
@@ -138,6 +144,7 @@
                 android:layout_marginTop="20dp"
                 android:text="이미지 첨부 : "
                 android:textSize="25dp"
+                android:textColor="@color/black"
                 android:background="@color/white"/>
 
 
@@ -157,7 +164,7 @@
                 android:layout_gravity="center"
                 android:text="완료"
                 android:textSize="20dp"
-                android:background="@color/skyblue"/>
+                android:background="@color/main_color"/>
 
 
         </LinearLayout>

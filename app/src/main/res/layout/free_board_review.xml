@@ -10,7 +10,8 @@
         android:layout_height="wrap_content"
         android:text="리뷰"
         android:textSize="40sp"
-        android:background="@color/white"/>
+        android:background="@color/white"
+        android:textColor="@color/black"/>
 
     <View
         android:layout_width="match_parent"

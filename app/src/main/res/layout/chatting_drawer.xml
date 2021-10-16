@@ -19,6 +19,7 @@
             android:layout_marginTop="10dp"
             android:layout_marginLeft="10dp"
             android:textSize="30dp"
+            android:textColor="@color/black"
             />
         <androidx.recyclerview.widget.RecyclerView
             android:layout_width="match_parent"
@@ -33,5 +34,6 @@
         android:layout_height="wrap_content"
         android:id="@+id/group_room_exit"
         android:text="채팅방 나가기"
+        android:textColor="@color/black"
         android:background="@color/skyblue"/>
 </LinearLayout>

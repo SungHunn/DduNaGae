@@ -16,6 +16,7 @@
             android:id="@+id/search_box"
             android:layout_width="275dp"
             android:layout_height="50dp"
+            android:textColor="@color/black"
             android:background="@drawable/rounded_edittext"
             android:hint="검색어를 입력하세요"
             android:paddingLeft="10dp" />

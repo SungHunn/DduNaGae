@@ -27,7 +27,8 @@
                 android:layout_marginTop="10dp"
                 android:text="카테고리"
                 android:textSize="30dp"
-                android:background="#FFFEE6"/>
+                android:background="#FFFEE6"
+                android:textColor="@color/black"/>
 
             <ImageButton
                 android:layout_gravity="center"

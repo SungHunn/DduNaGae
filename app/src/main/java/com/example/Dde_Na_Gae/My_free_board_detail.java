@@ -33,7 +33,6 @@ public class My_free_board_detail extends AppCompatActivity {
     private ImageView profile;
     private ImageView go_back;
 
-    private Button change;
     private Button delete;
 
     private String articleid;
@@ -63,7 +62,6 @@ public class My_free_board_detail extends AppCompatActivity {
 
 
 
-        change = (Button)findViewById(R.id.my_free_board_detail_change);
         delete = (Button)findViewById(R.id.my_free_board_detail_delete);
 
         Intent intent = getIntent();
@@ -124,15 +122,6 @@ public class My_free_board_detail extends AppCompatActivity {
             }
         });
 
-        change.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(),My_Free_Board_detail_Change.class);
-                intent.putExtra("my_articleid",articleid);
 
-
-                startActivity(intent);
-            }
-        });
     }
 }

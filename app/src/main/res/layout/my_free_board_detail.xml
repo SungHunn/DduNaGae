@@ -198,19 +198,20 @@
         android:orientation="horizontal"
         android:layout_marginTop="30dp">
 
-        <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="45dp"
-            android:text="수정"
-            android:id="@+id/my_free_board_detail_change"
-           />
+<!--        <Button-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:layout_marginLeft="45dp"-->
+<!--            android:text="수정"-->
+<!--            android:id="@+id/my_free_board_detail_change"-->
+<!--           />-->
 
         <Button
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
             android:text="삭제"
+            android:background="@color/main_color"
             android:id="@+id/my_free_board_detail_delete"/>
 
 

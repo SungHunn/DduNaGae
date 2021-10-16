@@ -72,6 +72,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="6"
+                android:textColor="@color/black"
                 android:hint="채팅방 이름 입력" />
 
 

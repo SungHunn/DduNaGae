@@ -92,6 +92,7 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/my_free_board_detail_title_change"
                 android:text="````` "
+                android:textColor="@color/black"
                 android:textSize="25dp"/>
 
 
@@ -113,6 +114,7 @@
             android:id="@+id/my_free_board_detail_content_change"
             android:text="내용"
             android:textSize="15dp"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"
             android:layout_marginBottom="20dp"/>
         <View
@@ -134,6 +136,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:text="완료"
+                android:background="@color/main_color"
                 android:id="@+id/my_free_board_detail_change_okay"
                 />
         </LinearLayout>

@@ -25,7 +25,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:text="나의 정보"
-            android:textSize="30sp" />
+            android:textSize="30sp"
+            android:textColor="@color/black"/>
 
         <EditText
             android:id="@+id/nick_name"
@@ -35,6 +36,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:ems="6"
+            android:textColor="@color/black"
             android:hint="닉네임 입력"
             android:inputType="textPersonName" />
 
@@ -57,6 +59,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="5dp"
             android:layout_weight="1"
+            android:textColor="@color/black"
             android:ems="7"
             android:hint="이름"
             android:inputType="textPersonName" />
@@ -71,6 +74,7 @@
             android:layout_weight="1"
             android:ems="15"
             android:hint="전화번호"
+            android:textColor="@color/black"
             android:inputType="textPersonName" />
 
         <EditText
@@ -82,6 +86,7 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:ems="6"
+            android:textColor="@color/black"
             android:hint="나이"
             android:inputType="textPersonName" />
 
@@ -93,6 +98,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
             android:layout_marginLeft="10dp"
+            android:textColor="@color/black"
             android:text="성별"
             android:textSize="19dp"/>
 
@@ -115,6 +121,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
+            android:textColor="@color/black"
             android:text="반려동물정보"
             android:textSize="25dp" />
 
@@ -127,6 +134,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
             android:text="반려동물사진"
+            android:textColor="@color/black"
             android:textSize="20dp"
             android:layout_marginBottom="5dp"/>
 
@@ -150,6 +158,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="15dp"
+            android:textColor="@color/black"
             android:text="반려 동물 옵션"
             android:textSize="19dp"/>
 
@@ -172,6 +181,7 @@
             android:layout_weight="1"
             android:layout_marginTop="5dp"
             android:ems="6"
+            android:textColor="@color/black"
             android:hint="(ex) 견종)"
             android:inputType="textPersonName" />
 
@@ -185,6 +195,7 @@
             android:ems="6"
             android:layout_marginTop="5dp"
             android:hint="동물 나이"
+            android:textColor="@color/black"
             android:inputType="textPersonName" />
 
         <EditText
@@ -197,6 +208,7 @@
             android:layout_marginTop="5dp"
             android:layout_weight="1"
             android:ems="6"
+            android:textColor="@color/black"
             android:hint="무게"
             android:inputType="textPersonName" />
 
@@ -210,6 +222,7 @@
             android:layout_weight="1"
             android:ems="6"
             android:hint="동물 이름"
+            android:textColor="@color/black"
             android:inputType="textPersonName" />
 
         <TextView
@@ -221,6 +234,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="차 유무"
+            android:textColor="@color/black"
             android:textSize="15dp" />
 
         <Spinner
@@ -241,6 +255,7 @@
             android:layout_height="260dp"
             android:layout_weight="1"
             android:layout_marginTop="10dp"
+            android:textColor="@color/black"
             android:ems="6"
             android:hint="ex)\n동물 등록번호\n 사회성 \n 동물 성격"
             android:inputType="textPersonName" />
@@ -253,6 +268,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:textColor="@color/black"
             android:layout_gravity="center"
             android:text="완료" />
 

@@ -32,6 +32,7 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="15dp"
                         android:textSize="20dp"
+                        android:textColor="@color/black"
                         />
                     <View
                         android:layout_width="0dp"
@@ -45,7 +46,7 @@
                         android:maxWidth="25dp"
                         android:maxHeight="20dp"
                         android:src="@drawable/ic_baseline_dehaze_24"
-                        android:background="@color/white"/>
+                        android:background="@color/white" />
                 </LinearLayout>
                 <View
                     android:layout_width="match_parent"
@@ -68,6 +69,7 @@
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentBottom="true"
                 android:text="내 글 목록"
+                android:textColor="@color/black"
                 />
 
 
@@ -78,6 +80,7 @@
                 android:text="글쓰기"
                 android:layout_alignParentRight="true"
                 android:layout_alignParentBottom="true"
+                android:textColor="@color/black"
                 />
         </RelativeLayout>
     </androidx.drawerlayout.widget.DrawerLayout>

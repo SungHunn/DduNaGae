@@ -6,7 +6,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:ignore="MissingConstraints">
+    tools:ignore="MissingConstraints"
+    android:background="@color/white">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/my_page_box"
@@ -39,7 +40,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MY PAGE"
-            android:textSize="35sp" />
+            android:textSize="35sp"
+            android:textColor="@color/black"/>
 
         <TextView
             android:id="@+id/my_page_nickname"
@@ -50,6 +52,7 @@
             android:text="내 이름"
             android:textSize="25sp"
             android:layout_marginLeft="20dp"
+            android:textColor="@color/black"
             android:layout_marginTop="20dp"/>
 
 
@@ -80,6 +83,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="내가 쓴 글"
+        android:textColor="@color/black"
         android:textSize="40dp"/>
 
     <TextView
@@ -91,6 +95,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="내 정보"
+        android:textColor="@color/black"
         android:textSize="40dp"/>
 
     <TextView
@@ -102,6 +107,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="고객 센터"
+        android:textColor="@color/black"
         android:textSize="40dp"/>
 
     <TextView
@@ -116,6 +122,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="탈퇴 하기"
+        android:textColor="@color/black"
         android:textSize="20dp"/>
 
 

@@ -36,6 +36,7 @@
             android:layout_height="wrap_content"
             android:hint="ex) 숙소, 카페, 등등"
             android:id="@+id/review_Category"
+            android:textColor="@color/black"
             />
     </LinearLayout>
 
@@ -54,6 +55,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ex) 21.09.16"
+            android:textColor="@color/black"
             android:id="@+id/review_Date"/>
     </LinearLayout>
     <LinearLayout
@@ -71,6 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="ex) 화성시 안녕동"
+            android:textColor="@color/black"
             android:id="@+id/review_Address"/>
     </LinearLayout>
     <LinearLayout
@@ -87,7 +90,8 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="ex) 리치모텔 나이쨔"
+            android:hint="ex) 리치모텔 굿"
+            android:textColor="@color/black"
             android:id="@+id/review_Title"/>
     </LinearLayout>
     <LinearLayout
@@ -105,6 +109,7 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="150dp"
+            android:textColor="@color/black"
             android:hint="ex) 숙소, 카페, 등등"
             android:id="@+id/review_Contents"/>
     </LinearLayout>

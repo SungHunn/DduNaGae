@@ -119,6 +119,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="45dp"
             android:text="수정"
+            android:background="@color/main_color"
             android:id="@+id/my_service_center_detail_change"
            />
 
@@ -127,6 +128,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="150dp"
             android:text="삭제"
+            android:background="@color/main_color"
             android:id="@+id/my_service_center_detail_delete"/>
     </LinearLayout>
     </LinearLayout>

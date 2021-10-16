@@ -42,7 +42,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="채팅방 이름"
-                    android:textSize="35dp"     />
+                    android:textSize="35dp"
+                    android:textColor="@color/black"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -67,6 +68,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="참여자 목록"
+                android:textColor="@color/black"
                 android:textSize="30dp"/>
 
             <!--            참여자 리사클러 뷰          -->
@@ -103,7 +105,8 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginTop="10dp"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"    />
+                android:layout_height="wrap_content"
+                android:textColor="@color/black"/>
 
             <TextView
                 android:id="@+id/room_text1"
@@ -112,6 +115,7 @@
                 android:layout_marginTop="7dp"
                 android:text="희망 성별 : "
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -123,6 +127,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="111111"
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -133,6 +138,7 @@
                 android:layout_marginTop="7dp"
                 android:text="희망 나이대 : "
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -144,6 +150,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="111111"
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -154,6 +161,7 @@
                 android:layout_marginTop="7dp"
                 android:text="희망 반려동물 나이 : "
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -164,6 +172,7 @@
                 android:layout_marginTop="7dp"
                 android:layout_marginLeft="10dp"
                 android:text="111111"
+                android:textColor="@color/black"
                 android:textSize="20dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
@@ -175,6 +184,7 @@
                 android:layout_marginTop="7dp"
                 android:text="희망 반려동물 종류 : "
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -186,6 +196,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="111111"
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -196,6 +207,7 @@
                 android:layout_marginTop="7dp"
                 android:text="차 여부 : "
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"    />
 
@@ -207,6 +219,7 @@
                 android:layout_marginLeft="10dp"
                 android:text="111111"
                 android:textSize="20dp"
+                android:textColor="@color/black"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
@@ -220,6 +233,7 @@
                 android:textAlignment="center"
                 android:textSize="30dp"
                 android:clickable="true"
+                android:textColor="@color/black"
                 android:background="@color/main_color"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"

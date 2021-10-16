@@ -24,7 +24,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColor="@color/black"/>
 
     <ImageView
         android:id="@+id/dialog_button_close"
@@ -83,6 +84,7 @@
         android:layout_width="290dp"
         android:layout_height="45dp"
         android:layout_weight="7"
+        android:textColor="@color/black"
         android:background="@color/white">
         <requestFocus/>
     </EditText>
@@ -95,6 +97,7 @@
         android:layout_height="45dp"
         android:layout_weight="3"
         android:text="댓글달기"
+        android:textColor="@color/black"
         android:background="@color/skyblue"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
