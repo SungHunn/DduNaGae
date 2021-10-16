@@ -97,8 +97,7 @@ public class Matching_filter_Option extends AppCompatActivity {
         img_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 

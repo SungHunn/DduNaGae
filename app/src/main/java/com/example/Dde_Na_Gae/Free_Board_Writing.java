@@ -75,8 +75,7 @@ public class Free_Board_Writing extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 

@@ -117,9 +117,7 @@ public class Free_Board_Detail  extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
         heart_count = (TextView)findViewById(R.id.love_it_num);

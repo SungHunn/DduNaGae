@@ -79,9 +79,7 @@ public class Service_Center_Detail extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent intent = new Intent(getApplicationContext(), Service_Center.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 

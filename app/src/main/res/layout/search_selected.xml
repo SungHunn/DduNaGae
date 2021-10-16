@@ -28,7 +28,7 @@
             android:layout_height="50dp" />
 
         <TextView
-            android:id="@id/selected_name"
+            android:id="@+id/selected_name"
             app:layout_constraintStart_toEndOf="@+id/selected_back"
             app:layout_constraintTop_toTopOf="parent"
             android:layout_width="wrap_content"

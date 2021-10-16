@@ -1,6 +1,7 @@
 package com.example.Dde_Na_Gae;
 
 import android.content.Intent;
+import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
@@ -42,6 +43,8 @@ public class My_Page extends AppCompatActivity {
     TextView secession;
     TextView service_center;
 
+    ImageView back_btn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +54,13 @@ public class My_Page extends AppCompatActivity {
         myprofile = (ImageView)findViewById(R.id.my_page_img);
         myuid = FirebaseAuth.getInstance().getCurrentUser().getUid();
 
+        back_btn = (ImageView) findViewById(R.id.back_btn);
+        back_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBackPressed();
+            }
+        });
 
         FirebaseDatabase.getInstance().getReference().child("users").child(myuid).child("imageUri").addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
@@ -163,7 +173,5 @@ public class My_Page extends AppCompatActivity {
             }
         });
 
-
     }
-
 }

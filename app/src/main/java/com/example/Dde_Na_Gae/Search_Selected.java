@@ -195,8 +195,7 @@ public class  Search_Selected extends AppCompatActivity {
         selected_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Mainactivity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
 

@@ -91,7 +91,7 @@ public class New_MessageActivity extends AppCompatActivity {
         singlechat_goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              finish();
+              onBackPressed();
             }
         });
 

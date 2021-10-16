@@ -93,7 +93,7 @@ public class Group_Matching_Room_detail extends AppCompatActivity {
         img_goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                onBackPressed();
             }
         });
 

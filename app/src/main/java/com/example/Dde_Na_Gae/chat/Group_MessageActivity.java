@@ -98,7 +98,7 @@ public class Group_MessageActivity extends AppCompatActivity {
         groupchat_goback.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-              finish();
+              onBackPressed();
             }
         });
 

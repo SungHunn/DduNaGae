@@ -22,8 +22,7 @@ public class Chatting_List extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), New_ChatMainActivity.class);
-                startActivity(intent);
+               onBackPressed();
             }
         });
 

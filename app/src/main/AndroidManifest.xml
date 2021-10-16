@@ -42,9 +42,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".Category_Accommodation" />
-        <activity android:name=".Api_date" />
         <activity android:name=".Search_Selected" />
-        <activity android:name=".Search_Selected_More" />
         <activity android:name="com.example.Dde_Na_Gae.Category" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
@@ -65,7 +63,6 @@
         <activity android:name=".My_Page" />
         <activity android:name=".Matching_Option" />
         <activity android:name=".Setting" />
-        <activity android:name=".Search" />
         <activity android:name=".chat.New_MessageActivity"
             android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".New_ChatMainActivity"/>

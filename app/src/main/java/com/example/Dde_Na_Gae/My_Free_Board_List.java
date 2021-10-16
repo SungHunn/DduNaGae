@@ -51,8 +51,7 @@ public class My_Free_Board_List extends AppCompatActivity {
         go_back.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(getApplicationContext(), Freeboard_Activity.class);
-                startActivity(intent);
+                onBackPressed();
             }
         });
     }

@@ -264,7 +264,8 @@
                     android:layout_marginLeft="10dp"
                     android:textColor="@color/black"
                     android:text="관광지"
-                    android:textSize="35dp" />
+                    android:textSize="35dp"
+                    android:textColor="@color/black"/>
 
                 <ImageView
                     android:layout_width="40dp"
