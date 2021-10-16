@@ -30,6 +30,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.Dde_Na_Gae.New_ChatMainActivity;
+import com.example.Dde_Na_Gae.Profile_Detail;
 import com.example.Dde_Na_Gae.R;
 import com.example.Dde_Na_Gae.fragment.My_Group_ChatFragment;
 import com.example.Dde_Na_Gae.fragment.RoomFragment;
@@ -500,6 +501,33 @@ public class Group_MessageActivity extends AppCompatActivity {
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError error) {
+
+                }
+            });
+
+            holder.itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    FirebaseDatabase.getInstance().getReference().child("users").child(members.get(position)).addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            UserModel userModel = snapshot.getValue(UserModel.class);
+
+                            Intent intent1 = new Intent(getApplicationContext(), Profile_Detail.class);
+                            intent1.putExtra("destinationuid", userModel.uid);
+                            startActivityForResult(intent1, 1);
+
+                            overridePendingTransition(R.anim.fadein, R.anim.fadeout);
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+
+
+                    });
 
                 }
             });

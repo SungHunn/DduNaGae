@@ -180,7 +180,7 @@ public class  Search_Selected extends AppCompatActivity {
 
                         Intent intent = new Intent(Intent.ACTION_SEND);
                         Uri dynamicLinkUri = dynamicLink.getUri();
-                        String msg = "여기로 떠날까요??\n" + dynamicLinkUri.toString();
+                        String msg = "여기로 떠날까요?\n" + dynamicLinkUri.toString();
                         intent.putExtra(Intent.EXTRA_TEXT, msg);
                         intent.setType("text/plain");
                         startActivity(intent);
