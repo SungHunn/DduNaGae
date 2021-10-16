@@ -110,20 +110,7 @@
         android:textColor="@color/black"
         android:textSize="40dp"/>
 
-    <TextView
-        android:id="@+id/my_page_secession"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.9"
-        app:layout_constraintHorizontal_bias="0.95"
-        android:layout_marginRight="10dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="탈퇴 하기"
-        android:textColor="@color/black"
-        android:textSize="20dp"/>
+
 
 
     <com.google.android.material.bottomnavigation.BottomNavigationView

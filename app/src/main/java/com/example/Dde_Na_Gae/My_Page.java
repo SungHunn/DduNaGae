@@ -40,7 +40,6 @@ public class My_Page extends AppCompatActivity {
     BottomNavigationView bottomNavigationView;
     TextView go_my_article;
     TextView go_my_info;
-    TextView secession;
     TextView service_center;
 
     ImageView back_btn;
@@ -124,26 +123,7 @@ public class My_Page extends AppCompatActivity {
             }
         });
 
-        secession = findViewById(R.id.my_page_secession);
 
-        secession.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-
-                user.delete()
-                        .addOnCompleteListener(new OnCompleteListener<Void>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Void> task) {
-                                if (task.isSuccessful()) {
-                                    Toast.makeText(My_Page.this, "회원 탈퇴 완료 되었습니다.", Toast.LENGTH_SHORT).show();
-                                    Intent intent = new Intent(getApplicationContext(), Login_New_Page.class);
-                                    startActivity(intent);
-                                }
-                            }
-                        });
-            }
-        });
 
     }
 
