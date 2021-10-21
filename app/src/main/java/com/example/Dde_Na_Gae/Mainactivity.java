@@ -265,6 +265,7 @@ public class Mainactivity extends AppCompatActivity {
             });
 
         } else {
+            layout_account.setVisibility(View.GONE);
             unlogin.setVisibility(View.VISIBLE);
             unlogin.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -320,7 +321,7 @@ public class Mainactivity extends AppCompatActivity {
                         break;
 
                     case 5:
-                        if (list.get(4).equals("로그아웃")) {
+                        if (list.get(5).equals("로그아웃")) {
                             AlertDialog.Builder alt_bld = new AlertDialog.Builder(view.getContext());
                             alt_bld.setMessage("로그아웃 하시겠습니까?").setCancelable(false)
                                     .setPositiveButton("네",

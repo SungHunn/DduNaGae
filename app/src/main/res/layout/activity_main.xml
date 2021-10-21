@@ -265,7 +265,7 @@
                     android:textColor="@color/black"
                     android:text="관광지"
                     android:textSize="35dp"
-                    android:textColor="@color/black"/>
+                    />
 
                 <ImageView
                     android:layout_width="40dp"

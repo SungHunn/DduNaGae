@@ -42,6 +42,7 @@ public class My_Page extends AppCompatActivity {
     TextView go_my_info;
     TextView service_center;
 
+
     ImageView back_btn;
 
     @Override
