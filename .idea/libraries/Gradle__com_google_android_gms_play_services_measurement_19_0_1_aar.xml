@@ -2,9 +2,7 @@
   <library name="Gradle: com.google.android.gms:play-services-measurement:19.0.1@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d57a6c88efc8e94f50dbd64c0d12ad4d/jetified-play-services-measurement-19.0.1/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef6d85a61a9a524f0cbe1a2b09d82aa7/transformed/jetified-play-services-measurement-19.0.1/AndroidManifest.xml" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-3/ef6d85a61a9a524f0cbe1a2b09d82aa7/transformed/jetified-play-services-measurement-19.0.1/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-3/ef6d85a61a9a524f0cbe1a2b09d82aa7/transformed/jetified-play-services-measurement-19.0.1/jars/classes.jar!/" />
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d57a6c88efc8e94f50dbd64c0d12ad4d/jetified-play-services-measurement-19.0.1/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/d57a6c88efc8e94f50dbd64c0d12ad4d/jetified-play-services-measurement-19.0.1/AndroidManifest.xml" />
     </CLASSES>

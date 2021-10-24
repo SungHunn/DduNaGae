@@ -47,7 +47,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
-            android:backgroundTint="#FFFEE6"
+            android:background="@color/main_blue"
             android:text="중복 확인"
             android:textColor="#000000" />
 
@@ -133,9 +133,10 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="25dp"
-            android:text="반려동물사진"
+            android:text="반려동물사진 (필수 !)"
+            android:textStyle="bold"
             android:textColor="@color/black"
-            android:textSize="20dp"
+            android:textSize="23dp"
             android:layout_marginBottom="5dp"/>
 
         <ImageView
@@ -257,8 +258,10 @@
             android:layout_marginTop="10dp"
             android:textColor="@color/black"
             android:ems="6"
+            android:gravity="top"
             android:hint="ex)\n동물 등록번호\n 사회성 \n 동물 성격"
-            android:inputType="textPersonName" />
+            android:inputType="text" />
+
 
         <Button
             android:id="@+id/okay"
@@ -269,6 +272,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/black"
+            android:background="@color/main_blue"
             android:layout_gravity="center"
             android:text="완료" />
 

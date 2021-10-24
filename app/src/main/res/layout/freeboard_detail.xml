@@ -103,8 +103,9 @@
             android:inputType="textPersonName"
             android:text="내용"
             android:textSize="15dp"
+            android:gravity="top"
             android:layout_marginTop="20dp"
-            android:layout_marginBottom="20dp"
+            android:layout_marginBottom="50dp"
             android:textColor="@color/black"
             android:background="@color/white"/>
 
@@ -115,7 +116,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="좋아요"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:layout_weight="1"
             android:textColor="@color/black"
             android:background="@color/white"/>
@@ -128,7 +129,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="좋아수"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="5dp"
             android:textColor="@color/black"
             android:background="@color/white"/>
@@ -139,7 +140,7 @@
             app:layout_constraintTop_toBottomOf="@+id/free_board_detail_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="50dp"
             android:text="댓글"
             android:layout_weight="1"
@@ -152,7 +153,7 @@
             app:layout_constraintTop_toBottomOf="@+id/free_board_detail_content"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="5dp"
+            android:layout_marginTop="50dp"
             android:layout_marginLeft="5dp"
             android:text="댓글수"
             android:layout_weight="1"

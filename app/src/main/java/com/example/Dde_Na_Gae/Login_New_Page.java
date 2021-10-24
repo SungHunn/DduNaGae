@@ -144,15 +144,7 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
         //카카오
         loginButton = (LoginButton) findViewById(R.id.kakaologin_button);
         Session.getCurrentSession().addCallback(new KakaoSessionCallback());
-
-
-
-
         //로그인 인터페이스 리스너
-
-
-
-
 
     }
 
@@ -171,7 +163,6 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         Session.getCurrentSession().handleActivityResult(requestCode, resultCode, data);
         // Result returned from launching the Intent from GoogleSignInApi.getSignInIntent(...);
         if (requestCode == RC_SIGN_IN) {
@@ -198,6 +189,7 @@ public class Login_New_Page extends AppCompatActivity implements GoogleApiClient
                             FirebaseUser user = mAuth.getCurrentUser();
                             updateUI(user);
                             //uid 검사
+
                             overlap_uid();
                             finish();
                         } else {
