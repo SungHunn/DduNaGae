@@ -1,49 +1,41 @@
 {
   "project_info": {
-    "project_number": "245319854039",
-    "project_id": "ddunagae-prj",
-    "storage_bucket": "ddunagae-prj.appspot.com"
+    "project_number": "676157937443",
+    "project_id": "ddunagae-final-9a930",
+    "storage_bucket": "ddunagae-final-9a930.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:245319854039:android:8a7cf340c04831109e0d92",
+        "mobilesdk_app_id": "1:676157937443:android:cca2c52b1b14f58f355e96",
         "android_client_info": {
-          "package_name": "com.example.Dde_Na_Gae"
+          "package_name": "com.Dde_Na_Gae_final.Dde_Na_Gae"
         }
       },
       "oauth_client": [
         {
-          "client_id": "245319854039-1lqbtaodj414su6a21ikbdtjdl1vjja6.apps.googleusercontent.com",
-          "client_type": 1,
+          "client_id": "676157937443-mhdjgjkbcm4v6t6c31r8g0frsqggudtf.apps.googleusercontent.com",
+          "client_type": 3,
           "android_info": {
-            "package_name": "com.example.Dde_Na_Gae",
-            "certificate_hash": "66fced6f83f915d96eb523fe4005c58661cb2db6"
+            "package_name": "com.Dde_Na_Gae_final.Dde_Na_Gae",
+            "certificate_hash": "09617dcaa5e62ee4bb65572597dfc23f0d73f119"
           }
         },
         {
-          "client_id": "245319854039-kmj45pld41akpg22cb49u7vdoi5eb9nj.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.example.Dde_Na_Gae",
-            "certificate_hash": "313baaed1601e58e0724bafa8d41233753804ed6"
-          }
-        },
-        {
-          "client_id": "245319854039-6ijumo16pha6bckgi5hfef970q8m6tgf.apps.googleusercontent.com",
+          "client_id": "676157937443-pi76h3d3omb6a40dm76lp86f5pg5lf0s.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyACh1LKaL-QlPWFsiUYUoTJtZQLwsbSqBM"
+          "current_key": "AIzaSyDyzLWXn6l6oH0-yVFWaJVkgIgYkrsjwnY"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "245319854039-6ijumo16pha6bckgi5hfef970q8m6tgf.apps.googleusercontent.com",
+              "client_id": "676157937443-pi76h3d3omb6a40dm76lp86f5pg5lf0s.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

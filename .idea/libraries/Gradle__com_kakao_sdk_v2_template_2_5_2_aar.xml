@@ -2,9 +2,9 @@
   <library name="Gradle: com.kakao.sdk:v2-template:2.5.2@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dc777d9620ec91474b204ea9d233e397/jetified-v2-template-2.5.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/a04c1943a95d5c6d09eeeb9a5afbc470/transformed/jetified-v2-template-2.5.2/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dc777d9620ec91474b204ea9d233e397/jetified-v2-template-2.5.2/AndroidManifest.xml" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/dc777d9620ec91474b204ea9d233e397/jetified-v2-template-2.5.2/jars/classes.jar!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b1d94f0ad378cb6f42c8ebf5f7bd2bc/jetified-v2-template-2.5.2/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b1d94f0ad378cb6f42c8ebf5f7bd2bc/jetified-v2-template-2.5.2/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/2b1d94f0ad378cb6f42c8ebf5f7bd2bc/jetified-v2-template-2.5.2/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

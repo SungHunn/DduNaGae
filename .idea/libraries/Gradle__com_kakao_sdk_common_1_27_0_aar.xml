@@ -2,9 +2,9 @@
   <library name="Gradle: com.kakao.sdk:common:1.27.0@aar">
     <CLASSES>
       <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4c930fbaea73337e0d4cb55ffaf5167a/jetified-common-1.27.0/res" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-3/f4ea94d7c9ff8f27d841289a87f73cc4/transformed/jetified-common-1.27.0/res" />
-      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4c930fbaea73337e0d4cb55ffaf5167a/jetified-common-1.27.0/jars/classes.jar!/" />
-      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/4c930fbaea73337e0d4cb55ffaf5167a/jetified-common-1.27.0/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e35f211b1cb2a967bba3040ccb91f8c9/jetified-common-1.27.0/res" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e35f211b1cb2a967bba3040ccb91f8c9/jetified-common-1.27.0/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-2/files-2.1/e35f211b1cb2a967bba3040ccb91f8c9/jetified-common-1.27.0/jars/classes.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES>

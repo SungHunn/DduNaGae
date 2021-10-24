@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.Dde_Na_Gae">
+    package="com.Dde_Na_Gae_final.Dde_Na_Gae">
 
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION " />
@@ -9,7 +9,7 @@
 
 
     <application
-        android:name=".KakaoApplication"
+        android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.KakaoApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_main"
         android:label="@string/app_name"
@@ -23,16 +23,15 @@
             android:name="com.kakao.sdk.AppKey"
             android:value="b214210d275c3c68a2ab5a59099d8b41" />
 
-        <activity android:name=".SplashActivity">
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.SplashActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
 
         </activity>
-        <activity android:name=".Terms_of_service" />
-        <activity android:name=".Personal_information" />
-        <activity android:name=".Mainactivity">
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Personal_information" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Mainactivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW"/>
                 <category android:name="android.intent.category.DEFAULT"/>
@@ -41,9 +40,8 @@
                     android:scheme="https"/>
             </intent-filter>
         </activity>
-        <activity android:name=".Category_Accommodation" />
-        <activity android:name=".Search_Selected" />
-        <activity android:name="com.example.Dde_Na_Gae.Category" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Category_Accommodation" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Search_Selected" />
         <activity android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
@@ -58,40 +56,40 @@
             </intent-filter>
         </activity>
 <!--        <activity android:name=".Mainactivity" />-->
-        <activity android:name=".Login_New_Page" />
-        <activity android:name=".My_Information" />
-        <activity android:name=".My_Page" />
-        <activity android:name=".Matching_Option" />
-        <activity android:name=".Setting" />
-        <activity android:name=".chat.New_MessageActivity"
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Login_New_Page" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Information" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Page" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Matching_Option" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Setting" />
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.chat.New_MessageActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".New_ChatMainActivity"/>
-        <activity android:name=".My_Matching_Room_detail"/>
-        <activity android:name=".Single_Matching_Room_detail"/>
-        <activity android:name=".Matching_filter_Option"/>
-        <activity android:name=".Chatting_List"/>
-        <activity android:name=".chat.Group_MessageActivity"
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.New_ChatMainActivity"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Matching_Room_detail"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Single_Matching_Room_detail"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Matching_filter_Option"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Chatting_List"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.chat.Group_MessageActivity"
             android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".Free_Board_Writing"/>
-        <activity android:name=".Freeboard_Activity"/>
-        <activity android:name=".My_free_board_detail"/>
-        <activity android:name=".My_Free_Board_List"/>
-        <activity android:name=".Free_Board_Detail"/>
-        <activity android:name=".My_Free_Board_detail_Change"/>
-        <activity android:name=".Free_Board_Review"/>
-        <activity android:name=".WelcomeActivity"
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Free_Board_Writing"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Freeboard_Activity"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_free_board_detail"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Free_Board_List"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Free_Board_Detail"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Free_Board_detail_Change"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Free_Board_Review"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.WelcomeActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Notice"/>
-        <activity android:name=".Terms_of_service"/>
-        <activity android:name=".Profile_Detail" android:theme="@android:style/Theme.Dialog"/>
-        <activity android:name=".Group_Matching_Room_detail"/>
-        <activity android:name=".My_Page_Information"/>
-        <activity android:name=".Service_Center"/>
-        <activity android:name=".Service_Center_Writing"/>
-        <activity android:name=".Service_Center_Detail"/>
-        <activity android:name=".My_Service_Center_List"/>
-        <activity android:name=".My_Service_Center_Detail"/>
-        <activity android:name=".My_Service_Center_detail_Change"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Notice"/>
+
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Profile_Detail" android:theme="@android:style/Theme.Dialog"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Group_Matching_Room_detail"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Page_Information"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Service_Center"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Service_Center_Writing"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.Service_Center_Detail"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Service_Center_List"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Service_Center_Detail"/>
+        <activity android:name="com.Dde_Na_Gae_final.Dde_Na_Gae.My_Service_Center_detail_Change"/>
 
     </application>
 

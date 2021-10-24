@@ -9,7 +9,7 @@ android {
     buildToolsVersion "30.0.3"
 
     defaultConfig {
-        applicationId "com.example.Dde_Na_Gae"
+        applicationId "com.Dde_Na_Gae_final.Dde_Na_Gae"
         minSdkVersion 19
         targetSdkVersion 30
         versionCode 1
@@ -42,7 +42,7 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation "androidx.viewpager2:viewpager2:1.0.0"
     implementation 'com.github.bumptech.glide:glide:4.11.0'
-    implementation files('C:/Users/dudrh/Desktop/Login_Example3/app/libs/json-simple-1.1.1')
+    implementation files('C:/Users/yoop1/AndroidStudioProjects/ddunagae-package/app/libs/json-simple-1.1.1.jar')
     implementation files('libs\\json-simple-1.1.1.jar')
     implementation 'com.google.firebase:firebase-database:20.0.2'
     implementation 'com.google.firebase:firebase-config:21.0.1'
