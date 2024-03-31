@@ -9,20 +9,17 @@
 ### 주요 기능 및 사용 기술
 - Firebase Authentication으로 구글 로그인 및 사용자 관리
 - Handler를 이용한 데이터 통신으로 여행 장소 및 기관 정보 게시
-- 
+- KakaoMap으로 장소 클릭 후 지도 화면으로 이동
+- Fireebase Realtimebase에 동승자 조건 저장 후 Recyclerview로 채팅방 기능 구현
+- 게시판에 여행 리뷰 및 사진 등록
 
 ***
 
-- main screen
+### Screen
 
-![KakaoTalk_20230202_172607661_01](https://github.com/SungHunn/CoinChart/assets/86955873/136ce8b3-543b-431e-9b44-a1d8cab7e6a2)
+![image](https://github.com/SungHunn/DduNaGae/assets/86955873/72baa3df-3e33-4a0c-a9f2-87e161fdb08a)   ![image](https://github.com/SungHunn/DduNaGae/assets/86955873/25770af7-cb09-4489-ad8e-27b4e4a6d6c5)     ![image](https://github.com/SungHunn/DduNaGae/assets/86955873/b4580378-7a0c-48c6-9faa-fb66c1a33c6c)
 
-
-- chatting screen
-
-![KakaoTalk_20230202_172607661](https://github.com/SungHunn/CoinChart/assets/86955873/8964360b-1b49-4003-8748-356da0036c4e)
+ 
 
 
-- article screen
 
-![캡처](https://github.com/SungHunn/CoinChart/assets/86955873/d0884576-8a73-4499-9e47-17a153eacaac)
